@@ -7,6 +7,7 @@ ThemeData theme = ThemeData(
   bottomNavigationBarTheme: bottomBarTheme,
   appBarTheme: appBarTheme,
   inputDecorationTheme: inputTheme,
+  scaffoldBackgroundColor: Couleur.primary,
 );
 
 /// Provides all colors of the app

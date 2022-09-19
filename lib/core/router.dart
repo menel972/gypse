@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:gypse/core/errors/route_error_screen.dart';
 import 'package:gypse/home/presentation/home_screen.dart';
 
 /// ScreenPaths class provides all paths used for routing
@@ -31,4 +32,6 @@ GoRouter router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
   ],
+
+  errorBuilder: (context, state) => RouteErrorScreen(state.error!),
 );

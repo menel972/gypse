@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 
@@ -10,11 +11,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      child: Center(
-        child: Text(
-          'HomeScreen',
-          style: TextXXL(Couleur.primary, isBold: true),
+    return Scaffold(
+      body: Center(
+        child: TextButton(
+          child: const Text(
+            'HomeScreen',
+            style: TextXXL(Couleur.text, isBold: true),
+          ),
+          onPressed: () => context.go('/t'),
         ),
       ),
     );

@@ -8,6 +8,7 @@ AppBarTheme appBarTheme = const AppBarTheme(
   backgroundColor: Colors.transparent,
   elevation: 0,
   centerTitle: true,
+  titleTextStyle: TextM(Couleur.text, isBold: true),
   systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   toolbarHeight: 40,
   iconTheme: IconThemeData(color: Couleur.text, size: 30),

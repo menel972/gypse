@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 /// Game view
 ///
@@ -8,9 +8,17 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      child: Center(
-        child: Text('GameScreen'),
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/game_bkg.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: const Center(
+          child: Text('GameScreen'),
+        ),
       ),
     );
   }

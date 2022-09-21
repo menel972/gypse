@@ -1,0 +1,96 @@
+{
+  "project_info": {
+    "project_number": "635658051968",
+    "project_id": "quiz-bible-44f41",
+    "storage_bucket": "quiz-bible-44f41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635658051968:android:dbd8a99a36b6483f256165",
+        "android_client_info": {
+          "package_name": "com.example.bible_quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635658051968-pm7m6md7q1sgo0vibb8te814issr8ka1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bible_quiz",
+            "certificate_hash": "be15beeaa1529460d252d4e951bd6887b90bf0ef"
+          }
+        },
+        {
+          "client_id": "635658051968-l3l9vu2q931rvpjs2ro7cg92dv6fkv16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVko6hwucDs4tRTZ_fL_LfcpRELp3TcFM"
+        },
+        {
+          "current_key": "AIzaSyDHHLcR4UWoXTbschYsGVG6eIgYJeQmjJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635658051968-l3l9vu2q931rvpjs2ro7cg92dv6fkv16.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "635658051968-ig9fgef45ffg8aehqovahdd1rrvivnce.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bibleQuiz"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635658051968:android:a17e9dd6333a3ac9256165",
+        "android_client_info": {
+          "package_name": "com.example.gypse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635658051968-l3l9vu2q931rvpjs2ro7cg92dv6fkv16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVko6hwucDs4tRTZ_fL_LfcpRELp3TcFM"
+        },
+        {
+          "current_key": "AIzaSyDHHLcR4UWoXTbschYsGVG6eIgYJeQmjJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635658051968-l3l9vu2q931rvpjs2ro7cg92dv6fkv16.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "635658051968-ig9fgef45ffg8aehqovahdd1rrvivnce.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bibleQuiz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

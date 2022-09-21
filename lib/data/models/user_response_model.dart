@@ -3,8 +3,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gypse/core/commons/enums.dart';
-import 'package:gypse/core/entities/user_entity.dart';
 import 'package:gypse/data/models/user_datas_model.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
 
 /// A model for the user response from firebase
 class UserResponse extends Equatable {

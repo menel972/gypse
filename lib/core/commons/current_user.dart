@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/core/commons/enums.dart';
-import 'package:gypse/core/entities/question_entity.dart';
-import 'package:gypse/core/entities/user_entity.dart';
+import 'package:gypse/domain/entities/question_entity.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
+
 
 /// A class that provides datas from the current user
 class CurrentUser extends ChangeNotifier {

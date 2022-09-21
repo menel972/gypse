@@ -1,6 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:gypse/core/errors/route_error_screen.dart';
-import 'package:gypse/home/presentation/home_screen.dart';
+import 'package:gypse/presenation/auth/auth_screen.dart';
+import 'package:gypse/presenation/books/books_screen.dart';
+import 'package:gypse/presenation/game/game_screen.dart';
+import 'package:gypse/presenation/home/home_screen.dart';
 
 /// ScreenPaths class provides all paths used for routing
 class ScreenPaths {
@@ -21,17 +24,16 @@ GoRouter router = GoRouter(
     ),
     GoRoute(
       path: ScreenPaths.game,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const GameScreen(),
     ),
     GoRoute(
       path: ScreenPaths.books,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const BooksScreen(),
     ),
     GoRoute(
       path: ScreenPaths.auth,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const AuthScreen(),
     ),
   ],
-
   errorBuilder: (context, state) => RouteErrorScreen(state.error!),
 );

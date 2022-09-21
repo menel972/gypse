@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:gypse/core/commons/enums.dart';
-import 'package:gypse/core/entities/user_entity.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
 
 /// A model for questions
 class Question extends Equatable {

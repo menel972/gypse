@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gypse/core/commons/enums.dart';
-import 'package:gypse/core/entities/answer_entity.dart';
 import 'package:gypse/core/l10n/localizations.dart';
+import 'package:gypse/domain/entities/answer_entity.dart';
 
 /// A model for the answer response from firebase
 class AnswerResponse extends Equatable {

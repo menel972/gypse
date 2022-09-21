@@ -9,3 +9,6 @@ enum Level { easy, medium, hard }
 
 /// Defines the time to answer
 enum Time { easy, medium, hard }
+
+/// Defines wich changes to apply
+enum UserChangeCode { settings, questions, status }

@@ -61,6 +61,24 @@ class UserResponse extends Equatable {
       settings: userSettings.toSettings(),
     );
   }
+
+  /// Returns a [UserResponse] from a [GypseUser]
+  factory UserResponse.fromGypseUser(GypseUser user) {
+    bool status = user.status == LoginState.authenticated ? true : false;
+
+    return UserResponse(
+      uid: user.uid,
+      userName: user.userName,
+      locale: user.locale.name,
+      isConnected: status,
+      isAdmin: user.isAdmin,
+      questions: user.questions
+          .map((question) =>
+              AnsweredQuestionDatas.fromAnsweredQuestion(question))
+          .toList(),
+      userSettings: SettingsDatas.fromSettings(user.settings),
+    );
+  }
 }
 
 /// A model for all questions already answered by [UserReponse]
@@ -105,6 +123,29 @@ class AnsweredQuestionDatas extends Equatable {
       isRightAnswer: isRightAnswer,
     );
   }
+
+  /// Returns an [AnsweredQuestionDatas] from an [AnsweredQuestion]
+  factory AnsweredQuestionDatas.fromAnsweredQuestion(
+      AnsweredQuestion question) {
+    int level;
+
+    switch (question.level) {
+      case Level.easy:
+        level = 1;
+        break;
+      case Level.medium:
+        level = 2;
+        break;
+      default:
+        level = 3;
+        break;
+    }
+    return AnsweredQuestionDatas(
+      id: question.id,
+      level: level,
+      isRightAnswer: question.isRightAnswer,
+    );
+  }
 }
 
 /// A model for the options set by the [UserReponse]
@@ -117,7 +158,7 @@ class SettingsDatas extends Equatable {
   @override
   List<Object?> get props => [level, time];
 
-  /// Get an [Settings] from a json
+  /// Get a [SettingsDatas] from a json
   factory SettingsDatas.fromJson(Map<String, dynamic> json) =>
       SettingsDatas(level: json['niveau'], time: json['chrono']);
 
@@ -151,5 +192,37 @@ class SettingsDatas extends Equatable {
     }
 
     return Settings(level: level, time: time);
+  }
+
+  /// Returns a [SettingsDatas] from a [Settings]
+  factory SettingsDatas.fromSettings(Settings settings) {
+    int level;
+    int time;
+
+    switch (settings.level) {
+      case Level.easy:
+        level = 1;
+        break;
+      case Level.medium:
+        level = 2;
+        break;
+      default:
+        level = 3;
+        break;
+    }
+
+    switch (settings.time) {
+      case Time.easy:
+        time = 30;
+        break;
+      case Time.medium:
+        time = 20;
+        break;
+      default:
+        time = 10;
+        break;
+    }
+
+    return SettingsDatas(level: level, time: time);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/data/firebase/users_firebase.dart';
-import 'package:gypse/data/models/user_datas_model.dart';
 import 'package:gypse/data/models/user_response_model.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/domain/repositories/users_repository.dart';
@@ -12,7 +11,7 @@ class UsersRepositoryImpl extends UsersRepository {
 
   @override
   Future<void> createNewUser(GypseUser user) async {
-    await _firebase.createNewUser(UserResponse.fromGypseUser(user));
+    await _firebase.createNewUser(UserFirebaseResponse.fromGypseUser(user));
   }
 
   @override
@@ -34,11 +33,11 @@ class UsersRepositoryImpl extends UsersRepository {
     await _firebase.onUserChanges(
       code: code,
       uid: uid,
-      settings: SettingsDatas.fromSettings(settings!),
+      settings: SettingsFirebaseDatas.fromSettings(settings!),
       state: state,
       questions: questions
           ?.map((question) =>
-              AnsweredQuestionDatas.fromAnsweredQuestion(question))
+              AnsweredQuestionFirebaseDatas.fromAnsweredQuestion(question))
           .toList(),
     );
   }

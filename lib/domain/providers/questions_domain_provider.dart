@@ -5,11 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class QuestionsDomainProvider {
   final QuestionsDataProvider _dataProvider = QuestionsDataProvider();
 
+  /// Provides an instance of [FetchQuestionsUsecase]
   get fetchQuestionsUsecaseProvider =>
       Provider.autoDispose<FetchQuestionsUsecase>(((ref) =>
           FetchQuestionsUsecase(
               ref.read(_dataProvider.questionsRepositoryProvider))));
 
+  /// Provides an instance of [FetchQuestionsByBookUsecase]
   get fetchQuestionsByBookUsecaseProvider =>
       Provider.autoDispose<FetchQuestionsByBookUsecase>(((ref) =>
           FetchQuestionsByBookUsecase(

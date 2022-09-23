@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/theme.dart';
-import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';

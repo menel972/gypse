@@ -14,7 +14,7 @@ class UsersFirebase {
       FirebaseFirestore.instance.collection(Strings.usersCollection);
 
   /// Asynchronous way to create a new [UserReponse] into the [database]
-  Future<void> createNewUser(UserResponse user) async {
+  Future<void> createNewUser(UserFirebaseResponse user) async {
     DocumentReference<Map<String, dynamic>> doc = database.doc();
     user.uid = doc.id;
 
@@ -27,19 +27,19 @@ class UsersFirebase {
     }
   }
 
-  /// Returns a [Stream] of [UserResponse] based its [UserResponse.uid]
-  Stream<UserResponse> fetchCurrentUser(String uid) =>
+  /// Returns a [Stream] of [UserFirebaseResponse] based its [UserFirebaseResponse.uid]
+  Stream<UserFirebaseResponse> fetchCurrentUser(String uid) =>
       database.snapshots().map((snapshot) => snapshot.docs
-          .map(((doc) => UserResponse.fromJson(doc.data())))
+          .map(((doc) => UserFirebaseResponse.fromJson(doc.data())))
           .firstWhere((user) => user.uid == uid));
 
-  /// Asynchronous method that updates user's properties based on its [UserResponse.uid]
+  /// Asynchronous method that updates user's properties based on its [UserFirebaseResponse.uid]
   Future<void> onUserChanges(
       {required UserChangeCode code,
       required String uid,
-      SettingsDatas? settings,
+      SettingsFirebaseDatas? settings,
       bool? state,
-      List<AnsweredQuestionDatas>? questions}) async {
+      List<AnsweredQuestionFirebaseDatas>? questions}) async {
     switch (code) {
       // Update settings
       case UserChangeCode.settings:
@@ -70,9 +70,9 @@ class UsersFirebase {
     }
   }
 
-  /// Asynchronous method that updates user's [SettingsDatas] based on its [UserResponse.uid]
+  /// Asynchronous method that updates user's [SettingsFirebaseDatas] based on its [UserFirebaseResponse.uid]
   Future<void> _onSettingsChanges(
-      {required String uid, required SettingsDatas settings}) async {
+      {required String uid, required SettingsFirebaseDatas settings}) async {
     try {
       await database.doc(uid).update({
         'settings': settings.toJson()
@@ -83,7 +83,7 @@ class UsersFirebase {
     }
   }
 
-  /// Asynchronous method that updates user's [isConnected] based on its [UserResponse.uid]
+  /// Asynchronous method that updates user's [isConnected] based on its [UserFirebaseResponse.uid]
   Future<void> _onStatusChanges(
       {required String uid, required bool state}) async {
     try {
@@ -95,10 +95,10 @@ class UsersFirebase {
     }
   }
 
-  /// Asynchronous method that updates user's [AnsweredQuestionDatas] list based on its [UserResponse.uid]
+  /// Asynchronous method that updates user's [AnsweredQuestionFirebaseDatas] list based on its [UserFirebaseResponse.uid]
   Future<void> _onAnsweredQuestionsChanges(
       {required String uid,
-      required List<AnsweredQuestionDatas> questions}) async {
+      required List<AnsweredQuestionFirebaseDatas> questions}) async {
     try {
       await database.doc(uid).update({'questions': questions}).whenComplete(
           () => debugPrint('User updated : new answered question'));
@@ -107,7 +107,7 @@ class UsersFirebase {
     }
   }
 
-  /// Asynchronous method that delete a user based on its [UserResponse.uid]
+  /// Asynchronous method that delete a user based on its [UserFirebaseResponse.uid]
   Future<void> deleteUser(String uid) async {
     try {
       await database

@@ -5,8 +5,8 @@ import 'package:gypse/domain/entities/user_entity.dart';
 /// A model for questions
 class Question extends Equatable {
   final String id;
-  final String? question;
-  final String? book;
+  final String question;
+  final String book;
 
   const Question(
       {required this.id, required this.question, required this.book});

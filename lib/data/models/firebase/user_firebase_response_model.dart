@@ -3,20 +3,20 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gypse/core/commons/enums.dart';
-import 'package:gypse/data/models/user_datas_model.dart';
+import 'package:gypse/data/models/firebase/user_firebase_datas_model.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 
 /// A model for the user response from firebase
-class UserResponse extends Equatable {
+class UserFirebaseResponse extends Equatable {
   String uid;
   String userName;
   String locale;
   bool isConnected;
   bool isAdmin;
-  SettingsDatas userSettings;
-  List<AnsweredQuestionDatas> questions;
+  SettingsFirebaseDatas userSettings;
+  List<AnsweredQuestionFirebaseDatas> questions;
 
-  UserResponse({
+  UserFirebaseResponse({
     required this.uid,
     required this.userName,
     required this.locale,
@@ -30,16 +30,17 @@ class UserResponse extends Equatable {
   List<Object?> get props =>
       [uid, userName, locale, isConnected, isAdmin, userSettings, questions];
 
-  /// Get an [UserResponse] from a json
-  factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
+  /// Get an [UserFirebaseResponse] from a json
+  factory UserFirebaseResponse.fromJson(Map<String, dynamic> json) =>
+      UserFirebaseResponse(
         uid: json['id'],
         userName: json['userName'],
         locale: json['locale'],
         isConnected: json['isConnected'],
         isAdmin: json['isAdmin'],
-        userSettings: SettingsDatas.fromJson(json['settings']),
+        userSettings: SettingsFirebaseDatas.fromJson(json['settings']),
         questions: json['questions']
-            .map((question) => AnsweredQuestionDatas.fromJson(question))
+            .map((question) => AnsweredQuestionFirebaseDatas.fromJson(question))
             .toList(),
       );
 
@@ -76,11 +77,11 @@ class UserResponse extends Equatable {
     );
   }
 
-  /// Returns a [UserResponse] from a [GypseUser]
-  factory UserResponse.fromGypseUser(GypseUser user) {
+  /// Returns a [UserFirebaseResponse] from a [GypseUser]
+  factory UserFirebaseResponse.fromGypseUser(GypseUser user) {
     bool status = user.status == LoginState.authenticated ? true : false;
 
-    return UserResponse(
+    return UserFirebaseResponse(
       uid: user.uid,
       userName: user.userName,
       locale: user.locale.name,
@@ -88,9 +89,9 @@ class UserResponse extends Equatable {
       isAdmin: user.isAdmin,
       questions: user.questions
           .map((question) =>
-              AnsweredQuestionDatas.fromAnsweredQuestion(question))
+              AnsweredQuestionFirebaseDatas.fromAnsweredQuestion(question))
           .toList(),
-      userSettings: SettingsDatas.fromSettings(user.settings),
+      userSettings: SettingsFirebaseDatas.fromSettings(user.settings),
     );
   }
 }

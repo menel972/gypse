@@ -12,6 +12,7 @@ class GypseUser extends Equatable {
   LoginState status;
   List<AnsweredQuestion> questions;
   Settings settings;
+  Credentials? credentials;
 
   GypseUser({
     required this.uid,
@@ -21,10 +22,12 @@ class GypseUser extends Equatable {
     required this.status,
     required this.questions,
     required this.settings,
+    this.credentials,
   });
 
   @override
-  List<Object?> get props => [uid, userName, isAdmin, locale, status];
+  List<Object?> get props =>
+      [uid, userName, isAdmin, locale, status, credentials];
 }
 
 /// A model for all answered questions by the [GypseUser]
@@ -56,4 +59,16 @@ class Settings extends Equatable {
         level: level ?? this.level,
         time: time ?? this.time,
       );
+}
+
+/// A model for [GypseUser] connection parameters
+class Credentials extends Equatable {
+  String? email;
+  String? password;
+  String? phone;
+
+  Credentials({this.email, this.password, this.phone});
+
+  @override
+  List<Object?> get props => [email, password, phone];
 }

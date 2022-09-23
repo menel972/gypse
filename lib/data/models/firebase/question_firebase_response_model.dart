@@ -5,13 +5,13 @@ import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/domain/entities/question_entity.dart';
 
 /// A Model for the question response from firebase
-class QuestionResponse extends Equatable {
+class QuestionFirebaseResponse extends Equatable {
   final String id;
   final QuestionDatas fr;
   final QuestionDatas en;
   final QuestionDatas es;
 
-  const QuestionResponse({
+  const QuestionFirebaseResponse({
     required this.id,
     required this.fr,
     required this.en,
@@ -21,9 +21,9 @@ class QuestionResponse extends Equatable {
   @override
   List<Object?> get props => [id, fr, en, es];
 
-  /// Get a [QuestionResponse] from a json
-  factory QuestionResponse.fromJson(Map<String, dynamic> json) =>
-      QuestionResponse(
+  /// Get a [QuestionFirebaseResponse] from a json
+  factory QuestionFirebaseResponse.fromJson(Map<String, dynamic> json) =>
+      QuestionFirebaseResponse(
         id: json['id'],
         fr: QuestionDatas.fromJson(json['fr']),
         en: QuestionDatas.fromJson(json['en']),

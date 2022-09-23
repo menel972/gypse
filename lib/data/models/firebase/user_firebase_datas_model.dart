@@ -3,20 +3,20 @@ import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 
 /// A model for all questions already answered by [UserReponse]
-class AnsweredQuestionDatas extends Equatable {
+class AnsweredQuestionFirebaseDatas extends Equatable {
   final String id;
   final int level;
   final bool isRightAnswer;
 
-  const AnsweredQuestionDatas(
+  const AnsweredQuestionFirebaseDatas(
       {required this.id, required this.level, required this.isRightAnswer});
 
   @override
   List<Object?> get props => [id, level, isRightAnswer];
 
   /// Get an [AnsweredQuestion] from a json
-  factory AnsweredQuestionDatas.fromJson(Map<String, dynamic> json) =>
-      AnsweredQuestionDatas(
+  factory AnsweredQuestionFirebaseDatas.fromJson(Map<String, dynamic> json) =>
+      AnsweredQuestionFirebaseDatas(
         id: json['qid'],
         level: json['niveau'],
         isRightAnswer: json['valid'],
@@ -49,8 +49,8 @@ class AnsweredQuestionDatas extends Equatable {
     );
   }
 
-  /// Returns an [AnsweredQuestionDatas] from an [AnsweredQuestion]
-  factory AnsweredQuestionDatas.fromAnsweredQuestion(
+  /// Returns an [AnsweredQuestionFirebaseDatas] from an [AnsweredQuestion]
+  factory AnsweredQuestionFirebaseDatas.fromAnsweredQuestion(
       AnsweredQuestion question) {
     int level;
 
@@ -65,7 +65,7 @@ class AnsweredQuestionDatas extends Equatable {
         level = 3;
         break;
     }
-    return AnsweredQuestionDatas(
+    return AnsweredQuestionFirebaseDatas(
       id: question.id,
       level: level,
       isRightAnswer: question.isRightAnswer,
@@ -74,18 +74,18 @@ class AnsweredQuestionDatas extends Equatable {
 }
 
 /// A model for the options set by the [UserReponse]
-class SettingsDatas extends Equatable {
+class SettingsFirebaseDatas extends Equatable {
   final int level;
   final int time;
 
-  const SettingsDatas({required this.level, required this.time});
+  const SettingsFirebaseDatas({required this.level, required this.time});
 
   @override
   List<Object?> get props => [level, time];
 
-  /// Get a [SettingsDatas] from a json
-  factory SettingsDatas.fromJson(Map<String, dynamic> json) =>
-      SettingsDatas(level: json['niveau'], time: json['chrono']);
+  /// Get a [SettingsFirebaseDatas] from a json
+  factory SettingsFirebaseDatas.fromJson(Map<String, dynamic> json) =>
+      SettingsFirebaseDatas(level: json['niveau'], time: json['chrono']);
 
   /// Returns a json [Map<String, dynamic>]
   Map<String, dynamic> toJson() => {'niveau': level, 'chrono': time};
@@ -122,8 +122,8 @@ class SettingsDatas extends Equatable {
     return Settings(level: level, time: time);
   }
 
-  /// Returns a [SettingsDatas] from a [Settings]
-  factory SettingsDatas.fromSettings(Settings settings) {
+  /// Returns a [SettingsFirebaseDatas] from a [Settings]
+  factory SettingsFirebaseDatas.fromSettings(Settings settings) {
     int level;
     int time;
 
@@ -151,6 +151,6 @@ class SettingsDatas extends Equatable {
         break;
     }
 
-    return SettingsDatas(level: level, time: time);
+    return SettingsFirebaseDatas(level: level, time: time);
   }
 }

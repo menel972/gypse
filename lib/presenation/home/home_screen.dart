@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 
@@ -18,10 +20,13 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: const Center(
-          child: Text(
-            'HomeScreen',
-            style: TextXXL(Couleur.text, isBold: true),
+        child: Center(
+          child: TextButton(
+            child: const Text(
+              'HomeScreen',
+              style: TextXXL(Couleur.text, isBold: true),
+            ),
+            onPressed: () => context.go(ScreenPaths.game),
           ),
         ),
       ),

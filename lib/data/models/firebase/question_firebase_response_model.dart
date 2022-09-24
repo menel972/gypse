@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/l10n/localizations.dart';
-import 'package:gypse/domain/entities/question_entity.dart';
+import 'package:gypse/data/models/sqlite/question_sqlite_response_model.dart';
 
 /// A Model for the question response from firebase
 class QuestionFirebaseResponse extends Equatable {
@@ -30,27 +30,19 @@ class QuestionFirebaseResponse extends Equatable {
         es: QuestionDatas.fromJson(json['es']),
       );
 
-  /// Returns a [Question]
-  Question toQuestion(BuildContext context) {
+  /// Returns an [QuestionSqliteResponse] to be consumed in the [sqflite] internal database
+  QuestionSqliteResponse toSqlite(BuildContext context) {
     Locales locale = getLocale(context);
-    QuestionDatas data;
+    QuestionDatas data = const QuestionDatas();
+    if (locale.name == 'fr') data = fr;
+    if (locale.name == 'en') data = en;
+    if (locale.name == 'es') data = es;
 
-    switch (locale.name) {
-      case 'en':
-        data = en;
-        break;
-      case 'es':
-        data = es;
-        break;
-      default:
-        data = fr;
-        break;
-    }
-
-    return Question(
+    return QuestionSqliteResponse(
       id: id,
-      question: data.question,
-      book: data.book,
+      fr: locale.name == 'fr' ? data.toSqlite() : null,
+      en: locale.name == 'en' ? data.toSqlite() : null,
+      es: locale.name == 'es' ? data.toSqlite() : null,
     );
   }
 }
@@ -68,4 +60,8 @@ class QuestionDatas extends Equatable {
   /// Get a [QuestionDatas] from a json
   factory QuestionDatas.fromJson(Map<String, dynamic> json) =>
       QuestionDatas(question: json['texte'], book: json['livre']);
+
+  /// Returns an [QuestionSqliteDatas] to be consumed in the [sqflite] internal database
+  QuestionSqliteDatas toSqlite() =>
+      QuestionSqliteDatas(question: question, book: book);
 }

@@ -36,7 +36,7 @@ class AnswerFirebaseResponse extends Equatable {
         es: AnswerFirebaseDatas.fromJson(json['es']),
       );
 
-  /// Returns an [AnswerSqliteResponse] to be consumed in the domain
+  /// Returns an [AnswerSqliteResponse] to be consumed in the [sqflite] internal database
   AnswerSqliteResponse toSqlite(BuildContext context) {
     Locales locale = getLocale(context);
     AnswerFirebaseDatas data = const AnswerFirebaseDatas();
@@ -53,8 +53,6 @@ class AnswerFirebaseResponse extends Equatable {
       es: locale.name == 'es' ? data.toSqlite() : null,
     );
   }
-
-  // TODO : Implement method fromSqlite
 }
 
 /// A model for answer's datas based on the the device's language

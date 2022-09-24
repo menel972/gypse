@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:gypse/core/commons/enums.dart';
+import 'package:flutter/material.dart';
+import 'package:gypse/data/models/Sqlite/user_Sqlite_datas_model.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 
 /// A model for all questions already answered by [UserReponse]
@@ -26,51 +27,22 @@ class AnsweredQuestionFirebaseDatas extends Equatable {
   Map<String, dynamic> toJson() =>
       {'qid': id, 'niveau': level, 'valid': isRightAnswer};
 
-  /// Returns an [AnsweredQuestion]
-  AnsweredQuestion toAnsweredQuestion() {
-    Level level;
+  /// Get an [AnsweredQuestionFirebaseDatas] from the [sqflite] internal database
+  factory AnsweredQuestionFirebaseDatas.fromSqlite(
+          AnsweredQuestionSqliteDatas question) =>
+      AnsweredQuestionFirebaseDatas(
+        id: question.id,
+        level: question.level,
+        isRightAnswer: question.isRightAnswer == 1 ? true : false,
+      );
 
-    switch (this.level) {
-      case 1:
-        level = Level.easy;
-        break;
-      case 2:
-        level = Level.medium;
-        break;
-      default:
-        level = Level.hard;
-        break;
-    }
-
-    return AnsweredQuestion(
-      id: id,
-      level: level,
-      isRightAnswer: isRightAnswer,
-    );
-  }
-
-  /// Returns an [AnsweredQuestionFirebaseDatas] from an [AnsweredQuestion]
-  factory AnsweredQuestionFirebaseDatas.fromAnsweredQuestion(
-      AnsweredQuestion question) {
-    int level;
-
-    switch (question.level) {
-      case Level.easy:
-        level = 1;
-        break;
-      case Level.medium:
-        level = 2;
-        break;
-      default:
-        level = 3;
-        break;
-    }
-    return AnsweredQuestionFirebaseDatas(
-      id: question.id,
-      level: level,
-      isRightAnswer: question.isRightAnswer,
-    );
-  }
+  /// Returns an [AnsweredQuestionSqliteDatas] to be consumed in the [sqflite] internal database
+  AnsweredQuestionSqliteDatas toSqlite(BuildContext context) =>
+      AnsweredQuestionSqliteDatas(
+        id: id,
+        level: level,
+        isRightAnswer: isRightAnswer ? 1 : 0,
+      );
 }
 
 /// A model for the options set by the [UserReponse]
@@ -90,67 +62,11 @@ class SettingsFirebaseDatas extends Equatable {
   /// Returns a json [Map<String, dynamic>]
   Map<String, dynamic> toJson() => {'niveau': level, 'chrono': time};
 
-  /// Returns a [Settings]
-  Settings toSettings() {
-    Level level;
-    Time time;
+  /// Get a [SettingsFirebaseDatas] from the [sqflite] internal database
+  factory SettingsFirebaseDatas.fromSqlite(SettingsSqliteDatas settings) =>
+      SettingsFirebaseDatas(level: settings.level, time: settings.time);
 
-    switch (this.level) {
-      case 1:
-        level = Level.easy;
-        break;
-      case 2:
-        level = Level.medium;
-        break;
-      default:
-        level = Level.hard;
-        break;
-    }
-
-    switch (this.time) {
-      case 30:
-        time = Time.easy;
-        break;
-      case 20:
-        time = Time.medium;
-        break;
-      default:
-        time = Time.hard;
-        break;
-    }
-
-    return Settings(level: level, time: time);
-  }
-
-  /// Returns a [SettingsFirebaseDatas] from a [Settings]
-  factory SettingsFirebaseDatas.fromSettings(Settings settings) {
-    int level;
-    int time;
-
-    switch (settings.level) {
-      case Level.easy:
-        level = 1;
-        break;
-      case Level.medium:
-        level = 2;
-        break;
-      default:
-        level = 3;
-        break;
-    }
-
-    switch (settings.time) {
-      case Time.easy:
-        time = 30;
-        break;
-      case Time.medium:
-        time = 20;
-        break;
-      default:
-        time = 10;
-        break;
-    }
-
-    return SettingsFirebaseDatas(level: level, time: time);
-  }
+  /// Returns a [SettingsSqliteDatas] to be consumed in the [sqflite] internal database
+  SettingsSqliteDatas toSqlite(BuildContext context) =>
+      SettingsSqliteDatas(level: level, time: time);
 }

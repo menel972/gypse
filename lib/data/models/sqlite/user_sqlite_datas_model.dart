@@ -26,7 +26,7 @@ class AnsweredQuestionSqliteDatas extends Equatable {
       {'qid': id, 'niveau': level, 'valid': isRightAnswer};
 
   /// Get an [AnsweredQuestionSqliteDatas] from the domain
-  factory AnsweredQuestionSqliteDatas.fromAnsweredQuestion(
+  factory AnsweredQuestionSqliteDatas.fromDomain(
       AnsweredQuestion question) {
     int domainLevel = 3;
 
@@ -42,7 +42,7 @@ class AnsweredQuestionSqliteDatas extends Equatable {
   }
 
   /// Returns an [AnsweredQuestion] to be consumed in the domain
-  AnsweredQuestion toAnsweredQuestion() {
+  AnsweredQuestion toDomain() {
     Level sqliteLevel = Level.hard;
 
     if (level == 1) sqliteLevel = Level.easy;
@@ -75,7 +75,7 @@ class SettingsSqliteDatas extends Equatable {
   Map<String, dynamic> toSqlite() => {'niveau': level, 'chrono': time};
 
   /// Get an [SettingsSqliteDatas] from the domain
-  factory SettingsSqliteDatas.fromSettings(Settings settings) {
+  factory SettingsSqliteDatas.fromDomain(Settings settings) {
     int domainLevel = 3;
     int domainTime = 30;
 
@@ -90,7 +90,7 @@ class SettingsSqliteDatas extends Equatable {
   }
 
   /// Returns a [Settings] to be consumed in the domain
-  Settings toSettings() {
+  Settings toDomain() {
     Level sqliteLevel = Level.hard;
     Time sqliteTime = Time.hard;
 

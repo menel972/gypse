@@ -70,23 +70,23 @@ class UserSqliteResponse extends Equatable {
       };
 
   /// Get a [UserSqliteResponse] from the domain
-  factory UserSqliteResponse.fromAnsweredQuestion(GypseUser user) =>
+  factory UserSqliteResponse.fromDomain(GypseUser user) =>
       UserSqliteResponse(
         uid: user.uid,
         userName: user.userName,
         locale: user.locale.name,
         isConnected: user.status != LoginState.authenticated ? 0 : 1,
         isAdmin: user.isAdmin ? 1 : 0,
-        credentials: SqliteCredentials.fromCredentials(user.credentials),
-        userSettings: SettingsSqliteDatas.fromSettings(user.settings),
+        credentials: SqliteCredentials.fromDomain(user.credentials),
+        userSettings: SettingsSqliteDatas.fromDomain(user.settings),
         questions: user.questions
             .map((question) =>
-                AnsweredQuestionSqliteDatas.fromAnsweredQuestion(question))
+                AnsweredQuestionSqliteDatas.fromDomain(question))
             .toList(),
       );
 
   /// Returns an [GypseUser] to be consumed in the domain
-  GypseUser toCredentials() {
+  GypseUser toDomain() {
     Locales sqliteLocale = Locales.fr;
 
     if (locale == 'fr') sqliteLocale = Locales.fr;
@@ -102,9 +102,9 @@ class UserSqliteResponse extends Equatable {
           ? LoginState.authenticated
           : LoginState.unauthenticated,
       questions:
-          questions.map((question) => question.toAnsweredQuestion()).toList(),
-      settings: userSettings.toSettings(),
-      credentials: credentials?.toCredentials(),
+          questions.map((question) => question.toDomain()).toList(),
+      settings: userSettings.toDomain(),
+      credentials: credentials?.toDomain(),
     );
   }
 }
@@ -132,7 +132,7 @@ class SqliteCredentials extends Equatable {
       {'email': email, 'password': password, 'phone': phone};
 
   /// Get an [SqliteCredentials] from the domain
-  static SqliteCredentials? fromCredentials(Credentials? credentials) {
+  static SqliteCredentials? fromDomain(Credentials? credentials) {
     if (credentials == null) return null;
 
     return SqliteCredentials(
@@ -143,6 +143,6 @@ class SqliteCredentials extends Equatable {
   }
 
   /// Returns a [Credentials] to be consumed in the domain
-  Credentials toCredentials() =>
+  Credentials toDomain() =>
       Credentials(email: email, password: password, phone: phone);
 }

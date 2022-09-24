@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/data/commons/utils.dart';
-import 'package:gypse/data/models/user_datas_model.dart';
-import 'package:gypse/data/models/user_response_model.dart';
+import 'package:gypse/data/models/firebase/user_firebase_datas_model.dart';
+import 'package:gypse/data/models/firebase/user_firebase_response_model.dart';
 
 /// Users database
 ///

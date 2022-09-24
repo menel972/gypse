@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gypse/data/commons/utils.dart';
+import 'package:gypse/data/models/firebase/answer_firebase_response_model.dart';
 
 /// Answers database
 ///

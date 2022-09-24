@@ -1,10 +1,9 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/rendering.dart';
-import 'package:gypse/core/commons/enums.dart';
+import 'package:flutter/material.dart';
 import 'package:gypse/data/models/firebase/user_firebase_datas_model.dart';
-import 'package:gypse/domain/entities/user_entity.dart';
+import 'package:gypse/data/models/sqlite/user_sqlite_response_model.dart';
 
 /// A model for the user response from firebase
 class UserFirebaseResponse extends Equatable {
@@ -55,43 +54,30 @@ class UserFirebaseResponse extends Equatable {
         'questions': questions.map((question) => question.toJson()).toList(),
       };
 
-  /// Returns a [GypseUser]
-  GypseUser toGypseUser() {
-    Locales locale =
-        Locales.values.firstWhere((lang) => lang.name == this.locale);
-    // TODO : A retirer après test
-    debugPrint(locale.name);
+  /// Get an [UserFirebaseResponse] from the [sqflite] internal database
+  factory UserFirebaseResponse.fromSqlite(UserSqliteResponse user) =>
+      UserFirebaseResponse(
+        uid: user.uid,
+        userName: user.userName,
+        locale: user.locale,
+        isConnected: user.isConnected == 1 ? true : false,
+        isAdmin: user.isAdmin == 1 ? true : false,
+        userSettings: SettingsFirebaseDatas.fromSqlite(user.userSettings),
+        questions: user.questions
+            .map((question) =>
+                AnsweredQuestionFirebaseDatas.fromSqlite(question))
+            .toList(),
+      );
 
-    LoginState status =
-        isConnected ? LoginState.authenticated : LoginState.unauthenticated;
-
-    return GypseUser(
-      uid: uid,
-      userName: userName,
-      isAdmin: isAdmin,
-      locale: locale,
-      status: status,
-      questions:
-          questions.map((question) => question.toAnsweredQuestion()).toList(),
-      settings: userSettings.toSettings(),
-    );
-  }
-
-  /// Returns a [UserFirebaseResponse] from a [GypseUser]
-  factory UserFirebaseResponse.fromGypseUser(GypseUser user) {
-    bool status = user.status == LoginState.authenticated ? true : false;
-
-    return UserFirebaseResponse(
-      uid: user.uid,
-      userName: user.userName,
-      locale: user.locale.name,
-      isConnected: status,
-      isAdmin: user.isAdmin,
-      questions: user.questions
-          .map((question) =>
-              AnsweredQuestionFirebaseDatas.fromAnsweredQuestion(question))
-          .toList(),
-      userSettings: SettingsFirebaseDatas.fromSettings(user.settings),
-    );
-  }
+  /// Returns a [UserSqliteResponse] to be consumed in the [sqflite] internal database
+  UserSqliteResponse toSqlite(BuildContext context) => UserSqliteResponse(
+        uid: uid,
+        userName: userName,
+        isAdmin: isAdmin ? 1 : 0,
+        locale: locale,
+        isConnected: isConnected ? 1 : 0,
+        questions:
+            questions.map((question) => question.toSqlite(context)).toList(),
+        userSettings: userSettings.toSqlite(context),
+      );
 }

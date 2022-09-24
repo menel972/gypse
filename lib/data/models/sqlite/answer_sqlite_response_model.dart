@@ -49,7 +49,7 @@ class AnswerSqliteResponse extends Equatable {
       };
 
   /// Returns an [Answer] to be consumed in the domain
-  Answer toAnswer(BuildContext context) {
+  Answer toDomain(BuildContext context) {
     Locales locale = getLocale(context);
     AnswerSqliteDatas data = const AnswerSqliteDatas();
     if (locale.name == 'fr') data = fr!;

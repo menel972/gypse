@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gypse/data/commons/utils.dart';
 import 'package:gypse/data/models/firebase/answer_firebase_response_model.dart';
 
-/// Answers database
+/// Answers online database
 ///
-/// Contains methods to fetch [AnswersResponse] from [FirebaseFireStore]
+/// Contains methods to fetch [AnswersFirebaseResponse] from [FirebaseFireStore]
 class AnswersFirebase {
   /// Create an unique instance of the [FirebaseFireStore] [database]
   final CollectionReference<Map<String, dynamic>> database =

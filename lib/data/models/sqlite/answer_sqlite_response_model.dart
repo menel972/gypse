@@ -6,7 +6,7 @@ import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/domain/entities/answer_entity.dart';
 
-/// A model for the answer response from firebase
+/// A model for the answer response from the internal [sqflite] database response
 class AnswerSqliteResponse extends Equatable {
   final String id;
   final String questionId;

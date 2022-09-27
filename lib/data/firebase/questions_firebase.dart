@@ -15,13 +15,4 @@ class QuestionsFirebase {
       database.snapshots().map((snapshot) => snapshot.docs
           .map((doc) => QuestionFirebaseResponse.fromJson(doc.data()))
           .toList());
-
-  /// Returns a [Stream] of list of [QuestionFirebaseResponse] filtered by book
-  Stream<List<QuestionFirebaseResponse>> fetchQuestionsByBook(String book) {
-    return fetchQuestions().map((questions) => (questions.where((question) {
-          return question.en.book == book ||
-              question.es.book == book ||
-              question.fr.book == book;
-        })).toList());
-  }
 }

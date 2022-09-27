@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/data/firebase/questions_firebase.dart';
+import 'package:gypse/data/sqlite/questions_sqlite.dart';
 import 'package:gypse/domain/entities/question_entity.dart';
 import 'package:gypse/domain/repositories/questions_repository.dart';
 
 class QuestionsRepositoryImpl extends QuestionsRepository {
+  final QuestionsSqlite _sqlite;
   final QuestionsFirebase _firebase;
 
-  QuestionsRepositoryImpl(this._firebase);
+  QuestionsRepositoryImpl(this._sqlite, this._firebase);
 
   @override
-  Stream<List<Question>> fetchQuestions(BuildContext context) =>
-      _firebase.fetchQuestions().map((questions) =>
-          questions.map((question) => question.toQuestion(context)).toList());
+  Future<void> initQuestions(BuildContext context) async {
+    _firebase.fetchQuestions().map((questionsList) async {
+      for (var question in questionsList) {
+        await _sqlite.insertQuestion(question.toSqlite(context));
+      }
+    });
+  }
 
   @override
-  Stream<List<Question>> fetchQuestionsByBook(
-          BuildContext context, String book) =>
-      _firebase.fetchQuestionsByBook(book).map((questions) =>
-          questions.map((question) => question.toQuestion(context)).toList());
+  Future<List<Question>> fetchQuestions(BuildContext context) async =>
+      await _sqlite.fetchQuestions().then((questionList) =>
+          questionList!.map((question) => question.toDomain(context)).toList());
+
+  @override
+  Future<List<Question>> fetchQuestionsByBook(
+          BuildContext context, String book) async =>
+      await _sqlite.fetchQuestionsByBook(book).then((questionList) =>
+          questionList!.map((question) => question.toDomain(context)).toList());
 }

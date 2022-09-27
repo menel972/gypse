@@ -66,7 +66,7 @@ class UsersSqlite {
   }
 
   /// Asynchronous method that delete a user based on its [UserSqliteResponse.uid]
-  Future<void> fetchUser(String uid) async {
+  Future<void> deleteUser(String uid) async {
     var userDatabase = await database;
 
     try {

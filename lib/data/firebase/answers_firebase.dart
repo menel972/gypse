@@ -10,11 +10,9 @@ class AnswersFirebase {
   final CollectionReference<Map<String, dynamic>> database =
       FirebaseFirestore.instance.collection(Strings.answersCollection);
 
-  /// Returns a [Stream] of a list of 4 [AnswerFirebaseResponse]
-  Stream<List<AnswerFirebaseResponse>> fetchQuestionAnswers(
-          String questionId) =>
+  /// Returns a [Stream] of a list of [AnswerFirebaseResponse]
+  Stream<List<AnswerFirebaseResponse>> fetchAnswers() =>
       database.snapshots().map((snapshot) => snapshot.docs
           .map((doc) => AnswerFirebaseResponse.fromJson(doc.data()))
-          .where((answer) => answer.questionId == questionId)
           .toList());
 }

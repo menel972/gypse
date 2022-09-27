@@ -20,7 +20,7 @@ class FetchAnswersUsecase {
   FetchAnswersUsecase(this._repository);
 
   /// Returns an asynchronous list of 4 [Answer]
-  Future<List<Answer>> fetchQuestionAnswers(
+  Future<List<Answer>?> fetchQuestionAnswers(
           BuildContext context, String questionId) async =>
       await _repository.fetchQuestionAnswers(context, questionId);
 }

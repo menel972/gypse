@@ -5,6 +5,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class UsersDomainProvider {
   final UsersDataProvider _dataProvider = UsersDataProvider();
 
+  /// Provides an instance of [InitUsersUsecase]
+  get initUsersUsecaseProvider =>
+      Provider.autoDispose<InitUsersUsecase>((ref) =>
+          InitUsersUsecase(ref.read(_dataProvider.usersRepositoryProvider)));
+
   /// Provides an instance of [CreateUserUsecase]
   get createUserUsecaseProvider =>
       Provider.autoDispose<CreateUserUsecase>((ref) =>
@@ -19,6 +24,12 @@ class UsersDomainProvider {
   get updateUserUsecaseProvider =>
       Provider.autoDispose<UpdateUserUsecase>((ref) =>
           UpdateUserUsecase(ref.read(_dataProvider.usersRepositoryProvider)));
+
+  /// Provides an instance of [UpdateFirebaseUserUsecase]
+  get updateFirebaseUserUsecaseProvider =>
+      Provider.autoDispose<UpdateFirebaseUserUsecase>((ref) =>
+          UpdateFirebaseUserUsecase(
+              ref.read(_dataProvider.usersRepositoryProvider)));
 
   /// Provides an instance of [DeleteUserUsecase]
   get deleteUserUsecaseProvider =>

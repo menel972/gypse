@@ -35,7 +35,7 @@ GoRouter router = GoRouter(
     ),
     GoRoute(
       path: ScreenPaths.home,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => HomeScreen(),
     ),
     GoRoute(
       path: ScreenPaths.game,

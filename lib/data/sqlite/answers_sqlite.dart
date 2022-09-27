@@ -52,11 +52,12 @@ class AnswersSqlite {
     var answerDatabase = await database;
 
     try {
-      List<Map<String, dynamic>> sqlites = await answerDatabase.query('answers',
-          where: 'questionId = $questionId');
+      List<Map<String, dynamic>> sqlites =
+          await answerDatabase.query('answers');
 
       return sqlites
           .map((sqlite) => AnswerSqliteResponse.fromSqlite(sqlite))
+          .where(((answer) => answer.questionId == questionId))
           .toList();
     } on DatabaseException catch (err) {
       debugPrint(err.toString());

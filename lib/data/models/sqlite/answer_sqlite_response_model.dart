@@ -32,7 +32,7 @@ class AnswerSqliteResponse extends Equatable {
       AnswerSqliteResponse(
         id: sqlite['id'],
         questionId: sqlite['questionId'],
-        isRightAnswer: sqlite['confirme'],
+        isRightAnswer: sqlite['isRightAnswer'],
         fr: AnswerSqliteDatas.fromSqlite(jsonDecode(sqlite['fr'])),
         en: AnswerSqliteDatas.fromSqlite(jsonDecode(sqlite['en'])),
         es: AnswerSqliteDatas.fromSqlite(jsonDecode(sqlite['es'])),
@@ -59,10 +59,10 @@ class AnswerSqliteResponse extends Equatable {
     return Answer(
       id: id,
       isRightAnswer: isRightAnswer == 1 ? true : false,
-      answer: data.answer!,
-      url: data.url!,
-      verse: data.verse!,
-      verseReference: data.verseReference!,
+      answer: data.answer,
+      url: data.url,
+      verse: data.verse,
+      verseReference: data.verseReference,
     );
   }
 }
@@ -85,12 +85,12 @@ class AnswerSqliteDatas extends Equatable {
   List<Object?> get props => [answer, url, verse, verseReference];
 
   /// Get an [AnswerSqliteDatas] from the internal [sqflite] database response
-  factory AnswerSqliteDatas.fromSqlite(Map<String, dynamic> sqlite) =>
+  factory AnswerSqliteDatas.fromSqlite(Map<String, dynamic>? sqlite) =>
       AnswerSqliteDatas(
-        answer: sqlite['texte'],
-        url: sqlite['link'],
-        verse: sqlite['verset'],
-        verseReference: sqlite['versetRef'],
+        answer: sqlite?['answer'],
+        url: sqlite?['url'],
+        verse: sqlite?['verse'],
+        verseReference: sqlite?['verseReference'],
       );
 
   /// Returns a [Map<String, dynamic>] to be saved in the internal [sqflite] database

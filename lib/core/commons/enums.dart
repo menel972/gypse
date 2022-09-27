@@ -14,4 +14,4 @@ enum Time { easy, medium, hard }
 enum UserChangeCode { settings, questions, status }
 
 /// Defines the type on an error
-enum ErrorCode { routing, network }
+enum ErrorCode { routing, network, exception }

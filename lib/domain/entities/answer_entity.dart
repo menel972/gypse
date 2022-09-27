@@ -4,18 +4,18 @@ import 'package:equatable/equatable.dart';
 class Answer extends Equatable {
   final String id;
   final bool isRightAnswer;
-  final String answer;
-  final String url;
-  final String verse;
-  final String verseReference;
+  final String? answer;
+  final String? url;
+  final String? verse;
+  final String? verseReference;
 
   const Answer({
     required this.id,
     required this.isRightAnswer,
     required this.answer,
-    required this.url,
-    required this.verse,
-    required this.verseReference,
+    this.url,
+    this.verse,
+    this.verseReference,
   });
 
   @override

@@ -17,7 +17,7 @@ class QuestionsDataProvider {
   /// Provides an instance of [QuestionsRepositoryImpl]
   get questionsRepositoryProvider => Provider.autoDispose<QuestionsRepository>(
       (ref) => QuestionsRepositoryImpl(
-            ref.read(questionsFirebaseProvider),
             ref.read(questionsSqliteProvider),
+            ref.read(questionsFirebaseProvider),
           ));
 }

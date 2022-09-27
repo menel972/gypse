@@ -54,9 +54,9 @@ class QuestionsSqlite {
       List<Map<String, dynamic>> sqlites =
           await questionDatabase.query('questions');
 
-      return sqlites
-          .map((sqlite) => QuestionSqliteResponse.fromSqlite(sqlite))
-          .toList();
+      return sqlites.map((sqlite) {
+        return QuestionSqliteResponse.fromSqlite(sqlite);
+      }).toList();
     } on DatabaseException catch (err) {
       debugPrint(err.toString());
       return null;
@@ -66,9 +66,10 @@ class QuestionsSqlite {
   /// Returns an asynchronous list of [QuestionSqliteResponse] filtered by book
   Future<List<QuestionSqliteResponse>?> fetchQuestionsByBook(
       String book) async {
+
     try {
       return await fetchQuestions()
-          .then(((questions) => questions?.where((question) {
+          .then(((questions) => questions!.where((question) {
                 return question.en?.book == book ||
                     question.es?.book == book ||
                     question.fr?.book == book;

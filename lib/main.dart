@@ -5,6 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/theme.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -21,7 +22,7 @@ void main() async {
   );
 
   /// Start app
-  runApp(const MyApp());
+  runApp(const riverpod.ProviderScope(child: MyApp()));
   await Future.delayed(const Duration(seconds: 1));
 
   /// Remove the splash screen

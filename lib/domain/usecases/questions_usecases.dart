@@ -20,7 +20,7 @@ class FetchQuestionsUsecase {
   FetchQuestionsUsecase(this._repository);
 
   /// Returns an asynchronous list of [Question]
-  Future<List<Question>> fetchQuestionQuestions(BuildContext context) async =>
+  Future<List<Question>> fetchQuestions(BuildContext context) async =>
       await _repository.fetchQuestions(context);
 }
 
@@ -31,7 +31,8 @@ class FetchQuestionsByBookUsecase {
   FetchQuestionsByBookUsecase(this._repository);
 
   /// Returns a [Stream] of list of [Question] filtered by book
-  Future<List<Question>> fetchQuestionsByBook(
-          BuildContext context, String book) async =>
-      await _repository.fetchQuestions(context);
+  Future<List<Question>?> fetchQuestionsByBook(
+      BuildContext context, String book) async {
+    return await _repository.fetchQuestionsByBook(context, book);
+  }
 }

@@ -6,6 +6,6 @@ abstract class AnswersRepository {
   Future<void> initAnswers(BuildContext context);
 
   /// Returns an asynchronous list of 4 [Answer]
-  Future<List<Answer>> fetchQuestionAnswers(
+  Future<List<Answer>?> fetchQuestionAnswers(
       BuildContext context, String questionId);
 }

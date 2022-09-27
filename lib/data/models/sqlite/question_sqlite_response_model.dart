@@ -63,8 +63,8 @@ class QuestionSqliteDatas extends Equatable {
   List<Object?> get props => [question, book];
 
   /// Get a [QuestionSqliteDatas] from the internal [sqflite] database response
-  factory QuestionSqliteDatas.fromSqlite(Map<String, dynamic> sqlite) =>
-      QuestionSqliteDatas(question: sqlite['question'], book: sqlite['book']);
+  factory QuestionSqliteDatas.fromSqlite(Map<String, dynamic>? sqlite) =>
+      QuestionSqliteDatas(question: sqlite?['question'], book: sqlite?['book']);
 
   /// Returns a [Map<String, dynamic>] to be saved in the internal [sqflite] database
   Map<String, dynamic> toSqlite() => {'question': question, 'book': book};

@@ -24,7 +24,7 @@ class ConnectionChekScreen extends StatelessWidget {
             context.go(ScreenPaths.error, extra: ErrorCode.network);
           }
         },
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => HomeScreen(),
       ),
     );
   }

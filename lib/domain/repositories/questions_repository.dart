@@ -9,6 +9,6 @@ abstract class QuestionsRepository {
   Future<List<Question>> fetchQuestions(BuildContext context);
 
   /// Returns a [Stream] of list of [Question] filtered by book
-  Future<List<Question>> fetchQuestionsByBook(
+  Future<List<Question>?> fetchQuestionsByBook(
       BuildContext context, String book);
 }

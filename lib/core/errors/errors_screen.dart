@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/core/commons/enums.dart';
+import 'package:gypse/core/errors/exceptions_error_screen.dart';
 import 'package:gypse/core/errors/network_error_screen.dart';
 import 'package:gypse/core/errors/route_error_screen.dart';
 
@@ -15,8 +16,10 @@ class ErrorsScreen extends StatelessWidget {
     switch (code) {
       case ErrorCode.network:
         return const NetworkErrorScreen();
-      default:
+      case ErrorCode.routing:
         return RouteErrorScreen(error!);
+      default:
+        return ExceptionsErrorScreen(error!);
     }
   }
 

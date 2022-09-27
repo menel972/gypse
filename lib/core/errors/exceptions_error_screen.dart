@@ -4,12 +4,12 @@ import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 
-///Routing error view
+///Exceptions error view
 ///
-///RouteErrorScreen shows an error screen when the wanted route isn't defined
-class RouteErrorScreen extends StatelessWidget {
+///ExceptionsErrorScreen shows an error screen when an exception occured
+class ExceptionsErrorScreen extends StatelessWidget {
   final Exception error;
-  const RouteErrorScreen(this.error, {super.key});
+  const ExceptionsErrorScreen(this.error, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/domain/repositories/users_repository.dart';
 
 /// A usecase to initialize the [sqflite] internal database
 class InitUsersUsecase {
+  
   final UsersRepository _repository;
 
   InitUsersUsecase(this._repository);
 
   /// Fetch the current user from the [FirebaseFirestore] database and save it in the [sqflite] database
-  Future<void> initUsers(BuildContext context, String uid) async =>
-      await _repository.initUsers(context, uid);
+  Future<void> initUsers(BuildContext context, String uid) async {
+    await _repository.initUsers(context, uid);
+  }
 }
 
 /// A usecase to create a [GypseUser]
@@ -43,18 +44,8 @@ class UpdateUserUsecase {
   UpdateUserUsecase(this._repository);
 
   /// Asynchronous method that updates user's properties based on its [GypseUser.uid]
-  Future<void> updateUser(
-          {required UserChangeCode code,
-          required String uid,
-          Settings? settings,
-          bool? state,
-          List<AnsweredQuestion>? questions}) async =>
-      await _repository.onUserChanges(
-          code: code,
-          uid: uid,
-          settings: settings,
-          state: state,
-          questions: questions);
+  Future<void> updateUser(GypseUser user) async =>
+      await _repository.onUserChanges(user);
 }
 
 /// A usecase to update a [GypseUser] in the [FirebaseFirestore] database

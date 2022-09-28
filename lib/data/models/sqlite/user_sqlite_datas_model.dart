@@ -26,8 +26,7 @@ class AnsweredQuestionSqliteDatas extends Equatable {
       {'qid': id, 'niveau': level, 'valid': isRightAnswer};
 
   /// Get an [AnsweredQuestionSqliteDatas] from the domain
-  factory AnsweredQuestionSqliteDatas.fromDomain(
-      AnsweredQuestion question) {
+  factory AnsweredQuestionSqliteDatas.fromDomain(AnsweredQuestion question) {
     int domainLevel = 3;
 
     if (question.level == Level.easy) domainLevel = 1;
@@ -82,10 +81,10 @@ class SettingsSqliteDatas extends Equatable {
     if (settings.level == Level.easy) domainLevel = 1;
     if (settings.level == Level.medium) domainLevel = 2;
     if (settings.level == Level.hard) domainLevel = 3;
-    if (settings.time == Time.easy) domainLevel = 30;
-    if (settings.time == Time.medium) domainLevel = 20;
-    if (settings.time == Time.hard) domainLevel = 10;
-
+    if (settings.time == Time.easy) domainTime = 30;
+    if (settings.time == Time.medium) domainTime = 20;
+    if (settings.time == Time.hard) domainTime = 10;
+    
     return SettingsSqliteDatas(level: domainLevel, time: domainTime);
   }
 

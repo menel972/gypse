@@ -26,10 +26,10 @@ class UsersFirebase {
   }
 
   /// Returns a [Stream] of [UserFirebaseResponse] based its [UserFirebaseResponse.uid]
-  Stream<UserFirebaseResponse> fetchCurrentUser(String uid) =>
-      database.snapshots().map((snapshot) => snapshot.docs
-          .map(((doc) => UserFirebaseResponse.fromJson(doc.data())))
-          .firstWhere((user) => user.uid == uid));
+  Future<UserFirebaseResponse?> fetchCurrentUser(String uid) => database
+      .doc(uid)
+      .get()
+      .then(((user) => UserFirebaseResponse.fromJson(user.data())));
 
   /// Asynchronous method that updates user's properties based on its [UserFirebaseResponse.uid]
   Future<void> onUserChanges(UserFirebaseResponse user) async {

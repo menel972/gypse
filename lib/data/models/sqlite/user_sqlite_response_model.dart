@@ -44,7 +44,7 @@ class UserSqliteResponse extends Equatable {
     }
 
     return UserSqliteResponse(
-      uid: sqlite['id'],
+      uid: sqlite['uid'],
       userName: sqlite['userName'],
       locale: sqlite['locale'],
       isConnected: sqlite['isConnected'],
@@ -59,14 +59,15 @@ class UserSqliteResponse extends Equatable {
 
   /// Returns a [Map<String, dynamic>] to be saved in the internal [sqflite] database
   Map<String, dynamic> toSqlite() => {
-        'id': uid,
+        'uid': uid,
         'userName': userName,
         'locale': locale,
         'isConnected': isConnected,
         'isAdmin': isAdmin,
-        'credentials': jsonEncode(credentials!.toSqlite()),
+        'credentials': jsonEncode(credentials?.toSqlite()),
         'settings': jsonEncode(userSettings.toSqlite()),
-        'questions': jsonEncode(questions),
+        'questions': jsonEncode(
+            questions.map((question) => question.toSqlite()).toList()),
       };
 
   /// Get a [UserSqliteResponse] from the domain
@@ -121,10 +122,10 @@ class SqliteCredentials extends Equatable {
   List<Object?> get props => [email, password, phone];
 
   /// Get a [SqliteCredentials] from the internal [sqflite] database response
-  static fromSqlite(Map<String, dynamic> sqlite) => SqliteCredentials(
-        email: sqlite['email'],
-        password: sqlite['password'],
-        phone: sqlite['phone'],
+  static fromSqlite(Map<String, dynamic>? sqlite) => SqliteCredentials(
+        email: sqlite?['email'],
+        password: sqlite?['password'],
+        phone: sqlite?['phone'],
       );
 
   /// Returns a [Map<String, dynamic>] to be saved in the internal [sqflite] database

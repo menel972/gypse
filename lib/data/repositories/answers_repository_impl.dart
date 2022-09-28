@@ -20,7 +20,6 @@ class AnswersRepositoryImpl extends AnswersRepository {
         await _firebase.fetchAnswers().first;
 
     for (var answer in firebaseAnswersList) {
-      print(answer);
       await _sqlite.insertAnswer(answer.toSqlite(context));
     }
   }

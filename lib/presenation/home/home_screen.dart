@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/data/models/sqlite/question_sqlite_response_model.dart';
-import 'package:gypse/domain/providers/answers_domain_provider.dart';
-import 'package:gypse/domain/usecases/answers_usecases.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// Homepage
@@ -18,14 +16,6 @@ class HomeScreen extends HookConsumerWidget {
   );
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    InitAnswersUsecase provider =
-        ref.read(AnswersDomainProvider().initAnswersUsecaseProvider);
-
-    FetchAnswersUsecase providers =
-        ref.read(AnswersDomainProvider().fetchAnswersUsecaseProvider);
-
-    
-
 
     return Scaffold(
       body: Container(
@@ -35,32 +25,11 @@ class HomeScreen extends HookConsumerWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                child: const Text(
-                  'HomeScreen',
-                  style: TextXXL(Couleur.text, isBold: true),
-                ),
-                onPressed: () async {
-                  provider.initAnswers(context);
-                },
-              ),
-              TextButton(
-                child: const Text(
-                  'HomeScreen2',
-                  style: TextXXL(Couleur.text, isBold: true),
-                ),
-                onPressed: () async {
-                  await providers
-                      .fetchQuestionAnswers(context, 'lvcRGCWx7xhRXRwNAY7s')
-                      .then(((value) => print(value)));
-                },
-              ),
-            ],
-          ),
+        child: const Center(
+            child: Text(
+          'HomeScreen',
+          style: TextXXL(Couleur.text, isBold: true),
+        )
         ),
       ),
     );

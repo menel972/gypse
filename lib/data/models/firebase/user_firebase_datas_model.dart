@@ -16,16 +16,16 @@ class AnsweredQuestionFirebaseDatas extends Equatable {
   List<Object?> get props => [id, level, isRightAnswer];
 
   /// Get an [AnsweredQuestion] from a json
-  factory AnsweredQuestionFirebaseDatas.fromJson(Map<String, dynamic> json) =>
+  factory AnsweredQuestionFirebaseDatas.fromJson(Map<String, dynamic>? json) =>
       AnsweredQuestionFirebaseDatas(
-        id: json['qid'],
-        level: json['niveau'],
-        isRightAnswer: json['valid'],
+        id: json?['qId'],
+        level: json?['niveau'],
+        isRightAnswer: json?['valid'],
       );
 
   /// Returns a json [Map<String, dynamic>]
   Map<String, dynamic> toJson() =>
-      {'qid': id, 'niveau': level, 'valid': isRightAnswer};
+      {'qId': id, 'niveau': level, 'valid': isRightAnswer};
 
   /// Get an [AnsweredQuestionFirebaseDatas] from the [sqflite] internal database
   factory AnsweredQuestionFirebaseDatas.fromSqlite(

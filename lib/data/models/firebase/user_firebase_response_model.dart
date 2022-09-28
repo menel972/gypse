@@ -30,18 +30,21 @@ class UserFirebaseResponse extends Equatable {
       [uid, userName, locale, isConnected, isAdmin, userSettings, questions];
 
   /// Get an [UserFirebaseResponse] from a json
-  factory UserFirebaseResponse.fromJson(Map<String, dynamic> json) =>
-      UserFirebaseResponse(
-        uid: json['id'],
-        userName: json['userName'],
-        locale: json['locale'],
-        isConnected: json['isConnected'],
-        isAdmin: json['isAdmin'],
-        userSettings: SettingsFirebaseDatas.fromJson(json['settings']),
-        questions: json['questions']
-            .map((question) => AnsweredQuestionFirebaseDatas.fromJson(question))
-            .toList(),
-      );
+  factory UserFirebaseResponse.fromJson(Map<String, dynamic>? json) {
+    List<AnsweredQuestionFirebaseDatas> answeredQuestionList = [];
+    json?['questions'].forEach((question) => answeredQuestionList
+        .add(AnsweredQuestionFirebaseDatas.fromJson(question)));
+
+    return UserFirebaseResponse(
+      uid: json?['id'],
+      userName: json?['userName'],
+      locale: json?['locale'],
+      isConnected: json?['isConnected'],
+      isAdmin: json?['isAdmin'],
+      userSettings: SettingsFirebaseDatas.fromJson(json?['settings']),
+      questions: answeredQuestionList,
+    );
+  }
 
   /// Returns a json [Map<String, dynamic>]
   Map<String, dynamic> toJson() => {

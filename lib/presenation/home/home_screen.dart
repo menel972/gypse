@@ -1,37 +1,48 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:gypse/core/themes/text_themes.dart';
-import 'package:gypse/core/themes/theme.dart';
-import 'package:gypse/data/models/sqlite/question_sqlite_response_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gypse/presenation/home/account/account_view.dart';
+import 'package:gypse/presenation/home/bloc/navigation_cubit.dart';
+import 'package:gypse/presenation/home/bloc/navigation_state.dart';
+import 'package:gypse/presenation/home/charts/charts_view.dart';
+import 'package:gypse/presenation/home/components/home_app_bar.dart';
+import 'package:gypse/presenation/home/components/home_bottom_bar.dart';
+import 'package:gypse/presenation/home/home/home_view.dart';
 
 /// Homepage
 ///
 /// HomeScreen is the first view of the app
-class HomeScreen extends HookConsumerWidget {
+class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  QuestionSqliteResponse queston = const QuestionSqliteResponse(
-    id: 'r',
-    fr: QuestionSqliteDatas(book: 'ff', question: 'Bonjour'),
-  );
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  List<Widget> selectedView = [
+    const HomeView(),
+    const ChartsView(),
+    const AccountView(),
+  ];
 
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/home_bkg.png'),
-            fit: BoxFit.cover,
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (_) => NavigationCubit(),
+        child: BlocConsumer<NavigationCubit, NavigationState>(
+          listener: (context, state) {},
+          builder: (context, state) => Scaffold(
+            appBar: const HomeAppBar(),
+            body: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/home_bkg.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: selectedView[state.index],
+            ),
+            bottomNavigationBar: HomeBottomBar(
+                index: state.index,
+                selectPage: context.read<NavigationCubit>().setIndex),
           ),
-        ),
-        child: const Center(
-            child: Text(
-          'HomeScreen',
-          style: TextXXL(Couleur.text, isBold: true),
-        )
-        ),
-      ),
-    );
+        ));
   }
 }

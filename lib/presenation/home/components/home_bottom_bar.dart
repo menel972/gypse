@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/core/l10n/localizations.dart';
+import 'package:gypse/core/themes/theme.dart';
 
 /// A navigation bar at the bottom of [HomeScreen]
 ///
@@ -14,16 +15,30 @@ class HomeBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: index,
-      onTap: (i) => selectPage(i),
       items: [
         BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
+            icon: IconButton(
+              icon: const Icon(Icons.home_outlined),
+              onPressed: () => selectPage(0),
+              splashRadius: 20,
+              splashColor: Couleur.secondary,
+            ),
             label: words(context).redir_acc),
         BottomNavigationBarItem(
-            icon: const Icon(Icons.bar_chart_outlined),
+            icon: IconButton(
+              icon: const Icon(Icons.bar_chart_outlined),
+              onPressed: () => selectPage(1),
+              splashRadius: 20,
+              splashColor: Couleur.secondary,
+            ),
             label: words(context).redir_stat),
         BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outline),
+            icon: IconButton(
+              icon: const Icon(Icons.person_outline),
+              onPressed: () => selectPage(2),
+              splashRadius: 20,
+              splashColor: Couleur.secondary,
+            ),
             label: words(context).redir_profile),
       ],
     );

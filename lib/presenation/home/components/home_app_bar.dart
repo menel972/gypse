@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/themes/theme.dart';
 
 /// An options bar at the top of [HomeScreen]
@@ -20,9 +21,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
         IconButton(
           icon: const Icon(Icons.settings_outlined),
           onPressed: () {},
-          splashRadius: 18,
+          splashRadius: 20,
           splashColor: Couleur.secondary,
-        )
+        ),
+        SizedBox(width: screenSize(context).width * 0.05),
       ],
     );
   }

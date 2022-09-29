@@ -30,7 +30,7 @@ BottomNavigationBarThemeData bottomBarTheme =
   selectedLabelStyle: TextXS(Couleur.text),
   showUnselectedLabels: false,
   unselectedIconTheme: IconThemeData(
-    color: Couleur.primaryVariant,
+    color: Couleur.primary,
     size: 25,
   ),
 );

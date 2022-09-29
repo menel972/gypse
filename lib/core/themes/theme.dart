@@ -4,9 +4,7 @@ import 'package:gypse/core/themes/ui_bars_themes.dart';
 
 /// Defines UI theme of the app
 ThemeData theme = ThemeData(
-  // TODO : Vérifier la couleur avec les autres
-  canvasColor: const Color.fromARGB(255, 7, 29, 108),
-  // canvasColor: Couleur.text,
+  canvasColor: Couleur.text,
   bottomNavigationBarTheme: bottomBarTheme,
   appBarTheme: appBarTheme,
   inputDecorationTheme: inputTheme,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gypse/core/themes/text_themes.dart';
-import 'package:gypse/core/themes/theme.dart';
+import 'package:gypse/presenation/home/home/widgets/carousel.dart';
+import 'package:gypse/presenation/home/home/widgets/navigation_buttons.dart';
 
 /// User personal view
 ///
@@ -10,10 +10,12 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'HomeView',
-        style: TextXXL(Couleur.text, isBold: true),
+    return Center(
+      child: Column(
+        children: const [
+          Expanded(child: Carousel()),
+          NavigationButtons(),
+        ],
       ),
     );
   }

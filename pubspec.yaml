@@ -33,12 +33,15 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  auto_size_text: ^3.0.0
   cloud_firestore: ^3.4.8
   connectivity_plus: ^2.3.7
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
+  expansion_tile_card: ^2.0.0
   firebase_core: ^1.22.0
   flutter_bloc: ^8.1.1
+  flutter_carousel_widget: ^1.2.0
   flutter_native_splash: ^2.2.9
   go_router: ^4.5.0
   hooks_riverpod: ^1.0.4

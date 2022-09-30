@@ -12,25 +12,25 @@ AppBarTheme appBarTheme = const AppBarTheme(
   systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   toolbarHeight: 40,
   iconTheme: IconThemeData(color: Couleur.text, size: 30),
-  actionsIconTheme: IconThemeData(color: Couleur.text, size: 30),
-  // TODO : Verifier ce que ça fait
-  scrolledUnderElevation: 5,
+  actionsIconTheme: IconThemeData(
+    color: Couleur.text,
+    size: 25,
+    opacity: 0.8,
+  ),
 );
 
 /// Defines UI theme of the [BottomNavigationBar]
 BottomNavigationBarThemeData bottomBarTheme =
     const BottomNavigationBarThemeData(
-  type: BottomNavigationBarType.shifting,
-  selectedItemColor: Couleur.primary,
+  elevation: 0,
+  type: BottomNavigationBarType.fixed,
+  selectedItemColor: Couleur.secondary,
   selectedIconTheme: IconThemeData(
-    color: Couleur.primary,
-    size: 30,
-  ),
+    color: Couleur.secondary, size: 30),
   selectedLabelStyle: TextXS(Couleur.text),
   showUnselectedLabels: false,
   unselectedIconTheme: IconThemeData(
-    // TODO : Comparer avec [Couleur.primaryVariant]
-    color: Couleur.primarySurface,
+    color: Couleur.primary,
     size: 25,
   ),
 );

@@ -14,13 +14,18 @@ import 'package:gypse/presenation/home/home/home_view.dart';
 ///
 /// HomeScreen is the first view of the app
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
-  List<Widget> selectedView = [
-    const HomeView(),
-    const ChartsView(),
-    const AccountView(),
-  ];
+  Widget selectedView(int index) {
+    switch (index) {
+      case 1:
+        return const ChartsView();
+      case 2:
+        return const AccountView();
+      default:
+        return const HomeView();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: selectedView[state.index],
+              child: selectedView(state.index),
             ),
             bottomNavigationBar: HomeBottomBar(
                 index: state.index,

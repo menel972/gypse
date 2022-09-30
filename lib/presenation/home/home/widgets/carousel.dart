@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:gypse/core/commons/size.dart';
@@ -18,6 +20,10 @@ class _CarouselState extends ConsumerState<Carousel> {
 
   @override
   void initState() {
+    Timer.periodic(const Duration(seconds: 10), (timer) {
+      controller.nextPage(duration: const Duration(milliseconds: 600));
+    });
+
     super.initState();
   }
 

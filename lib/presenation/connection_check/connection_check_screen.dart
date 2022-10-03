@@ -1,17 +1,37 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/core/connectivity_service.dart';
+import 'package:gypse/domain/providers/answers_domain_provider.dart';
+import 'package:gypse/domain/providers/questions_domain_provider.dart';
+import 'package:gypse/domain/providers/users_domain_provider.dart';
 import 'package:gypse/presenation/home/home_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// Internet connection check
 ///
 /// Check the internet connection of the device using [ConnectivityCubit] & [ConnectivityState]
 /// Redirects the user if he doesn't have an internet connection
-class ConnectionChekScreen extends StatelessWidget {
+class ConnectionChekScreen extends HookConsumerWidget {
   const ConnectionChekScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Future<void> initApp() async {
+      await ref
+          .read(UsersDomainProvider().initUsersUsecaseProvider)
+          .initUsers(context, '68Ykp0OX2UXIGWUSQPj719UbDWr1');
+      await ref
+          .read(QuestionsDomainProvider().initQuestionsUsecaseProvider)
+          .initQuestions(context);
+      await ref
+          .read(AnswersDomainProvider().initAnswersUsecaseProvider)
+          .initAnswers(context);
+    }
+
+    initApp();
+
     return BlocProvider(
       create: (_) => ConnectivityCubit(),
       child: BlocConsumer<ConnectivityCubit, ConnectivityState>(
@@ -21,7 +41,7 @@ class ConnectionChekScreen extends StatelessWidget {
           //   context.go(ScreenPaths.error, extra: ErrorCode.network);
           // }
         },
-        builder: (context, state) => HomeScreen(),
+        builder: (context, state) => const HomeScreen(),
       ),
     );
   }

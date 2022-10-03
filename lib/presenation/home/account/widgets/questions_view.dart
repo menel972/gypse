@@ -7,7 +7,7 @@ import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/domain/entities/answer_entity.dart';
 import 'package:gypse/domain/entities/question_entity.dart';
-import 'package:gypse/presenation/components/cards.dart';
+import 'package:gypse/presenation/components/tiles.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class QuestionsView extends HookConsumerWidget {

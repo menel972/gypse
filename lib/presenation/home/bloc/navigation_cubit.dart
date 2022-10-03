@@ -6,7 +6,5 @@ class NavigationCubit extends Cubit<NavigationState> {
   NavigationCubit() : super(const NavigationState());
 
   /// Change the current index of navigation
-  void setIndex(int index) {
-    emit(state.copyWith(index));
-  }
+  void setIndex(int index) => emit(state.copyWith(index));
 }

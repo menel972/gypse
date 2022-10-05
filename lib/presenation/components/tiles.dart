@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
+import 'package:gypse/domain/entities/answer_entity.dart';
 
 /// An expansion panel to list questions and answers
 class QuestionsTile extends ExpansionTile {
@@ -37,4 +38,18 @@ class QuestionsTile extends ExpansionTile {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
+
+  static List<Widget> answersTile(List<Answer> answers) {
+    List<Widget> list = [];
+
+    for (var answer in answers) {
+      list.add(const Divider(color: Couleur.text));
+      list.add(AutoSizeText(
+        answer.answer!,
+        style: TextS(answer.isRightAnswer ? Couleur.secondary : Couleur.error),
+      ));
+    }
+
+    return list;
+  }
 }

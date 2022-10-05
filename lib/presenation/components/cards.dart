@@ -144,7 +144,7 @@ class CredentialsCard extends Stack {
 class BookCard extends GypseCard {
   final String book;
   final int questions;
-  final int answeredQuestions;
+  final int? answeredQuestions;
 
   BookCard(super.context, super.enabled,
       {super.key,

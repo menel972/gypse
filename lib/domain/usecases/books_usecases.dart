@@ -38,11 +38,20 @@ class GetBooksUsecase {
 
     switch (locale) {
       case Locales.en:
-        return BooksEn.books.where((book) => book.startsWith(filter)).toList();
+        return BooksEn.books
+            .where(
+                (book) => book.toLowerCase().startsWith(filter.toLowerCase()))
+            .toList();
       case Locales.es:
-        return BooksEs.books.where((book) => book.startsWith(filter)).toList();
+        return BooksEs.books
+            .where(
+                (book) => book.toLowerCase().startsWith(filter.toLowerCase()))
+            .toList();
       default:
-        return BooksFr.books.where((book) => book.startsWith(filter)).toList();
+        return BooksFr.books
+            .where(
+                (book) => book.toLowerCase().startsWith(filter.toLowerCase()))
+            .toList();
     }
   }
 }

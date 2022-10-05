@@ -23,6 +23,7 @@ class BooksScreen extends StatelessWidget {
             extendBodyBehindAppBar: true,
             appBar: BooksAppBar(context),
             body: Container(
+              padding: const EdgeInsets.only(top: 110),
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/game_bkg.png'),
@@ -33,6 +34,7 @@ class BooksScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SearchBarView(context.read<FilterCubit>().setFilter),
+                    // SizedBox(height: screenSize(context).height * 0.03),
                     Expanded(child: BooksView(state.filter))
                   ],
                 ),

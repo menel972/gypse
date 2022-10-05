@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/core/connectivity_service.dart';
 import 'package:gypse/domain/providers/answers_domain_provider.dart';
 import 'package:gypse/domain/providers/questions_domain_provider.dart';
@@ -28,6 +29,9 @@ class ConnectionChekScreen extends HookConsumerWidget {
       await ref
           .read(AnswersDomainProvider().initAnswersUsecaseProvider)
           .initAnswers(context);
+
+      /// Remove the splash screen
+      FlutterNativeSplash.remove();
     }
 
     initApp();

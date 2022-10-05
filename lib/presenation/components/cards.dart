@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,64 +10,84 @@ import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 
-/// A card view for books
-class BookCard extends StatelessWidget {
-  final String book;
+/// An abstract class for all card in the app
+abstract class GypseCard extends GestureDetector {
+  final BuildContext context;
+  final bool enabled;
+  Widget? content;
 
-  const BookCard({super.key, required this.book});
+  GypseCard(this.context, this.enabled, {super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.go(ScreenPaths.game),
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: const SweepGradient(
-            colors: Couleur.cardGradientColors,
-            stops: [0, 0.39, 0.6, 0.9],
-            center: Alignment(1, 0.2),
-            startAngle: -0.8,
-            endAngle: 6.5,
-          ),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black,
-              offset: Offset(2, 1),
-              blurRadius: 4,
-            ),
-            BoxShadow(
-              color: Couleur.primary,
-              offset: Offset(3, 2),
-              blurRadius: 10,
-            ),
-          ],
-        ),
-        child: Stack(
-          fit: StackFit.expand,
+  GestureTapCallback? get onTap =>
+      enabled ? () => context.go(ScreenPaths.game) : () => () {};
+
+  @override
+  Widget? get child => Stack(children: [
+        Container(
           alignment: Alignment.center,
-          children: [
-            Positioned(
-              bottom: screenSize(context).height * 0.16,
-              child: AutoSizeText(
-                book.toUpperCase(),
-                style: const TextXL(Couleur.text, isBold: true),
-                maxLines: 1,
-              ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: const SweepGradient(
+              colors: Couleur.cardGradientColors,
+              stops: [0, 0.39, 0.6, 0.9],
+              center: Alignment(1, 0.2),
+              startAngle: -0.8,
+              endAngle: 6.5,
             ),
-            Positioned(
-              bottom: 20,
-              child: SmallButton(
-                text: words(context).btn_jouer,
-                onPressed: () => context.go(ScreenPaths.game),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                offset: Offset(2, 1),
+                blurRadius: 4,
               ),
-            ),
-          ],
+              BoxShadow(
+                color: Couleur.primary,
+                offset: Offset(3, 2),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+          child: content,
         ),
-      ),
-    );
-  }
+        Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: !enabled ? Colors.black.withOpacity(0.4) : null,
+          ),
+        ),
+      ]);
+}
+
+/// A card view for the Carousel
+class CarouselCard extends GypseCard {
+  final String book;
+
+  CarouselCard(super.context, super.enabled, {super.key, required this.book});
+
+  @override
+  Widget get content => Stack(
+        fit: StackFit.expand,
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            bottom: screenSize(context).height * 0.16,
+            child: AutoSizeText(
+              book.toUpperCase(),
+              style: const TextXL(Couleur.text, isBold: true),
+              maxLines: 1,
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            child: SmallButton(
+              text: words(context).btn_jouer,
+              onPressed: () => context.go(ScreenPaths.game),
+            ),
+          ),
+        ],
+      );
 }
 
 /// A card for credentials datas
@@ -118,37 +140,43 @@ class CredentialsCard extends Stack {
       ];
 }
 
-class QuestionsTile extends ExpansionTile {
-  final String question;
+/// A card view for books
+class BookCard extends GypseCard {
   final String book;
-  final int index;
+  final int questions;
+  final int? answeredQuestions;
 
-  const QuestionsTile(
+  BookCard(super.context, super.enabled,
       {super.key,
-      required this.question,
       required this.book,
-      required this.index,
-      required super.title,
-      required super.children});
+      required this.questions,
+      required this.answeredQuestions});
 
   @override
-  Widget get title => AutoSizeText(
-        '${index + 1} - $book',
-        style: const TextS(Couleur.text),
-      );
-
-  @override
-  Color? get collapsedIconColor => Couleur.secondaryVariant;
-
-  @override
-  Color? get backgroundColor => Couleur.primarySurface.withOpacity(0.2);
-
-  @override
-  Widget? get subtitle => AutoSizeText(
-        question,
-        style: const TextXS(Couleur.text),
-        minFontSize: 14,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+  Widget? get content => Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.04),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          AutoSizeText(
+            book.toUpperCase(),
+            style: const TextXXL(Couleur.text, isBold: true),
+            maxLines: 2,
+            wrapWords: false,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: screenSize(context).height * 0.015),
+          AutoSizeText.rich(
+            TextSpan(
+              text: '$answeredQuestions',
+              style: TextS(answeredQuestions == questions && questions != 0
+                  ? Couleur.secondary
+                  : Couleur.text),
+              children: [
+                TextSpan(
+                    text: ' / $questions', style: const TextS(Couleur.text))
+              ],
+            ),
+          ),
+        ]),
       );
 }

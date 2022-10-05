@@ -27,3 +27,31 @@ class FetchFiveRandomBooksUsecase {
     }
   }
 }
+
+/// A usecase to fetch a list of bible's books
+class GetBooksUsecase {
+  GetBooksUsecase();
+
+  /// Returns alist of all bible's books as [List<String>] based on the device's language
+  List<String> getBooks(BuildContext context, String filter) {
+    Locales locale = getLocale(context);
+
+    switch (locale) {
+      case Locales.en:
+        return BooksEn.books
+            .where(
+                (book) => book.toLowerCase().startsWith(filter.toLowerCase()))
+            .toList();
+      case Locales.es:
+        return BooksEs.books
+            .where(
+                (book) => book.toLowerCase().startsWith(filter.toLowerCase()))
+            .toList();
+      default:
+        return BooksFr.books
+            .where(
+                (book) => book.toLowerCase().startsWith(filter.toLowerCase()))
+            .toList();
+    }
+  }
+}

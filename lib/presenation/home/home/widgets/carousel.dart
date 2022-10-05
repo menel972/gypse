@@ -33,7 +33,8 @@ class _CarouselState extends ConsumerState<Carousel> {
     return FlutterCarousel.builder(
       carouselController: controller,
       itemCount: 5,
-      itemBuilder: (context, index, realIndex) => BookCard(book: books[index]),
+      itemBuilder: (context, index, realIndex) =>
+          CarouselCard(context, true, book: books[index]),
       options: Options(context),
     );
   }

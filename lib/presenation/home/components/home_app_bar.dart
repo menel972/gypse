@@ -5,19 +5,12 @@ import 'package:gypse/core/themes/theme.dart';
 /// An options bar at the top of [HomeScreen]
 ///
 /// HomeAppBar allows user to access to the [SettingsView]
-class HomeAppBar extends StatelessWidget implements PreferredSize {
-  const HomeAppBar({super.key});
+class HomeAppBar extends AppBar {
+  final BuildContext context;
+  HomeAppBar(this.context, {super.key});
 
   @override
-  Widget get child => AppBar();
-
-  @override
-  Size get preferredSize => const Size.fromHeight(40);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      actions: [
+  List<Widget>? get actions => [
         IconButton(
           icon: const Icon(Icons.settings_outlined),
           onPressed: () {},
@@ -25,7 +18,5 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
           splashColor: Couleur.secondary,
         ),
         SizedBox(width: screenSize(context).width * 0.05),
-      ],
-    );
-  }
+      ];
 }

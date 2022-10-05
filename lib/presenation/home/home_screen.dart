@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
         child: BlocConsumer<NavigationCubit, NavigationState>(
           listener: (context, state) {},
           builder: (context, state) => Scaffold(
-            appBar: const HomeAppBar(),
+            appBar: HomeAppBar(context),
             body: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(

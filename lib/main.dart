@@ -24,9 +24,6 @@ void main() async {
   /// Start app
   runApp(const riverpod.ProviderScope(child: MyApp()));
   await Future.delayed(const Duration(seconds: 1));
-
-  /// Remove the splash screen
-  FlutterNativeSplash.remove();
 }
 
 /// Creates the app using the [CupertinoApp.router] constructor and [GoRouter] to navigate

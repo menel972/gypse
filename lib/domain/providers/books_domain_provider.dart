@@ -6,4 +6,8 @@ class BooksDomainProvider {
   get fetchFiveRandomBooksUsecaseProvider =>
       Provider.autoDispose<FetchFiveRandomBooksUsecase>(
           ((ref) => FetchFiveRandomBooksUsecase()));
+
+  /// Provides an instance of [GetBooksUsecase]
+  get getBooksUsecaseProvider =>
+      Provider.autoDispose<GetBooksUsecase>(((ref) => GetBooksUsecase()));
 }

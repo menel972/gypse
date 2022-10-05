@@ -65,7 +65,7 @@ class BooksView extends HookConsumerWidget {
                               message: '${snap.error}',
                               child: BookCard(
                                 context,
-                                questions.isNotEmpty,
+                                enabled: questions.isNotEmpty,
                                 book: book,
                                 questions: questions.length,
                                 answeredQuestions: getAnsweredQuestions(

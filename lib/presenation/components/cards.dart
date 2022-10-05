@@ -14,13 +14,19 @@ import 'package:gypse/presenation/components/buttons.dart';
 abstract class GypseCard extends GestureDetector {
   final BuildContext context;
   final bool enabled;
+  final String book;
   Widget? content;
 
-  GypseCard(this.context, this.enabled, {super.key});
+  GypseCard(
+    this.context, {
+    super.key,
+    this.enabled = true,
+    required this.book,
+  });
 
   @override
   GestureTapCallback? get onTap =>
-      enabled ? () => context.go(ScreenPaths.game) : () => () {};
+      enabled ? () => context.go('${ScreenPaths.game}/$book') : () => () {};
 
   @override
   Widget? get child => Stack(children: [
@@ -62,9 +68,8 @@ abstract class GypseCard extends GestureDetector {
 
 /// A card view for the Carousel
 class CarouselCard extends GypseCard {
-  final String book;
 
-  CarouselCard(super.context, super.enabled, {super.key, required this.book});
+  CarouselCard(super.context, {super.key, super.enabled, required super.book});
 
   @override
   Widget get content => Stack(
@@ -83,10 +88,51 @@ class CarouselCard extends GypseCard {
             bottom: 20,
             child: SmallButton(
               text: words(context).btn_jouer,
-              onPressed: () => context.go(ScreenPaths.game),
+              onPressed: () => context.go('${ScreenPaths.game}/$book'),
             ),
           ),
         ],
+      );
+}
+
+/// A card view for books
+class BookCard extends GypseCard {
+  final int questions;
+  final int? answeredQuestions;
+
+  BookCard(super.context,
+      {super.key,
+      super.enabled,
+      required super.book,
+      required this.questions,
+      required this.answeredQuestions});
+
+  @override
+  Widget? get content => Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.04),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          AutoSizeText(
+            book.toUpperCase(),
+            style: const TextXXL(Couleur.text, isBold: true),
+            maxLines: 2,
+            wrapWords: false,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: screenSize(context).height * 0.015),
+          AutoSizeText.rich(
+            TextSpan(
+              text: '$answeredQuestions',
+              style: TextS(answeredQuestions == questions && questions != 0
+                  ? Couleur.secondary
+                  : Couleur.text),
+              children: [
+                TextSpan(
+                    text: ' / $questions', style: const TextS(Couleur.text))
+              ],
+            ),
+          ),
+        ]),
       );
 }
 
@@ -140,43 +186,3 @@ class CredentialsCard extends Stack {
       ];
 }
 
-/// A card view for books
-class BookCard extends GypseCard {
-  final String book;
-  final int questions;
-  final int? answeredQuestions;
-
-  BookCard(super.context, super.enabled,
-      {super.key,
-      required this.book,
-      required this.questions,
-      required this.answeredQuestions});
-
-  @override
-  Widget? get content => Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.04),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AutoSizeText(
-            book.toUpperCase(),
-            style: const TextXXL(Couleur.text, isBold: true),
-            maxLines: 2,
-            wrapWords: false,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: screenSize(context).height * 0.015),
-          AutoSizeText.rich(
-            TextSpan(
-              text: '$answeredQuestions',
-              style: TextS(answeredQuestions == questions && questions != 0
-                  ? Couleur.secondary
-                  : Couleur.text),
-              children: [
-                TextSpan(
-                    text: ' / $questions', style: const TextS(Couleur.text))
-              ],
-            ),
-          ),
-        ]),
-      );
-}

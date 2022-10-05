@@ -21,4 +21,10 @@ class QuestionsDomainProvider {
       Provider.autoDispose<FetchQuestionsByBookUsecase>(((ref) =>
           FetchQuestionsByBookUsecase(
               ref.read(_dataProvider.questionsRepositoryProvider))));
+
+  /// Provides an instance of [FetchNextQuestionUsecase]
+  get fetchNextQuestionUsecaseProvider =>
+      Provider.autoDispose<FetchNextQuestionUsecase>(((ref) =>
+          FetchNextQuestionUsecase(
+              ref.read(_dataProvider.questionsRepositoryProvider))));
 }

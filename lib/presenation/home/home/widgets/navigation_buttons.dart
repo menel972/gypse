@@ -22,7 +22,7 @@ class NavigationButtons extends StatelessWidget {
           PrimaryButton(
             context,
             text: words(context).btn_start,
-            onPressed: () => context.go(ScreenPaths.game),
+            onPressed: () => context.go('${ScreenPaths.game}/_'),
             textColor: Couleur.text,
             color: Couleur.secondary,
           ),

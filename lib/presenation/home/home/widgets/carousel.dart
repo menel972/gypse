@@ -34,7 +34,7 @@ class _CarouselState extends ConsumerState<Carousel> {
       carouselController: controller,
       itemCount: 5,
       itemBuilder: (context, index, realIndex) =>
-          CarouselCard(context, true, book: books[index]),
+          CarouselCard(context, book: books[index]),
       options: Options(context),
     );
   }

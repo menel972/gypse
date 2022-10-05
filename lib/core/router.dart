@@ -38,8 +38,8 @@ GoRouter router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: ScreenPaths.game,
-      builder: (context, state) => const GameScreen(),
+      path: '${ScreenPaths.game}/:book',
+      builder: (context, state) => GameScreen(state.params['book']!),
     ),
     GoRoute(
       path: ScreenPaths.books,

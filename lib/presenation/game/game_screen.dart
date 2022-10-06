@@ -59,13 +59,19 @@ class GameScreen extends riverpod.HookConsumerWidget {
                             child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: 2,
-                              
                               itemBuilder: (context, index) => [
                                 SizedBox(
                                     height: (screenSize(context).height - 30) *
                                         0.25,
-                                    child: GameQuestion(snapshot.data!)),
-                                GameAnswers(snap.data!)
+                                    child: GameQuestion(
+                                      question: snapshot.data!,
+                                      settings: user.settings,
+                                    )),
+                                GameAnswers(
+                                  answers: snap.data!,
+                                  user: user,
+                                  questionId: snapshot.data!.id,
+                                )
                               ][index],
                             ),
                           ),

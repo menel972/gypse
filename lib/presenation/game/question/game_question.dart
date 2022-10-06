@@ -1,14 +1,24 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/domain/entities/question_entity.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
 
 class GameQuestion extends StatelessWidget {
   final Question question;
-  const GameQuestion(this.question, {super.key});
+  final Settings settings;
+  const GameQuestion(
+      {super.key, required this.question, required this.settings});
+
+  String difficultyImage() {
+    if (settings.level == Level.easy) return 'easy.png';
+    if (settings.level == Level.medium) return 'medium.png';
+    return 'hard.png';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +35,7 @@ class GameQuestion extends StatelessWidget {
                 style: const TextM(Couleur.text),
                 maxLines: 1,
               ),
-              const AutoSizeText(
-                'Difficulté',
-                style: TextM(Couleur.text),
-                maxLines: 1,
-              ),
+              Image.asset('assets/images/${difficultyImage()}', height: 40),
             ],
           ),
           const Divider(color: Couleur.text),

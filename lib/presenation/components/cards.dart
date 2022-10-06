@@ -8,6 +8,7 @@ import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
+import 'package:gypse/domain/entities/answer_entity.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 
 /// An abstract class for all card in the app
@@ -68,7 +69,6 @@ abstract class GypseCard extends GestureDetector {
 
 /// A card view for the Carousel
 class CarouselCard extends GypseCard {
-
   CarouselCard(super.context, {super.key, super.enabled, required super.book});
 
   @override
@@ -186,3 +186,96 @@ class CredentialsCard extends Stack {
       ];
 }
 
+class AnswerCard extends GestureDetector {
+  final BuildContext context;
+  final bool enabled;
+  final bool selected;
+  final Answer answer;
+  final VoidCallback selectCard;
+  final int index;
+
+  AnswerCard(this.context,
+      {super.key,
+      required this.answer,
+      required this.selectCard,
+      required this.index,
+      this.enabled = true,
+      this.selected = false});
+
+  @override
+  GestureTapCallback? get onTap => enabled ? () => selectCard() : () {};
+
+  @override
+  Widget? get child => Card(
+        margin:
+            EdgeInsets.symmetric(vertical: screenSize(context).height * 0.01),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: cardColor,
+              border: Border.all(width: 2, color: borderColor)),
+          padding: EdgeInsets.symmetric(
+              vertical: screenSize(context).height * 0.015,
+              horizontal: screenSize(context).width * 0.03),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 1,
+                child: AutoSizeText('${index + 1}.',
+                    style: TextS(
+                      textColor,
+                      isBold: selected,
+                    )),
+              ),
+              Flexible(
+                flex: 4,
+                child: AutoSizeText(
+                  answer.answer!,
+                  textAlign: TextAlign.center,
+                  style: TextS(textColor, isBold: selected),
+                  minFontSize: 12,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Visibility(
+                  visible: selected,
+                  child: Icon(
+                    icon,
+                    color: iconColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Color get cardColor {
+    if (answer.isRightAnswer && selected) return Couleur.secondary;
+    return Couleur.secondarySurface;
+  }
+
+  Color get borderColor {
+    if (answer.isRightAnswer && selected) return Couleur.secondarySurface;
+    if (!answer.isRightAnswer && selected) return Couleur.error;
+    return Couleur.secondaryBorder;
+  }
+
+  Color get textColor {
+    if (answer.isRightAnswer && selected) return Couleur.secondarySurface;
+    if (!answer.isRightAnswer && selected) return Couleur.error;
+    return Couleur.primary;
+  }
+
+  Color get iconColor =>
+      answer.isRightAnswer ? Couleur.secondarySurface : Couleur.error;
+
+  IconData get icon =>
+      answer.isRightAnswer ? Icons.check_circle_outline : Icons.highlight_off;
+}

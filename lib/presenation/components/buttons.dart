@@ -62,3 +62,35 @@ class SmallButton extends ElevatedButton {
         ),
       );
 }
+
+/// Low emphasis button with a circled form
+class FabButton extends GestureDetector {
+  final BuildContext context;
+  final IconData icon;
+  final Color iconColor;
+  final Color color;
+  final VoidCallback function;
+
+  FabButton(
+    this.context, {
+    super.key,
+    required this.icon,
+    required this.function,
+    required this.color,
+    required this.iconColor,
+  });
+
+  @override
+  GestureTapCallback? get onTap => () => function();
+
+  @override
+  Widget? get child => Container(
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+        ),
+        padding: EdgeInsets.all(screenSize(context).width * 0.02),
+        alignment: Alignment.center,
+        child: Icon(icon, color: iconColor, size: 35),
+      );
+}

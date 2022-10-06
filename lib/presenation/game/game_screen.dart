@@ -49,7 +49,7 @@ class GameScreen extends riverpod.HookConsumerWidget {
                           extendBodyBehindAppBar: true,
                           appBar: GameAppBar(context, snapshot.data!.book),
                           body: Container(
-                            padding: const EdgeInsets.only(top: 110),
+                            padding: const EdgeInsets.only(top: 30),
                             decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('assets/images/game_bkg.png'),
@@ -59,17 +59,13 @@ class GameScreen extends riverpod.HookConsumerWidget {
                             child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: 2,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: screenSize(context).width * 0.05),
+                              
                               itemBuilder: (context, index) => [
                                 SizedBox(
-                                    height: (screenSize(context).height - 110) *
-                                        0.4,
+                                    height: (screenSize(context).height - 30) *
+                                        0.25,
                                     child: GameQuestion(snapshot.data!)),
-                                SizedBox(
-                                    height: (screenSize(context).height - 110) *
-                                        0.6,
-                                    child: GameAnswers(snap.data!))
+                                GameAnswers(snap.data!)
                               ][index],
                             ),
                           ),

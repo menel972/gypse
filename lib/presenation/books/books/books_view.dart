@@ -70,6 +70,7 @@ class BooksView extends HookConsumerWidget {
                                 questions: questions.length,
                                 answeredQuestions: getAnsweredQuestions(
                                     questions, snap.data?.questions),
+                                userQuestions: snap.data!.questions,
                               ),
                             );
                           }),

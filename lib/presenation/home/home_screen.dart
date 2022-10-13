@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gypse/core/commons/current_user.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/presenation/home/account/account_view.dart';
 import 'package:gypse/presenation/home/bloc/navigation_cubit.dart';
 import 'package:gypse/presenation/home/bloc/navigation_state.dart';
@@ -9,6 +11,7 @@ import 'package:gypse/presenation/home/charts/charts_view.dart';
 import 'package:gypse/presenation/home/components/home_app_bar.dart';
 import 'package:gypse/presenation/home/components/home_bottom_bar.dart';
 import 'package:gypse/presenation/home/home/home_view.dart';
+import 'package:provider/provider.dart';
 
 /// Homepage
 ///
@@ -29,12 +32,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GypseUser user = Provider.of<CurrentUser>(context).currentUser;
+
     return BlocProvider(
         create: (_) => NavigationCubit(),
         child: BlocConsumer<NavigationCubit, NavigationState>(
           listener: (context, state) {},
           builder: (context, state) => Scaffold(
-            appBar: HomeAppBar(context),
+            appBar: HomeAppBar(context, user),
             body: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(

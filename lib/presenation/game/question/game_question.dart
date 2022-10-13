@@ -47,7 +47,7 @@ class GameQuestion extends StatelessWidget {
                 child: AutoSizeText(
                   question.question,
                   style: const TextL(Couleur.text),
-                  maxLines: 5,
+                  maxLines: 3,
                 ),
               ),
               const Flexible(

@@ -9,6 +9,7 @@ import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/domain/entities/answer_entity.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 
 /// An abstract class for all card in the app
@@ -17,17 +18,21 @@ abstract class GypseCard extends GestureDetector {
   final bool enabled;
   final String book;
   Widget? content;
+  final List<AnsweredQuestion> userQuestions;
 
   GypseCard(
     this.context, {
     super.key,
     this.enabled = true,
     required this.book,
+    required this.userQuestions,
   });
 
   @override
   GestureTapCallback? get onTap =>
-      enabled ? () => context.go('${ScreenPaths.game}/$book') : () => () {};
+      enabled
+      ? () => context.go('${ScreenPaths.game}/$book', extra: userQuestions)
+      : () => () {};
 
   @override
   Widget? get child => Stack(children: [
@@ -69,7 +74,11 @@ abstract class GypseCard extends GestureDetector {
 
 /// A card view for the Carousel
 class CarouselCard extends GypseCard {
-  CarouselCard(super.context, {super.key, super.enabled, required super.book});
+  CarouselCard(super.context,
+      {super.key,
+      super.enabled,
+      required super.userQuestions,
+      required super.book});
 
   @override
   Widget get content => Stack(
@@ -88,7 +97,8 @@ class CarouselCard extends GypseCard {
             bottom: 20,
             child: SmallButton(
               text: words(context).btn_jouer,
-              onPressed: () => context.go('${ScreenPaths.game}/$book'),
+              onPressed: () =>
+                  context.go('${ScreenPaths.game}/$book', extra: userQuestions),
             ),
           ),
         ],
@@ -103,6 +113,7 @@ class BookCard extends GypseCard {
   BookCard(super.context,
       {super.key,
       super.enabled,
+      required super.userQuestions,
       required super.book,
       required this.questions,
       required this.answeredQuestions});

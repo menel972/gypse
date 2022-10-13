@@ -1,16 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class AnswersState extends Equatable {
-  final int? index;
-  final bool viewSize;
+  int? index;
+  bool animate;
 
-  const AnswersState({this.index, this.viewSize = true});
+  AnswersState(this.index, this.animate);
 
   @override
-  List<Object?> get props => [];
-
-  AnswersState copyWith({int? index, bool? viewSize}) => AnswersState(
-        index: index ?? this.index,
-        viewSize: viewSize ?? this.viewSize,
-      );
+  List<Object?> get props => [index, animate];
 }

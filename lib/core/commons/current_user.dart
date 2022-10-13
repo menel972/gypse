@@ -16,6 +16,12 @@ class CurrentUser extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Defines the authenticated user
+  void setSettingsUser(Settings settings) {
+    _currentUser?.settings = settings;
+    notifyListeners();
+  }
+
   /// Defines the user's device's language
   void setUserLocale(Locales locale) {
     _currentUser!.locale = locale;

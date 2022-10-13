@@ -44,16 +44,16 @@ class FetchNextQuestionUsecase {
   FetchNextQuestionUsecase(this._repository);
 
   Future<Question> fetchNextQuestion(BuildContext context,
-      {String? book, required GypseUser user}) async {
+      {String? book, required List<AnsweredQuestion> userQuestions}) async {
     List<Question>? questions = book != null
         ? await _repository.fetchQuestionsByBook(context, book)
         : await _repository.fetchQuestions(context);
 
-    Iterable<String> userQuestions =
-        user.questions.map((question) => question.id);
+    Iterable<String> iterableUserQuestions =
+        userQuestions.map((question) => question.id);
 
     List<Question> filteredQuestions = questions!
-        .where((question) => userQuestions.contains(question.id))
+        .where((question) => iterableUserQuestions.contains(question.id))
         .toList();
 
     filteredQuestions.shuffle();

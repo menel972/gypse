@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:gypse/core/commons/mocks.dart';
+import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/text_themes.dart';
@@ -8,14 +8,14 @@ import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 import 'package:gypse/presenation/components/cards.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:provider/provider.dart';
 
-class CredentialsView extends HookConsumerWidget {
+class CredentialsView extends StatelessWidget {
   const CredentialsView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    GypseUser user = userMock;
+  Widget build(BuildContext context) {
+    GypseUser user = Provider.of<CurrentUser>(context).currentUser;
     Size size = screenSize(context);
 
     return ListView.separated(
@@ -33,12 +33,12 @@ class CredentialsView extends HookConsumerWidget {
       },
       padding: EdgeInsets.symmetric(
           vertical: size.height * 0.05, horizontal: size.width * 0.08),
-      itemBuilder: (context, index) => r(context, user)[index],
+      itemBuilder: (context, index) => userDatas(context, user)[index],
     );
   }
 }
 
-List<Widget> r(BuildContext context, GypseUser user) => [
+List<Widget> userDatas(BuildContext context, GypseUser user) => [
       Image.asset('assets/images/splash_logo.png',
           height: screenSize(context).height * 0.08),
       CredentialsCard(
@@ -68,7 +68,7 @@ List<Widget> r(BuildContext context, GypseUser user) => [
         icon: Icons.alternate_email_outlined,
         label: '${words(context).label_mail} :',
         data: AutoSizeText(
-          user.credentials!.email!,
+          user.credentials!.email ?? '',
           style: const TextM(Couleur.text),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

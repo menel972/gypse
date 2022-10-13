@@ -1,6 +1,7 @@
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/bloc/bloc_provider.dart' as blocs;
+import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/theme.dart';
@@ -12,9 +13,10 @@ import 'package:gypse/presenation/components/cards.dart';
 import 'package:gypse/presenation/game/bloc/answers_bloc.dart';
 import 'package:gypse/presenation/game/bloc/answers_state.dart';
 import 'package:gypse/presenation/game/components/verse_modal.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
+import 'package:provider/provider.dart';
 
-class GameAnswers extends HookConsumerWidget {
+class GameAnswers extends riverpod.HookConsumerWidget {
   final List<Answer> answers;
   final GypseUser user;
   final String questionId;
@@ -28,17 +30,21 @@ class GameAnswers extends HookConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    Future<void> updateUser(GypseUser user) => ref
+  Widget build(BuildContext context, riverpod.WidgetRef ref) {
+    Future<void> updateSqliteUser(GypseUser user) => ref
         .read(UsersDomainProvider().updateUserUsecaseProvider)
         .updateUser(user);
+
+    void updateCurrentUser(GypseUser user) =>
+        Provider.of<CurrentUser>(context, listen: false).setCurrentUser(user);
     final bloc = blocs.BlocProvider.of<AnswersBloc>(context);
 
     Future<void> nextQuestion(AnsweredQuestion newQuestion) async {
       user.questions.add(newQuestion);
       bloc.slideView(false);
       await Future.delayed(const Duration(milliseconds: 900));
-      await updateUser(user);
+      await updateSqliteUser(user);
+      updateCurrentUser(user);
       addQuestion(newQuestion);
       bloc.slideView(true);
       bloc.selectAnswer(null);

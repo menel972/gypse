@@ -11,13 +11,15 @@ class PrimaryButton extends ElevatedButton {
   final Color textColor;
   final Color color;
 
-  const PrimaryButton(this.context,
-      {super.key,
-      required super.onPressed,
-      super.child,
-      required this.text,
-      required this.textColor,
-      required this.color});
+  const PrimaryButton(
+    this.context, {
+    super.key,
+    required super.onPressed,
+    super.child,
+    required this.text,
+    required this.textColor,
+    required this.color,
+  });
 
   @override
   Widget get child => AutoSizeText(text, style: TextS(textColor), maxLines: 1);

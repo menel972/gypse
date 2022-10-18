@@ -2,6 +2,7 @@ import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/bloc/bloc_provider.dart' as blocs;
 import 'package:gypse/core/commons/current_user.dart';
+import 'package:gypse/core/commons/is_answered_menu.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/theme.dart';
@@ -17,6 +18,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
 
 class GameAnswers extends riverpod.HookConsumerWidget {
+  final VoidCallback pause;
+  final VoidCallback restart;
   final List<Answer> answers;
   final GypseUser user;
   final String questionId;
@@ -27,6 +30,8 @@ class GameAnswers extends riverpod.HookConsumerWidget {
     required this.user,
     required this.questionId,
     required this.addQuestion,
+    required this.pause,
+    required this.restart,
   });
 
   @override
@@ -37,6 +42,10 @@ class GameAnswers extends riverpod.HookConsumerWidget {
 
     void updateCurrentUser(GypseUser user) =>
         Provider.of<CurrentUser>(context, listen: false).setCurrentUser(user);
+
+    void setAnswered() =>
+        Provider.of<IsAnsweredMenu>(context, listen: false).setAnswered();
+
     final bloc = blocs.BlocProvider.of<AnswersBloc>(context);
 
     Future<void> nextQuestion(AnsweredQuestion newQuestion) async {
@@ -45,9 +54,11 @@ class GameAnswers extends riverpod.HookConsumerWidget {
       await Future.delayed(const Duration(milliseconds: 900));
       await updateSqliteUser(user);
       updateCurrentUser(user);
+      setAnswered();
       addQuestion(newQuestion);
       bloc.slideView(true);
       bloc.selectAnswer(null);
+      restart();
     }
 
     return StreamBuilder<AnswersState>(
@@ -100,9 +111,12 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                               context,
                               enabled: state.index == null,
                               answer: answer,
-                              selectCard: () => bloc.selectAnswer(i),
+                              selectCard: () {
+                                bloc.selectAnswer(i);
+                                pause();
+                                setAnswered();
+                              },
                               index: i,
-                              // enabled: state.index == null,
                               selected: answer.isRightAnswer
                                   ? state.index != null
                                   : state.index == i,

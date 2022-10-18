@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/core/commons/current_user.dart';
+import 'package:gypse/core/commons/is_answered_menu.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
@@ -34,7 +35,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: CurrentUser())],
+      providers: [
+        ChangeNotifierProvider.value(value: CurrentUser()),
+        ChangeNotifierProvider.value(value: IsAnsweredMenu()),
+      ],
       child: MaterialApp.router(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

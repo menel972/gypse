@@ -38,4 +38,10 @@ class Couleur {
     Color.fromRGBO(107, 16, 139, 1),
     Color.fromRGBO(248, 119, 0, 1),
   ];
+
+  /// Gauge Background
+  static List<Color> gaugeGradientColors = [
+    primary.withOpacity(0.9),
+    primarySurface.withOpacity(0.4)
+  ];
 }

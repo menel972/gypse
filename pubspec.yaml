@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore: ^3.4.8
   connectivity_plus: ^2.3.7
   cupertino_icons: ^1.0.2
+  d_chart: ^0.1.0
   equatable: ^2.0.5
   expansion_tile_card: ^2.0.0
   firebase_core: ^1.22.0

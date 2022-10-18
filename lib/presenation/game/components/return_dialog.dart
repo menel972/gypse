@@ -1,26 +1,39 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/is_answered_menu.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
+import 'package:gypse/domain/providers/users_domain_provider.dart';
 import 'package:gypse/presenation/components/buttons.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
 
-class ReturnDialog extends Center {
-  final BuildContext context;
+class ReturnDialog extends riverpod.HookConsumerWidget {
   final VoidCallback resume;
 
-  const ReturnDialog(this.context, this.resume, {super.key});
-
-  bool get isAnswered => Provider.of<IsAnsweredMenu>(context).isAnswered;
+  const ReturnDialog(this.resume, {super.key});
 
   @override
-  Widget? get child => Container(
+  Widget build(BuildContext context, riverpod.WidgetRef ref) {
+    GypseUser user = Provider.of<CurrentUser>(context).currentUser;
+
+    bool isAnswered = Provider.of<IsAnsweredMenu>(context).isAnswered;
+
+    Future<void> updateFirebaseUser(GypseUser user) async => await ref
+        .read(UsersDomainProvider().updateFirebaseUserUsecaseProvider)
+        .updateFirebaseUser(user);
+
+    return Center(
+      child: Container(
         height: screenSize(context).height * 0.4,
         width: screenSize(context).width * 0.85,
         decoration: BoxDecoration(
@@ -73,7 +86,10 @@ class ReturnDialog extends Center {
                         text: words(context).btn_quit,
                         onPressed: isAnswered
                             ? () {}
-                            : () => context.go(ScreenPaths.home),
+                            : () async {
+                                await updateFirebaseUser(user);
+                                context.go(ScreenPaths.home);
+                              },
                         textColor: isAnswered ? Couleur.error : Couleur.primary,
                         color: Couleur.primarySurface.withOpacity(0.2),
                       ),
@@ -95,5 +111,7 @@ class ReturnDialog extends Center {
           ),
           child: Container(),
         ),
-      );
+      ),
+    );
+  }
 }

@@ -10,13 +10,15 @@ import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
+import 'package:gypse/domain/providers/users_domain_provider.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 import 'package:gypse/presenation/components/tiles.dart';
 import 'package:gypse/presenation/home/bloc/settings_bloc.dart';
 import 'package:gypse/presenation/home/bloc/settings_state.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
 
-class SettingsModal extends StatelessWidget {
+class SettingsModal extends riverpod.HookConsumerWidget {
   const SettingsModal({super.key});
 
   static Future<void> showSettings(BuildContext context, GypseUser user) async {
@@ -35,11 +37,18 @@ class SettingsModal extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, riverpod.WidgetRef ref) {
     final bloc = BlocProvider.of<SettingsBloc>(context);
+
+    GypseUser user = Provider.of<CurrentUser>(context).currentUser;
+
     void updateUser(Settings settings) =>
         Provider.of<CurrentUser>(context, listen: false)
             .setSettingsUser(settings);
+
+    Future<void> updateFirebaseUser(GypseUser user) async => await ref
+        .read(UsersDomainProvider().updateFirebaseUserUsecaseProvider)
+        .updateFirebaseUser(user);
 
     return StreamBuilder<SettingsState>(
         stream: bloc.stream,
@@ -163,6 +172,7 @@ class SettingsModal extends StatelessWidget {
                           text: words(context).btn_valide,
                           onPressed: () {
                             updateUser(snapshot.data!.toSettings());
+                            updateFirebaseUser(user);
                             Navigator.of(context).pop();
                           },
                           color: Couleur.primary,

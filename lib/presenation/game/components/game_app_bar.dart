@@ -34,7 +34,7 @@ class GameAppBar extends AppBar {
     pause();
     return await showDialog(
       context: context,
-      builder: (context) => ReturnDialog(context, resume),
+      builder: (context) => ReturnDialog(resume),
     );
   }
 }

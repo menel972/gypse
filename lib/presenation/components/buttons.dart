@@ -11,13 +11,15 @@ class PrimaryButton extends ElevatedButton {
   final Color textColor;
   final Color color;
 
-  const PrimaryButton(this.context,
-      {super.key,
-      required super.onPressed,
-      super.child,
-      required this.text,
-      required this.textColor,
-      required this.color});
+  const PrimaryButton(
+    this.context, {
+    super.key,
+    required super.onPressed,
+    super.child,
+    required this.text,
+    required this.textColor,
+    required this.color,
+  });
 
   @override
   Widget get child => AutoSizeText(text, style: TextS(textColor), maxLines: 1);
@@ -60,5 +62,37 @@ class SmallButton extends ElevatedButton {
           (_) =>
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
+      );
+}
+
+/// Low emphasis button with a circled form
+class FabButton extends GestureDetector {
+  final BuildContext context;
+  final IconData icon;
+  final Color iconColor;
+  final Color color;
+  final VoidCallback function;
+
+  FabButton(
+    this.context, {
+    super.key,
+    required this.icon,
+    required this.function,
+    required this.color,
+    required this.iconColor,
+  });
+
+  @override
+  GestureTapCallback? get onTap => () => function();
+
+  @override
+  Widget? get child => Container(
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+        ),
+        padding: EdgeInsets.all(screenSize(context).width * 0.02),
+        alignment: Alignment.center,
+        child: Icon(icon, color: iconColor, size: 35),
       );
 }

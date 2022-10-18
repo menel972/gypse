@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/builders/content_buider.dart';
+import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/text_themes.dart';
@@ -23,7 +24,7 @@ class QuestionsView extends HookConsumerWidget {
 
     Future<List<Answer>?> answers(String questionId) => ref
         .read(AnswersDomainProvider().fetchAnswersUsecaseProvider)
-        .fetchQuestionAnswers(context, questionId);
+        .fetchQuestionAnswers(context, questionId, Level.hard);
 
     return Padding(
       padding: EdgeInsets.only(

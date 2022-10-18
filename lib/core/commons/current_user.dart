@@ -3,7 +3,6 @@ import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/domain/entities/question_entity.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 
-
 /// A class that provides datas from the current user
 class CurrentUser extends ChangeNotifier {
   GypseUser? _currentUser;
@@ -13,6 +12,12 @@ class CurrentUser extends ChangeNotifier {
   /// Defines the authenticated user
   void setCurrentUser(GypseUser user) {
     _currentUser = user;
+    notifyListeners();
+  }
+
+  /// Defines the authenticated user
+  void setSettingsUser(Settings settings) {
+    _currentUser?.settings = settings;
     notifyListeners();
   }
 

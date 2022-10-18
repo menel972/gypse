@@ -8,19 +8,31 @@ import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
+import 'package:gypse/domain/entities/answer_entity.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 
 /// An abstract class for all card in the app
 abstract class GypseCard extends GestureDetector {
   final BuildContext context;
   final bool enabled;
+  final String book;
   Widget? content;
+  final List<AnsweredQuestion> userQuestions;
 
-  GypseCard(this.context, this.enabled, {super.key});
+  GypseCard(
+    this.context, {
+    super.key,
+    this.enabled = true,
+    required this.book,
+    required this.userQuestions,
+  });
 
   @override
   GestureTapCallback? get onTap =>
-      enabled ? () => context.go(ScreenPaths.game) : () => () {};
+      enabled
+      ? () => context.go('${ScreenPaths.game}/$book', extra: userQuestions)
+      : () => () {};
 
   @override
   Widget? get child => Stack(children: [
@@ -62,9 +74,11 @@ abstract class GypseCard extends GestureDetector {
 
 /// A card view for the Carousel
 class CarouselCard extends GypseCard {
-  final String book;
-
-  CarouselCard(super.context, super.enabled, {super.key, required this.book});
+  CarouselCard(super.context,
+      {super.key,
+      super.enabled,
+      required super.userQuestions,
+      required super.book});
 
   @override
   Widget get content => Stack(
@@ -83,10 +97,53 @@ class CarouselCard extends GypseCard {
             bottom: 20,
             child: SmallButton(
               text: words(context).btn_jouer,
-              onPressed: () => context.go(ScreenPaths.game),
+              onPressed: () =>
+                  context.go('${ScreenPaths.game}/$book', extra: userQuestions),
             ),
           ),
         ],
+      );
+}
+
+/// A card view for books
+class BookCard extends GypseCard {
+  final int questions;
+  final int? answeredQuestions;
+
+  BookCard(super.context,
+      {super.key,
+      super.enabled,
+      required super.userQuestions,
+      required super.book,
+      required this.questions,
+      required this.answeredQuestions});
+
+  @override
+  Widget? get content => Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.04),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          AutoSizeText(
+            book.toUpperCase(),
+            style: const TextXXL(Couleur.text, isBold: true),
+            maxLines: 2,
+            wrapWords: false,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: screenSize(context).height * 0.015),
+          AutoSizeText.rich(
+            TextSpan(
+              text: '$answeredQuestions',
+              style: TextS(answeredQuestions == questions && questions != 0
+                  ? Couleur.secondary
+                  : Couleur.text),
+              children: [
+                TextSpan(
+                    text: ' / $questions', style: const TextS(Couleur.text))
+              ],
+            ),
+          ),
+        ]),
       );
 }
 
@@ -140,43 +197,96 @@ class CredentialsCard extends Stack {
       ];
 }
 
-/// A card view for books
-class BookCard extends GypseCard {
-  final String book;
-  final int questions;
-  final int? answeredQuestions;
+class AnswerCard extends GestureDetector {
+  final BuildContext context;
+  final bool enabled;
+  final bool selected;
+  final Answer answer;
+  final VoidCallback selectCard;
+  final int index;
 
-  BookCard(super.context, super.enabled,
+  AnswerCard(this.context,
       {super.key,
-      required this.book,
-      required this.questions,
-      required this.answeredQuestions});
+      required this.answer,
+      required this.selectCard,
+      required this.index,
+      this.enabled = true,
+      this.selected = false});
 
   @override
-  Widget? get content => Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: screenSize(context).width * 0.04),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AutoSizeText(
-            book.toUpperCase(),
-            style: const TextXXL(Couleur.text, isBold: true),
-            maxLines: 2,
-            wrapWords: false,
-            textAlign: TextAlign.center,
+  GestureTapCallback? get onTap => enabled ? () => selectCard() : () {};
+
+  @override
+  Widget? get child => Card(
+        margin:
+            EdgeInsets.symmetric(vertical: screenSize(context).height * 0.01),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: cardColor,
+              border: Border.all(width: 2, color: borderColor)),
+          padding: EdgeInsets.symmetric(
+              vertical: screenSize(context).height * 0.015,
+              horizontal: screenSize(context).width * 0.03),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 1,
+                child: AutoSizeText('${index + 1}.',
+                    style: TextS(
+                      textColor,
+                      isBold: selected,
+                    )),
+              ),
+              Flexible(
+                flex: 4,
+                child: AutoSizeText(
+                  answer.answer!,
+                  textAlign: TextAlign.center,
+                  style: TextS(textColor, isBold: selected),
+                  minFontSize: 12,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Visibility(
+                  visible: selected,
+                  child: Icon(
+                    icon,
+                    color: iconColor,
+                  ),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: screenSize(context).height * 0.015),
-          AutoSizeText.rich(
-            TextSpan(
-              text: '$answeredQuestions',
-              style: TextS(answeredQuestions == questions && questions != 0
-                  ? Couleur.secondary
-                  : Couleur.text),
-              children: [
-                TextSpan(
-                    text: ' / $questions', style: const TextS(Couleur.text))
-              ],
-            ),
-          ),
-        ]),
+        ),
       );
+
+  Color get cardColor {
+    if (answer.isRightAnswer && selected) return Couleur.secondary;
+    return Couleur.secondarySurface;
+  }
+
+  Color get borderColor {
+    if (answer.isRightAnswer && selected) return Couleur.secondarySurface;
+    if (!answer.isRightAnswer && selected) return Couleur.error;
+    return Couleur.secondaryBorder;
+  }
+
+  Color get textColor {
+    if (answer.isRightAnswer && selected) return Couleur.secondarySurface;
+    if (!answer.isRightAnswer && selected) return Couleur.error;
+    return Couleur.primary;
+  }
+
+  Color get iconColor =>
+      answer.isRightAnswer ? Couleur.secondarySurface : Couleur.error;
+
+  IconData get icon =>
+      answer.isRightAnswer ? Icons.check_circle_outline : Icons.highlight_off;
 }

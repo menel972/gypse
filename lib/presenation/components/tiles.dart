@@ -53,3 +53,39 @@ class QuestionsTile extends ExpansionTile {
     return list;
   }
 }
+
+class SettingsRadioButton extends RadioListTile {
+  final String textTitle;
+  final String textSubTitle;
+
+  const SettingsRadioButton({
+    super.key,
+    required super.value,
+    required super.groupValue,
+    required super.onChanged,
+    required this.textTitle,
+    required this.textSubTitle,
+  });
+
+  @override
+  EdgeInsetsGeometry? get contentPadding => const EdgeInsets.all(0);
+
+  @override
+  Color? get activeColor => Couleur.primary;
+
+  @override
+  Widget? get title => AutoSizeText(
+        textTitle,
+        style: const TextS(Couleur.primary),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      );
+
+  @override
+  Widget? get subtitle => AutoSizeText(
+        textSubTitle,
+        style: const TextXS(Couleur.primary),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      );
+}

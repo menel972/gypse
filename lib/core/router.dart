@@ -1,9 +1,12 @@
 import 'package:go_router/go_router.dart';
+import 'package:gypse/core/bloc/bloc_provider.dart';
 import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/errors/errors_screen.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/presenation/auth/auth_screen.dart';
 import 'package:gypse/presenation/books/books_screen.dart';
 import 'package:gypse/presenation/connection_check/connection_check_screen.dart';
+import 'package:gypse/presenation/game/bloc/user_bloc.dart';
 import 'package:gypse/presenation/game/game_screen.dart';
 import 'package:gypse/presenation/home/home_screen.dart';
 
@@ -38,8 +41,10 @@ GoRouter router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: ScreenPaths.game,
-      builder: (context, state) => const GameScreen(),
+      path: '${ScreenPaths.game}/:book',
+      builder: (context, state) => BlocProvider<UserBloc>(
+          bloc: UserBloc(state.extra as List<AnsweredQuestion>),
+          child: GameScreen(state.params['book']!)),
     ),
     GoRoute(
       path: ScreenPaths.books,

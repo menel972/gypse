@@ -63,6 +63,15 @@ class ResetPasswordUsecase {
   Future<void> resetPassword() => _repository.resetPassword();
 }
 
+class ForgottenPasswordUsecase {
+  final AuthRepository _repository;
+
+  ForgottenPasswordUsecase(this._repository);
+
+  Future<void> forgottenPassword(String email) =>
+      _repository.forgottenPassword(email);
+}
+
 class SignOutUsecase {
   final AuthRepository _repository;
 

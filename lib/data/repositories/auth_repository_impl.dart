@@ -17,6 +17,10 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<void> resetPassword() => _auth.resetPassword();
+  
+  @override
+  Future<void> forgottenPassword(String email) =>
+      _auth.forgottenPassword(email);
 
   @override
   Future<void> setUserName(String userName) => _auth.setUserName(userName);

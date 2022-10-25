@@ -36,6 +36,11 @@ class AuthDomainProvider {
       Provider.autoDispose<ResetPasswordUsecase>((ref) =>
           ResetPasswordUsecase(ref.read(_dataProvider.authRepositoryProvider)));
 
+  get forgottenPasswordProvider =>
+      Provider.autoDispose<ForgottenPasswordUsecase>((ref) =>
+          ForgottenPasswordUsecase(
+              ref.read(_dataProvider.authRepositoryProvider)));
+
   get signOutUsecaseProvider => Provider.autoDispose<SignOutUsecase>(
       (ref) => SignOutUsecase(ref.read(_dataProvider.authRepositoryProvider)));
 

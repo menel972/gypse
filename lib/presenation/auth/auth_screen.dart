@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/themes/theme.dart';
+import 'package:gypse/presenation/auth/bloc/forgotten_password_cubit.dart';
 import 'package:gypse/presenation/auth/bloc/sign_in_cubit.dart';
 import 'package:gypse/presenation/auth/bloc/sign_up_cubit.dart';
 import 'package:gypse/presenation/auth/bloc/switch_view_bloc.dart';
 import 'package:gypse/core/bloc/bloc_provider.dart' as blocs;
 import 'package:gypse/presenation/auth/sign_in/sign_in.dart';
 import 'package:gypse/presenation/auth/sign_up/sign_up.dart';
+import 'package:gypse/presenation/auth/widgets/forgotten_password_dialog.dart';
 
 /// Login view
 ///
@@ -55,6 +57,9 @@ class AuthScreen extends StatelessWidget {
                       BlocProvider(
                           create: (_) => SignInCubit(),
                           child: SignIn(bloc.switchView)),
+                      BlocProvider(
+                          create: (_) => ForgottenPasswordCubit(),
+                          child: ForgottenPasswordDialog(bloc.switchView)),
                     ][snapshot.data!],
                   ),
                 ),

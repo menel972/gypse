@@ -109,7 +109,17 @@ class SignIn extends riverpod.HookConsumerWidget {
                 maxLines: 1,
               ),
             ),
-            SizedBox(height: screenSize(context).height * 0.03),
+            SizedBox(height: screenSize(context).height * 0.01),
+            TextButton(
+              child: const AutoSizeText(
+                // TODO : Clé de trad
+                'Mot de passe oublié ?',
+                style: TextS(Couleur.secondary),
+                maxLines: 1,
+              ),
+              onPressed: () => switchView(2),
+            ),
+            SizedBox(height: screenSize(context).height * 0.001),
             PrimaryButton(
               context,
               text: words(context).btn_signin,

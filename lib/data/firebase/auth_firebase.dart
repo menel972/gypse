@@ -70,6 +70,11 @@ class AuthFirebase {
   Future<void> resetPassword() =>
       auth.sendPasswordResetEmail(email: auth.currentUser!.email!);
 
+  /// Asynchronous way for users to reset their password when they forget theirs.
+  /// Sends a password reset email to a user
+  Future<void> forgottenPassword(String email) =>
+      auth.sendPasswordResetEmail(email: email);
+
   /// Asynchronous way for users to log out.
   Future<void> signOut() async => auth.signOut();
 

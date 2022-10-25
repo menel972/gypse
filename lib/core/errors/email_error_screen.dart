@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 
@@ -9,12 +10,11 @@ class EmailErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO : Utiliser des cles de traduction
     return Scaffold(
       appBar: AppBar(
-        title: const AutoSizeText(
-          'Votre adresse mail n\'est pas confirmée',
-          style: TextM(Couleur.text),
+        title: AutoSizeText(
+          words(context).title_verif_mail,
+          style: const TextM(Couleur.text),
           maxLines: 1,
         ),
       ),
@@ -29,20 +29,20 @@ class EmailErrorScreen extends StatelessWidget {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const AutoSizeText(
-              'Votre adresse mail n\'est pas confirmée.',
+            AutoSizeText(
+              words(context).title_verif_mail,
               textAlign: TextAlign.center,
-              style: TextM(Couleur.text),
+              style: const TextM(Couleur.text),
             ),
             AutoSizeText(
-              'Un mail de confirmation a été envoyé à $email...',
+              '${words(context).txt_verif_mail} $email...',
               textAlign: TextAlign.center,
               style: const TextM(Couleur.text),
             ),
             TextButton(
-              child: const Text(
-                'Renvoyer un mail de confirmation',
-                style: TextM(Couleur.secondary),
+              child: Text(
+                words(context).txt_verif_mail2,
+                style: const TextM(Couleur.secondary),
               ),
               onPressed: () {},
             ),

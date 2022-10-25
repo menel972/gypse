@@ -54,7 +54,6 @@ class Settings extends Equatable {
   List<Object?> get props => [level, time];
 
   /// Set new settings
-  // TODO: à vérifier si ça fonctionne
   Settings copyWith({Level? level, Time? time}) => Settings(
         level: level ?? this.level,
         time: time ?? this.time,

@@ -1,34 +1,42 @@
-// TODO : Utiliser des clés de trad
-String? isEmpty(value) {
-  if (value!.isEmpty) return 'Vous devez entrer une valeur';
+import 'package:flutter/material.dart';
+import 'package:gypse/core/l10n/localizations.dart';
+
+String? isEmpty(BuildContext context, value) {
+  if (value!.isEmpty) return words(context).form_err_empty;
   return null;
 }
 
-String? emailValidator(value) {
+String? emailValidator(BuildContext context, value) {
   RegExp exp = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  if (value!.isEmpty) return 'Vous devez entrer une adresse mail';
+  if (value!.isEmpty) return words(context).form_err_empty;
   if (!exp.hasMatch(value)) {
-    return 'Cette adresse mail n\'est pas valide';
+    return words(context).form_err_mail;
   }
   return null;
 }
 
-String? passwordValidator(value) {
+String? passwordValidator(BuildContext context, value) {
   RegExp majExp = RegExp(r"^(?=.*?[A-Z])");
   RegExp minExp = RegExp(r"^(?=.*?[a-z])");
   RegExp numExp = RegExp(r"^(?=.*?[0-9])");
   RegExp speExp = RegExp(r"^(?=.*?[#?!@$ %^&*_-])");
-  if (value!.isEmpty) return 'Vous devez entrer un mot de passe';
-  if (!majExp.hasMatch(value)) return 'Il manque au moins une majuscule';
-  if (!minExp.hasMatch(value)) return 'Il manque au moins une minuscule';
-  if (!numExp.hasMatch(value)) return 'Il manque au moins un chiffre';
+  if (value!.isEmpty) return words(context).form_err_empty;
+  if (!majExp.hasMatch(value)) {
+    return '${words(context).form_err_lack} ${words(context).form_err_maj}';
+  }
+  if (!minExp.hasMatch(value)) {
+    return '${words(context).form_err_lack} ${words(context).form_err_min}';
+  }
+  if (!numExp.hasMatch(value)) {
+    return '${words(context).form_err_lack} ${words(context).form_err_num}';
+  }
   if (!speExp.hasMatch(value)) {
-    return 'Il manque au moins un caractère spécial';
+    return '${words(context).form_err_lack} ${words(context).form_err_spe}';
   }
   if (value!.length < 8) {
     num delta = 8 - value!.length;
-    return 'Il manque au moins $delta caractères - min 8';
+    return '${words(context).form_err_lack} $delta ${words(context).form_err_car}';
   }
   return null;
 }

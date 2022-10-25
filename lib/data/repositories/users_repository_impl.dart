@@ -55,7 +55,6 @@ class UsersRepositoryImpl extends UsersRepository {
   Future<void> deleteUser(String uid) async {
     await _firebase.deleteUser(uid);
     await _sqlite.deleteUser(uid);
-    // TODO : Ajouter la suppression du compte depuis le Auth Service
   }
 
   @override

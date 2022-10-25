@@ -11,27 +11,27 @@ class SignUpCubit extends Cubit<CredentialsState> {
 
   void onPasswordVisibilityChanged() => emit(state.copyWith(hide: !state.hide));
 
-  void onUserNameChanged(String value) {
-    if (isEmpty(value) != null) {
-      emit(state.copyWith(userNameError: isEmpty(value)));
+  void onUserNameChanged(BuildContext context, String value) {
+    if (isEmpty(context, value) != null) {
+      emit(state.copyWith(userNameError: isEmpty(context, value)));
     } else {
       emit(state.copyWith(userName: value));
       emit(state.copyWith(userNameError: ''));
     }
   }
 
-  void onEmailChanged(String value) {
-    if (emailValidator(value) != null) {
-      emit(state.copyWith(emailError: emailValidator(value)));
+  void onEmailChanged(BuildContext context, String value) {
+    if (emailValidator(context, value) != null) {
+      emit(state.copyWith(emailError: emailValidator(context, value)));
     } else {
       emit(state.copyWith(email: value));
       emit(state.copyWith(emailError: ''));
     }
   }
 
-  void onPasswordChanged(String value) {
-    if (passwordValidator(value) != null) {
-      emit(state.copyWith(passwordError: passwordValidator(value)));
+  void onPasswordChanged(BuildContext context, String value) {
+    if (passwordValidator(context, value) != null) {
+      emit(state.copyWith(passwordError: passwordValidator(context, value)));
     } else {
       emit(state.copyWith(password: value));
       emit(state.copyWith(passwordError: ''));
@@ -42,21 +42,19 @@ class SignUpCubit extends Cubit<CredentialsState> {
       emit(state.copyWith(status: status));
 
   bool onSignUpRequest(BuildContext context) {
-    if (passwordValidator(state.password) == null &&
-        emailValidator(state.email) == null &&
-        isEmpty(state.userName) == null) {
+    if (passwordValidator(context, state.password) == null &&
+        emailValidator(context, state.email) == null &&
+        isEmpty(context, state.userName) == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            // TODO : Utiliser une clé de trad
             content: Text(words(context).snack_welcome),
             backgroundColor: Couleur.secondary),
       );
       return true;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            // TODO : Utiliser une clé de trad
-            content: Text('Le formulaire n\'est pas valide'),
+        SnackBar(
+            content: Text(words(context).snack_error_form),
             backgroundColor: Couleur.error),
       );
       return false;

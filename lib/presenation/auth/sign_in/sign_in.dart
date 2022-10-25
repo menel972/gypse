@@ -67,7 +67,7 @@ class SignIn extends riverpod.HookConsumerWidget {
                   )),
               style: const TextM(Couleur.text),
               onChanged: (value) =>
-                  context.read<SignInCubit>().onEmailChanged(value),
+                  context.read<SignInCubit>().onEmailChanged(context, value),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
             ),
@@ -96,7 +96,7 @@ class SignIn extends riverpod.HookConsumerWidget {
               ),
               style: const TextM(Couleur.text),
               onChanged: (value) =>
-                  context.read<SignInCubit>().onPasswordChanged(value),
+                  context.read<SignInCubit>().onPasswordChanged(context, value),
               obscureText: state.hide,
               keyboardType: TextInputType.visiblePassword,
               textInputAction: TextInputAction.done,
@@ -111,10 +111,9 @@ class SignIn extends riverpod.HookConsumerWidget {
             ),
             SizedBox(height: screenSize(context).height * 0.01),
             TextButton(
-              child: const AutoSizeText(
-                // TODO : Clé de trad
-                'Mot de passe oublié ?',
-                style: TextS(Couleur.secondary),
+              child: AutoSizeText(
+                words(context).title_forget_mdp,
+                style: const TextS(Couleur.secondary),
                 maxLines: 1,
               ),
               onPressed: () => switchView(2),

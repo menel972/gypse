@@ -103,9 +103,8 @@ List<Widget> userDatas(
           onPressed: () async {
             await resetPassword();
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  // TODO : Utiliser une clé de trad
-                  content: Text('Un mail vous a été envoyé'),
+              SnackBar(
+                  content: Text(words(context).txt_mail),
                   backgroundColor: Couleur.secondary),
             );
           },

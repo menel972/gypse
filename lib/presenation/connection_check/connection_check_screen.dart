@@ -3,10 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/core/commons/current_user.dart';
+import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/connectivity_service.dart';
-import 'package:gypse/domain/providers/answers_domain_provider.dart';
-import 'package:gypse/domain/providers/questions_domain_provider.dart';
+import 'package:gypse/core/router.dart';
+import 'package:gypse/domain/entities/user_entity.dart';
+import 'package:gypse/domain/providers/auth_domain_provider.dart';
+import 'package:gypse/domain/providers/init_domain_provider.dart';
 import 'package:gypse/domain/providers/users_domain_provider.dart';
 import 'package:gypse/presenation/home/home_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
@@ -21,38 +25,47 @@ class ConnectionChekScreen extends riverpod.HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, riverpod.WidgetRef ref) {
-    Future<void> initApp() async {
-      await ref
-          .read(UsersDomainProvider().initUsersUsecaseProvider)
-          .initUsers(context, '68Ykp0OX2UXIGWUSQPj719UbDWr1');
+    GypseUser user = Provider.of<CurrentUser>(context).currentUser;
 
-      Provider.of<CurrentUser>(context, listen: false).setCurrentUser(await ref
-          .read(UsersDomainProvider().fetchUserUsecaseProvider)
-          .fetchUserById('68Ykp0OX2UXIGWUSQPj719UbDWr1'));
+    String? uid = ref.read(AuthDomainProvider().getUserUidUsecaseProvider).uid;
 
-      await ref
-          .read(QuestionsDomainProvider().initQuestionsUsecaseProvider)
-          .initQuestions(context);
-      await ref
-          .read(AnswersDomainProvider().initAnswersUsecaseProvider)
-          .initAnswers(context);
+    void checkAuthState() => ref
+        .read(AuthDomainProvider().checkAuthStateUsecaseProvider)
+        .checkAuthState(context);
 
-      /// Remove the splash screen
-      FlutterNativeSplash.remove();
-    }
+    Future<void> initApp() async => await ref
+        .read(InitDomainProvider().initAppUsecaseProvider)
+        .initApp(context);
 
-    initApp();
+    Future<void> setCurrentUser() async =>
+        Provider.of<CurrentUser>(context, listen: false).setCurrentUser(
+            await ref
+                .read(UsersDomainProvider().fetchUserUsecaseProvider)
+                .fetchUserById(uid));
+
+    checkAuthState();
 
     return BlocProvider(
       create: (_) => ConnectivityCubit(),
       child: BlocConsumer<ConnectivityCubit, ConnectivityState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           // TODO : Decommenter pour activer le check réseau
           // if (state.state == ConnectivityResult.none) {
           //   context.go(ScreenPaths.error, extra: ErrorCode.network);
           // }
+          if (user.status == LoginState.authenticated) {
+            await initApp();
+            setCurrentUser();
+            FlutterNativeSplash.remove();
+          }
+          if (user.status == LoginState.unauthenticated) {
+            context.go(ScreenPaths.auth);
+            FlutterNativeSplash.remove();
+          }
         },
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) {
+          return const HomeScreen();
+        },
       ),
     );
   }

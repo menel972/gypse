@@ -1,8 +1,10 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:gypse/core/commons/is_answered_menu.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
+import 'package:provider/provider.dart';
 
 class QuizTimer extends CircularCountDownTimer {
   final BuildContext context;
@@ -28,4 +30,13 @@ class QuizTimer extends CircularCountDownTimer {
 
   @override
   bool get isReverse => true;
+
+  @override
+  VoidCallback? get onComplete => () => setAnswered(true);
+
+  @override
+  VoidCallback? get onStart => () => setAnswered(false);
+
+  void setAnswered(bool boolean) =>
+      Provider.of<IsAnsweredMenu>(context, listen: false).setAnswered(boolean);
 }

@@ -4,6 +4,7 @@ import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/errors/errors_screen.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/presenation/auth/auth_screen.dart';
+import 'package:gypse/presenation/auth/bloc/switch_view_bloc.dart';
 import 'package:gypse/presenation/books/books_screen.dart';
 import 'package:gypse/presenation/connection_check/connection_check_screen.dart';
 import 'package:gypse/presenation/game/bloc/user_bloc.dart';
@@ -30,10 +31,15 @@ GoRouter router = GoRouter(
       builder: (context, state) => const ConnectionChekScreen(),
     ),
     GoRoute(
-      path: ScreenPaths.error,
+      path: '${ScreenPaths.error}/:params',
       builder: (context, state) {
-        ErrorCode params = state.extra! as ErrorCode;
-        return ErrorsScreen(params);
+        ErrorCode extra = state.extra! as ErrorCode;
+        String? params = state.params['params'];
+        return ErrorsScreen(
+          extra,
+          message: params,
+          email: params,
+        );
       },
     ),
     GoRoute(
@@ -52,7 +58,8 @@ GoRouter router = GoRouter(
     ),
     GoRoute(
       path: ScreenPaths.auth,
-      builder: (context, state) => const AuthScreen(),
+      builder: (context, state) => BlocProvider<SwitchViewBloc>(
+          bloc: SwitchViewBloc(1), child: const AuthScreen()),
     ),
   ],
   errorBuilder: (context, state) =>

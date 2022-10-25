@@ -7,8 +7,8 @@ class IsAnsweredMenu extends ChangeNotifier {
   bool get isAnswered => _isAnswered;
 
   /// Defines if the user has selected an answer
-  void setAnswered() {
-    _isAnswered = !_isAnswered;
+  void setAnswered(bool boolean) {
+    _isAnswered = boolean;
     notifyListeners();
   }
 }

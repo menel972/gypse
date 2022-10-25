@@ -43,8 +43,11 @@ class GameAnswers extends riverpod.HookConsumerWidget {
     void updateCurrentUser(GypseUser user) =>
         Provider.of<CurrentUser>(context, listen: false).setCurrentUser(user);
 
-    void setAnswered() =>
-        Provider.of<IsAnsweredMenu>(context, listen: false).setAnswered();
+    void setAnswered(bool boolean) =>
+        Provider.of<IsAnsweredMenu>(context, listen: false)
+            .setAnswered(boolean);
+
+    bool isAnswered = Provider.of<IsAnsweredMenu>(context).isAnswered;
 
     final bloc = blocs.BlocProvider.of<AnswersBloc>(context);
 
@@ -54,7 +57,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
       await Future.delayed(const Duration(milliseconds: 900));
       await updateSqliteUser(user);
       updateCurrentUser(user);
-      setAnswered();
+      setAnswered(false);
       addQuestion(newQuestion);
       bloc.slideView(true);
       bloc.selectAnswer(null);
@@ -102,7 +105,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                         fit: FlexFit.tight,
                         flex: 2,
                         child: ListView.builder(
-                          itemCount: answers.length > 4 ? 4 : answers.length,
+                          itemCount: answers.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: ((context, i) {
                             Answer answer = answers[i];
@@ -114,12 +117,13 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                               selectCard: () {
                                 bloc.selectAnswer(i);
                                 pause();
-                                setAnswered();
+                                setAnswered(true);
                               },
                               index: i,
-                              selected: answer.isRightAnswer
-                                  ? state.index != null
-                                  : state.index == i,
+                              selected: (answer.isRightAnswer
+                                      ? state.index != null
+                                      : state.index == i) ||
+                                  (state.index == null && isAnswered),
                             );
                           }),
                         ),
@@ -128,7 +132,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                         fit: FlexFit.loose,
                         flex: 1,
                         child: Visibility(
-                          visible: state.index != null,
+                          visible: isAnswered,
                           child: Row(
                             children: [
                               Expanded(
@@ -156,8 +160,9 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                                       AnsweredQuestion(
                                     id: questionId,
                                     level: user.settings.level,
-                                    isRightAnswer:
-                                        answers[state.index!].isRightAnswer,
+                                    isRightAnswer: state.index == null
+                                        ? false
+                                        : answers[state.index!].isRightAnswer,
                                   );
 
                                   nextQuestion(newQuestion);

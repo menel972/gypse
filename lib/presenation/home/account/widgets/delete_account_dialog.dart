@@ -4,33 +4,30 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gypse/core/commons/current_user.dart';
-import 'package:gypse/core/commons/is_answered_menu.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
-import 'package:gypse/domain/entities/user_entity.dart';
+import 'package:gypse/domain/providers/auth_domain_provider.dart';
 import 'package:gypse/domain/providers/users_domain_provider.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
-import 'package:provider/provider.dart';
 
-class ReturnDialog extends riverpod.HookConsumerWidget {
-  final VoidCallback resume;
-
-  const ReturnDialog(this.resume, {super.key});
+class DeleteAccountDialog extends riverpod.HookConsumerWidget {
+  const DeleteAccountDialog({super.key});
 
   @override
   Widget build(BuildContext context, riverpod.WidgetRef ref) {
-    GypseUser user = Provider.of<CurrentUser>(context).currentUser;
+    String? uid = ref.read(AuthDomainProvider().getUserUidUsecaseProvider).uid;
 
-    bool isAnswered = Provider.of<IsAnsweredMenu>(context).isAnswered;
+    Future<void> deleteAccount() => ref
+        .read(AuthDomainProvider().deleteAccountUsecaseProvider)
+        .deleteAccount();
 
-    Future<void> updateFirebaseUser(GypseUser user) async => await ref
-        .read(UsersDomainProvider().updateFirebaseUserUsecaseProvider)
-        .updateFirebaseUser(user);
+    Future<void> deleteUser(String uid) => ref
+        .read(UsersDomainProvider().deleteUserUsecaseProvider)
+        .deleteUser(uid);
 
     return Center(
       child: Container(
@@ -52,17 +49,17 @@ class ReturnDialog extends riverpod.HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AutoSizeText(
-                  words(context).title_quit.toUpperCase(),
+                  words(context).title_suppr.toUpperCase(),
                   style: const TextXL(Couleur.primary, isBold: true),
                   textAlign: TextAlign.center,
-                  maxLines: 1,
+                  maxLines: 2,
                 ),
                 SizedBox(height: screenSize(context).height * 0.03),
                 AutoSizeText(
-                  words(context).txt_confirm_quit,
-                  style: const TextM(Couleur.secondary),
+                  words(context).txt_confirm_suppr,
+                  style: const TextM(Colors.black87),
                   textAlign: TextAlign.center,
-                  maxLines: 2,
+                  maxLines: 3,
                 ),
                 SizedBox(height: screenSize(context).height * 0.04),
                 Row(
@@ -70,10 +67,11 @@ class ReturnDialog extends riverpod.HookConsumerWidget {
                     Expanded(
                       child: PrimaryButton(
                         context,
-                        text: words(context).btn_resume,
-                        onPressed: () {
-                          resume();
-                          Navigator.pop(context);
+                        text: words(context).btn_supprim,
+                        onPressed: () async {
+                          await deleteUser(uid!);
+                          await deleteAccount();
+                          context.go(ScreenPaths.auth);
                         },
                         textColor: Couleur.text,
                         color: Couleur.primary,
@@ -83,28 +81,13 @@ class ReturnDialog extends riverpod.HookConsumerWidget {
                     Expanded(
                       child: PrimaryButton(
                         context,
-                        text: words(context).btn_quit,
-                        onPressed: isAnswered
-                            ? () {}
-                            : () async {
-                                await updateFirebaseUser(user);
-                                context.go(ScreenPaths.home);
-                              },
-                        textColor: isAnswered ? Couleur.error : Couleur.primary,
+                        text: words(context).btn_annule,
+                        onPressed: () => Navigator.pop(context),
+                        textColor: Couleur.primary,
                         color: Couleur.primarySurface.withOpacity(0.2),
                       ),
                     ),
                   ],
-                ),
-                SizedBox(height: screenSize(context).height * 0.015),
-                Visibility(
-                  visible: isAnswered,
-                  child: const AutoSizeText(
-                    'Passez à la question suivante pour quitter la partie.',
-                    style: TextXS(Couleur.error),
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                  ),
                 ),
               ],
             ),

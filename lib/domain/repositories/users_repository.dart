@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 
 abstract class UsersRepository {
@@ -6,7 +7,13 @@ abstract class UsersRepository {
   Future<void> initUsers(BuildContext context, String uid);
 
   /// Asynchronous way to create a new [GypseUser]
-  Future<void> createNewUser(GypseUser user);
+  Future<void> createNewUser({
+    required String uid,
+    required String userName,
+    required Locales locale,
+    required String email,
+    required String password,
+  });
 
   /// Returns a [Stream] of [GypseUser] based its [GypseUser.uid]
   Future<GypseUser> fetchCurrentUser(String uid);

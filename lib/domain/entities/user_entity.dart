@@ -17,7 +17,7 @@ class GypseUser extends Equatable {
   GypseUser({
     required this.uid,
     required this.userName,
-    required this.isAdmin,
+    this.isAdmin = false,
     required this.locale,
     required this.status,
     required this.questions,

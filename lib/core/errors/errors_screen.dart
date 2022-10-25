@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/core/commons/enums.dart';
+import 'package:gypse/core/errors/email_error_screen.dart';
 import 'package:gypse/core/errors/exceptions_error_screen.dart';
 import 'package:gypse/core/errors/network_error_screen.dart';
 import 'package:gypse/core/errors/route_error_screen.dart';
@@ -8,8 +9,10 @@ class ErrorsScreen extends StatelessWidget {
   final ErrorCode code;
   final Exception? error;
   final String? message;
+  final String? email;
 
-  const ErrorsScreen(this.code, {Key? key, this.error, this.message})
+  const ErrorsScreen(this.code,
+      {Key? key, this.error, this.message, this.email})
       : super(key: key);
 
   Widget errorCodeRedirect() {
@@ -18,6 +21,8 @@ class ErrorsScreen extends StatelessWidget {
         return const NetworkErrorScreen();
       case ErrorCode.routing:
         return RouteErrorScreen(error!);
+      case ErrorCode.email:
+        return EmailErrorScreen(email!);
       default:
         return ExceptionsErrorScreen(error!);
     }

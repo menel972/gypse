@@ -1,21 +1,31 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/l10n/localizations.dart';
+import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
+import 'package:gypse/domain/providers/auth_domain_provider.dart';
 import 'package:gypse/presenation/components/buttons.dart';
 import 'package:gypse/presenation/components/cards.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
 
-class CredentialsView extends StatelessWidget {
+class CredentialsView extends riverpod.HookConsumerWidget {
   const CredentialsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, riverpod.WidgetRef ref) {
     GypseUser user = Provider.of<CurrentUser>(context).currentUser;
+
+    Future<void> signOut() =>
+        ref.read(AuthDomainProvider().signOutUsecaseProvider).signOut();
+
     Size size = screenSize(context);
 
     return ListView.separated(
@@ -33,12 +43,14 @@ class CredentialsView extends StatelessWidget {
       },
       padding: EdgeInsets.symmetric(
           vertical: size.height * 0.05, horizontal: size.width * 0.08),
-      itemBuilder: (context, index) => userDatas(context, user)[index],
+      itemBuilder: (context, index) => userDatas(context, user, signOut)[index],
     );
   }
 }
 
-List<Widget> userDatas(BuildContext context, GypseUser user) => [
+List<Widget> userDatas(BuildContext context, GypseUser user,
+        Future<void> Function() signOut) =>
+    [
       Image.asset('assets/images/splash_logo.png',
           height: screenSize(context).height * 0.08),
       CredentialsCard(
@@ -109,7 +121,10 @@ List<Widget> userDatas(BuildContext context, GypseUser user) => [
             child: PrimaryButton(
               context,
               text: words(context).btn_logout,
-              onPressed: () {},
+              onPressed: () async {
+                await signOut();
+                context.go(ScreenPaths.auth);
+              },
               textColor: Couleur.text,
               color: Couleur.secondary,
             ),

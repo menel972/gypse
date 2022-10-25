@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/domain/repositories/users_repository.dart';
 
 /// A usecase to initialize the [sqflite] internal database
 class InitUsersUsecase {
-  
   final UsersRepository _repository;
 
   InitUsersUsecase(this._repository);
@@ -22,8 +22,19 @@ class CreateUserUsecase {
   CreateUserUsecase(this._repository);
 
   /// Asynchronous way to create a new [GypseUser]
-  Future<void> createUser(GypseUser user) async =>
-      await _repository.createNewUser(user);
+  Future<void> createUser({
+    required String uid,
+    required String userName,
+    required Locales locale,
+    required String email,
+    required String password,
+  }) async =>
+      await _repository.createNewUser(
+          email: email,
+          locale: locale,
+          password: password,
+          uid: uid,
+          userName: userName);
 }
 
 /// A usecase to fetch a [GypseUser]

@@ -13,11 +13,9 @@ class UsersFirebase {
 
   /// Asynchronous way to create a new [UserReponse] into the [database]
   Future<void> createNewUser(UserFirebaseResponse user) async {
-    DocumentReference<Map<String, dynamic>> doc = database.doc();
-    user.uid = doc.id;
-
     try {
-      await doc
+      await database
+          .doc(user.uid)
           .set(user.toJson())
           .whenComplete(() => debugPrint('${user.userName} added'));
     } on Exception catch (err) {

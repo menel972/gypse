@@ -30,6 +30,9 @@ class AnswersRepositoryImpl extends AnswersRepository {
     List<AnswerSqliteResponse>? sqliteAnswerList =
         await _sqlite.fetchQuestionAnswers(questionId);
 
-    return sqliteAnswerList?.map((answer) => answer.toDomain(context)).toList();
+    return sqliteAnswerList
+        ?.map((answer) => answer.toDomain(context))
+        .toSet()
+        .toList();
   }
 }

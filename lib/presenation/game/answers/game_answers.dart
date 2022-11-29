@@ -73,7 +73,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
             curve: Curves.easeInOut,
             padding: EdgeInsets.only(
                 top: (screenSize(context).height - 30) *
-                    (state.animate ? 0 : 0.7)),
+                    (state.animate ? 0 : 0.65)),
             child: Container(
               width: screenSize(context).width,
               height: (screenSize(context).height - 30) * 0.75,
@@ -94,7 +94,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                 overlay: Padding(
                   padding: EdgeInsets.only(
                     top: screenSize(context).height * 0.01,
-                    bottom: screenSize(context).height * 0.07,
+                    bottom: screenSize(context).height * 0.075,
                     left: screenSize(context).width * 0.05,
                     right: screenSize(context).width * 0.05,
                   ),

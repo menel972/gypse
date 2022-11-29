@@ -46,17 +46,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.inactive) {
-      print('ICI: INACTIVE');
+      debugPrint('ICI: INACTIVE');
     }
     if (state == AppLifecycleState.resumed) {
-      print('ICI: RESUMED');
+      debugPrint('ICI: RESUMED');
     }
   }
 
   /// The root of your application.
   @override
   Widget build(BuildContext context) {
-    
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: CurrentUser()),

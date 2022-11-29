@@ -139,5 +139,18 @@
   "form_err_min": "Una minúscula",
   "form_err_num": "Un número",
   "form_err_spe": "Un carácter especial",
-  "form_err_car": "Caracteres - un mínimo de 8"
+  "form_err_car": "Caracteres - un mínimo de 8",
+  "btn_send": "Translate",
+  "btn_home": "Translate",
+  "title_verif_mail": "Translate",
+  "title_forget_mdp": "Translate",
+  "txt_verif_mail": "Translate",
+  "txt_verif_mail2": "Translate",
+  "txt_forget_mdp": "Translate",
+  "txt_mail": "Translate",
+  "txt_err": "Translate",
+  "txt_err_net": "Translate",
+  "txt_err_net2": "Translate",
+  "err": "Translate",
+  "err_net": "Translate"
 }

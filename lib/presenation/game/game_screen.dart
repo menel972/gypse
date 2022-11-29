@@ -86,7 +86,9 @@ class GameScreen extends riverpod.HookConsumerWidget {
                                       SizedBox(
                                           height: (screenSize(context).height -
                                                   30) *
-                                              0.25,
+                                              (isLargeScreen(context)
+                                                  ? 0.25
+                                                  : 0.3),
                                           child: GameQuestion(
                                             question: snapshot.data!,
                                             settings: user.settings,

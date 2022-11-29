@@ -25,8 +25,8 @@ class GaugeBorder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenSize(context).width * 0.60,
-      width: screenSize(context).width * 0.60,
+      height: screenSize(context).width * 0.50,
+      width: screenSize(context).width * 0.50,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: Couleur.gaugeGradientColors,

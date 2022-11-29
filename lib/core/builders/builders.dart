@@ -49,10 +49,9 @@ class NoQuestionBuiler extends StatelessWidget {
                 style: const TextM(Couleur.text),
               ),
               TextButton(
-                child: const Text(
-                  // TODO : add wording
-                  'Revenir à la page d\'accueil',
-                  style: TextM(Couleur.secondary),
+                child: Text(
+                  words(context).btn_home,
+                  style: const TextM(Couleur.secondary),
                 ),
                 onPressed: () => context.go(ScreenPaths.home),
               ),

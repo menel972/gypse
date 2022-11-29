@@ -31,17 +31,16 @@ class ForgottenPasswordDialog extends riverpod.HookConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const AutoSizeText(
-                  // TODO : UTILISER UNE CLÉ DE TRAD
-                  'MOT DE PASSE OUBLIÉ ?',
-                  style: TextXL(Couleur.text, isBold: true),
+                AutoSizeText(
+                  words(context).title_forget_mdp,
+                  style: const TextXL(Couleur.text, isBold: true),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                 ),
                 SizedBox(height: screenSize(context).height * 0.03),
-                const AutoSizeText(
-                  'Réinitialisez votre passe',
-                  style: TextM(Couleur.text),
+                AutoSizeText(
+                  words(context).txt_forget_mdp,
+                  style: const TextM(Couleur.text),
                   textAlign: TextAlign.center,
                   maxLines: 3,
                 ),
@@ -56,7 +55,7 @@ class ForgottenPasswordDialog extends riverpod.HookConsumerWidget {
                   style: const TextM(Couleur.text),
                   onChanged: (value) => context
                       .read<ForgottenPasswordCubit>()
-                      .onEmailChanged(value),
+                      .onEmailChanged(context, value),
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -74,8 +73,7 @@ class ForgottenPasswordDialog extends riverpod.HookConsumerWidget {
                     Expanded(
                       child: PrimaryButton(
                         context,
-                        // TODO : Clé de trad
-                        text: 'Envoyer',
+                        text: words(context).btn_send,
                         textColor: Couleur.text,
                         color: Couleur.secondary,
                         onPressed: () async {

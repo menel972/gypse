@@ -8,9 +8,9 @@ import 'package:gypse/presenation/auth/bloc/credentials_state.dart';
 class ForgottenPasswordCubit extends Cubit<CredentialsState> {
   ForgottenPasswordCubit() : super(const CredentialsState());
 
-  void onEmailChanged(String value) {
-    if (emailValidator(value) != null) {
-      emit(state.copyWith(emailError: emailValidator(value)));
+  void onEmailChanged(BuildContext context, String value) {
+    if (emailValidator(context, value) != null) {
+      emit(state.copyWith(emailError: emailValidator(context, value)));
     } else {
       emit(state.copyWith(email: value));
       emit(state.copyWith(emailError: ''));
@@ -18,19 +18,17 @@ class ForgottenPasswordCubit extends Cubit<CredentialsState> {
   }
 
   bool onSignInRequest(BuildContext context) {
-    if (emailValidator(state.email) == null) {
+    if (emailValidator(context, state.email) == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            // TODO : Utiliser une clé de trad
-            content: Text('Un mail vous a été envoyé'),
+        SnackBar(
+            content: Text(words(context).txt_mail),
             backgroundColor: Couleur.secondary),
       );
       return true;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            // TODO : Utiliser une clé de trad
-            content: Text('Le formulaire n\'est pas valide'),
+        SnackBar(
+            content: Text(words(context).snack_error_form),
             backgroundColor: Couleur.error),
       );
       return false;

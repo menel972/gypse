@@ -100,7 +100,7 @@ class SignUp extends riverpod.HookConsumerWidget {
                   )),
               style: const TextM(Couleur.text),
               onChanged: (value) =>
-                  context.read<SignUpCubit>().onUserNameChanged(value),
+                  context.read<SignUpCubit>().onUserNameChanged(context, value),
               textInputAction: TextInputAction.next,
             ),
             Visibility(
@@ -121,7 +121,7 @@ class SignUp extends riverpod.HookConsumerWidget {
                   )),
               style: const TextM(Couleur.text),
               onChanged: (value) =>
-                  context.read<SignUpCubit>().onEmailChanged(value),
+                  context.read<SignUpCubit>().onEmailChanged(context, value),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
             ),
@@ -150,7 +150,7 @@ class SignUp extends riverpod.HookConsumerWidget {
               ),
               style: const TextM(Couleur.text),
               onChanged: (value) =>
-                  context.read<SignUpCubit>().onPasswordChanged(value),
+                  context.read<SignUpCubit>().onPasswordChanged(context, value),
               obscureText: state.hide,
               keyboardType: TextInputType.visiblePassword,
               textInputAction: TextInputAction.done,

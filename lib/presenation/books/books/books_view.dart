@@ -18,10 +18,12 @@ class BooksView extends riverpod.HookConsumerWidget {
   const BooksView(this.filter, {super.key});
 
   int? getAnsweredQuestions(
-      List<Question> questions, List<AnsweredQuestion>? userQuestions) {
-    Iterable<String> ids = questions.map((question) => question.id);
+    List<Question> questions,
+    List<AnsweredQuestion>? userQuestions,
+  ) {
+    Iterable<String> ids = questions.map((question) => question.id).toSet();
     Iterable<AnsweredQuestion>? answeredQuestions =
-        userQuestions?.where((question) => ids.contains(question.id));
+        userQuestions?.where((question) => ids.contains(question.id)).toSet();
 
     return answeredQuestions?.length;
   }

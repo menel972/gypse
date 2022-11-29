@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/router.dart';
 import 'package:gypse/core/themes/text_themes.dart';
 import 'package:gypse/core/themes/theme.dart';
@@ -16,7 +17,7 @@ class ExceptionsErrorScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        title: const Text('ERROR !'),
+        title: Text(words(context).err),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -28,16 +29,15 @@ class ExceptionsErrorScreen extends StatelessWidget {
         child: Center(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          // TODO : Utiliser des clefs de traductions
           children: [
-            const Text(
-              'Il semble y avoir une erreur...',
-              style: TextM(Couleur.text),
+            Text(
+              words(context).txt_err,
+              style: const TextM(Couleur.text),
             ),
             TextButton(
-              child: const Text(
-                'Revenir à la page d\'accueil',
-                style: TextM(Couleur.secondary),
+              child: Text(
+                words(context).btn_home,
+                style: const TextM(Couleur.secondary),
               ),
               onPressed: () => context.go(ScreenPaths.home),
             ),

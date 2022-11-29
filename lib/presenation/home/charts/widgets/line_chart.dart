@@ -10,13 +10,13 @@ class LineChart extends DChartLine {
       : super();
 
   @override
-  LineColor<Color>? get pointColor => ((lineData, index, id) {
-        return lineData['measure'] >= 0 ? Couleur.secondary : Couleur.error;
+  LineColor<Color> get lineColor => ((lineData, index, id) {
+        return lineData['measure'] > 0 ? Couleur.secondary : Couleur.error;
       });
 
   @override
   bool get includeArea => true;
 
   @override
-  bool get includePoints => true;
+  bool get includePoints => false;
 }

@@ -136,16 +136,20 @@ class ChartsView extends StatelessWidget {
     ];
 
     return Padding(
-      padding: EdgeInsets.all(screenSize(context).height * 0.05),
+      padding: EdgeInsets.symmetric(
+          vertical: screenSize(context).height * 0.03,
+          horizontal: screenSize(context).width * 0.02),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AutoSizeText(
             '${userQuestions.length} ${words(context).txt_que_rep} :',
             style: const TextM(Couleur.text),
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: screenSize(context).height * 0.02),
           Expanded(
+            flex: 2,
             child: Row(
               children: [
                 Expanded(
@@ -179,8 +183,9 @@ class ChartsView extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: screenSize(context).height * 0.02),
+          SizedBox(height: screenSize(context).height * 0.05),
           Expanded(
+            flex: 3,
             child: LineBorder(
               data: dataGlobale,
             ),

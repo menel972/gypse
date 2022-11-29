@@ -49,6 +49,7 @@ class BooksView extends riverpod.HookConsumerWidget {
                 return ContentBuilder(
                   hasData: snapshot.hasData,
                   hasError: snapshot.hasError,
+                  data: snapshot.data != null,
                   message: '${snapshot.error}',
                   child: BookCard(
                     context,

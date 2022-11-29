@@ -37,6 +37,7 @@ class QuestionsView extends HookConsumerWidget {
         builder: (context, snapshot) => ContentBuilder(
           hasData: snapshot.hasData,
           hasError: snapshot.hasError,
+          data: snapshot.data != null,
           message: '${snapshot.error}',
           child: Column(
             children: [
@@ -55,6 +56,7 @@ class QuestionsView extends HookConsumerWidget {
                     builder: (context, snap) => ContentBuilder(
                       hasData: snap.hasData,
                       hasError: snap.hasError,
+                      data: snap.data != null,
                       message: '${snap.error}',
                       child: QuestionsTile(
                         book: snapshot.data![index].book,

@@ -52,6 +52,7 @@ class GameScreen extends riverpod.HookConsumerWidget {
               builder: (context, snapshot) => ContentBuilder(
                     hasData: snapshot.hasData,
                     hasError: snapshot.hasError,
+                    data: snapshot.data != null,
                     message: '${snapshot.error}',
                     question: true,
                     child: FutureBuilder<List<Answer>?>(
@@ -59,6 +60,7 @@ class GameScreen extends riverpod.HookConsumerWidget {
                         builder: (context, snap) => ContentBuilder(
                               hasData: snap.hasData,
                               hasError: snap.hasError,
+                              data: snap.data != null,
                               message: '${snap.error}',
                               child: Scaffold(
                                 extendBodyBehindAppBar: true,

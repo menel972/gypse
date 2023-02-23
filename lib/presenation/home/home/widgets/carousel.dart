@@ -35,12 +35,10 @@ class _CarouselState extends riverpod.ConsumerState<Carousel> {
     final books = ref.read(_provider).getFiveRandomBooks(context);
     GypseUser user = Provider.of<CurrentUser>(context).currentUser;
     return FlutterCarousel.builder(
-      carouselController: controller,
       itemCount: 5,
-      itemBuilder: (context, index, realIndex) =>
-          CarouselCard(context,
+      itemBuilder: (context, index, realIndex) => CarouselCard(context,
           book: books[index], userQuestions: user.questions),
-      options: Options(context),
+      options: Options(context, controller),
     );
   }
 }
@@ -48,8 +46,9 @@ class _CarouselState extends riverpod.ConsumerState<Carousel> {
 /// Extends [CarouselOptions] to provides parameters for [FlutterCarousel]
 class Options extends CarouselOptions {
   final BuildContext context;
+  final CarouselController carouselController;
 
-  Options(this.context);
+  Options(this.context, this.carouselController);
 
   @override
   double? get height => screenSize(context).height * 0.33;
@@ -65,4 +64,7 @@ class Options extends CarouselOptions {
 
   @override
   bool? get enlargeCenterPage => true;
+
+  @override
+  CarouselController? get controller => carouselController;
 }

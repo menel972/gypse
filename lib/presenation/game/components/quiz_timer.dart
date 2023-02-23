@@ -18,8 +18,8 @@ class QuizTimer extends CircularCountDownTimer {
   }) : super(
           height: screenSize(context).height * 0.05,
           width: screenSize(context).height * 0.05,
-          fillColor: Couleur.secondary,
-          ringColor: Colors.transparent,
+          fillColor: Couleur.primary,
+          ringColor: Couleur.secondary,
         );
 
   @override

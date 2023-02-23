@@ -246,9 +246,9 @@ class AnswerCard extends GestureDetector {
                 child: AutoSizeText(
                   answer.answer!,
                   textAlign: TextAlign.center,
-                  style: TextS(textColor, isBold: selected),
-                  minFontSize: 14,
-                  maxLines: 3,
+                  style: TextXS(textColor, isBold: selected),
+                  minFontSize: 13,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

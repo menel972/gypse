@@ -39,31 +39,34 @@ class BooksView extends riverpod.HookConsumerWidget {
         .read(QuestionsDomainProvider().fetchQuestionsByBookUsecaseProvider)
         .fetchQuestionsByBook(context, book);
 
-    return GridView.count(crossAxisCount: 2, childAspectRatio: 1.05, children: [
-      ...books.map(((book) {
-        return Padding(
-          padding: EdgeInsets.all(screenSize(context).height * 0.015),
-          child: FutureBuilder<List<Question>?>(
-              future: fetchQuestions(book),
-              builder: (context, snapshot) {
-                return ContentBuilder(
-                  hasData: snapshot.hasData,
-                  hasError: snapshot.hasError,
-                  data: snapshot.data != null,
-                  message: '${snapshot.error}',
-                  child: BookCard(
-                    context,
-                    enabled: snapshot.data!.isNotEmpty,
-                    book: book,
-                    questions: snapshot.data!.length,
-                    answeredQuestions:
-                        getAnsweredQuestions(snapshot.data!, user.questions),
-                    userQuestions: user.questions,
-                  ),
-                );
-              }),
-        );
-      }))
-    ]);
+    return Scrollbar(
+      child:
+          GridView.count(crossAxisCount: 2, childAspectRatio: 1.05, children: [
+        ...books.map(((book) {
+          return Padding(
+            padding: EdgeInsets.all(screenSize(context).height * 0.015),
+            child: FutureBuilder<List<Question>?>(
+                future: fetchQuestions(book),
+                builder: (context, snapshot) {
+                  return ContentBuilder(
+                    hasData: snapshot.hasData,
+                    hasError: snapshot.hasError,
+                    data: snapshot.data != null,
+                    message: '${snapshot.error}',
+                    child: BookCard(
+                      context,
+                      enabled: snapshot.data!.isNotEmpty,
+                      book: book,
+                      questions: snapshot.data!.length,
+                      answeredQuestions:
+                          getAnsweredQuestions(snapshot.data!, user.questions),
+                      userQuestions: user.questions,
+                    ),
+                  );
+                }),
+          );
+        }))
+      ]),
+    );
   }
 }

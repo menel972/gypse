@@ -21,8 +21,6 @@ class GameQuestion extends StatelessWidget {
       required this.settings,
       required this.countDownController});
 
-  
-
   int timerDuration() {
     if (settings.time == Time.easy) return 30;
     if (settings.time == Time.medium) return 20;
@@ -56,7 +54,9 @@ class GameQuestion extends StatelessWidget {
                 child: AutoSizeText(
                   question.question,
                   style: const TextL(Couleur.text),
-                  maxLines: 6,
+                  minFontSize: 16,
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               Flexible(

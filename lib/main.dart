@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/is_answered_menu.dart';
 import 'package:gypse/core/router.dart';
@@ -56,6 +60,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   /// The root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
 
     return MultiProvider(
       providers: [

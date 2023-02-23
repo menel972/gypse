@@ -72,7 +72,8 @@ class GameScreen extends riverpod.HookConsumerWidget {
                                   resume: countDownController.resume,
                                 ),
                                 body: Container(
-                                  padding: const EdgeInsets.only(top: 30),
+                                  padding: EdgeInsets.only(
+                                      top: screenSize(context).height * 0.03),
                                   decoration: const BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -85,12 +86,18 @@ class GameScreen extends riverpod.HookConsumerWidget {
                                         const NeverScrollableScrollPhysics(),
                                     itemCount: 2,
                                     itemBuilder: (context, index) => [
-                                      SizedBox(
-                                          height: (screenSize(context).height -
-                                                  30) *
-                                              (isLargeScreen(context)
-                                                  ? 0.25
-                                                  : 0.3),
+                                      Container(
+                                          // height: (screenSize(context).height -
+                                          //         30) *
+                                          //     (isLargeScreen(context)
+                                          //         ? 0.25
+                                          //         : 0.3),
+                                          height:
+                                              screenSize(context).height * 0.3,
+                                          // margin: EdgeInsets.only(
+                                          //     bottom:
+                                          //         screenSize(context).height *
+                                          //             0.03),
                                           child: GameQuestion(
                                             question: snapshot.data!,
                                             settings: user.settings,

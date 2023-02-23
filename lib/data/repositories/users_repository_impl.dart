@@ -39,7 +39,7 @@ class UsersRepositoryImpl extends UsersRepository {
         uid: uid,
         userName: name,
         locale: locale,
-        isAdmin: true,
+        isAdmin: false,
         questions: const [],
         settings: const Settings(level: Level.medium, time: Time.medium),
         status: LoginState.authenticated,

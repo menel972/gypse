@@ -31,7 +31,11 @@ class QuestionsSqlite {
   Future<void> insertQuestion(QuestionSqliteResponse question) async {
     var questionDatabase = await database;
     try {
-      await questionDatabase.insert('questions', question.toSqlite());
+      await questionDatabase.insert(
+        'questions',
+        question.toSqlite(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
       debugPrint('Question : ${question.id} added');
     } on DatabaseException catch (err) {
       if (err.isUniqueConstraintError()) {

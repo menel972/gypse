@@ -32,7 +32,11 @@ class UsersSqlite {
     var userDatabase = await database;
 
     try {
-      await userDatabase.insert('users', user.toSqlite());
+      await userDatabase.insert(
+        'users',
+        user.toSqlite(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
       debugPrint('User : ${user.userName} added');
     } on DatabaseException catch (err) {
       debugPrint(err.toString());
@@ -58,13 +62,11 @@ class UsersSqlite {
     var userDatabase = await database;
 
     try {
-      await userDatabase
-          .delete(
+      await userDatabase.delete(
         'users',
         where: 'uid = ?',
         whereArgs: [uid],
-      )
-          .then((nb) => debugPrint(nb.toString()));
+      ).then((nb) => debugPrint(nb.toString()));
     } on DatabaseException catch (err) {
       debugPrint(err.toString());
       return;
@@ -76,8 +78,7 @@ class UsersSqlite {
     var userDatabase = await database;
 
     try {
-      await userDatabase
-          .update(
+      await userDatabase.update(
         'users',
         user.toSqlite(),
         where: 'uid = ?',
@@ -86,5 +87,5 @@ class UsersSqlite {
     } catch (err) {
       debugPrint(err.toString());
     }
-  } 
+  }
 }

@@ -28,7 +28,7 @@ GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: ScreenPaths.connectionCheck,
-      builder: (context, state) => const ConnectionChekScreen(),
+      builder: (context, state) => ConnectionChekScreen(),
     ),
     GoRoute(
       path: '${ScreenPaths.error}/:params',

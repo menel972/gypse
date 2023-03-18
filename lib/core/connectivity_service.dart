@@ -7,16 +7,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Provides the internet connection state
 class ConnectivityState extends Equatable {
+  final bool isReady;
   final ConnectivityResult state;
 
-  const ConnectivityState({this.state = ConnectivityResult.none});
+  const ConnectivityState(
+      {this.state = ConnectivityResult.none, this.isReady = false});
 
   @override
   List<Object?> get props => [];
 
   /// Returns a [ConnectivityState] with a new state
-  ConnectivityState onStateChanged(ConnectivityResult changes) =>
-      ConnectivityState(state: changes);
+  ConnectivityState copyWith({ConnectivityResult? changes, bool? ready}) =>
+      ConnectivityState(
+          state: changes ?? state, isReady: ready ?? this.isReady);
 }
 
 /// A simple [Cubit] that manages the [ConnectivityState] as its state.
@@ -36,5 +39,10 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
 
   /// update state with a new [ConnectivityResult]
   void editState(ConnectivityResult newState) =>
-      emit(state.onStateChanged(newState));
+      emit(state.copyWith(changes: newState));
+
+  /// update state with a new [ConnectivityResult]
+  void editReady() {
+    emit(state.copyWith(ready: !state.isReady));
+  }
 }

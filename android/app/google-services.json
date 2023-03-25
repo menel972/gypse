@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:635658051968:android:dbd8a99a36b6483f256165",
         "android_client_info": {
-          "package_name": "com.example.bible_quiz"
+          "package_name": "com.prod.bible_quiz"
         }
       },
       "oauth_client": [
@@ -56,7 +56,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:635658051968:android:a17e9dd6333a3ac9256165",
         "android_client_info": {
-          "package_name": "com.example.gypse"
+          "package_name": "com.prod.gypse"
         }
       },
       "oauth_client": [

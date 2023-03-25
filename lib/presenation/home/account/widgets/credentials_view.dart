@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/core/commons/current_user.dart';
@@ -139,6 +140,8 @@ List<Widget> userDatas(
               context,
               text: words(context).btn_logout,
               onPressed: () async {
+                FirebaseAnalytics.instance
+                    .logEvent(name: words(context).btn_logout);
                 await signOut();
                 context.go(ScreenPaths.auth);
               },

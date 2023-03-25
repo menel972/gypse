@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/theme.dart';
@@ -19,7 +20,10 @@ class HomeBottomBar extends StatelessWidget {
         BottomNavigationBarItem(
             icon: IconButton(
               icon: const Icon(Icons.home_outlined),
-              onPressed: () => selectPage(0),
+              onPressed: () {
+                FirebaseAnalytics.instance.logEvent(name: 'press_home');
+                selectPage(0);
+              },
               splashRadius: 20,
               splashColor: Couleur.secondary,
             ),
@@ -27,7 +31,10 @@ class HomeBottomBar extends StatelessWidget {
         BottomNavigationBarItem(
             icon: IconButton(
               icon: const Icon(Icons.bar_chart_outlined),
-              onPressed: () => selectPage(1),
+              onPressed: () {
+                FirebaseAnalytics.instance.logEvent(name: 'press_charts');
+                selectPage(1);
+              },
               splashRadius: 20,
               splashColor: Couleur.secondary,
             ),
@@ -35,7 +42,10 @@ class HomeBottomBar extends StatelessWidget {
         BottomNavigationBarItem(
             icon: IconButton(
               icon: const Icon(Icons.person_outline),
-              onPressed: () => selectPage(2),
+              onPressed: () {
+                FirebaseAnalytics.instance.logEvent(name: 'press_profile');
+                selectPage(2);
+              },
               splashRadius: 20,
               splashColor: Couleur.secondary,
             ),

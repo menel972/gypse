@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -125,6 +126,8 @@ class SignIn extends riverpod.HookConsumerWidget {
               onPressed: () async {
                 if (context.read<SignInCubit>().onSignInRequest(context)) {
                   await signIn(state.email, state.password);
+                  FirebaseAnalytics.instance
+                      .logLogin(loginMethod: 'mail_password');
 
                   await initApp();
                   setCurrentUser();

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -56,6 +57,9 @@ class ConnectionChekScreen extends riverpod.HookConsumerWidget {
             context.go(ScreenPaths.error, extra: ErrorCode.network);
           }
           if (user.status == LoginState.authenticated) {
+            FirebaseAnalytics.instance.setUserId(id: user.uid);
+            FirebaseAnalytics.instance
+                .setUserProperty(name: user.userName, value: user.locale.name);
             FlutterNativeSplash.remove();
             await initApp().whenComplete(() {
               setCurrentUser();

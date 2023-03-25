@@ -1,4 +1,5 @@
 import 'package:blur/blur.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/bloc/bloc_provider.dart' as blocs;
 import 'package:gypse/core/commons/current_user.dart';
@@ -107,7 +108,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: ((context, i) {
                             Answer answer = answers[i];
-                      
+
                             return AnswerCard(
                               context,
                               enabled: state.index == null,
@@ -138,10 +139,14 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                                 child: PrimaryButton(
                                   context,
                                   text: words(context).btn_verset,
-                                  onPressed: () => VerseModal.showVerset(
-                                      context,
-                                      answers.firstWhere(
-                                          (answer) => answer.isRightAnswer)),
+                                  onPressed: () {
+                                    FirebaseAnalytics.instance.logEvent(
+                                        name: words(context).btn_verset);
+                                    VerseModal.showVerset(
+                                        context,
+                                        answers.firstWhere(
+                                            (answer) => answer.isRightAnswer));
+                                  },
                                   color:
                                       Couleur.primarySurface.withOpacity(0.2),
                                   textColor: Couleur.primary,
@@ -154,6 +159,10 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                                 iconColor: Couleur.text,
                                 color: Couleur.primary,
                                 function: () async {
+                                  FirebaseAnalytics.instance
+                                      .logLevelEnd(levelName: '');
+                                  FirebaseAnalytics.instance
+                                      .logLevelStart(levelName: '');
                                   AnsweredQuestion newQuestion =
                                       AnsweredQuestion(
                                     id: questionId,
@@ -162,7 +171,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                                         ? false
                                         : answers[state.index!].isRightAnswer,
                                   );
-                      
+
                                   nextQuestion(newQuestion);
                                 },
                               )

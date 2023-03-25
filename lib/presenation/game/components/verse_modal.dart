@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:blur/blur.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/core/commons/size.dart';
 import 'package:gypse/core/commons/web_view.dart';
@@ -56,7 +57,10 @@ class VerseModal extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: () => WebView(answer.url!).showInternet(),
+              onTap: () {
+                FirebaseAnalytics.instance.logEvent(name: 'you_version');
+                WebView(answer.url!).showInternet();
+              },
               child: AutoSizeText(answer.verseReference!,
                   style: const TextM(Couleur.secondary)),
             ),

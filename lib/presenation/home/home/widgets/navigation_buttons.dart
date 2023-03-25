@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/core/commons/current_user.dart';
@@ -26,8 +27,11 @@ class NavigationButtons extends StatelessWidget {
           PrimaryButton(
             context,
             text: words(context).btn_start,
-            onPressed: () =>
-                context.go('${ScreenPaths.game}/_', extra: user.questions),
+            onPressed: () {
+              FirebaseAnalytics.instance.logLevelStart(levelName: 'random');
+              FirebaseAnalytics.instance.logEvent(name: 'pressed_random_play');
+              context.go('${ScreenPaths.game}/_', extra: user.questions);
+            },
             textColor: Couleur.secondarySurface,
             color: Couleur.secondary,
           ),
@@ -35,7 +39,11 @@ class NavigationButtons extends StatelessWidget {
           PrimaryButton(
             context,
             text: words(context).btn_livre,
-            onPressed: () => context.go(ScreenPaths.books),
+            onPressed: () {
+              FirebaseAnalytics.instance
+                  .logEvent(name: 'pressed_filtered_play');
+              context.go(ScreenPaths.books);
+            },
             textColor: Couleur.secondaryVariant,
             color: Couleur.primarySurface.withOpacity(0.2),
           ),

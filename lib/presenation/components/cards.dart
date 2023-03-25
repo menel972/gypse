@@ -152,6 +152,31 @@ class BookCard extends GypseCard {
       );
 }
 
+/// A card view for books
+class LoadingBookCard extends Container {
+  LoadingBookCard({super.key});
+
+  @override
+  Decoration? get decoration => BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black,
+            offset: Offset(2, 1),
+            blurRadius: 4,
+          ),
+          BoxShadow(
+            color: Couleur.primary,
+            offset: Offset(3, 2),
+            blurRadius: 10,
+          ),
+        ],
+      );
+
+  @override
+  Widget? get child => Text('');
+}
+
 /// A card for credentials datas
 class CredentialsCard extends Stack {
   final BuildContext context;

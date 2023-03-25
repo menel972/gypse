@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gypse/core/builders/content_buider.dart';
+import 'package:gypse/core/builders/builders.dart';
 import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/size.dart';
+import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/domain/entities/question_entity.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/domain/providers/books_domain_provider.dart';
@@ -9,6 +10,7 @@ import 'package:gypse/domain/providers/questions_domain_provider.dart';
 import 'package:gypse/presenation/components/cards.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 /// List of all bible books
 ///
@@ -48,12 +50,20 @@ class BooksView extends riverpod.HookConsumerWidget {
             child: FutureBuilder<List<Question>?>(
                 future: fetchQuestions(book),
                 builder: (context, snapshot) {
-                  return ContentBuilder(
-                    hasData: snapshot.hasData,
-                    hasError: snapshot.hasError,
-                    data: snapshot.data != null,
-                    message: '${snapshot.error}',
-                    child: BookCard(
+                  if (snapshot.hasError) {
+                    debugPrint('Content Builder Error : ${snapshot.error}');
+                    return const ErrorBuiler();
+                  }
+                  if (!snapshot.hasData) {
+                    debugPrint('Content Builder : Pas de donnée');
+                    return Shimmer.fromColors(
+                      baseColor: Couleur.primary,
+                      highlightColor: Couleur.primaryVariant,
+                      child: LoadingBookCard(),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    return BookCard(
                       context,
                       enabled: snapshot.data!.isNotEmpty,
                       book: book,
@@ -61,8 +71,10 @@ class BooksView extends riverpod.HookConsumerWidget {
                       answeredQuestions:
                           getAnsweredQuestions(snapshot.data!, user.questions),
                       userQuestions: user.questions,
-                    ),
-                  );
+                    );
+                  }
+                  debugPrint('Content Builder : loading');
+                  return const LoadingBuiler();
                 }),
           );
         }))

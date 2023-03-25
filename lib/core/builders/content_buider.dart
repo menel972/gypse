@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/core/builders/builders.dart';
+import 'package:gypse/core/builders/tips.dart';
 
 /// A [StatelessWidget] used to consumed datas from a builder
 class ContentBuilder extends StatelessWidget {
@@ -26,18 +27,19 @@ class ContentBuilder extends StatelessWidget {
       return const ErrorBuiler();
     }
     if (hasError && question) {
-      debugPrint('Content Builder : Pas de donnée');
+      debugPrint('Content Builder : error');
       return const NoQuestionBuiler();
     }
     if (!hasData) {
       debugPrint('Content Builder : Pas de donnée');
-      return const LoadingBuiler();
+      return Tips();
     }
     if (hasData && !data) {
-      debugPrint('Content Builder : Pas de donnée');
+      debugPrint('Content Builder : data - loading');
       return const LoadingBuiler();
     }
     if (hasData && data) return child;
+    debugPrint('Content Builder : loading');
     return const LoadingBuiler();
   }
 }

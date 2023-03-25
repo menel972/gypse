@@ -8,12 +8,14 @@ class ContentBuilder extends StatelessWidget {
   final String? message;
   final bool hasData;
   final bool question;
+  final bool data;
 
   const ContentBuilder(
       {super.key,
       required this.hasData,
       required this.hasError,
       required this.child,
+      required this.data,
       this.message,
       this.question = false});
 
@@ -29,9 +31,13 @@ class ContentBuilder extends StatelessWidget {
     }
     if (!hasData) {
       debugPrint('Content Builder : Pas de donnée');
-      return const ErrorBuiler();
+      return const LoadingBuiler();
     }
-    if (hasData) return child;
+    if (hasData && !data) {
+      debugPrint('Content Builder : Pas de donnée');
+      return const LoadingBuiler();
+    }
+    if (hasData && data) return child;
     return const LoadingBuiler();
   }
 }

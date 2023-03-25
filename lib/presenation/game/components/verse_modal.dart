@@ -15,11 +15,12 @@ class VerseModal extends StatelessWidget {
   static Future<void> showVerset(BuildContext context, Answer answer) async {
     await showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      constraints: BoxConstraints(
+        maxHeight: screenSize(context).height * 0.58,
       ),
       builder: (context) => VerseModal(answer),
     );
@@ -31,8 +32,8 @@ class VerseModal extends StatelessWidget {
       blur: 3,
       blurColor: Couleur.primarySurface,
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(20),
-        topRight: Radius.circular(20),
+        topLeft: Radius.circular(30),
+        topRight: Radius.circular(30),
       ),
       overlay: Padding(
         padding: EdgeInsets.all(screenSize(context).height * 0.05),

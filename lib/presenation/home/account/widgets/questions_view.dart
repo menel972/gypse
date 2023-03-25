@@ -37,6 +37,7 @@ class QuestionsView extends HookConsumerWidget {
         builder: (context, snapshot) => ContentBuilder(
           hasData: snapshot.hasData,
           hasError: snapshot.hasError,
+          data: snapshot.data != null,
           message: '${snapshot.error}',
           child: Column(
             children: [
@@ -45,23 +46,27 @@ class QuestionsView extends HookConsumerWidget {
                 style: const TextS(Couleur.text),
               ),
               Expanded(
-                child: ListView.separated(
-                  itemCount: snapshot.data!.length,
-                  separatorBuilder: (context, i) => const Divider(
-                    color: Couleur.text,
-                  ),
-                  itemBuilder: (context, index) => FutureBuilder<List<Answer>?>(
-                    future: answers(snapshot.data![index].id),
-                    builder: (context, snap) => ContentBuilder(
-                      hasData: snap.hasData,
-                      hasError: snap.hasError,
-                      message: '${snap.error}',
-                      child: QuestionsTile(
-                        book: snapshot.data![index].book,
-                        index: index,
-                        question: snapshot.data![index].question,
-                        title: Container(),
-                        children: QuestionsTile.answersTile(snap.data!),
+                child: Scrollbar(
+                  child: ListView.separated(
+                    itemCount: snapshot.data!.length,
+                    separatorBuilder: (context, i) => const Divider(
+                      color: Couleur.text,
+                    ),
+                    itemBuilder: (context, index) =>
+                        FutureBuilder<List<Answer>?>(
+                      future: answers(snapshot.data![index].id),
+                      builder: (context, snap) => ContentBuilder(
+                        hasData: snap.hasData,
+                        hasError: snap.hasError,
+                        data: snap.data != null,
+                        message: '${snap.error}',
+                        child: QuestionsTile(
+                          book: snapshot.data![index].book,
+                          index: index,
+                          question: snapshot.data![index].question,
+                          title: Container(),
+                          children: QuestionsTile.answersTile(snap.data!),
+                        ),
                       ),
                     ),
                   ),

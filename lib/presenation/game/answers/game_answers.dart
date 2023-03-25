@@ -99,17 +99,15 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                     right: screenSize(context).width * 0.05,
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(
-                        fit: FlexFit.tight,
-                        flex: 2,
+                      Expanded(
                         child: ListView.builder(
                           itemCount: answers.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: ((context, i) {
                             Answer answer = answers[i];
-
+                      
                             return AnswerCard(
                               context,
                               enabled: state.index == null,
@@ -128,9 +126,9 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                           }),
                         ),
                       ),
-                      Flexible(
-                        fit: FlexFit.loose,
-                        flex: 1,
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: screenSize(context).height * 0.1),
                         child: Visibility(
                           visible: isAnswered,
                           child: Row(
@@ -164,7 +162,7 @@ class GameAnswers extends riverpod.HookConsumerWidget {
                                         ? false
                                         : answers[state.index!].isRightAnswer,
                                   );
-
+                      
                                   nextQuestion(newQuestion);
                                 },
                               )

@@ -52,6 +52,7 @@ class GameScreen extends riverpod.HookConsumerWidget {
               builder: (context, snapshot) => ContentBuilder(
                     hasData: snapshot.hasData,
                     hasError: snapshot.hasError,
+                    data: snapshot.data != null,
                     message: '${snapshot.error}',
                     question: true,
                     child: FutureBuilder<List<Answer>?>(
@@ -59,6 +60,7 @@ class GameScreen extends riverpod.HookConsumerWidget {
                         builder: (context, snap) => ContentBuilder(
                               hasData: snap.hasData,
                               hasError: snap.hasError,
+                              data: snap.data != null,
                               message: '${snap.error}',
                               child: Scaffold(
                                 extendBodyBehindAppBar: true,
@@ -70,7 +72,8 @@ class GameScreen extends riverpod.HookConsumerWidget {
                                   resume: countDownController.resume,
                                 ),
                                 body: Container(
-                                  padding: const EdgeInsets.only(top: 30),
+                                  padding: EdgeInsets.only(
+                                      top: screenSize(context).height * 0.03),
                                   decoration: const BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -83,12 +86,18 @@ class GameScreen extends riverpod.HookConsumerWidget {
                                         const NeverScrollableScrollPhysics(),
                                     itemCount: 2,
                                     itemBuilder: (context, index) => [
-                                      SizedBox(
-                                          height: (screenSize(context).height -
-                                                  30) *
-                                              (isLargeScreen(context)
-                                                  ? 0.25
-                                                  : 0.3),
+                                      Container(
+                                          // height: (screenSize(context).height -
+                                          //         30) *
+                                          //     (isLargeScreen(context)
+                                          //         ? 0.25
+                                          //         : 0.3),
+                                          height:
+                                              screenSize(context).height * 0.3,
+                                          // margin: EdgeInsets.only(
+                                          //     bottom:
+                                          //         screenSize(context).height *
+                                          //             0.03),
                                           child: GameQuestion(
                                             question: snapshot.data!,
                                             settings: user.settings,

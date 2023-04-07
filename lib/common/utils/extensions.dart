@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gypse/common/dimensions.dart';
 import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/utils/dimensions.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 ///## Extension on [Dimensions]

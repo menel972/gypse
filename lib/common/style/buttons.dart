@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gypse/common/extensions.dart';
-import 'package:gypse/common/dimensions.dart';
 import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/extensions.dart';
 
 ///## Gypse [ElevatedButton]
 ///

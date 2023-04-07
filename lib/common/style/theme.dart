@@ -15,4 +15,5 @@ ThemeData gypseTheme = ThemeData(
   appBarTheme: GypseAppBarTheme(),
   bottomNavigationBarTheme: GypseBottomBarTheme(),
   inputDecorationTheme: GypseInputTheme(),
+  useMaterial3: true,
 );

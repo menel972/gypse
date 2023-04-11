@@ -1,3 +1,5 @@
+/** LOGIN STATE */
+
 ///## Authentication state enumeration
 ///
 ///It represents the login state of a user.<br>
@@ -7,6 +9,8 @@
 ///<li>unauthenticated
 ///<li>authenticated
 enum LoginState { uninitialized, loading, unauthenticated, authenticated }
+
+/** LOCALES */
 
 ///## Supported languages enumeration
 ///
@@ -24,6 +28,8 @@ enum Locales {
   const Locales(this.language);
 }
 
+/** LEVEL */
+
 ///## Difficulty levels enumeration
 ///
 ///It represents the different difficulty levels and the associated number of proposition.<br>
@@ -39,6 +45,8 @@ enum Level {
   final int propositions;
   const Level(this.propositions);
 }
+
+/** TIME */
 
 ///## Time laps enumeration
 ///
@@ -56,6 +64,8 @@ enum Time {
   const Time(this.seconds);
 }
 
+/** USER CHANGE CODE */
+
 ///## Natures of change enumeration
 ///
 ///It represents the different nature of the updates to be made on the database.<br>
@@ -64,6 +74,8 @@ enum Time {
 ///<li>questions
 ///<li>status
 enum UserChangeCode { settings, questions, status }
+
+/** ERROR CODES */
 
 ///## Error codes enumeration
 ///
@@ -84,6 +96,8 @@ enum ErrorCode {
   final String errorType;
   const ErrorCode(this.errorType);
 }
+
+/** BOOKS */
 
 ///## Bible's books enumeration
 ///

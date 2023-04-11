@@ -1,7 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:equatable/equatable.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/game/domain/models/answer.dart';
+
+/** WS ANSWER RESPONSE */
 
 ///<i><small>`Data Layer`</small></i>
 ///## Answer's response <i><small>(received from the database)</small></i>
@@ -17,6 +21,8 @@ import 'package:gypse/common/utils/extensions.dart';
 ///
 ///Data received from the `Firebase Firestore database`is parsed into a `WsAnswerResponse` using the [WsAnswerResponse.fromMap] factory constructor.
 ///<br><br>
+///The `WsAnswerResponse` is parsed to the `Domain Layer` using the [WsAnswerResponse.toDomain] method.
+///<br><br>
 ///It contains the database response for an answer.
 class WsAnswerResponse extends Equatable {
   final String? uId;
@@ -29,7 +35,9 @@ class WsAnswerResponse extends Equatable {
   ///<i><small>`Data Layer`</small></i>
   ///### Answer's response <i><small>(received from the database)</small></i>
   ///#### `WsAnswerResponse` constructor
-  ///<br>
+  ///<br><br>
+  ///The `WsAnswerResponse` is parsed to the `Domain Layer` using the [WsAnswerResponse.toDomain] method.
+  ///<br><br>
   ///It contains the database response for an answer.
   WsAnswerResponse({
     this.uId = '',
@@ -64,7 +72,46 @@ class WsAnswerResponse extends Equatable {
       return WsAnswerResponse();
     }
   }
+
+  /// <i><small>`Data Layer`</small></i><br>
+  /// Converts a `WsAnswerData` into an `Answer` according to the language of the user.
+  Answer toDomain({Locales locale = Locales.fr}) {
+    switch (locale) {
+      case Locales.fr:
+        return Answer(
+          uId: uId ?? '',
+          qId: questionId ?? '',
+          isRightAnswer: isRightAnswer ?? false,
+          answer: fr?.answer ?? '',
+          url: fr?.url ?? '',
+          verse: fr?.verse ?? '',
+          verseReference: fr?.verseReference ?? '',
+        );
+      case Locales.en:
+        return Answer(
+          uId: uId ?? '',
+          qId: questionId ?? '',
+          isRightAnswer: isRightAnswer ?? false,
+          answer: en?.answer ?? '',
+          url: en?.url ?? '',
+          verse: en?.verse ?? '',
+          verseReference: en?.verseReference ?? '',
+        );
+      default:
+        return Answer(
+          uId: uId ?? '',
+          qId: questionId ?? '',
+          isRightAnswer: isRightAnswer ?? false,
+          answer: es?.answer ?? '',
+          url: es?.url ?? '',
+          verse: es?.verse ?? '',
+          verseReference: es?.verseReference ?? '',
+        );
+    }
+  }
 }
+
+/** WS ANSWER DATA */
 
 ///<i><small>`Data Layer`</small></i>
 ///## Answer's informations <i><small>(received from the database)</small></i>

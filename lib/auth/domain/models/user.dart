@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
 
 import 'package:gypse/common/utils/enums.dart';
 
@@ -64,10 +65,19 @@ class User extends Equatable {
   }
 
   /// <i><small>`Domain Layer`</small></i><br>
-  /// Converts an `User` into an object.
-  toPresentation() {
-    // TODO : Implements Method
-    throw UnimplementedError();
+  /// Converts an `User` into an `UiUser`.
+  UiUser toPresentation() {
+    return UiUser(
+      uid,
+      userName: userName,
+      isAdmin: isAdmin,
+      language: language,
+      status: status,
+      questions: List<UiAnsweredQuestions>.from(
+          questions.map((q) => q.toPresentation())),
+      settings: settings.toPresentation(),
+      credentials: credentials.toPresentation(),
+    );
   }
 }
 
@@ -77,23 +87,23 @@ class User extends Equatable {
 ///## User settings <i><small>(received from the data layer)</small></i>
 ///
 ///```
-///final Level level;
-///final Time time;
+///Level level;
+///Time time;
 ///```
 ///
 ///The `GypseSettings` is parsed to the `Presentation Layer` using the [GypseSettings.toPresentation] method.
 ///<br><br>
 ///It contains user's settings.
 class GypseSettings extends Equatable {
-  final Level level;
-  final Time time;
+  Level level;
+  Time time;
 
   ///<i><small>`Domain Layer`</small></i>
   ///### User settings <i><small>(received from the data layer)</small></i>
   ///#### `GypseSettings` constructor
   ///<br>
   ///It contains user's settings.
-  const GypseSettings({
+  GypseSettings({
     required this.level,
     required this.time,
   });
@@ -102,10 +112,12 @@ class GypseSettings extends Equatable {
   List<Object> get props => [level, time];
 
   /// <i><small>`Domain Layer`</small></i><br>
-  /// Converts an `GypseSettings` into an object.
-  toPresentation() {
-    // TODO : Implements Method
-    throw UnimplementedError();
+  /// Converts an `GypseSettings` into an `UiGypseSettings`.
+  UiGypseSettings toPresentation() {
+    return UiGypseSettings(
+      level: level,
+      time: time,
+    );
   }
 }
 
@@ -143,10 +155,13 @@ class AnsweredQuestions extends Equatable {
   List<Object> get props => [id, level, isRightAnswer];
 
   /// <i><small>`Domain Layer`</small></i><br>
-  /// Converts an `AnsweredQuestions` into an object.
-  toPresentation() {
-    // TODO : Implements Method
-    throw UnimplementedError();
+  /// Converts an `AnsweredQuestions` into an `UiAnsweredQuestions`.
+  UiAnsweredQuestions toPresentation() {
+    return UiAnsweredQuestions(
+      qId: id,
+      level: level,
+      isRightAnswer: isRightAnswer,
+    );
   }
 }
 
@@ -184,9 +199,12 @@ class Credentials extends Equatable {
   List<Object?> get props => [email, password, phone];
 
   /// <i><small>`Domain Layer`</small></i><br>
-  /// Converts an `Credentials` into an object.
-  toPresentation() {
-    // TODO : Implements Method
-    throw UnimplementedError();
+  /// Converts an `Credentials` into an `UiCredentials`.
+  UiCredentials toPresentation() {
+    return UiCredentials(
+      email: email ?? '',
+      password: password ?? '',
+      phone: phone ?? '',
+    );
   }
 }

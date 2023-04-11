@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:gypse/game/presentation/models/ui_answer.dart';
 
 ///<i><small>`Domain Layer`</small></i>
 ///## Answer's data <i><small>(received from the data layer)</small></i>
@@ -53,9 +54,16 @@ class Answer extends Equatable {
   }
 
   /// <i><small>`Domain Layer`</small></i><br>
-  /// Converts an `Answer` into an object.
-  toPresentation() {
-    // TODO : Implements Method
-    throw UnimplementedError();
+  /// Converts an `Answer` into an `UiAnswer`.
+  UiAnswer toPresentation() {
+    return UiAnswer(
+      uId,
+      qId: qId,
+      isRightAnswer: isRightAnswer,
+      text: answer,
+      url: url,
+      verse: verse,
+      verseReference: verseReference,
+    );
   }
 }

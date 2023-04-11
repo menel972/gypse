@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/game/domain/models/question.dart';
 
+/** WS QUESTION RESPONSE */
 ///<i><small>`Data Layer`</small></i>
 ///## Question's response <i><small>(received from the database)</small></i>
 ///
@@ -12,6 +15,8 @@ import 'package:gypse/common/utils/extensions.dart';
 ///```
 ///
 ///Data received from the `Firebase Firestore database`is parsed into a `WsQuestionResponse` using the [WsQuestionResponse.fromMap] factory constructor.
+///<br><br>
+///The `WsQuestionResponse` is parsed to the `Domain Layer` using the [WsQuestionResponse.toDomain] method.
 ///<br><br>
 ///It contains the database response for a question.
 class WsQuestionResponse extends Equatable {
@@ -54,7 +59,34 @@ class WsQuestionResponse extends Equatable {
       return WsQuestionResponse();
     }
   }
+
+  /// <i><small>`Data Layer`</small></i><br>
+  /// Converts a `WsQuestionResponse` into a `Question` according to the language of the user.
+  Question toDomain({Locales locale = Locales.fr}) {
+    switch (locale) {
+      case Locales.fr:
+        return Question(
+          uId: uId ?? '',
+          question: fr?.question ?? '',
+          book: fr?.book ?? '',
+        );
+      case Locales.en:
+        return Question(
+          uId: uId ?? '',
+          question: en?.question ?? '',
+          book: en?.book ?? '',
+        );
+      default:
+        return Question(
+          uId: uId ?? '',
+          question: es?.question ?? '',
+          book: es?.book ?? '',
+        );
+    }
+  }
 }
+
+/** WS QUESTION DATA */
 
 ///<i><small>`Data Layer`</small></i>
 ///## Question's informations <i><small>(received from the database)</small></i>

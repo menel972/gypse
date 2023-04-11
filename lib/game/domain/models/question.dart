@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/game/presentation/models/ui_question.dart';
 
 ///<i><small>`Domain Layer`</small></i>
 ///## Question's data <i><small>(received from the data layer)</small></i>
@@ -32,9 +34,27 @@ class Question extends Equatable {
   List<Object> get props => [uId, question, book];
 
   /// <i><small>`Domain Layer`</small></i><br>
-  /// Converts a `Question` into an object.
-  Map<String, dynamic> toPresentation() {
-    // TODO : Implements Method
-    throw UnimplementedError();
+  /// Converts a `Question` into an `UiQuestion` according to the language of the user.
+  UiQuestion toPresentation(Locales locale) {
+    switch (locale) {
+      case Locales.fr:
+        return UiQuestion(
+          uId,
+          text: question,
+          book: Books.values.firstWhere((b) => b.fr == book),
+        );
+      case Locales.en:
+        return UiQuestion(
+          uId,
+          text: question,
+          book: Books.values.firstWhere((b) => b.en == book),
+        );
+      default:
+        return UiQuestion(
+          uId,
+          text: question,
+          book: Books.values.firstWhere((b) => b.es == book),
+        );
+    }
   }
 }

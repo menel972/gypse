@@ -31,7 +31,7 @@ class FirebaseClients {
   ///## Authentication client
   ///
   ///An instance of the entry point of the <b>Firebase Authentication SDK</b>.
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  static final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 }
 
 // TODO : PROVIDES CLIENTS WITHOUT RIVERPOD

@@ -133,26 +133,11 @@ class WsAuthService {
   }
 
   ///<i><small>`Data Layer`</small></i>
-  ///## Update password request method
-  ///
-  ///Function using the `Firebase Authentication SDK` to send a reset password request to the user's email, and returns a `boolean`to confirm the succes. <br><hr><br>
-  ///<i>Errors are handled, logged and thrown with a [GypseException].</i>
-  Future<bool?> changePassword() async => await _resetPassword();
-
-  ///<i><small>`Data Layer`</small></i>
-  ///## Forgotten password method
-  ///
-  ///Function using the `Firebase Authentication SDK` to send a reset password request to the user's email, and returns a `boolean`to confirm the succes. <br><hr><br>
-  ///<i>Errors are handled, logged and thrown with a [GypseException].</i>
-  Future<bool?> forgottenPassword(String email) async =>
-      await _resetPassword(email: email);
-
-  ///<i><small>`Data Layer`</small></i>
   ///## Send update password request method
   ///
   ///Function using the `Firebase Authentication SDK` to send a reset password request to the user's email, and returns a `boolean`to confirm the succes. <br><hr><br>
   ///<i>Errors are handled, logged and thrown with a [GypseException].</i>
-  Future<bool?> _resetPassword({String? email}) async {
+  Future<bool?> resetPassword({String? email}) async {
     try {
       // NOTE: Send a reset password request to the user's email, then return true.
       return await _client

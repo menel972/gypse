@@ -79,6 +79,16 @@ extension Print on Object {
   void log() => debugPrint(toString());
 }
 
+///## Extension on any [Object]
+///
+/// Wheather the object is null.
+extension Null on Object? {
+  ///## Extension on any [Object]
+  ///
+  /// Wheather the object is null..
+  bool get isNull => this == null;
+}
+
 ///## Extension on [String]
 ///
 /// Snack adds methods [success] and [failure] that return custom [SnackBar].

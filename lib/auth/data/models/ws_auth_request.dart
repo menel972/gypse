@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:gypse/auth/domain/models/auth_request.dart';
 
 ///<i><small>`Data Layer`</small></i>
 ///## Authentication request
@@ -22,4 +23,9 @@ class WsAuthRequest extends Equatable {
 
   @override
   List<Object?> get props => [email, password];
+
+  /// <i><small>`Data Layer`</small></i><br>
+  /// Parse the `domain layer` request in a [WsAuthRequest].
+  factory WsAuthRequest.fromDomain(AuthRequest request) =>
+      WsAuthRequest(request.email, request.password);
 }

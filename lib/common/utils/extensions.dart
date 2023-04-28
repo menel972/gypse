@@ -99,7 +99,7 @@ extension Snack on String {
   /// Use it to **inform the user of a successful event**.
   void success(BuildContext context) =>
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(this, style: GypseFont.m()),
+        content: Text(this, style: GypseFont.xs()),
         backgroundColor: const Color.fromRGBO(207, 109, 18, 1),
         duration: const Duration(seconds: 5),
       ));
@@ -112,7 +112,7 @@ extension Snack on String {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
           this,
-          style: GypseFont.m(),
+          style: GypseFont.xs(),
         ),
         backgroundColor: const Color.fromRGBO(176, 0, 32, 1),
         duration: const Duration(seconds: 5),
@@ -135,4 +135,15 @@ extension WebView on String {
       e.message?.log();
     }
   }
+}
+
+///## Extension on [IconData]
+///
+/// Display an [Icon] of the given `IconData`.
+extension ShowIcon on IconData {
+  ///## Extension on [IconData]
+  ///
+  /// Returns an [Icon] with the given `IconData`.
+  Icon show({Color? color = const Color.fromRGBO(196, 196, 196, 1)}) =>
+      Icon(this, color: color);
 }

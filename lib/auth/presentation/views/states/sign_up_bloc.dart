@@ -29,8 +29,8 @@ class SignUpBloc extends Cubit<AuthCredentialsState> {
       emit(state.copyWith(userNameError: isEmpty(value)));
     }
 
-    if (!charLimit(value, 4).isNull) {
-      emit(state.copyWith(userNameError: charLimit(value, 4)));
+    if (!charLimit(value, 3).isNull) {
+      emit(state.copyWith(userNameError: charLimit(value, 3)));
     } else {
       emit(state.copyWith(userName: value, userNameError: ''));
     }

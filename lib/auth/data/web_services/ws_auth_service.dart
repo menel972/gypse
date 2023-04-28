@@ -39,7 +39,7 @@ class WsAuthService {
     } on FirebaseAuthException catch (err) {
       // NOTE: If there is any Firebase authentication error, log it and throw a custom exception.
       err.message?.log();
-      throw GypseException(code: err.code);
+      throw GypseException(code: err.code, message: err.message);
     } on Exception catch (e) {
       // NOTE: If there is any other exception caught, log the error and throw a custom exception.
       e.log();
@@ -61,8 +61,8 @@ class WsAuthService {
           .then((UserCredential credentials) => credentials.user?.uid);
     } on FirebaseAuthException catch (err) {
       // NOTE: If there is any Firebase authentication error, log it and throw a custom exception.
-      err.message?.log();
-      throw GypseException(code: err.code);
+      'DATA : ${err.message}'.log();
+      throw GypseException(code: err.code, message: err.message);
     } on Exception catch (e) {
       // NOTE: If there is any other exception caught, log the error and throw a custom exception.
       e.log();
@@ -146,7 +146,7 @@ class WsAuthService {
     } on FirebaseAuthException catch (err) {
       // NOTE: If there is any Firebase authentication error, log it and throw a custom exception.
       err.log();
-      throw GypseException(code: err.code);
+      throw GypseException(code: err.code, message: err.message);
     } on Exception catch (e) {
       // NOTE: If there is any other exception caught, log the error and throw a custom exception.
       e.log();

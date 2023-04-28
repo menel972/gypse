@@ -183,3 +183,27 @@ enum Books {
     this.esCode,
   });
 }
+
+/** SCREEN */
+
+///## Screen paths navigation
+///
+///It represents the list of views and their navigation path<br>
+///6 possible views :
+///<li> initView - /
+///<li> authView - /auth
+///<li> homeView - /home
+///<li> gameView - /game
+///<li> booksView - /books
+///<li> errorView - /error
+enum Screen {
+  initView('/'),
+  authView('/auth'),
+  homeView('/home'),
+  gameView('/game'),
+  booksView('/books'),
+  errorView('/error');
+
+  final String path;
+  const Screen(this.path);
+}

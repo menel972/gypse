@@ -14,12 +14,12 @@ import 'package:gypse/presenation/home/home_screen.dart';
 
 /// ScreenPaths class provides all paths used for routing
 class ScreenPaths {
-  static const String connectionCheck = '/a';
+  static const String connectionCheck = '/';
   static const String error = '/error';
   static const String home = '/home';
   static const String game = '/game';
   static const String books = '/books';
-  static const String auth = '/';
+  static const String auth = '/auth';
 }
 
 /// A Declarative routing package

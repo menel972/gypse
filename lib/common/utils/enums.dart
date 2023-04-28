@@ -64,17 +64,6 @@ enum Time {
   const Time(this.seconds);
 }
 
-/** USER CHANGE CODE */
-
-///## Natures of change enumeration
-///
-///It represents the different nature of the updates to be made on the database.<br>
-///Three possible upadates :<br>
-///<li>settings
-///<li>questions
-///<li>status
-enum UserChangeCode { settings, questions, status }
-
 /** ERROR CODES */
 
 ///## Error codes enumeration

@@ -13,25 +13,25 @@ class FirebaseClients {
   ///## Questions database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where questions are stored</b>.
-  final CollectionReference<Map<String, dynamic>> questionsDb =
+  static final CollectionReference<Map<String, dynamic>> questionsDb =
       FirebaseFirestore.instance.collection('question');
 
   ///## Answers database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where answers are stored</b>.
-  final CollectionReference<Map<String, dynamic>> answersDb =
+  static final CollectionReference<Map<String, dynamic>> answersDb =
       FirebaseFirestore.instance.collection('reponse');
 
   ///## Users database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where users are stored</b>.
-  final CollectionReference<Map<String, dynamic>> usersDb =
+  static final CollectionReference<Map<String, dynamic>> usersDb =
       FirebaseFirestore.instance.collection('user');
 
   ///## Authentication client
   ///
   ///An instance of the entry point of the <b>Firebase Authentication SDK</b>.
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  static final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 }
 
 // TODO : PROVIDES CLIENTS WITHOUT RIVERPOD

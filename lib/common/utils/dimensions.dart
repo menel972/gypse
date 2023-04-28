@@ -8,6 +8,18 @@ class Dimensions extends Size {
 
   ///## Responsive [Size]
   ///
+  /// Returns **1% of the screen dimensions**.
+  /// ```
+  /// final BuildContext context;
+  /// ```
+  Dimensions.xxxs(this.context)
+      : super(
+          MediaQuery.of(context).size.width * 0.01,
+          MediaQuery.of(context).size.height * 0.01,
+        );
+
+  ///## Responsive [Size]
+  ///
   /// Returns **2% of the screen dimensions**.
   /// ```
   /// final BuildContext context;

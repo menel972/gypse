@@ -14,19 +14,25 @@ class GypseInputTheme extends InputDecorationTheme {
   TextStyle? get counterStyle => GypseFont.s();
 
   @override
-  InputBorder? get border => const UnderlineInputBorder(
-        borderSide: BorderSide(color: const Color.fromRGBO(196, 196, 196, 1)),
+  InputBorder? get border => const OutlineInputBorder(
+        borderSide: BorderSide(color: const Color.fromRGBO(70, 96, 192, 1)),
       );
 
   @override
-  InputBorder? get enabledBorder => const UnderlineInputBorder(
-        borderSide: BorderSide(color: const Color.fromRGBO(196, 196, 196, 1)),
+  InputBorder? get enabledBorder => const OutlineInputBorder(
+        borderSide: BorderSide(color: const Color.fromRGBO(70, 96, 192, 1)),
       );
 
   @override
-  InputBorder? get focusedBorder => UnderlineInputBorder(
+  InputBorder? get focusedBorder => OutlineInputBorder(
         borderSide:
             BorderSide(color: const Color.fromRGBO(207, 109, 18, 1), width: 2),
+      );
+
+  @override
+  InputBorder? get errorBorder => OutlineInputBorder(
+        borderSide:
+            BorderSide(color: const Color.fromRGBO(176, 0, 32, 1), width: 2),
       );
 
   @override

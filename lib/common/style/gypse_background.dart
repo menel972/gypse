@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/strings.dart';
 
 ///## Gypse Background [Container]
 ///
@@ -14,4 +16,18 @@ class GypseBackground extends Container {
   @override
   Decoration? get decoration =>
       BoxDecoration(image: DecorationImage(image: AssetImage(image)));
+}
+
+class GypseLoading extends Scaffold {
+  final BuildContext context;
+
+  GypseLoading(this.context);
+
+  @override
+  Widget? get body => Center(
+        child: Image.asset(
+          '$imagesPath/splash_logo.png',
+          width: Dimensions.xxl(context).width,
+        ),
+      );
 }

@@ -1,0 +1,82 @@
+{
+	"data": [
+		{
+			"id": "68Ykp0OX2UXIGWUSQPj719UbDWr1",
+			"userName": "Menel972#68Yk",
+			"locale": "fr",
+			"isAdmin": true,
+			"isConnected": true,
+			"credentials": {
+				"email": null,
+				"password": null,
+				"phone": null
+			},
+			"settings": {
+				"niveau": 3,
+				"chrono": 20
+			},
+			"questions": [
+				{
+					"niveau": 3,
+					"valid": false,
+					"qId": "19yuWA0iW4QeNm8moqtQ"
+				},
+				{
+					"niveau": 2,
+					"valid": true,
+					"qId": "11Ze2MEkruvHfFvEqIdp"
+				},
+				{
+					"niveau": 1,
+					"valid": true,
+					"qId": "0wXK2IIZ0TjHT1mGmgs3"
+				}
+			]
+		},
+		{
+			"id": "JofLLU6ExgcL40CdAHcjgL4JACs2",
+			"userName": "Dev#JofL",
+			"locale": "fr",
+			"isAdmin": true,
+			"isConnected": true,
+			"credentials": {
+				"email": "gypse@yopmail.com",
+				"password": "Gypse_972",
+				"phone": null
+			},
+			"settings": {
+				"niveau": 2,
+				"chrono": 12
+			},
+			"questions": [
+				{
+					"niveau": 3,
+					"valid": true,
+					"qId": "19yuWA0iW4QeNm8moqtQ"
+				},
+				{
+					"niveau": 1,
+					"valid": true,
+					"qId": "0wXK2IIZ0TjHT1mGmgs3"
+				}
+			]
+		},
+		{
+			"id": "vjCokavSYxYi5ajA15f0woBWTNi2",
+			"userName": "moi12 #vjCo",
+			"locale": "fr",
+			"isAdmin": false,
+			"isConnected": true,
+			"credentials": {
+				"email": "moi12@yopmail.com",
+				"password": "Moi12_973",
+				"phone": null
+			},
+			"settings": {
+				"niveau": 1,
+				"chrono": 30
+			},
+			"questions": []
+		}
+	]
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gypse/auth/data/repositories/auth_repository_impl.dart';
-import 'package:gypse/auth/data/web_services/ws_auth_service.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
 import 'package:gypse/auth/presentation/views/states/forgotten_password_bloc.dart';
 import 'package:gypse/auth/presentation/views/states/sign_in_bloc.dart';
@@ -9,19 +9,30 @@ import 'package:gypse/auth/presentation/views/states/sign_up_bloc.dart';
 import 'package:gypse/auth/presentation/views/widgets/forgotten_password_view.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_in_view.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up_view.dart';
-import 'package:gypse/common/clients/firebase_client.dart';
 import 'package:gypse/common/style/colors.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/core/l10n/localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthScreen extends StatelessWidget {
-  const AuthScreen({super.key});
+  final Future<String> Function(WidgetRef, UiAuthRequest) signUpUseCase;
+  final Future<String> Function(WidgetRef, UiAuthRequest) signInUseCase;
+  final Future<bool?> Function(WidgetRef, String) forgottenPasswordUseCase;
+
+  const AuthScreen({
+    super.key,
+    required this.signUpUseCase,
+    required this.signInUseCase,
+    required this.forgottenPasswordUseCase,
+  });
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
+    
     return BlocConsumer<AuthViewsBloc, int>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -54,23 +65,21 @@ class AuthScreen extends StatelessWidget {
                         child: [
                           BlocProvider(
                             create: (_) => SignUpBloc(),
-                            child: SignUpView(AuthRepositoryImpl(
-                                WsAuthService(FirebaseClients().firebaseAuth))),
+                            child: SignUpView(signUpUseCase),
                           ),
                           BlocProvider(
                             create: (_) => SignInBloc(),
                             child: SignInView(
                               context.read<AuthViewsBloc>().onViewChanged,
-                              auth: AuthRepositoryImpl(WsAuthService(
-                                  FirebaseClients().firebaseAuth)),
+                              signInUseCase: signInUseCase,
                             ),
                           ),
                           BlocProvider(
                             create: (_) => ForgottenPasswordBloc(),
                             child: ForgottenPasswordView(
                               context.read<AuthViewsBloc>().onViewChanged,
-                              auth: AuthRepositoryImpl(WsAuthService(
-                                  FirebaseClients().firebaseAuth)),
+                              forgottenPasswordUseCase:
+                                  forgottenPasswordUseCase,
                             ),
                           ),
                         ][state]),

@@ -142,9 +142,7 @@ class GetUserUidUseCase {
 
   String invoke() {
     'start'.log(tag: 'GetUserUidUseCase');
-    String result = _repository.getUserUid;
-    result.log(tag: 'GetUserUidUseCase');
-    return result;
+    return _repository.getUserUid;
   }
 }
 

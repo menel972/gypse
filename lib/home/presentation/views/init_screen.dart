@@ -3,42 +3,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/common/style/gypse_background.dart';
+import 'package:gypse/game/domain/models/answer.dart';
 import 'package:gypse/game/domain/models/question.dart';
+import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class InitScreen extends HookConsumerWidget {
   final Future<List<Question>> Function(WidgetRef) fetchQuestionUseCase;
+  final Future<List<Answer>> Function(WidgetRef) fetchAnswerUseCase;
   final Function(WidgetRef, List<UiQuestion>) storeQuestions;
+  final Function(WidgetRef, List<UiAnswer>) storeAnswers;
 
   late List<UiQuestion>? questions;
+  late List<UiAnswer>? answers;
   late Exception? error;
 
   InitScreen(
       {super.key,
       required this.fetchQuestionUseCase,
-      required this.storeQuestions});
+      required this.fetchAnswerUseCase,
+      required this.storeQuestions,
+      required this.storeAnswers});
+
+  Future<List<dynamic>> initFutureGroup(WidgetRef ref) async {
+    return await Future.wait(
+        [fetchQuestionUseCase(ref), fetchAnswerUseCase(ref)]);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return FutureBuilder<List<Question>>(
-        future: fetchQuestionUseCase(ref),
-        builder: (context, questionsListSnapshot) {
-          questions = questionsListSnapshot.data
-              ?.map((question) => question.toPresentation())
+    return FutureBuilder<List<dynamic>>(
+        future: initFutureGroup(ref),
+        builder: (context, snapshot) {
+          List<Question>? questionList = snapshot.data?[0];
+          List<Answer>? answerList = snapshot.data?[1];
+
+          questions = questionList
+              ?.map((Question question) => question.toPresentation())
               .toList();
-          error = questionsListSnapshot.error as Exception?;
+
+          answers = answerList
+              ?.map((Answer answer) => answer.toPresentation())
+              .toList();
+
+          error = snapshot.error as Exception?;
 
 // NOTE : ERROR
-          if (questionsListSnapshot.hasError) {
+          if (snapshot.hasError) {
             FlutterNativeSplash.remove();
 
             return ErrorWidget(error!);
           }
 
 // NOTE : DATA
-          if (questionsListSnapshot.hasData) {
-            storeQuestions(ref, questions!);
+          if (snapshot.hasData) {
+            Future(() => storeQuestions(ref, questions!));
+            Future(() => storeAnswers(ref, answers!));
             FlutterNativeSplash.remove();
 
             return Center(

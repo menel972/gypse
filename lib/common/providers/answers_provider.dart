@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:gypse/game/presentation/models/ui_Answer.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/game/presentation/models/ui_answer.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AnswersProvider extends ChangeNotifier {
-  List<UiAnswer> _answers = [];
-  List<UiAnswer> _questionAnswers = [];
+class AnswersProvider extends StateNotifier<Set<UiAnswer>> {
+  AnswersProvider() : super({});
 
-  List<UiAnswer> get answers => _answers;
-  List<UiAnswer> get questionAnswers => _questionAnswers;
-
-  void setAnswers(List<UiAnswer> newAnswers) {
-    _answers = newAnswers.toSet().toList();
-    notifyListeners();
+  void addAnswers(List<UiAnswer> newAnswers) {
+    state = {...state, ...newAnswers.toSet()};
+    state.length.log(tag: 'Stored Answers');
   }
 
-  void setQuestionAnswers(String qId) {
-    _questionAnswers = answers.where((a) => a.qId == qId).toList();
-    notifyListeners();
-  }
+  List<UiAnswer> getQuestionAnswers(String qId) =>
+      state.where((answer) => answer.qId == qId).toList();
 }
+
+get answersProvider =>
+    StateNotifierProvider.autoDispose<AnswersProvider, Set<UiAnswer>>(
+        (ref) => AnswersProvider());

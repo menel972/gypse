@@ -4,24 +4,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/common/style/gypse_background.dart';
 import 'package:gypse/game/domain/models/question.dart';
-import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
+import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class InitScreen extends HookConsumerWidget {
-  late Future<List<Question>> Function() fetchQuestionUseCase;
+  final Future<List<Question>> Function(WidgetRef) fetchQuestionUseCase;
+  final Function(WidgetRef, List<UiQuestion>) storeQuestions;
 
-  InitScreen({super.key});
+  late List<UiQuestion>? questions;
+  late Exception? error;
+
+  InitScreen(
+      {super.key,
+      required this.fetchQuestionUseCase,
+      required this.storeQuestions});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    fetchQuestionUseCase = ref.read(fetchQuestionsUseCaseProvider).invoke;
+    return FutureBuilder<List<Question>>(
+        future: fetchQuestionUseCase(ref),
+        builder: (context, questionsListSnapshot) {
+          questions = questionsListSnapshot.data
+              ?.map((question) => question.toPresentation())
+              .toList();
+          error = questionsListSnapshot.error as Exception?;
 
-    fetchQuestionUseCase();
-    FlutterNativeSplash.remove();
+// NOTE : ERROR
+          if (questionsListSnapshot.hasError) {
+            FlutterNativeSplash.remove();
 
-    return GypseLoading(
-      context,
-      message: 'Chargement de vos données...',
-    );
+            return ErrorWidget(error!);
+          }
+
+// NOTE : DATA
+          if (questionsListSnapshot.hasData) {
+            storeQuestions(ref, questions!);
+            FlutterNativeSplash.remove();
+
+            return Center(
+              child: Text('${questions!.length}'),
+            );
+          }
+
+// NOTE : LOADING
+          FlutterNativeSplash.remove();
+          return GypseLoading(
+            context,
+            message: 'Chargement de vos données...',
+          );
+        });
   }
 }

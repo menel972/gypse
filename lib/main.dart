@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/providers/answers_provider.dart';
-import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/theme.dart';
 import 'package:gypse/common/utils/gypse_router.dart';
@@ -68,7 +67,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       providers: [
         ChangeNotifierProvider.value(value: CurrentUser()),
         ChangeNotifierProvider.value(value: IsAnsweredMenu()),
-        ChangeNotifierProvider.value(value: QuestionsProvider()),
         ChangeNotifierProvider.value(value: AnswersProvider()),
         ChangeNotifierProvider.value(value: UserProvider()),
       ],

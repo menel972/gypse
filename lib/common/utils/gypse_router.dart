@@ -1,9 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
+import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
+import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 ///## Gypse navigation system <i><small>(using [GoRouter])</small></i>
 ///
@@ -16,7 +20,14 @@ GoRouter gypseRouter = GoRouter(
     // NOTE : INIT VIEW
     GoRoute(
       path: Screen.initView.path,
-      builder: (context, state) => InitScreen(),
+      builder: (context, state) {
+        return InitScreen(
+          fetchQuestionUseCase: (WidgetRef ref) =>
+              ref.read(fetchQuestionsUseCaseProvider).invoke(),
+          storeQuestions: (WidgetRef ref, List<UiQuestion> questions) =>
+              ref.read(questionsProvider.notifier).addQuestions(questions),
+        );
+      },
     ),
     // NOTE : AUTH VIEW
     GoRoute(

@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
 import 'package:gypse/common/providers/answers_provider.dart';
@@ -25,6 +26,8 @@ GoRouter gypseRouter = GoRouter(
       path: Screen.initView.path,
       builder: (context, state) {
         return InitScreen(
+          getUserUidUseCase: (WidgetRef ref) =>
+              ref.read(getUserUidUseCaseProvider).invoke(),
           fetchQuestionUseCase: (WidgetRef ref) =>
               ref.read(fetchQuestionsUseCaseProvider).invoke(),
           fetchAnswerUseCase: (WidgetRef ref) =>

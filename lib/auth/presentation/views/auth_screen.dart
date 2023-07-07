@@ -9,6 +9,7 @@ import 'package:gypse/auth/presentation/views/states/sign_up_bloc.dart';
 import 'package:gypse/auth/presentation/views/widgets/forgotten_password_view.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_in_view.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up_view.dart';
+import 'package:gypse/common/clients/firebase_client.dart';
 import 'package:gypse/common/style/colors.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
@@ -53,21 +54,23 @@ class AuthScreen extends StatelessWidget {
                         child: [
                           BlocProvider(
                             create: (_) => SignUpBloc(),
-                            child:
-                                SignUpView(AuthRepositoryImpl(WsAuthService())),
+                            child: SignUpView(AuthRepositoryImpl(
+                                WsAuthService(FirebaseClients().firebaseAuth))),
                           ),
                           BlocProvider(
                             create: (_) => SignInBloc(),
                             child: SignInView(
                               context.read<AuthViewsBloc>().onViewChanged,
-                              auth: AuthRepositoryImpl(WsAuthService()),
+                              auth: AuthRepositoryImpl(WsAuthService(
+                                  FirebaseClients().firebaseAuth)),
                             ),
                           ),
                           BlocProvider(
                             create: (_) => ForgottenPasswordBloc(),
                             child: ForgottenPasswordView(
                               context.read<AuthViewsBloc>().onViewChanged,
-                              auth: AuthRepositoryImpl(WsAuthService()),
+                              auth: AuthRepositoryImpl(WsAuthService(
+                                  FirebaseClients().firebaseAuth)),
                             ),
                           ),
                         ][state]),

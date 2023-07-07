@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/auth/data/repositories/auth_repository_impl.dart';
 import 'package:gypse/auth/data/web_services/ws_auth_service.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
@@ -22,7 +21,6 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FlutterNativeSplash.remove();
     return BlocConsumer<AuthViewsBloc, int>(
         listener: (context, state) {},
         builder: (context, state) {

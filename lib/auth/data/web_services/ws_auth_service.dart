@@ -18,7 +18,7 @@ class WsAuthService {
   ///## Authentication client
   ///
   ///An instance of the entry point of the <b>Firebase Authentication SDK</b>.
-  final FirebaseAuth _client = FirebaseClients.firebaseAuth;
+  final FirebaseAuth _client = FirebaseClients().firebaseAuth;
 
   /** 
    * AUTHENTICATION 

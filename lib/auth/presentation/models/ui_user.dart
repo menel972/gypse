@@ -57,6 +57,23 @@ class UiUser extends Equatable {
         settings,
         credentials
       ];
+
+  UiUser copyWith({
+    LoginState? status,
+    List<UiAnsweredQuestions>? questions,
+    UiGypseSettings? settings,
+    UiCredentials? credentials,
+  }) =>
+      UiUser(
+        this.uId,
+        userName: this.userName,
+        isAdmin: this.isAdmin,
+        language: this.language,
+        status: status ?? this.status,
+        questions: questions ?? this.questions,
+        settings: settings ?? this.settings,
+        credentials: credentials ?? this.credentials,
+      );
 }
 
 /** UI GYPSE SETTINGS */
@@ -83,6 +100,11 @@ class UiGypseSettings extends Equatable {
 
   @override
   List<Object?> get props => [level, time];
+
+  UiGypseSettings copyWith({Level? level, Time? time}) => UiGypseSettings(
+        level: level ?? this.level,
+        time: time ?? this.time,
+      );
 }
 
 /** UI ANSWERED QUESTIONS */

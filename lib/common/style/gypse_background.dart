@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 
 ///## Gypse Background [Container]
@@ -18,16 +20,33 @@ class GypseBackground extends Container {
       BoxDecoration(image: DecorationImage(image: AssetImage(image)));
 }
 
+///## Gypse Loading screen [Scaffold]
+///
+///It defines the appearance the loading screen.
 class GypseLoading extends Scaffold {
   final BuildContext context;
+  final String? message;
 
-  GypseLoading(this.context);
+  ///## Gypse Loading screen [Scaffold]
+  ///
+  ///It defines the appearance the loading screen.
+  GypseLoading(this.context, {this.message});
 
   @override
   Widget? get body => Center(
-        child: Image.asset(
-          '$imagesPath/splash_logo.png',
-          width: Dimensions.xxl(context).width,
+        child: Column(
+          children: [
+            Expanded(
+              child: Image.asset(
+                '$imagesPath/splash_logo.png',
+                width: Dimensions.l(context).width,
+              ),
+            ),
+            Dimensions.xs(context).padding(Text(
+              message ?? '',
+              style: GypseFont.s(),
+            )),
+          ],
         ),
       );
 }

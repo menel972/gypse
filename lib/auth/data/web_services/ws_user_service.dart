@@ -18,7 +18,7 @@ class WsUserService {
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where users are stored</b>.
   final CollectionReference<Map<String, dynamic>> _client =
-      FirebaseClients.usersDb;
+      FirebaseClients().usersDb;
 
   /**
    * CREATE

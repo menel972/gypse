@@ -76,7 +76,8 @@ extension Print on Object {
   ///## Extension on any [Object]
   ///
   /// Logs the object to debug console using [debugPrint].
-  void log() => debugPrint(toString());
+  void log({String? tag = null}) =>
+      debugPrint('${tag.isNull ? '[]' : '[$tag] :'} $this');
 }
 
 ///## Extension on any [Object]

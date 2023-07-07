@@ -16,7 +16,7 @@ GoRouter gypseRouter = GoRouter(
     // NOTE : INIT VIEW
     GoRoute(
       path: Screen.initView.path,
-      builder: (context, state) => const InitScreen(),
+      builder: (context, state) => InitScreen(),
     ),
     // NOTE : AUTH VIEW
     GoRoute(

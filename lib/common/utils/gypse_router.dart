@@ -1,10 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
+import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
 import 'package:gypse/common/providers/answers_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
+import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/game/domain/usecases/answers_use_cases.dart';
@@ -33,10 +36,14 @@ GoRouter gypseRouter = GoRouter(
               ref.read(fetchQuestionsUseCaseProvider).invoke(),
           fetchAnswerUseCase: (WidgetRef ref) =>
               ref.read(fetchAnswersUseCaseProvider).invoke(),
+          getCurrentUserUseCase: (WidgetRef ref, String id) =>
+              ref.read(getCurrentUserUseCaseProvider).invoke(id),
           storeQuestions: (WidgetRef ref, List<UiQuestion> questions) =>
               ref.read(questionsProvider.notifier).addQuestions(questions),
           storeAnswers: (WidgetRef ref, List<UiAnswer> answers) =>
               ref.read(answersProvider.notifier).addAnswers(answers),
+          storeUser: (WidgetRef ref, UiUser user) =>
+              ref.read(userProvider.notifier).setCurrentUser(user),
         );
       },
     ),

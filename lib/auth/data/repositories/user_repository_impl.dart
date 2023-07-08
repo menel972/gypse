@@ -5,6 +5,7 @@ import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/auth/domain/repositories/user_repository.dart';
 import 'package:gypse/common/utils/exception.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final WsUserService _userService;
@@ -63,3 +64,8 @@ class UserRepositoryImpl extends UserRepository {
     }
   }
 }
+
+AutoDisposeProvider<UserRepository> get userRepositoryProvider =>
+    Provider.autoDispose<UserRepository>(
+        (AutoDisposeProviderRef<UserRepository> ref) =>
+            UserRepositoryImpl(ref.read(wsUserServiceProvider)));

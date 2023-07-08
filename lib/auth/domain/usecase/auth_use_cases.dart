@@ -14,7 +14,7 @@ class SignUpUseCase {
 
   Future<String> invoke(UiAuthRequest request) async {
     'start'.log(tag: 'SignUpUseCase');
-    return _repository.signUp(AuthRequest.fromPresentation(request));
+    return await _repository.signUp(AuthRequest.fromPresentation(request));
   }
 }
 
@@ -30,7 +30,7 @@ class SignInUseCase {
 
   Future<String> invoke(UiAuthRequest request) async {
     'start'.log(tag: 'SignInUseCase');
-    return _repository.signIn(AuthRequest.fromPresentation(request));
+    return await _repository.signIn(AuthRequest.fromPresentation(request));
   }
 }
 
@@ -46,7 +46,7 @@ class SignOutUseCase {
 
   Future<bool> invoke() async {
     'start'.log(tag: 'SignOutUseCase');
-    return _repository.signOut();
+    return await _repository.signOut();
   }
 }
 
@@ -62,7 +62,7 @@ class DeleteAccountUseCase {
 
   Future<bool> invoke() async {
     'start'.log(tag: 'DeleteAccountUseCase');
-    return _repository.deleteAccount();
+    return await _repository.deleteAccount();
   }
 }
 
@@ -78,7 +78,7 @@ class SetUserNameUseCase {
 
   Future<bool> invoke(String userName) async {
     'start'.log(tag: 'SetUserNameUseCase');
-    return _repository.setUserName(userName);
+    return await _repository.setUserName(userName);
   }
 }
 
@@ -93,7 +93,7 @@ class ChangePasswordUseCase {
 
   Future<bool> invoke() async {
     'start'.log(tag: 'ChangePasswordUseCase');
-    return _repository.changePassword();
+    return await _repository.changePassword();
   }
 }
 
@@ -108,7 +108,7 @@ class ForgottenPasswordUseCase {
 
   Future<bool?> invoke(String email) async {
     'start'.log(tag: 'ForgottenPassword');
-    return _repository.forgottenPassword(email);
+    return await _repository.forgottenPassword(email);
   }
 }
 
@@ -124,7 +124,7 @@ class VerifyEmailUseCase {
 
   Future<bool?> invoke() async {
     'start'.log(tag: 'VerifyEmailUseCase');
-    return _repository.verifyEmail();
+    return await _repository.verifyEmail();
   }
 }
 

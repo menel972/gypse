@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/extensions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UserProvider extends ChangeNotifier {
-  UiUser _user = UiUser(
-    '',
-    userName: '',
-    isAdmin: false,
-    language: Locales.fr,
-    status: LoginState.uninitialized,
-    questions: [],
-    settings: UiGypseSettings(level: Level.medium, time: Time.medium),
-    credentials:
-        UiCredentials(email: 'email', password: 'password', phone: 'phone'),
-  );
+class UserProvider extends StateNotifier<UiUser?> {
+  UserProvider() : super(null);
 
-  UiUser get user => _user;
-
-  void setUser(UiUser newUser) {
-    _user = newUser;
-    notifyListeners();
+  void setCurrentUser(UiUser user) {
+    state = user;
+    state?.userName.log(tag: 'Stored User');
   }
 
-  void setAnsweredQuestion(UiAnsweredQuestions newQuestion) {
-    _user.questions.add(newQuestion);
-    notifyListeners();
+  void updateAnsweredQuestions(UiAnsweredQuestions newQuestion) {
+    state?.questions.length.log(tag: 'Answered Questions - before');
+    state?.questions = [...state!.questions, newQuestion];
+    state?.questions.length.log(tag: 'Answered Questions Added');
   }
 
-  void setSettings({Time? time, Level? level}) {
-    _user = _user.copyWith(
-        settings: _user.settings.copyWith(time: time, level: level));
-
-    notifyListeners();
+  void updateSettings(UiGypseSettings newSettings) {
+    state?.settings = newSettings;
+    debugPrint(
+        '[Settings Updated] : Level ${state?.settings.level}, Time ${state?.settings.time}');
   }
 }
+
+get userProvider => StateNotifierProvider.autoDispose<UserProvider, UiUser?>(
+    (ref) => UserProvider());

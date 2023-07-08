@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
@@ -96,7 +97,7 @@ class WsUserResponse extends Equatable {
       locale: map?['locale'],
       isConnected: map?['isConnected'],
       isAdmin: map?['isAdmin'],
-      userSettings: WsGypseSettings.fromMap(map?['userSettings']),
+      userSettings: WsGypseSettings.fromMap(map?['settings']),
       questions: List<WsAnsweredQuestions?>.from(
         (map?['questions']).map<WsAnsweredQuestions?>(
           (q) => WsAnsweredQuestions.fromMap(q),
@@ -113,7 +114,7 @@ class WsUserResponse extends Equatable {
         uid: uid ?? '',
         userName: userName ?? '',
         isAdmin: isAdmin ?? false,
-        language: Locales.values.firstWhere((code) => code.language == locale),
+        language: Locales.values.firstWhere((code) => code.name == locale),
         status: LoginState.uninitialized,
         questions:
             List<AnsweredQuestions>.from(questions.map((q) => q?.toDomain())),
@@ -191,11 +192,11 @@ class WsGypseSettings extends Equatable {
   factory WsGypseSettings.fromMap(Map<String, dynamic>? map) {
     try {
       return WsGypseSettings(
-        level: map?['level'],
-        time: map?['time'],
+        level: map?['niveau'],
+        time: map?['chrono'],
       );
     } catch (e) {
-      e.log();
+      e.log(tag: 'WsGypseSettings.fromMap');
       return WsGypseSettings();
     }
   }
@@ -203,10 +204,16 @@ class WsGypseSettings extends Equatable {
   /// <i><small>`Data Layer`</small></i><br>
   /// Converts a `WsGypseSettings` into a `GypseSettings`.
   GypseSettings toDomain() {
-    return GypseSettings(
-      level: Level.values.firstWhere((value) => value.propositions == level),
-      time: Time.values.firstWhere((value) => value.seconds == time),
-    );
+    try {
+      return GypseSettings(
+        level: Level.values.firstWhere((value) => value.propositions == level),
+        time: Time.values.firstWhere((value) => value.seconds == time),
+      );
+    } catch (e) {
+      e.log(tag: 'GypseSettings toDomain');
+      debugPrint('$level, $time');
+      return GypseSettings(level: Level.medium, time: Time.medium);
+    }
   }
 
   /// <i><small>`Data Layer`</small></i><br>

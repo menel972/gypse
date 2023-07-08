@@ -55,3 +55,10 @@ AutoDisposeProvider<FirebaseAuth> get firebaseAuthProvider =>
       (AutoDisposeProviderRef<FirebaseAuth> ref) =>
           FirebaseClients().firebaseAuth,
     );
+
+AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
+    get usersDbProvider =>
+        Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
+          (AutoDisposeProviderRef<CollectionReference> ref) =>
+              FirebaseClients().usersDb,
+        );

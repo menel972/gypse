@@ -3,6 +3,7 @@ import 'package:gypse/auth/data/models/ws_user_response.dart';
 import 'package:gypse/common/clients/firebase_client.dart';
 import 'package:gypse/common/utils/exception.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 ///<i><small>`Data Layer`</small></i>
 ///## Firebase user service
@@ -17,8 +18,9 @@ class WsUserService {
   ///## Users database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where users are stored</b>.
-  final CollectionReference<Map<String, dynamic>> _client =
-      FirebaseClients().usersDb;
+  final CollectionReference<Map<String, dynamic>> _client;
+
+  WsUserService(this._client);
 
   /**
    * CREATE
@@ -56,13 +58,13 @@ class WsUserService {
   Future<WsUserResponse?> fetchUserById(String id) async {
     try {
       // NOTE: Fetch a user in the database using its id.
-      return await _client
-          .doc(id)
-          .get()
-          .then((user) => WsUserResponse.fromMap(user.data()));
+      return await _client.doc(id).get().then((user) {
+        user.data()?.log(tag: 'fetchUserById user');
+        return WsUserResponse.fromMap(user.data());
+      });
     } on FirebaseException catch (err) {
       // NOTE: If there is any Firebase error, log it and throw a custom exception.
-      err.message?.log();
+      err.message?.log(tag: 'fetchUserById');
       throw GypseException(code: err.code);
     } on Exception catch (e) {
       // NOTE: If there is any other exception caught, log the error and throw a custom exception.
@@ -119,3 +121,8 @@ class WsUserService {
     }
   }
 }
+
+AutoDisposeProvider<WsUserService> get wsUserServiceProvider =>
+    Provider.autoDispose<WsUserService>(
+        (AutoDisposeProviderRef<WsUserService> ref) =>
+            WsUserService(ref.read(usersDbProvider)));

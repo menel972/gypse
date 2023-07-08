@@ -14,10 +14,13 @@ import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class InitScreen extends HookConsumerWidget {
+  // NOTE : CHECK USER CONNECTION
   final String Function(WidgetRef) getUserUidUseCase;
+  // NOTE : FETCH DATA
   final Future<List<Question>> Function(WidgetRef) fetchQuestionUseCase;
   final Future<List<Answer>> Function(WidgetRef) fetchAnswerUseCase;
   final Future<UiUser> Function(WidgetRef, String) getCurrentUserUseCase;
+  // NOTE : SAVE DATA
   final Function(WidgetRef, List<UiQuestion>) storeQuestions;
   final Function(WidgetRef, List<UiAnswer>) storeAnswers;
   final Function(WidgetRef, UiUser) storeUser;
@@ -50,11 +53,14 @@ class InitScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     userUid = getUserUidUseCase(ref);
 
+// NOTE : NO USER LOGGED !
     if (userUid.isEmpty) {
       'No user logged !'.log(tag: 'Init - User Check');
       Future(() => context.go(Screen.authView.path));
 
       return Container();
+
+// NOTE : USER LOGGED
     } else {
       'User logged !'.log(tag: 'Init - User Check');
 

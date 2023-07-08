@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gypse/auth/domain/models/auth_request.dart';
-import 'package:gypse/auth/domain/repositories/auth_repository.dart';
+import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
 import 'package:gypse/auth/presentation/views/states/auth_credentials_state.dart';
 import 'package:gypse/auth/presentation/views/states/sign_in_bloc.dart';
 import 'package:gypse/common/style/buttons.dart';
@@ -10,14 +10,20 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/core/l10n/localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SignInView extends StatelessWidget {
+class SignInView extends HookConsumerWidget {
   final Function(int) onSelectedView;
-  final AuthRepository auth;
-  const SignInView(this.onSelectedView, {required this.auth, super.key});
+  final Future<String> Function(WidgetRef, UiAuthRequest) signInUseCase;
+
+  const SignInView(
+    this.onSelectedView, {
+    super.key,
+    required this.signInUseCase,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BlocConsumer<SignInBloc, AuthCredentialsState>(
       listener: (context, state) {
         switch (state.connectionStatus) {
@@ -130,13 +136,15 @@ class SignInView extends StatelessWidget {
                   if (isFormValid) {
                     authLoad();
                     // NOTE : Try to login
-                    await auth
-                        .signIn(AuthRequest(state.email, state.password))
+                    await signInUseCase(
+                            ref, UiAuthRequest(state.email, state.password))
                         // NOTE : Case : SUCCESS
                         .then((String result) {
                       if (!result.isEmpty) {
                         authTrue();
                         words(context).snack_welcome.success(context);
+
+                        Future(() => context.go(Screen.initView.path));
                         return result;
                       }
                     })

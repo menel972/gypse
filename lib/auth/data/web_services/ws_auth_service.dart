@@ -3,6 +3,7 @@ import 'package:gypse/auth/data/models/ws_auth_request.dart';
 import 'package:gypse/common/clients/firebase_client.dart';
 import 'package:gypse/common/utils/exception.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 ///<i><small>`Data Layer`</small></i>
 ///## Firebase auth service
@@ -18,7 +19,9 @@ class WsAuthService {
   ///## Authentication client
   ///
   ///An instance of the entry point of the <b>Firebase Authentication SDK</b>.
-  final FirebaseAuth _client = FirebaseClients.firebaseAuth;
+  final FirebaseAuth _client;
+
+  WsAuthService(this._client);
 
   /** 
    * AUTHENTICATION 
@@ -188,3 +191,8 @@ class WsAuthService {
 
   String? get _getUserNameSuffix => _client.currentUser?.uid.substring(0, 4);
 }
+
+AutoDisposeProvider<WsAuthService> get wsAuthServiceProvider =>
+    Provider.autoDispose<WsAuthService>(
+        (AutoDisposeProviderRef<WsAuthService> ref) =>
+            WsAuthService(ref.read(firebaseAuthProvider)));

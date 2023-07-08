@@ -1,6 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:gypse/auth/presentation/views/auth_screen.dart';
-import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
 import 'package:gypse/core/bloc/bloc_provider.dart' as bloc;
 import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/errors/errors_screen.dart';
@@ -8,18 +6,17 @@ import 'package:gypse/domain/entities/user_entity.dart';
 import 'package:gypse/presenation/books/books_screen.dart';
 import 'package:gypse/presenation/connection_check/connection_check_screen.dart';
 import 'package:gypse/presenation/game/bloc/user_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/presenation/game/game_screen.dart';
 import 'package:gypse/presenation/home/home_screen.dart';
 
 /// ScreenPaths class provides all paths used for routing
 class ScreenPaths {
-  static const String connectionCheck = '/a';
+  static const String connectionCheck = '/';
   static const String error = '/error';
   static const String home = '/home';
   static const String game = '/game';
   static const String books = '/books';
-  static const String auth = '/';
+  static const String auth = '/auth';
 }
 
 /// A Declarative routing package
@@ -57,11 +54,11 @@ GoRouter router = GoRouter(
       path: ScreenPaths.books,
       builder: (context, state) => const BooksScreen(),
     ),
-    GoRoute(
-      path: ScreenPaths.auth,
-      builder: (context, state) => BlocProvider<AuthViewsBloc>(
-          create: (_) => AuthViewsBloc(), child: AuthScreen()),
-    ),
+    // GoRoute(
+    //   path: ScreenPaths.auth,
+    //   builder: (context, state) => BlocProvider<AuthViewsBloc>(
+    //       create: (_) => AuthViewsBloc(), child: AuthScreen()),
+    // ),
   ],
   errorBuilder: (context, state) =>
       ErrorsScreen(ErrorCode.routing, error: state.error!),

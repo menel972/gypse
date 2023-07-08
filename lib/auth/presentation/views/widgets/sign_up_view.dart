@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gypse/auth/domain/models/auth_request.dart';
-import 'package:gypse/auth/domain/repositories/auth_repository.dart';
+import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
 import 'package:gypse/auth/presentation/views/states/auth_credentials_state.dart';
 import 'package:gypse/auth/presentation/views/states/sign_up_bloc.dart';
 import 'package:gypse/common/style/buttons.dart';
@@ -10,13 +10,14 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/core/l10n/localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SignUpView extends StatelessWidget {
-  final AuthRepository auth;
-  const SignUpView(this.auth, {super.key});
+class SignUpView extends HookConsumerWidget {
+  final Future<String> Function(WidgetRef, UiAuthRequest) signUpUseCase;
+  const SignUpView(this.signUpUseCase, {super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BlocConsumer<SignUpBloc, AuthCredentialsState>(
       listener: (context, state) {
         switch (state.connectionStatus) {
@@ -141,14 +142,16 @@ class SignUpView extends StatelessWidget {
                   if (isFormValid) {
                     authLoad();
                     // NOTE : Try to signup
-                    await auth
-                        .signUp(AuthRequest(state.email, state.password))
+                    await signUpUseCase(
+                            ref, UiAuthRequest(state.email, state.password))
                         // NOTE : Case : SUCCESS
                         .then((String result) {
                       if (!result.isEmpty) {
                         authTrue();
                         '${words(context).snack_welcome} ${state.userName}'
                             .success(context);
+
+                        Future(() => context.go(Screen.initView.path));
                         return result;
                       }
                     })

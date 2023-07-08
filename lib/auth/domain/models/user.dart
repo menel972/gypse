@@ -65,6 +65,23 @@ class User extends Equatable {
   }
 
   /// <i><small>`Domain Layer`</small></i><br>
+  /// Creates an `User` from an `UiUser`.
+  factory User.fromPresentation(UiUser uiUser) {
+    return User(
+      uid: uiUser.uId,
+      userName: uiUser.userName,
+      isAdmin: uiUser.isAdmin,
+      language: uiUser.language,
+      status: uiUser.status,
+      questions: uiUser.questions
+          .map((uiQuestion) => AnsweredQuestions.fromPresentation(uiQuestion))
+          .toList(),
+      settings: GypseSettings.fromPresentation(uiUser.settings),
+      credentials: Credentials.fromPresentation(uiUser.credentials),
+    );
+  }
+
+  /// <i><small>`Domain Layer`</small></i><br>
   /// Converts an `User` into an `UiUser`.
   UiUser toPresentation() {
     return UiUser(
@@ -111,6 +128,9 @@ class GypseSettings extends Equatable {
   @override
   List<Object> get props => [level, time];
 
+  factory GypseSettings.fromPresentation(UiGypseSettings uiSettings) =>
+      GypseSettings(level: uiSettings.level, time: uiSettings.time);
+
   /// <i><small>`Domain Layer`</small></i><br>
   /// Converts an `GypseSettings` into an `UiGypseSettings`.
   UiGypseSettings toPresentation() {
@@ -153,6 +173,12 @@ class AnsweredQuestions extends Equatable {
 
   @override
   List<Object> get props => [id, level, isRightAnswer];
+
+  factory AnsweredQuestions.fromPresentation(UiAnsweredQuestions uiQuestion) =>
+      AnsweredQuestions(
+          id: uiQuestion.qId,
+          level: uiQuestion.level,
+          isRightAnswer: uiQuestion.isRightAnswer);
 
   /// <i><small>`Domain Layer`</small></i><br>
   /// Converts an `AnsweredQuestions` into an `UiAnsweredQuestions`.
@@ -197,6 +223,12 @@ class Credentials extends Equatable {
 
   @override
   List<Object?> get props => [email, password, phone];
+
+  factory Credentials.fromPresentation(UiCredentials credentials) =>
+      Credentials(
+          email: credentials.email,
+          password: credentials.password,
+          phone: credentials.phone);
 
   /// <i><small>`Domain Layer`</small></i><br>
   /// Converts an `Credentials` into an `UiCredentials`.

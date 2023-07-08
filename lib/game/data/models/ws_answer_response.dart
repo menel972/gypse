@@ -57,15 +57,15 @@ class WsAnswerResponse extends Equatable {
   ///<i>EXCEPTIONS :
   /// <li>If any of the member variables are not present in the response, default null values will be assigned to them.
   /// <li>If an exception occurs, the `catch` will return a new instance of `WsAnswerResponse` with initial values.
-  factory WsAnswerResponse.fromMap(Map<String, dynamic> map) {
+  factory WsAnswerResponse.fromMap(Map<String, dynamic>? map) {
     try {
       return WsAnswerResponse(
-        uId: map['uId'],
-        questionId: map['questionId'],
-        isRightAnswer: map['isRightAnswer'],
-        fr: WsAnswerData.fromMap(map['fr']),
-        en: WsAnswerData.fromMap(map['en']),
-        es: WsAnswerData.fromMap(map['es']),
+        uId: map?['uId'] ?? '',
+        questionId: map?['questionId'] ?? '',
+        isRightAnswer: map?['isRightAnswer'] ?? false,
+        fr: WsAnswerData.fromMap(map?['fr']),
+        en: WsAnswerData.fromMap(map?['en']),
+        es: WsAnswerData.fromMap(map?['es']),
       );
     } catch (e) {
       e.log();

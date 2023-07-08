@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gypse/common/utils/strings.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 ///## Firebase clients
 ///
@@ -13,38 +15,50 @@ class FirebaseClients {
   ///## Questions database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where questions are stored</b>.
-  static final CollectionReference<Map<String, dynamic>> questionsDb =
-      FirebaseFirestore.instance.collection('question');
+  final CollectionReference<Map<String, dynamic>> questionsDb =
+      FirebaseFirestore.instance.collection(questionsPath);
 
   ///## Answers database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where answers are stored</b>.
-  static final CollectionReference<Map<String, dynamic>> answersDb =
-      FirebaseFirestore.instance.collection('reponse');
+  final CollectionReference<Map<String, dynamic>> answersDb =
+      FirebaseFirestore.instance.collection(answersPath);
 
   ///## Users database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where users are stored</b>.
-  static final CollectionReference<Map<String, dynamic>> usersDb =
-      FirebaseFirestore.instance.collection('user');
+  final CollectionReference<Map<String, dynamic>> usersDb =
+      FirebaseFirestore.instance.collection(usersPath);
 
   ///## Authentication client
   ///
   ///An instance of the entry point of the <b>Firebase Authentication SDK</b>.
-  static final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 }
 
-// TODO : PROVIDES CLIENTS WITHOUT RIVERPOD
-// AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
-//     get questionsDbProvider =>
-//         Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
-//           (AutoDisposeProviderRef<CollectionReference> ref) =>
-//               FirebaseClients().questionsDb,
-//         );
+AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
+    get questionsDbProvider =>
+        Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
+          (AutoDisposeProviderRef<CollectionReference> ref) =>
+              FirebaseClients().questionsDb,
+        );
 
-// AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
-//     get answersDbProvider =>
-//         Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
-//           (AutoDisposeProviderRef<CollectionReference> ref) =>
-//               FirebaseClients().answersDb,
-//         );
+AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
+    get answersDbProvider =>
+        Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
+          (AutoDisposeProviderRef<CollectionReference> ref) =>
+              FirebaseClients().answersDb,
+        );
+
+AutoDisposeProvider<FirebaseAuth> get firebaseAuthProvider =>
+    Provider.autoDispose<FirebaseAuth>(
+      (AutoDisposeProviderRef<FirebaseAuth> ref) =>
+          FirebaseClients().firebaseAuth,
+    );
+
+AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
+    get usersDbProvider =>
+        Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
+          (AutoDisposeProviderRef<CollectionReference> ref) =>
+              FirebaseClients().usersDb,
+        );

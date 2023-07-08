@@ -35,7 +35,7 @@ class Question extends Equatable {
 
   /// <i><small>`Domain Layer`</small></i><br>
   /// Converts a `Question` into an `UiQuestion` according to the language of the user.
-  UiQuestion toPresentation(Locales locale) {
+  UiQuestion toPresentation({Locales locale = Locales.fr}) {
     switch (locale) {
       case Locales.fr:
         return UiQuestion(

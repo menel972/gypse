@@ -5,9 +5,9 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/theme.dart';
+import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/is_answered_menu.dart';
-import 'package:gypse/core/router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
 
@@ -70,9 +70,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
-        routerDelegate: router.routerDelegate,
+        routeInformationParser: gypseRouter.routeInformationParser,
+        routeInformationProvider: gypseRouter.routeInformationProvider,
+        routerDelegate: gypseRouter.routerDelegate,
         theme: gypseTheme,
       ),
     );

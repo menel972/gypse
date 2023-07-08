@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gypse/auth/domain/repositories/auth_repository.dart';
 import 'package:gypse/auth/presentation/views/states/auth_credentials_state.dart';
 import 'package:gypse/auth/presentation/views/states/forgotten_password_bloc.dart';
 import 'package:gypse/common/style/buttons.dart';
@@ -8,15 +7,16 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/core/l10n/localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ForgottenPasswordView extends StatelessWidget {
+class ForgottenPasswordView extends HookConsumerWidget {
   final Function(int) onSelectedView;
-  final AuthRepository auth;
+  final Future<bool?> Function(WidgetRef, String) forgottenPasswordUseCase;
   const ForgottenPasswordView(this.onSelectedView,
-      {required this.auth, super.key});
+      {required this.forgottenPasswordUseCase, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BlocConsumer<ForgottenPasswordBloc, AuthCredentialsState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -70,8 +70,7 @@ class ForgottenPasswordView extends StatelessWidget {
                             .onFormValidated();
 
                         if (isFormValid) {
-                          await auth
-                              .forgottenPassword(state.email)
+                          await forgottenPasswordUseCase(ref, state.email)
                               .then((bool? result) {
                             if (result == true) {
                               words(context).txt_mail.success(context);

@@ -37,11 +37,11 @@ class UiUser extends Equatable {
   ///It contains all the data for an user.
   UiUser(
     this.uId, {
-    required this.userName,
-    required this.isAdmin,
-    required this.language,
-    required this.status,
-    required this.questions,
+    this.userName = '',
+    this.isAdmin = false,
+    this.language = Locales.fr,
+    this.status = LoginState.loading,
+    this.questions = const [],
     required this.settings,
     required this.credentials,
   });
@@ -57,6 +57,23 @@ class UiUser extends Equatable {
         settings,
         credentials
       ];
+
+  UiUser copyWith({
+    LoginState? status,
+    List<UiAnsweredQuestions>? questions,
+    UiGypseSettings? settings,
+    UiCredentials? credentials,
+  }) =>
+      UiUser(
+        this.uId,
+        userName: this.userName,
+        isAdmin: this.isAdmin,
+        language: this.language,
+        status: status ?? this.status,
+        questions: questions ?? this.questions,
+        settings: settings ?? this.settings,
+        credentials: credentials ?? this.credentials,
+      );
 }
 
 /** UI GYPSE SETTINGS */
@@ -79,10 +96,15 @@ class UiGypseSettings extends Equatable {
   ///#### `UiGypseSettings` constructor
   ///<br>
   ///It contains user's settings.
-  UiGypseSettings({required this.level, required this.time});
+  UiGypseSettings({this.level = Level.medium, this.time = Time.medium});
 
   @override
   List<Object?> get props => [level, time];
+
+  UiGypseSettings copyWith({Level? level, Time? time}) => UiGypseSettings(
+        level: level ?? this.level,
+        time: time ?? this.time,
+      );
 }
 
 /** UI ANSWERED QUESTIONS */
@@ -140,9 +162,9 @@ class UiCredentials extends Equatable {
   ///<br>
   ///It contains login informations of a user.
   UiCredentials({
-    required this.email,
-    required this.password,
-    required this.phone,
+    this.email = '',
+    this.password = '',
+    this.phone = '',
   });
 
   @override

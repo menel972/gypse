@@ -3,6 +3,7 @@ import 'package:gypse/auth/data/web_services/ws_auth_service.dart';
 import 'package:gypse/auth/domain/models/auth_request.dart';
 import 'package:gypse/auth/domain/repositories/auth_repository.dart';
 import 'package:gypse/common/utils/exception.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final WsAuthService _authService;
@@ -97,3 +98,8 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   bool get isEmailVerified => _authService.isEmailVerified ?? false;
 }
+
+AutoDisposeProvider<AuthRepository> get authRepositoryProvider =>
+    Provider.autoDispose<AuthRepository>(
+        (AutoDisposeProviderRef<AuthRepository> ref) =>
+            AuthRepositoryImpl(ref.read(wsAuthServiceProvider)));

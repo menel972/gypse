@@ -43,9 +43,12 @@ class InitScreen extends HookConsumerWidget {
 
   Future<List<dynamic>> initFutureGroup(WidgetRef ref) async {
     return await Future.wait([
-      fetchQuestionUseCase(ref),
-      fetchAnswerUseCase(ref),
+      fetchQuestionUseCase(ref)
+          .whenComplete(() => 'Complete'.log(tag: 'FetchQuestionsUseCase')),
+      fetchAnswerUseCase(ref)
+          .whenComplete(() => 'Complete'.log(tag: 'FetchAnswersUseCase')),
       getCurrentUserUseCase(ref, userUid)
+          .whenComplete(() => 'Complete'.log(tag: 'GetCurrentUserUseCase')),
     ]);
   }
 

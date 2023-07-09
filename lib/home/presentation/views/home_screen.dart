@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/common/utils/strings.dart';
+import 'package:gypse/home/presentation/views/modals/user_settings_modal.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:gypse/home/presentation/views/widgets/home_navigation_bar.dart';
+import 'package:gypse/home/presentation/views/widgets/home_view.dart';
+import 'package:gypse/home/presentation/views/widgets/user_profile_view.dart';
+import 'package:gypse/home/presentation/views/widgets/user_stats_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeScreen extends HookConsumerWidget {
@@ -12,7 +16,11 @@ class HomeScreen extends HookConsumerWidget {
     int navigationIndex = ref.watch(homeNavigationStateProvider);
 
     return Scaffold(
-        // appBar: HomeAppBar(context, user),
+        floatingActionButton: IconButton(
+          onPressed: () => UserSettingsModal(context),
+          icon: const Icon(Icons.settings_outlined),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -20,7 +28,11 @@ class HomeScreen extends HookConsumerWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Center(child: Text('$navigationIndex')),
+          child: const [
+            HomeView(),
+            UserStatsView(),
+            UserProfileView()
+          ][navigationIndex],
         ),
         bottomNavigationBar: HomeNavigationBar());
   }

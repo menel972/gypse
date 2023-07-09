@@ -64,10 +64,6 @@ GoRouter gypseRouter = GoRouter(
     ),
     // NOTE : HOME VIEW
     GoRoute(
-      path: Screen.homeView.path,
-      builder: (context, state) {
-        return HomeScreen();
-      },
-    ),
+        path: Screen.homeView.path, builder: (context, state) => HomeScreen()),
   ],
 );

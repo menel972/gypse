@@ -15,6 +15,6 @@ class AnswersProvider extends StateNotifier<Set<UiAnswer>> {
       state.where((answer) => answer.qId == qId).toList();
 }
 
-get answersProvider =>
+final answersProvider =
     StateNotifierProvider.autoDispose<AnswersProvider, Set<UiAnswer>>(
         (ref) => AnswersProvider());

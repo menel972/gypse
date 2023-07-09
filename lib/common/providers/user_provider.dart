@@ -24,5 +24,5 @@ class UserProvider extends StateNotifier<UiUser?> {
   }
 }
 
-get userProvider => StateNotifierProvider.autoDispose<UserProvider, UiUser?>(
+final userProvider = StateNotifierProvider.autoDispose<UserProvider, UiUser?>(
     (ref) => UserProvider());

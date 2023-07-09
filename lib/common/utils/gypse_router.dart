@@ -14,6 +14,7 @@ import 'package:gypse/game/domain/usecases/answers_use_cases.dart';
 import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
+import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -60,6 +61,13 @@ GoRouter gypseRouter = GoRouter(
             forgottenPasswordUseCase: (WidgetRef ref, String email) =>
                 ref.read(forgottenPasswordUseCaseProvider).invoke(email),
           )),
-    )
+    ),
+    // NOTE : HOME VIEW
+    GoRoute(
+      path: Screen.homeView.path,
+      builder: (context, state) {
+        return HomeScreen();
+      },
+    ),
   ],
 );

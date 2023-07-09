@@ -99,8 +99,11 @@ class InitScreen extends HookConsumerWidget {
               Future(() => storeUser(ref, user!));
               FlutterNativeSplash.remove();
 
-              return Center(
-                child: Text('${questions!.length}'),
+              Future(() => context.go(Screen.homeView.path));
+
+              return GypseLoading(
+                context,
+                message: 'Redirection vers la page d\'accueil...',
               );
             }
 

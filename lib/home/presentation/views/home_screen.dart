@@ -3,9 +3,9 @@ import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/home/presentation/views/modals/user_settings_modal.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:gypse/home/presentation/views/widgets/home_navigation_bar.dart';
-import 'package:gypse/home/presentation/views/widgets/home_view.dart';
-import 'package:gypse/home/presentation/views/widgets/user_profile_view.dart';
-import 'package:gypse/home/presentation/views/widgets/user_stats_view.dart';
+import 'package:gypse/home/presentation/views/widgets/navigation/home_view.dart';
+import 'package:gypse/home/presentation/views/widgets/profile/user_profile_view.dart';
+import 'package:gypse/home/presentation/views/widgets/stats/user_stats_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeScreen extends HookConsumerWidget {

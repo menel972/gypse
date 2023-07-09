@@ -63,7 +63,7 @@ class GypseSmallButton extends ElevatedButton {
   const GypseSmallButton(
     this.label, {
     required super.onPressed,
-    required super.child,
+    super.child,
   });
 
   @override

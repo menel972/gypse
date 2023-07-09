@@ -12,12 +12,12 @@ class GypseColors extends ColorScheme {
 
     // NOTE : PRIMARY COLORS
     super.primary = const Color.fromRGBO(10, 35, 128, 1),
-    super.primaryVariant = const Color.fromRGBO(70, 96, 192, 1),
+    super.primaryContainer = const Color.fromRGBO(70, 96, 192, 1),
     super.onPrimary = const Color.fromRGBO(196, 196, 196, 1),
 
     // NOTE : SECONDAY COLORS
     super.secondary = const Color.fromRGBO(207, 109, 18, 1),
-    super.secondaryVariant = const Color.fromRGBO(243, 121, 0, 1),
+    super.secondaryContainer = const Color.fromRGBO(243, 121, 0, 1),
     super.onSecondary = const Color.fromRGBO(255, 209, 163, 0.5),
 
     // NOTE : SURFACES

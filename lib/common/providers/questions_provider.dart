@@ -42,5 +42,5 @@ class QuestionsProvider extends StateNotifier<QuestionsState> {
 }
 
 final questionsProvider =
-    StateNotifierProvider.autoDispose<QuestionsProvider, QuestionsState>(
+    StateNotifierProvider<QuestionsProvider, QuestionsState>(
         (ref) => QuestionsProvider());

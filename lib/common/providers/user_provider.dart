@@ -9,6 +9,7 @@ class UserProvider extends StateNotifier<UiUser?> {
   void setCurrentUser(UiUser user) {
     state = user;
     state?.userName.log(tag: 'Stored User');
+    state?.uId.log(tag: 'Stored User');
   }
 
   void updateAnsweredQuestions(UiAnsweredQuestions newQuestion) {
@@ -24,5 +25,6 @@ class UserProvider extends StateNotifier<UiUser?> {
   }
 }
 
-final userProvider = StateNotifierProvider.autoDispose<UserProvider, UiUser?>(
+final userProvider =
+    StateNotifierProvider<UserProvider, UiUser?>(
     (ref) => UserProvider());

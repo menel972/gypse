@@ -16,5 +16,5 @@ class AnswersProvider extends StateNotifier<Set<UiAnswer>> {
 }
 
 final answersProvider =
-    StateNotifierProvider.autoDispose<AnswersProvider, Set<UiAnswer>>(
+    StateNotifierProvider<AnswersProvider, Set<UiAnswer>>(
         (ref) => AnswersProvider());

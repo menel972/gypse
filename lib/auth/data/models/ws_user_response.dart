@@ -92,7 +92,7 @@ class WsUserResponse extends Equatable {
   /// <li>If an exception occurs, the `catch` will return a new instance of `WsGypseSettings` with initial values.
   factory WsUserResponse.fromMap(Map<String, dynamic>? map) {
     return WsUserResponse(
-      uid: map?['uid'],
+      uid: map?['id'],
       userName: map?['userName'],
       locale: map?['locale'],
       isConnected: map?['isConnected'],
@@ -129,7 +129,7 @@ class WsUserResponse extends Equatable {
     return WsUserResponse(
       uid: domain.uid,
       userName: domain.userName,
-      locale: domain.language.language,
+      locale: domain.language.name,
       isConnected: domain.status == LoginState.authenticated,
       isAdmin: domain.isAdmin,
       userSettings: WsGypseSettings.fromDomain(domain.settings),

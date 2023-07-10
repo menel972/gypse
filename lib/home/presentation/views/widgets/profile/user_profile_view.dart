@@ -25,27 +25,18 @@ class UserProfileView extends HookConsumerWidget {
         child: Column(children: [
           TabBar(
             tabs: user!.isAdmin
-                ? [
-                    Text(
-                      'Mon Profile',
-                      style: GypseFont.m(bold: true),
-                    ),
-                    Text(
-                      'Questions',
-                      style: GypseFont.m(bold: true),
-                    )
-                  ]
-                : [
-                    Text(
-                      'Mon Profile',
-                      style: GypseFont.m(bold: true),
-                    )
-                  ],
+                ? [Text('Mon Profile'), Text('Questions')]
+                : [Text('Mon Profile')],
             isScrollable: true,
             indicatorColor: Theme.of(context).colorScheme.secondary,
             indicatorSize: TabBarIndicatorSize.label,
             overlayColor: MaterialStateProperty.all(
                 Theme.of(context).colorScheme.secondary),
+            indicatorWeight: 1.5,
+            dividerColor: Colors.transparent,
+            labelColor: Theme.of(context).colorScheme.secondary,
+            labelStyle: GypseFont.m(bold: true),
+            unselectedLabelStyle: GypseFont.m(bold: false),
           ),
           Expanded(
               child: TabBarView(

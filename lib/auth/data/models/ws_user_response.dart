@@ -92,7 +92,7 @@ class WsUserResponse extends Equatable {
   /// <li>If an exception occurs, the `catch` will return a new instance of `WsGypseSettings` with initial values.
   factory WsUserResponse.fromMap(Map<String, dynamic>? map) {
     return WsUserResponse(
-      uid: map?['uid'],
+      uid: map?['id'],
       userName: map?['userName'],
       locale: map?['locale'],
       isConnected: map?['isConnected'],
@@ -129,7 +129,7 @@ class WsUserResponse extends Equatable {
     return WsUserResponse(
       uid: domain.uid,
       userName: domain.userName,
-      locale: domain.language.language,
+      locale: domain.language.name,
       isConnected: domain.status == LoginState.authenticated,
       isAdmin: domain.isAdmin,
       userSettings: WsGypseSettings.fromDomain(domain.settings),
@@ -206,7 +206,7 @@ class WsGypseSettings extends Equatable {
   GypseSettings toDomain() {
     try {
       return GypseSettings(
-        level: Level.values.firstWhere((value) => value.propositions == level),
+        level: Level.values.firstWhere((value) => value.id == level),
         time: Time.values.firstWhere((value) => value.seconds == time),
       );
     } catch (e) {
@@ -220,7 +220,7 @@ class WsGypseSettings extends Equatable {
   /// Parses the data received from `Domain Layer` into a `WsGypseSettings`.
   factory WsGypseSettings.fromDomain(GypseSettings domain) {
     return WsGypseSettings(
-      level: domain.level.propositions,
+      level: domain.level.id,
       time: domain.time.seconds,
     );
   }
@@ -297,7 +297,7 @@ class WsAnsweredQuestions extends Equatable {
   AnsweredQuestions toDomain() {
     return AnsweredQuestions(
       id: id ?? '',
-      level: Level.values.firstWhere((value) => value.propositions == level),
+      level: Level.values.firstWhere((value) => value.id == level),
       isRightAnswer: isRightAnswer ?? false,
     );
   }
@@ -308,7 +308,7 @@ class WsAnsweredQuestions extends Equatable {
     return WsAnsweredQuestions(
       id: domain.id,
       isRightAnswer: domain.isRightAnswer,
-      level: domain.level.propositions,
+      level: domain.level.id,
     );
   }
 }

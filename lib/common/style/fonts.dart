@@ -71,7 +71,7 @@ class GypseFont extends TextStyle {
   const GypseFont.xs({
     super.color = const Color.fromRGBO(196, 196, 196, 1),
     this.bold = false,
-    super.fontSize = 14,
+    super.fontSize = 12,
     super.letterSpacing = 0.5,
   });
 }

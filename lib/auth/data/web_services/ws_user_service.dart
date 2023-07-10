@@ -59,7 +59,7 @@ class WsUserService {
     try {
       // NOTE: Fetch a user in the database using its id.
       return await _client.doc(id).get().then((user) {
-        user.data()?.log(tag: 'fetchUserById user');
+        user.data()?.log(tag: 'fetchUserById');
         return WsUserResponse.fromMap(user.data());
       });
     } on FirebaseException catch (err) {

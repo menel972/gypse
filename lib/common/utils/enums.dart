@@ -38,12 +38,13 @@ enum Locales {
 ///<li>medium - 3 propositions
 ///<li>hard - 4 propositions
 enum Level {
-  easy(2),
-  medium(3),
-  hard(4);
+  easy(1, 2),
+  medium(2, 3),
+  hard(3, 4);
 
+  final int id;
   final int propositions;
-  const Level(this.propositions);
+  const Level(this.id, this.propositions);
 }
 
 /** TIME */

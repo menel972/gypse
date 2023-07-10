@@ -43,9 +43,12 @@ class InitScreen extends HookConsumerWidget {
 
   Future<List<dynamic>> initFutureGroup(WidgetRef ref) async {
     return await Future.wait([
-      fetchQuestionUseCase(ref),
-      fetchAnswerUseCase(ref),
+      fetchQuestionUseCase(ref)
+          .whenComplete(() => 'Complete'.log(tag: 'FetchQuestionsUseCase')),
+      fetchAnswerUseCase(ref)
+          .whenComplete(() => 'Complete'.log(tag: 'FetchAnswersUseCase')),
       getCurrentUserUseCase(ref, userUid)
+          .whenComplete(() => 'Complete'.log(tag: 'GetCurrentUserUseCase')),
     ]);
   }
 
@@ -99,8 +102,11 @@ class InitScreen extends HookConsumerWidget {
               Future(() => storeUser(ref, user!));
               FlutterNativeSplash.remove();
 
-              return Center(
-                child: Text('${questions!.length}'),
+              Future(() => context.go(Screen.homeView.path));
+
+              return GypseLoading(
+                context,
+                message: 'Redirection vers la page d\'accueil...',
               );
             }
 

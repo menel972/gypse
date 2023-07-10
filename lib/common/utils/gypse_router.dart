@@ -5,6 +5,7 @@ import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
+import 'package:gypse/books/presentation/views/book_screen.dart';
 import 'package:gypse/common/providers/answers_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
@@ -26,7 +27,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 ///Each of them is identified by the enum class [Screen].
 GoRouter gypseRouter = GoRouter(
   routes: [
-    // NOTE : INIT VIEW
+    // NOTE : INIT SCREEN
     GoRoute(
       path: Screen.initView.path,
       builder: (context, state) {
@@ -48,7 +49,7 @@ GoRouter gypseRouter = GoRouter(
         );
       },
     ),
-    // NOTE : AUTH VIEW
+    // NOTE : AUTH SCREEN
     GoRoute(
       path: Screen.authView.path,
       builder: (context, state) => BlocProvider<AuthViewsBloc>(
@@ -62,8 +63,11 @@ GoRouter gypseRouter = GoRouter(
                 ref.read(forgottenPasswordUseCaseProvider).invoke(email),
           )),
     ),
-    // NOTE : HOME VIEW
+    // NOTE : HOME SCREEN
     GoRoute(
         path: Screen.homeView.path, builder: (context, state) => HomeScreen()),
+    // NOTE : BOOK SCREEN
+    GoRoute(
+        path: Screen.booksView.path, builder: (context, state) => BookScreen()),
   ],
 );

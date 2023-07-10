@@ -206,7 +206,7 @@ class WsGypseSettings extends Equatable {
   GypseSettings toDomain() {
     try {
       return GypseSettings(
-        level: Level.values.firstWhere((value) => value.propositions == level),
+        level: Level.values.firstWhere((value) => value.id == level),
         time: Time.values.firstWhere((value) => value.seconds == time),
       );
     } catch (e) {
@@ -220,7 +220,7 @@ class WsGypseSettings extends Equatable {
   /// Parses the data received from `Domain Layer` into a `WsGypseSettings`.
   factory WsGypseSettings.fromDomain(GypseSettings domain) {
     return WsGypseSettings(
-      level: domain.level.propositions,
+      level: domain.level.id,
       time: domain.time.seconds,
     );
   }
@@ -297,7 +297,7 @@ class WsAnsweredQuestions extends Equatable {
   AnsweredQuestions toDomain() {
     return AnsweredQuestions(
       id: id ?? '',
-      level: Level.values.firstWhere((value) => value.propositions == level),
+      level: Level.values.firstWhere((value) => value.id == level),
       isRightAnswer: isRightAnswer ?? false,
     );
   }
@@ -308,7 +308,7 @@ class WsAnsweredQuestions extends Equatable {
     return WsAnsweredQuestions(
       id: domain.id,
       isRightAnswer: domain.isRightAnswer,
-      level: domain.level.propositions,
+      level: domain.level.id,
     );
   }
 }

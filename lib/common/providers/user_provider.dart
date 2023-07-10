@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,8 +24,45 @@ class UserProvider extends StateNotifier<UiUser?> {
     debugPrint(
         '[Settings Updated] : Level ${state?.settings.level}, Time ${state?.settings.time}');
   }
+
+  int get positivAnswers =>
+      state!.questions.where((question) => question.isRightAnswer).length;
+  int get negativAnswers =>
+      state!.questions.where((question) => !question.isRightAnswer).length;
+
+  int get easyAnswers =>
+      state!.questions.where((question) => question.level == Level.easy).length;
+  int get mediumAnswers => state!.questions
+      .where((question) => question.level == Level.medium)
+      .length;
+  int get hardAnswers =>
+      state!.questions.where((question) => question.level == Level.hard).length;
+
+  int get easyPositivAnswers => state!.questions
+      .where(
+          (question) => question.isRightAnswer && question.level == Level.easy)
+      .length;
+  int get easyNegativAnswers => state!.questions
+      .where(
+          (question) => !question.isRightAnswer && question.level == Level.easy)
+      .length;
+  int get mediumPositivAnswers => state!.questions
+      .where((question) =>
+          question.isRightAnswer && question.level == Level.medium)
+      .length;
+  int get mediumNegativAnswers => state!.questions
+      .where((question) =>
+          !question.isRightAnswer && question.level == Level.medium)
+      .length;
+  int get hardPositivAnswers => state!.questions
+      .where(
+          (question) => question.isRightAnswer && question.level == Level.hard)
+      .length;
+  int get hardNegativAnswers => state!.questions
+      .where(
+          (question) => !question.isRightAnswer && question.level == Level.hard)
+      .length;
 }
 
 final userProvider =
-    StateNotifierProvider<UserProvider, UiUser?>(
-    (ref) => UserProvider());
+    StateNotifierProvider<UserProvider, UiUser?>((ref) => UserProvider());

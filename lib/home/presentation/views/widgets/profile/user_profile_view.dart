@@ -1,12 +1,60 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/home/presentation/views/widgets/profile/widgets/admin_view.dart';
+import 'package:gypse/home/presentation/views/widgets/profile/widgets/user_credentials_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserProfileView extends HookConsumerWidget {
-  const UserProfileView({super.key});
+  late UiUser? user;
+
+  UserProfileView({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: Text('UserProfileView'),
+    user = ref.watch(userProvider);
+
+    return Padding(
+      padding: EdgeInsets.only(top: Dimensions.s(context).height),
+      child: DefaultTabController(
+        length: user!.isAdmin ? 2 : 1,
+        child: Column(children: [
+          TabBar(
+            tabs: user!.isAdmin
+                ? [
+                    Text(
+                      'Mon Profile',
+                      style: GypseFont.m(bold: true),
+                    ),
+                    Text(
+                      'Questions',
+                      style: GypseFont.m(bold: true),
+                    )
+                  ]
+                : [
+                    Text(
+                      'Mon Profile',
+                      style: GypseFont.m(bold: true),
+                    )
+                  ],
+            isScrollable: true,
+            indicatorColor: Theme.of(context).colorScheme.secondary,
+            indicatorSize: TabBarIndicatorSize.label,
+            overlayColor: MaterialStateProperty.all(
+                Theme.of(context).colorScheme.secondary),
+          ),
+          Expanded(
+              child: TabBarView(
+            children: user!.isAdmin
+                ? [UserCredentialsView(), AdminView()]
+                : [UserCredentialsView()],
+          )),
+        ]),
+      ),
     );
   }
 }

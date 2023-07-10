@@ -62,7 +62,7 @@ class WsAnswerResponse extends Equatable {
       return WsAnswerResponse(
         uId: map?['uId'] ?? '',
         questionId: map?['questionId'] ?? '',
-        isRightAnswer: map?['isRightAnswer'] ?? false,
+        isRightAnswer: map?['confirme'] ?? false,
         fr: WsAnswerData.fromMap(map?['fr']),
         en: WsAnswerData.fromMap(map?['en']),
         es: WsAnswerData.fromMap(map?['es']),

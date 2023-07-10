@@ -28,7 +28,7 @@ class HomeScreen extends HookConsumerWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: const [
+          child: [
             HomeView(),
             UserStatsView(),
             UserProfileView()

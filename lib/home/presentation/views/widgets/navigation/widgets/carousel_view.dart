@@ -10,7 +10,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class CarouselView extends StatefulHookConsumerWidget {
   CarouselView({super.key});
 
-  late List<Books> books;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _CarouselViewState();
@@ -23,6 +22,7 @@ class CarouselView extends StatefulHookConsumerWidget {
 }
 
 class _CarouselViewState extends ConsumerState<CarouselView> {
+  late List<Books> books;
   final CarouselController carouselController = CarouselController();
 
   @override
@@ -30,7 +30,7 @@ class _CarouselViewState extends ConsumerState<CarouselView> {
     List<Books> allBooks = [...Books.values];
     allBooks.shuffle();
 
-    widget.books = allBooks.take(5).toList();
+    books = allBooks.take(5).toList();
     super.initState();
   }
 
@@ -40,7 +40,7 @@ class _CarouselViewState extends ConsumerState<CarouselView> {
       itemCount: 5,
       itemBuilder: (context, index, realIndex) => HomeCarouselCard(
         context,
-        book: widget.books[index],
+        book: books[index],
         function: () {},
         onCtaPressed: () {},
       ),

@@ -5,7 +5,9 @@ class BookState extends StateNotifier<List<Books>> {
   BookState() : super(Books.values);
 
   void filterBooks(String filter) {
-    state = Books.values.where((book) => book.fr.startsWith(filter)).toList();
+    state = Books.values
+        .where((book) => book.fr.toLowerCase().startsWith(filter.toLowerCase()))
+        .toList();
   }
 }
 

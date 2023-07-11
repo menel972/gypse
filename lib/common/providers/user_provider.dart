@@ -25,6 +25,12 @@ class UserProvider extends StateNotifier<UiUser?> {
         '[Settings Updated] : Level ${state?.settings.level}, Time ${state?.settings.time}');
   }
 
+  int getAnswersByIds(List<String> questions) {
+    return state!.questions
+        .where((question) => questions.contains(question.qId))
+        .length;
+  }
+
   int get positivAnswers =>
       state!.questions.where((question) => question.isRightAnswer).length;
   int get negativAnswers =>

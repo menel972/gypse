@@ -41,8 +41,9 @@ class UserRepositoryImpl extends UserRepository {
     try {
       await _userService
           .updateUser(WsUserResponse.fromDomain(user))
-          .then((result) =>
-              result == true ? 'Utilisateur modifié'.success(context) : null)
+          .then((result) => result == true
+              ? 'Utilisateur modifié'.log(tag: 'onUserChanged')
+              : null)
           .onError((GypseException error, stackTrace) =>
               error.message?.failure(context));
     } on GypseException catch (e) {

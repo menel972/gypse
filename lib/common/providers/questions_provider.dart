@@ -20,10 +20,22 @@ class QuestionsProvider extends StateNotifier<Set<UiQuestion>> {
         .toList();
   }
 
-  List<UiQuestion> getEnabledQuestions(Iterable<String> answeredQuestions) {
-    List<UiQuestion> questions = state
-        .where((question) => !answeredQuestions.contains(question.uId))
-        .toList();
+  List<UiQuestion> getEnabledQuestions(Iterable<String> answeredQuestions,
+      {String book = ' '}) {
+    List<UiQuestion> questions;
+
+    if (book == ' ') {
+      questions = state
+          .where((question) => !answeredQuestions.contains(question.uId))
+          .toList();
+    } else {
+      questions = state
+          .where((question) =>
+              !answeredQuestions.contains(question.uId) &&
+              question.book.fr == book)
+          .toList();
+    }
+
     questions.shuffle();
 
     return questions;

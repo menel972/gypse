@@ -32,7 +32,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     UiQuestion question = ref
         .read(questionsProvider.notifier)
         .getEnabledQuestions(
-            ref.read(userProvider.notifier).answeredQuestionsId)
+            ref.read(userProvider.notifier).answeredQuestionsId,
+            book: widget.filter)
         .first;
     List<UiAnswer> answers = ref
         .read(answersProvider.notifier)

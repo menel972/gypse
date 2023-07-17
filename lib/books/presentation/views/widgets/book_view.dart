@@ -78,7 +78,7 @@ class BookView extends HookConsumerWidget {
                           book: book,
                           questions: questions.length,
                           answeredQuestions: getAnswersByIds(questions),
-                          isEnabled: questions.isEmpty,
+                          isEnabled: questions.isNotEmpty,
                         );
                       }),
                     ],

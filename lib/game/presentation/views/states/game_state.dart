@@ -62,6 +62,9 @@ class GameStateNotifier extends StateNotifier<GameState> {
 
   bool isAnswerEnabled() => state.selectedAnswers.isEmpty;
 
+  UiAnswer getRightAnswer() =>
+      state.answers.firstWhere((answer) => answer.isRightAnswer);
+
   void setSettings(UiGypseSettings settings) {
     state.settings = settings;
     state.settings.level.log(tag: 'GameState Settings');

@@ -7,6 +7,7 @@ import 'package:gypse/common/style/tiles.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
+import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/states/answer_ratio_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -87,32 +88,41 @@ class AnswersView extends HookConsumerWidget {
             ),
           ),
           Dimensions.xs(context).paddingW(
-            Row(
-              children: [
-                Expanded(
-                  child: GypseElevatedButton(
-                    context,
-                    onPressed: () {},
-                    label: 'Voir le verset',
-                    textColor: Theme.of(context).colorScheme.primary,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.surface.withOpacity(0.2),
+            Visibility(
+              visible: gameState.selectedAnswers.isNotEmpty,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GypseElevatedButton(
+                      context,
+                      onPressed: () => VerseModal(
+                          context,
+                          ref
+                              .read(gameStateNotifierProvider.notifier)
+                              .getRightAnswer()),
+                      label: 'Voir le verset',
+                      textColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: Theme.of(context)
+                          .colorScheme
+                          .surface
+                          .withOpacity(0.2),
+                    ),
                   ),
-                ),
-                Dimensions.xs(context).spaceW(),
-                GypseCircularButton(
-                  context,
-                  onPressed: () async {
-                    await ref.read(answerRatioStateProvider.notifier).slide();
-                    initGameState();
-                    ref
-                        .read(gameStateNotifierProvider.notifier)
-                        .clearSelectedIndex();
-                    timeController.restart();
-                  },
-                  icon: Icons.keyboard_arrow_right,
-                ),
-              ],
+                  Dimensions.xs(context).spaceW(),
+                  GypseCircularButton(
+                    context,
+                    onPressed: () async {
+                      await ref.read(answerRatioStateProvider.notifier).slide();
+                      initGameState();
+                      ref
+                          .read(gameStateNotifierProvider.notifier)
+                          .clearSelectedIndex();
+                      timeController.restart();
+                    },
+                    icon: Icons.keyboard_arrow_right,
+                  ),
+                ],
+              ),
             ),
           ),
           Dimensions.xxs(context).spaceH(),

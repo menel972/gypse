@@ -2,14 +2,13 @@
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/answers_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
-import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
+import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/widgets/answers_view.dart';
 import 'package:gypse/game/presentation/views/widgets/question_view.dart';
@@ -51,7 +50,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     initGameState();
     return Scaffold(
       floatingActionButton: IconButton(
-        onPressed: () => context.go(Screen.homeView.path),
+        onPressed: () => QuitDialog(
+          context,
+          timeController: timeController,
+        ),
         icon: Icon(Icons.home_outlined),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,

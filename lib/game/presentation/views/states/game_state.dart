@@ -1,24 +1,25 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
 import 'package:equatable/equatable.dart';
-import 'package:gypse/common/utils/extensions.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class GameState extends Equatable {
   List<int> selectedAnswers;
   UiQuestion question;
   List<UiAnswer> answers;
   UiGypseSettings settings;
+  bool isRight;
 
   GameState({
     this.selectedAnswers = const [],
     this.question = const UiQuestion(''),
     this.answers = const [],
     required this.settings,
+    this.isRight = false,
   }) : super();
 
   @override
@@ -29,12 +30,14 @@ class GameState extends Equatable {
     UiQuestion? question,
     List<UiAnswer>? answers,
     UiGypseSettings? settings,
+    bool? isRight,
   }) {
     return GameState(
       selectedAnswers: selectedAnswers ?? this.selectedAnswers,
       question: question ?? this.question,
       answers: answers ?? this.answers,
       settings: settings ?? this.settings,
+      isRight: isRight ?? this.isRight,
     );
   }
 }
@@ -44,21 +47,21 @@ class GameStateNotifier extends StateNotifier<GameState> {
 
   void addSelectedIndex(int index) {
     if (state.answers[index].isRightAnswer) {
-      state =
-          state.copyWith(selectedAnswers: [...state.selectedAnswers, index]);
-    }
-    {
+      state = state.copyWith(
+          selectedAnswers: [...state.selectedAnswers, index], isRight: true);
+    } else {
       int i = state.answers
           .indexOf(state.answers.firstWhere((answer) => answer.isRightAnswer));
-      state =
-          state.copyWith(selectedAnswers: [...state.selectedAnswers, index, i]);
+      state = state.copyWith(
+          selectedAnswers: [...state.selectedAnswers, index, i],
+          isRight: false);
     }
   }
 
   void clearSelectedIndex() => state = state.copyWith(selectedAnswers: []);
 
   void selecteAllIndex() =>
-      state = state.copyWith(selectedAnswers: [0, 1, 2, 3]);
+      state = state.copyWith(selectedAnswers: [0, 1, 2, 3], isRight: false);
 
   bool isAnswerEnabled() => state.selectedAnswers.isEmpty;
 

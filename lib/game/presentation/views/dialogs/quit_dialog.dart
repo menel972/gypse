@@ -4,6 +4,9 @@ import 'package:blur/blur.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/domain/usecase/user_use_case.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
@@ -17,7 +20,7 @@ class QuitDialog extends HookConsumerWidget {
   final CountDownController timeController;
 
   late GameState gameState;
-
+  late UiUser user;
   QuitDialog(this.context, {super.key, required this.timeController}) {
     timeController.pause();
     showDialog(context: context, builder: (context) => this);
@@ -26,6 +29,10 @@ class QuitDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     gameState = ref.watch(gameStateNotifierProvider);
+    user = ref.watch(userProvider)!;
+
+    Future<void> updateUser(BuildContext context, UiUser user) =>
+        ref.read(onUserChangedUseCaseProvider).invoke(context, user);
 
     return Center(
       child: Container(
@@ -69,8 +76,9 @@ class QuitDialog extends HookConsumerWidget {
                       child: GypseElevatedButton(
                     context,
                     label: 'Quitter',
-                    onPressed: () {
+                    onPressed: () async {
                       if (gameState.selectedAnswers.isEmpty) {
+                        await updateUser(context, user);
                         context.go(Screen.homeView.path);
                       }
                     },

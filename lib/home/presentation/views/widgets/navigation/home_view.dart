@@ -18,7 +18,7 @@ class HomeView extends HookConsumerWidget {
         Dimensions.s(context).paddingW(
           GypseElevatedButton(
             context,
-            onPressed: () {},
+            onPressed: () => context.go('${Screen.gameView.path}/ '),
             label: 'Commencer une partie',
             textColor: Theme.of(context).colorScheme.onSurface,
             backgroundColor: Theme.of(context).colorScheme.secondary,

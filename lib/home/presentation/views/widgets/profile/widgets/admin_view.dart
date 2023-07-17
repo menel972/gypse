@@ -15,7 +15,7 @@ class AdminView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    questions = ref.watch(questionsProvider).questions.toList();
+    questions = ref.watch(questionsProvider).toList();
 
     return Padding(
       padding: EdgeInsets.only(top: Dimensions.xxs(context).height),
@@ -41,7 +41,7 @@ class AdminView extends HookConsumerWidget {
                 ),
                 children: ref
                     .read(answersProvider.notifier)
-                    .getQuestionsAnswers(context, questions[i]),
+                    .getAdminViewAnswers(context, questions[i].uId),
               ),
             ),
           ),

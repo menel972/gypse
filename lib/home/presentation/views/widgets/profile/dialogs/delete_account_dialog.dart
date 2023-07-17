@@ -57,6 +57,7 @@ class DeleteAccountDialog extends HookConsumerWidget {
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Dimensions.xs(context).spaceH(),
                 Text(

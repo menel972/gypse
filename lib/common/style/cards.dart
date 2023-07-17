@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/colors.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -89,6 +90,13 @@ class BookFilterCard extends GestureDetector {
       required this.isEnabled});
 
   @override
+  GestureTapCallback? get onTap => () {
+        if (isEnabled) {
+          context.go('${Screen.gameView.path}/${book.fr}');
+        }
+      };
+
+  @override
   Widget? get child => Stack(children: [
         Container(
           alignment: Alignment.center,
@@ -141,7 +149,7 @@ class BookFilterCard extends GestureDetector {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: isEnabled ? Colors.black.withOpacity(0.4) : null,
+            color: isEnabled ? null : Colors.black.withOpacity(0.4),
           ),
         ),
       ]);

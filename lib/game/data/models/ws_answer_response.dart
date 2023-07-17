@@ -159,7 +159,7 @@ class WsAnswerData extends Equatable {
         answer: map?['texte'],
         url: map?['link'],
         verse: map?['verset'],
-        verseReference: map?['verseRef'],
+        verseReference: map?['versetRef'],
       );
     } catch (e) {
       e.log();

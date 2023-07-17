@@ -21,7 +21,7 @@ class PieChartStats extends HookConsumerWidget {
         children: [
           Text('Statistiques globales :', style: GypseFont.m()),
           Text(
-              'Questions répondues : ${ref.watch(userProvider)!.questions.length} / ${ref.watch(questionsProvider).questions.length}',
+              'Questions répondues : ${ref.watch(userProvider)!.questions.length} / ${ref.watch(questionsProvider).length}',
               style: GypseFont.xs()),
           Expanded(
             child: DChartPie(

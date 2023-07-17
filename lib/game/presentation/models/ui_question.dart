@@ -22,10 +22,10 @@ class UiQuestion extends Equatable {
   ///#### `UiQuestion` constructor
   ///<br>
   ///It contains all the data for a question to be displayed on the screen.
-  UiQuestion(
+  const UiQuestion(
     this.uId, {
-    required this.text,
-    required this.book,
+    this.text = '',
+    this.book = Books.gen,
   });
 
   @override

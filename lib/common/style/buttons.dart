@@ -105,8 +105,8 @@ class GypseCircularButton extends ElevatedButton {
   const GypseCircularButton(
     this.context, {
     required super.onPressed,
-    required super.child,
     required this.icon,
+    super.child,
     this.iconColor = const Color.fromRGBO(196, 196, 196, 1),
     this.backgroundColor = const Color.fromRGBO(10, 35, 128, 1),
   });

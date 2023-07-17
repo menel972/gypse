@@ -15,6 +15,7 @@ import 'package:gypse/game/domain/usecases/answers_use_cases.dart';
 import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
+import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -69,5 +70,9 @@ GoRouter gypseRouter = GoRouter(
     // NOTE : BOOK SCREEN
     GoRoute(
         path: Screen.booksView.path, builder: (context, state) => BookScreen()),
+    // NOTE : GAME SCREEN
+    GoRoute(
+        path: '${Screen.gameView.path}/:book',
+        builder: (context, state) => GameScreen(state.params['book']!)),
   ],
 );

@@ -41,7 +41,7 @@ class AnswersView extends HookConsumerWidget {
           Expanded(
             child: ListView.separated(
               physics: NeverScrollableScrollPhysics(),
-              itemCount: 4,
+              itemCount: gameState.settings.level.propositions,
               padding: Dimensions.xs(context).pad(),
               separatorBuilder: (context, index) =>
                   Dimensions.xxxs(context).spaceH(),

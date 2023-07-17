@@ -50,6 +50,7 @@ class QuestionView extends HookConsumerWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              Dimensions.xxs(context).spaceW(),
               CircularCountDownTimer(
                 controller: timeController,
                 width: Dimensions.xs(context).height,

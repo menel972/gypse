@@ -13,11 +13,24 @@ class AnswersProvider extends StateNotifier<Set<UiAnswer>> {
     state.length.log(tag: 'Stored Answers');
   }
 
-  List<UiAnswer> getQuestionAnswers(String qId) =>
-      state.where((answer) => answer.qId == qId).toList();
+  List<UiAnswer> getQuestionAnswers(String qId, int propositions) {
+    List<UiAnswer> answers;
+    List<UiAnswer> allAnswers =
+        state.where((answer) => answer.qId == qId).toList();
+
+    answers = [
+      allAnswers.firstWhere((answer) => answer.isRightAnswer),
+      ...allAnswers
+          .where((answer) => !answer.isRightAnswer)
+          .take(propositions - 1),
+    ];
+
+    answers.shuffle();
+    return answers;
+  }
 
   List<ListTile> getAdminViewAnswers(BuildContext context, String qId) {
-    return getQuestionAnswers(qId)
+    return getQuestionAnswers(qId, 4)
         .map((answer) => ListTile(
               leading: Icon(
                 answer.isRightAnswer

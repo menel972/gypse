@@ -35,8 +35,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         .getEnabledQuestions(
             ref.read(userProvider.notifier).answeredQuestionsId)
         .first;
-    List<UiAnswer> answers =
-        ref.read(answersProvider.notifier).getQuestionAnswers(question.uId);
+    List<UiAnswer> answers = ref
+        .read(answersProvider.notifier)
+        .getQuestionAnswers(question.uId, user.settings.level.propositions);
 
     ref.read(gameStateNotifierProvider.notifier).setSettings(user.settings);
     ref.read(gameStateNotifierProvider.notifier).setQuestion(question);

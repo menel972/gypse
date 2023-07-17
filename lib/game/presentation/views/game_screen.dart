@@ -49,20 +49,26 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   Widget build(BuildContext context) {
     initGameState();
-    return Scaffold(
-      floatingActionButton: IconButton(
-        onPressed: () => QuitDialog(
-          context,
-          timeController: timeController,
+    return WillPopScope(
+      onWillPop: () async {
+        QuitDialog(context, timeController: timeController);
+        return false;
+      },
+      child: Scaffold(
+        floatingActionButton: IconButton(
+          onPressed: () => QuitDialog(
+            context,
+            timeController: timeController,
+          ),
+          icon: Icon(Icons.home_outlined),
         ),
-        icon: Icon(Icons.home_outlined),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      body: Column(
-        children: [
-          Expanded(child: QuestionView(timeController)),
-          AnswersView(initGameState, timeController),
-        ],
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        body: Column(
+          children: [
+            Expanded(child: QuestionView(timeController)),
+            AnswersView(initGameState, timeController),
+          ],
+        ),
       ),
     );
   }

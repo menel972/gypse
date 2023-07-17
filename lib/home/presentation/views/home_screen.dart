@@ -15,25 +15,31 @@ class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int navigationIndex = ref.watch(homeNavigationStateProvider);
 
-    return Scaffold(
-        floatingActionButton: IconButton(
-          onPressed: () => UserSettingsModal(context),
-          icon: const Icon(Icons.settings_outlined),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('$imagesPath/home_bkg.png'),
-              fit: BoxFit.cover,
-            ),
+    return WillPopScope(
+      onWillPop: () async {
+        ref.read(homeNavigationStateProvider.notifier).updatePage(0);
+        return false;
+      },
+      child: Scaffold(
+          floatingActionButton: IconButton(
+            onPressed: () => UserSettingsModal(context),
+            icon: const Icon(Icons.settings_outlined),
           ),
-          child: [
-            HomeView(),
-            UserStatsView(),
-            UserProfileView()
-          ][navigationIndex],
-        ),
-        bottomNavigationBar: HomeNavigationBar());
+          floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('$imagesPath/home_bkg.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: [
+              HomeView(),
+              UserStatsView(),
+              UserProfileView()
+            ][navigationIndex],
+          ),
+          bottomNavigationBar: HomeNavigationBar()),
+    );
   }
 }

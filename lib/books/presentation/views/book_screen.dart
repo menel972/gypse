@@ -8,20 +8,26 @@ class BookScreen extends StatelessWidget {
   const BookScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: IconButton(
-        onPressed: () => context.go(Screen.homeView.path),
-        icon: Icon(Icons.home_outlined),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('$imagesPath/game_bkg.png'),
-            fit: BoxFit.cover,
-          ),
+    return WillPopScope(
+      onWillPop: () async {
+        context.go(Screen.homeView.path);
+        return false;
+      },
+      child: Scaffold(
+        floatingActionButton: IconButton(
+          onPressed: () => context.go(Screen.homeView.path),
+          icon: Icon(Icons.home_outlined),
         ),
-        child: BookView(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('$imagesPath/game_bkg.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: BookView(),
+        ),
       ),
     );
   }

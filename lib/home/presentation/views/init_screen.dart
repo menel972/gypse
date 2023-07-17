@@ -67,56 +67,59 @@ class InitScreen extends HookConsumerWidget {
     } else {
       'User logged !'.log(tag: 'Init - User Check');
 
-      return FutureBuilder<List<dynamic>>(
-          future: initFutureGroup(ref),
-          builder: (context, snapshot) {
-            List<Question>? questionList = snapshot.data?[0];
-            List<Answer>? answerList = snapshot.data?[1];
+      return WillPopScope(
+        onWillPop: () async => false,
+        child: FutureBuilder<List<dynamic>>(
+            future: initFutureGroup(ref),
+            builder: (context, snapshot) {
+              List<Question>? questionList = snapshot.data?[0];
+              List<Answer>? answerList = snapshot.data?[1];
 
-            questions = questionList
-                ?.map((Question question) => question.toPresentation())
-                .toList();
+              questions = questionList
+                  ?.map((Question question) => question.toPresentation())
+                  .toList();
 
-            answers = answerList
-                ?.map((Answer answer) => answer.toPresentation())
-                .toList();
+              answers = answerList
+                  ?.map((Answer answer) => answer.toPresentation())
+                  .toList();
 
-            user = snapshot.data?[2];
+              user = snapshot.data?[2];
 
-            error = snapshot.error as StateError?;
+              error = snapshot.error as StateError?;
 
-// NOTE : ERROR
-            if (snapshot.hasError) {
+              // NOTE : ERROR
+              if (snapshot.hasError) {
+                FlutterNativeSplash.remove();
+
+                return GypseLoading(
+                  context,
+                  message: error.toString(),
+                );
+              }
+
+              // NOTE : DATA
+              if (snapshot.hasData) {
+                Future(() => storeQuestions(ref, questions!));
+                Future(() => storeAnswers(ref, answers!));
+                Future(() => storeUser(ref, user!));
+                FlutterNativeSplash.remove();
+
+                Future(() => context.go(Screen.homeView.path));
+
+                return GypseLoading(
+                  context,
+                  message: 'Redirection vers la page d\'accueil...',
+                );
+              }
+
+              // NOTE : LOADING
               FlutterNativeSplash.remove();
-
               return GypseLoading(
                 context,
-                message: error.toString(),
+                message: 'Chargement de vos données...',
               );
-            }
-
-// NOTE : DATA
-            if (snapshot.hasData) {
-              Future(() => storeQuestions(ref, questions!));
-              Future(() => storeAnswers(ref, answers!));
-              Future(() => storeUser(ref, user!));
-              FlutterNativeSplash.remove();
-
-              Future(() => context.go(Screen.homeView.path));
-
-              return GypseLoading(
-                context,
-                message: 'Redirection vers la page d\'accueil...',
-              );
-            }
-
-// NOTE : LOADING
-            FlutterNativeSplash.remove();
-            return GypseLoading(
-              context,
-              message: 'Chargement de vos données...',
-            );
-          });
+            }),
+      );
     }
   }
 }

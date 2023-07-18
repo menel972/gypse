@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/home/presentation/views/widgets/profile/widgets/admin_view.dart';
 import 'package:gypse/home/presentation/views/widgets/profile/widgets/user_credentials_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,6 +19,9 @@ class UserProfileView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     user = ref.watch(userProvider);
+    ref
+        .read(logDisplayUseCaseProvider)
+        .invoke(screen: Screen.homeView.path, details: 'Profile');
 
     return Padding(
       padding: EdgeInsets.only(top: Dimensions.s(context).height),

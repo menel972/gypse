@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VerseModal extends StatelessWidget {
+class VerseModal extends HookConsumerWidget {
   final BuildContext context;
   final UiAnswer answer;
   VerseModal(this.context, this.answer, {super.key}) {
@@ -27,7 +29,9 @@ class VerseModal extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(logActionUseCaseProvider).invoke(cta: 'read verse');
+
     return Dimensions.xs(context).padding(Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -47,6 +51,7 @@ class VerseModal extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
+            ref.read(logActionUseCaseProvider).invoke(cta: 'you version');
             answer.url.launch(context);
           },
           child: Text(

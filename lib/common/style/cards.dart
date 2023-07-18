@@ -3,25 +3,35 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/colors.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeCarouselCard extends GestureDetector {
   final BuildContext context;
   final Books book;
+  final WidgetRef ref;
 
   HomeCarouselCard(
     this.context, {
     required this.book,
+    required this.ref,
   });
 
   @override
-  GestureTapCallback? get onTap =>
-      () => context.go('${Screen.gameView.path}/${book.fr}');
+  GestureTapCallback? get onTap => () {
+        ref.read(logNavigationUseCaseProvider).invoke(
+              from: Screen.homeView.path,
+              to: Screen.gameView.path,
+              details: book.fr,
+            );
+        context.go('${Screen.gameView.path}/${book.fr}');
+      };
 
   @override
   Widget? get child => Stack(children: [
@@ -80,16 +90,25 @@ class BookFilterCard extends GestureDetector {
   final int questions;
   final int answeredQuestions;
   final bool isEnabled;
+  final WidgetRef ref;
 
-  BookFilterCard(this.context,
-      {required this.book,
-      required this.questions,
-      required this.answeredQuestions,
-      required this.isEnabled});
+  BookFilterCard(
+    this.context, {
+    required this.book,
+    required this.questions,
+    required this.answeredQuestions,
+    required this.isEnabled,
+    required this.ref,
+  });
 
   @override
   GestureTapCallback? get onTap => () {
         if (isEnabled) {
+          ref.read(logNavigationUseCaseProvider).invoke(
+                from: Screen.booksView.path,
+                to: Screen.gameView.path,
+                details: book.fr,
+              );
           context.go('${Screen.gameView.path}/${book.fr}');
         }
       };

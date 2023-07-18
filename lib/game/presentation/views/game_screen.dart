@@ -4,9 +4,11 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/answers_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
@@ -63,6 +65,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   Widget build(BuildContext context) {
     initGameState();
+    ref
+        .read(logDisplayUseCaseProvider)
+        .invoke(screen: Screen.gameView.path, details: widget.filter);
+
     return WillPopScope(
       onWillPop: () async {
         QuitDialog(context, timeController: timeController);

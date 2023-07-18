@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/gypse_background.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
@@ -99,6 +100,7 @@ class InitScreen extends HookConsumerWidget {
 
               // NOTE : DATA
               if (snapshot.hasData) {
+                ref.read(logUserUseCaseProvider).invoke(user: user!);
                 Future(() => storeQuestions(ref, questions!));
                 Future(() => storeAnswers(ref, answers!));
                 Future(() => storeUser(ref, user!));

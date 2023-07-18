@@ -40,6 +40,7 @@ class _CarouselViewState extends ConsumerState<CarouselView> {
       itemBuilder: (context, index, realIndex) => HomeCarouselCard(
         context,
         book: books[index],
+        ref: ref,
       ),
       options: Options(context, carouselController),
     );

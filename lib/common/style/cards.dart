@@ -13,18 +13,15 @@ import 'package:gypse/common/utils/extensions.dart';
 class HomeCarouselCard extends GestureDetector {
   final BuildContext context;
   final Books book;
-  final VoidCallback function;
-  final VoidCallback onCtaPressed;
 
   HomeCarouselCard(
     this.context, {
     required this.book,
-    required this.function,
-    required this.onCtaPressed,
   });
 
   @override
-  GestureTapCallback? get onTap => function;
+  GestureTapCallback? get onTap =>
+      () => context.go('${Screen.gameView.path}/${book.fr}');
 
   @override
   Widget? get child => Stack(children: [
@@ -67,7 +64,8 @@ class HomeCarouselCard extends GestureDetector {
                 bottom: 20,
                 child: GypseSmallButton(
                   'Jouer',
-                  onPressed: () => onCtaPressed,
+                  onPressed: () =>
+                      context.go('${Screen.gameView.path}/${book.fr}'),
                 ),
               ),
             ],

@@ -9,15 +9,17 @@ import 'package:gypse/auth/presentation/views/states/sign_up_bloc.dart';
 import 'package:gypse/auth/presentation/views/widgets/forgotten_password_view.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_in_view.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up_view.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/colors.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/core/l10n/localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends HookConsumerWidget {
   final Future<String> Function(WidgetRef, UiAuthRequest) signUpUseCase;
   final Future<String> Function(WidgetRef, UiAuthRequest) signInUseCase;
   final Future<bool?> Function(WidgetRef, String) forgottenPasswordUseCase;
@@ -30,7 +32,8 @@ class AuthScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(logDisplayUseCaseProvider).invoke(screen: Screen.authView.path);
     FlutterNativeSplash.remove();
 
     return BlocConsumer<AuthViewsBloc, int>(

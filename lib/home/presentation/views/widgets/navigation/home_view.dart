@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
@@ -11,6 +12,10 @@ class HomeView extends HookConsumerWidget {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref
+        .read(logDisplayUseCaseProvider)
+        .invoke(screen: Screen.homeView.path, details: 'Home');
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -18,7 +23,12 @@ class HomeView extends HookConsumerWidget {
         Dimensions.s(context).paddingW(
           GypseElevatedButton(
             context,
-            onPressed: () => context.go('${Screen.gameView.path}/ '),
+            onPressed: () {
+              ref
+                  .read(logNavigationUseCaseProvider)
+                  .invoke(from: Screen.homeView.path, to: Screen.gameView.path);
+              context.go('${Screen.gameView.path}/ ');
+            },
             label: 'Commencer une partie',
             textColor: Theme.of(context).colorScheme.onSurface,
             backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -28,7 +38,11 @@ class HomeView extends HookConsumerWidget {
         Dimensions.s(context).paddingW(
           GypseElevatedButton(
             context,
-            onPressed: () => context.go(Screen.booksView.path),
+            onPressed: () {
+              ref.read(logNavigationUseCaseProvider).invoke(
+                  from: Screen.homeView.path, to: Screen.booksView.path);
+              context.go(Screen.booksView.path);
+            },
             label: 'Choisir un livre',
             textColor: Theme.of(context).colorScheme.secondaryContainer,
             backgroundColor:

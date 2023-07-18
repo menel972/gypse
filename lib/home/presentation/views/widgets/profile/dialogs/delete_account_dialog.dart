@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -75,6 +76,9 @@ class DeleteAccountDialog extends HookConsumerWidget {
                         context,
                         label: 'Supprimer',
                         onPressed: () async {
+                          ref
+                              .read(logActionUseCaseProvider)
+                              .invoke(cta: 'delete account');
                           bool result = await deleteAccountUseCase();
 
                           if (result) {

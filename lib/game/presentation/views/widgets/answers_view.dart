@@ -3,6 +3,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/tiles.dart';
@@ -114,6 +115,9 @@ class AnswersView extends HookConsumerWidget {
                   GypseCircularButton(
                     context,
                     onPressed: () async {
+                      ref
+                          .read(logActionUseCaseProvider)
+                          .invoke(cta: 'next question');
                       await ref.read(answerRatioStateProvider.notifier).slide();
 
                       ref.read(userProvider.notifier).updateAnsweredQuestions(

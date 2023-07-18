@@ -1,12 +1,14 @@
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class NoQuestionScreen extends StatelessWidget {
+class NoQuestionScreen extends HookConsumerWidget {
   final BuildContext context;
   final String book;
 
@@ -15,7 +17,11 @@ class NoQuestionScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref
+        .read(logDisplayUseCaseProvider)
+        .invoke(screen: Screen.noQuestionView.path, details: book);
+
     return WillPopScope(
       onWillPop: () async {
         context.go(Screen.homeView.path);

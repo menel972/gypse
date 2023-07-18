@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
@@ -44,6 +45,9 @@ class InitScreen extends HookConsumerWidget {
 
   Future<List<dynamic>> initFutureGroup(WidgetRef ref) async {
     return await Future.wait([
+      Connectivity()
+          .checkConnectivity()
+          .whenComplete(() => 'Complete'.log(tag: 'ConnectivityCheck')),
       fetchQuestionUseCase(ref)
           .whenComplete(() => 'Complete'.log(tag: 'FetchQuestionsUseCase')),
       fetchAnswerUseCase(ref)
@@ -73,8 +77,21 @@ class InitScreen extends HookConsumerWidget {
         child: FutureBuilder<List<dynamic>>(
             future: initFutureGroup(ref),
             builder: (context, snapshot) {
-              List<Question>? questionList = snapshot.data?[0];
-              List<Answer>? answerList = snapshot.data?[1];
+              ConnectivityResult connectivity = snapshot.data?[0];
+
+              // NOTE : NO INTERNET
+              if (connectivity == ConnectivityResult.none) {
+                FlutterNativeSplash.remove();
+
+                return GypseLoading(
+                  context,
+                  message:
+                      'GYPSE a besoin d\'une connexion internet au lancement.',
+                );
+              }
+
+              List<Question>? questionList = snapshot.data?[1];
+              List<Answer>? answerList = snapshot.data?[2];
 
               questions = questionList
                   ?.map((Question question) => question.toPresentation())
@@ -84,7 +101,7 @@ class InitScreen extends HookConsumerWidget {
                   ?.map((Answer answer) => answer.toPresentation())
                   .toList();
 
-              user = snapshot.data?[2];
+              user = snapshot.data?[3];
 
               error = snapshot.error as StateError?;
 

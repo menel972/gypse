@@ -45,6 +45,7 @@ class GypseLoading extends Scaffold {
             Dimensions.xs(context).padding(Text(
               message ?? '',
               style: GypseFont.s(),
+              textAlign: TextAlign.center,
             )),
           ],
         ),

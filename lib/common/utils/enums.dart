@@ -57,9 +57,9 @@ enum Level {
 ///<li>medium - 20 seconds
 ///<li>hard - 12 seconds
 enum Time {
-  easy(12),
+  easy(30),
   medium(20),
-  hard(30);
+  hard(12);
 
   final int seconds;
   const Time(this.seconds);

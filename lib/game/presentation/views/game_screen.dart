@@ -2,13 +2,16 @@
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/answers_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
+import 'package:gypse/game/presentation/views/no_question_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/widgets/answers_view.dart';
 import 'package:gypse/game/presentation/views/widgets/question_view.dart';
@@ -27,21 +30,32 @@ class GameScreen extends StatefulHookConsumerWidget {
 }
 
 class _GameScreenState extends ConsumerState<GameScreen> {
+  Future<void> updateUser(BuildContext context, UiUser user) =>
+      ref.read(onUserChangedUseCaseProvider).invoke(context, user);
+
   void initGameState() {
     UiUser user = ref.watch(userProvider)!;
-    UiQuestion question = ref
+    List<UiQuestion> questions = ref
         .read(questionsProvider.notifier)
         .getEnabledQuestions(
             ref.read(userProvider.notifier).answeredQuestionsId,
-            book: widget.filter)
-        .first;
-    List<UiAnswer> answers = ref
-        .read(answersProvider.notifier)
-        .getQuestionAnswers(question.uId, user.settings.level.propositions);
+            book: widget.filter);
 
-    ref.read(gameStateNotifierProvider.notifier).setSettings(user.settings);
-    ref.read(gameStateNotifierProvider.notifier).setQuestion(question);
-    ref.read(gameStateNotifierProvider.notifier).setAnswers(answers);
+    if (questions.isEmpty) {
+      updateUser(context, user);
+      Future(() => NoQuestionScreen(context, widget.filter));
+      // Future(
+      //     () => context.go('${Screen.noQuestionView.path}/${widget.filter}'));
+    } else {
+      UiQuestion question = questions.first;
+      List<UiAnswer> answers = ref
+          .read(answersProvider.notifier)
+          .getQuestionAnswers(question.uId, user.settings.level.propositions);
+
+      ref.read(gameStateNotifierProvider.notifier).setSettings(user.settings);
+      ref.read(gameStateNotifierProvider.notifier).setQuestion(question);
+      ref.read(gameStateNotifierProvider.notifier).setAnswers(answers);
+    }
   }
 
   final CountDownController timeController = CountDownController();
@@ -63,11 +77,19 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           icon: Icon(Icons.home_outlined),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        body: Column(
-          children: [
-            Expanded(child: QuestionView(timeController)),
-            AnswersView(initGameState, timeController),
-          ],
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('$imagesPath/game_bkg.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              Expanded(child: QuestionView(timeController)),
+              AnswersView(initGameState, timeController),
+            ],
+          ),
         ),
       ),
     );

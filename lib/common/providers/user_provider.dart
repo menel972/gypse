@@ -15,7 +15,7 @@ class UserProvider extends StateNotifier<UiUser?> {
 
   void updateAnsweredQuestions(UiAnsweredQuestions newQuestion) {
     state?.questions.length.log(tag: 'Answered Questions - before');
-    state?.questions = [...state!.questions, newQuestion];
+    state?.questions = {...state!.questions, newQuestion}.toList();
     state?.questions.length.log(tag: 'Answered Questions Added');
   }
 
@@ -25,8 +25,8 @@ class UserProvider extends StateNotifier<UiUser?> {
         '[Settings Updated] : Level ${state?.settings.level}, Time ${state?.settings.time}');
   }
 
-  List<String> get answeredQuestionsId =>
-      state!.questions.map((question) => question.qId).toList(); 
+  Iterable<String> get answeredQuestionsId =>
+      state!.questions.map((question) => question.qId);
 
   int getAnswersByIds(List<String> questions) {
     return state!.questions

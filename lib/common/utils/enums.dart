@@ -208,3 +208,12 @@ enum Screen {
   final String path;
   const Screen(this.path);
 }
+
+enum EventName {
+  display('DISPLAY'),
+  navigation('NAVIGATION'),
+  action('ACTION');
+
+  final String name;
+  const EventName(this.name);
+}

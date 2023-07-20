@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
@@ -10,7 +11,6 @@ import 'package:gypse/common/providers/answers_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/utils/enums.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/game/domain/usecases/answers_use_cases.dart';
 import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';

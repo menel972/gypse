@@ -6,9 +6,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
+import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/style/gypse_background.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/game/domain/models/answer.dart';
 import 'package:gypse/game/domain/models/question.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
@@ -45,9 +47,6 @@ class InitScreen extends HookConsumerWidget {
 
   Future<List<dynamic>> initFutureGroup(WidgetRef ref) async {
     return await Future.wait([
-      Connectivity()
-          .checkConnectivity()
-          .whenComplete(() => 'Complete'.log(tag: 'ConnectivityCheck')),
       fetchQuestionUseCase(ref)
           .whenComplete(() => 'Complete'.log(tag: 'FetchQuestionsUseCase')),
       fetchAnswerUseCase(ref)
@@ -59,6 +58,13 @@ class InitScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    ref.listen(connectivityNotifierProvider, (previous, next) {
+      if (next == ConnectivityResult.none) {
+        NetworkErrorScreen(context);
+      }
+    });
+
     userUid = getUserUidUseCase(ref);
 
 // NOTE : NO USER LOGGED !
@@ -77,21 +83,8 @@ class InitScreen extends HookConsumerWidget {
         child: FutureBuilder<List<dynamic>>(
             future: initFutureGroup(ref),
             builder: (context, snapshot) {
-              ConnectivityResult connectivity = snapshot.data?[0];
-
-              // NOTE : NO INTERNET
-              if (connectivity == ConnectivityResult.none) {
-                FlutterNativeSplash.remove();
-
-                return GypseLoading(
-                  context,
-                  message:
-                      'GYPSE a besoin d\'une connexion internet au lancement.',
-                );
-              }
-
-              List<Question>? questionList = snapshot.data?[1];
-              List<Answer>? answerList = snapshot.data?[2];
+              List<Question>? questionList = snapshot.data?[0];
+              List<Answer>? answerList = snapshot.data?[1];
 
               questions = questionList
                   ?.map((Question question) => question.toPresentation())
@@ -101,7 +94,7 @@ class InitScreen extends HookConsumerWidget {
                   ?.map((Answer answer) => answer.toPresentation())
                   .toList();
 
-              user = snapshot.data?[3];
+              user = snapshot.data?[2];
 
               error = snapshot.error as StateError?;
 

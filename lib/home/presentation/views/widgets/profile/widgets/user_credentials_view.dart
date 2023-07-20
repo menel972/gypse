@@ -29,7 +29,6 @@ class UserCredentialsView extends HookConsumerWidget {
 
     return ListView.separated(
       itemCount: 5,
-      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(
         top: Dimensions.s(context).height,
         left: Dimensions.xs(context).width,

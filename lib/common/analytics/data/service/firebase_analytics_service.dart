@@ -21,7 +21,7 @@ class FirebaseAnalyticsService {
     await _analytics.setCurrentScreen(
         screenName: screen, screenClassOverride: screen);
     await _analytics.logEvent(
-      name: '${EventName.display.name}_$screen',
+      name: '${EventName.display.name}_${screen.substring(1)}',
       parameters: {
         'screen': '',
         'details': details ?? '',
@@ -32,7 +32,8 @@ class FirebaseAnalyticsService {
   Future<void> logNavigation(
       {required String from, required String to, String? details}) async {
     await _analytics.logEvent(
-      name: '${EventName.navigation.name}_from_${from}_to_$to',
+      name:
+          '${EventName.navigation.name}_from_${from.substring(1)}_to_${to.substring(1)}',
       parameters: {
         'from': '',
         'to': '',

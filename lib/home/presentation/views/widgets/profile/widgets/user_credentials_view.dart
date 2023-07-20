@@ -31,6 +31,7 @@ class UserCredentialsView extends HookConsumerWidget {
       itemCount: 5,
       padding: EdgeInsets.only(
         top: Dimensions.s(context).height,
+        bottom: Dimensions.xs(context).width,
         left: Dimensions.xs(context).width,
         right: Dimensions.xs(context).width,
       ),

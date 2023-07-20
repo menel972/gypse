@@ -1,6 +1,10 @@
 import 'package:gypse/auth/domain/models/user.dart';
 
 abstract class FirebaseAnalyticsRepository {
+  Future<void> logLogin(String method);
+
+  Future<void> logSignUp(String method);
+
   Future<void> logUser({required User user});
 
   Future<void> logDisplay({

@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
-import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
@@ -54,15 +53,7 @@ GoRouter gypseRouter = GoRouter(
     GoRoute(
       path: Screen.authView.path,
       builder: (context, state) => BlocProvider<AuthViewsBloc>(
-          create: (_) => AuthViewsBloc(),
-          child: AuthScreen(
-            signUpUseCase: (WidgetRef ref, UiAuthRequest request) =>
-                ref.read(signUpUseCaseProvider).invoke(request),
-            signInUseCase: (WidgetRef ref, UiAuthRequest request) =>
-                ref.read(signInUseCaseProvider).invoke(request),
-            forgottenPasswordUseCase: (WidgetRef ref, String email) =>
-                ref.read(forgottenPasswordUseCaseProvider).invoke(email),
-          )),
+          create: (_) => AuthViewsBloc(), child: AuthScreen()),
     ),
     // NOTE : HOME SCREEN
     GoRoute(

@@ -9,6 +9,14 @@ class FirebaseAnalyticsService {
 
   FirebaseAnalyticsService(this._analytics);
 
+  Future<void> logLogin(String method) async {
+    await _analytics.logLogin(loginMethod: method);
+  }
+
+  Future<void> logSignUp(String method) async {
+    await _analytics.logSignUp(signUpMethod: method);
+  }
+
   Future<void> logUser({required WsUserResponse user}) async {
     await _analytics.setUserId(id: user.uid);
     await _analytics.setUserProperty(

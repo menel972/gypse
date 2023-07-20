@@ -5,6 +5,38 @@ import 'package:gypse/common/analytics/domain/repositories/firebase_analytics_re
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+class LogLoginUseCase {
+  final FirebaseAnalyticsRepository _repository;
+
+  LogLoginUseCase(this._repository);
+
+  Future<void> invoke({String method = 'mail_password'}) async {
+    'start'.log(tag: 'LogLoginUseCase');
+    return await _repository.logLogin(method);
+  }
+}
+
+AutoDisposeProvider<LogLoginUseCase> get logLoginUseCaseProvider =>
+    Provider.autoDispose<LogLoginUseCase>(
+        (AutoDisposeProviderRef<LogLoginUseCase> ref) =>
+            LogLoginUseCase(ref.read(firebaseAnalyticsRepositoryProvider)));
+
+class LogSignUpUseCase {
+  final FirebaseAnalyticsRepository _repository;
+
+  LogSignUpUseCase(this._repository);
+
+  Future<void> invoke({String method = 'mail_password'}) async {
+    'start'.log(tag: 'LogSignUpUseCase');
+    return await _repository.logSignUp(method);
+  }
+}
+
+AutoDisposeProvider<LogSignUpUseCase> get logSignUpUseCaseProvider =>
+    Provider.autoDispose<LogSignUpUseCase>(
+        (AutoDisposeProviderRef<LogSignUpUseCase> ref) =>
+            LogSignUpUseCase(ref.read(firebaseAnalyticsRepositoryProvider)));
+
 class LogUserUseCase {
   final FirebaseAnalyticsRepository _repository;
 

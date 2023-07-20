@@ -46,6 +46,24 @@ class FirebaseAnalyticsRepositoryImpl extends FirebaseAnalyticsRepository {
       throw e;
     }
   }
+
+  @override
+  Future<void> logLogin(String method) async {
+    try {
+      await _service.logLogin(method);
+    } on FirebaseException catch (e) {
+      throw e;
+    }
+  }
+
+  @override
+  Future<void> logSignUp(String method) async {
+    try {
+      await _service.logSignUp(method);
+    } on FirebaseException catch (e) {
+      throw e;
+    }
+  }
 }
 
 AutoDisposeProvider<FirebaseAnalyticsRepository>

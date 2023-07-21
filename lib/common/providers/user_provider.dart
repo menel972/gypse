@@ -36,8 +36,15 @@ class UserProvider extends StateNotifier<UiUser?> {
 
   int get positivAnswers =>
       state!.questions.where((question) => question.isRightAnswer).length;
+  String get positivAnswersPercent {
+    return (positivAnswers * 100 / state!.questions.length).toStringAsFixed(1);
+  }
+
   int get negativAnswers =>
       state!.questions.where((question) => !question.isRightAnswer).length;
+  String get negativAnswersPercent {
+    return (negativAnswers * 100 / state!.questions.length).toStringAsFixed(1);
+  }
 
   int get easyAnswers =>
       state!.questions.where((question) => question.level == Level.easy).length;

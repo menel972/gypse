@@ -62,24 +62,24 @@ class BookView extends HookConsumerWidget {
           SliverToBoxAdapter(
             child: Dimensions.xxxs(context).paddingH(
               SizedBox(
-                height: Dimensions.xxxl(context).height,
+                height: Dimensions.screen(context).height * 0.83,
                 child: Scrollbar(
                   child: GridView.count(
                     crossAxisCount: 2,
                     childAspectRatio: 1,
-                    crossAxisSpacing: Dimensions.xxs(context).width,
-                    mainAxisSpacing: Dimensions.xxs(context).width,
                     children: [
                       ...books.map((book) {
                         List<String> questions = getQuestionsIdByBook(book);
 
-                        return BookFilterCard(
-                          context,
-                          book: book,
-                          questions: questions.length,
-                          answeredQuestions: getAnswersByIds(questions),
-                          isEnabled: questions.isNotEmpty,
-                          ref: ref,
+                        return Dimensions.xxxs(context).padding(
+                          BookFilterCard(
+                            context,
+                            book: book,
+                            questions: questions.length,
+                            answeredQuestions: getAnswersByIds(questions),
+                            isEnabled: questions.isNotEmpty,
+                            ref: ref,
+                          ),
                         );
                       }),
                     ],

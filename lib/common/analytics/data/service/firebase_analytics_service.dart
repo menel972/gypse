@@ -20,7 +20,7 @@ class FirebaseAnalyticsService {
   Future<void> logUser({required WsUserResponse user}) async {
     await _analytics.setUserId(id: user.uid);
     await _analytics.setUserProperty(
-      name: user.userName ?? '',
+      name: user.userName?.substring(0, (user.userName?.length ?? 5) - 5) ?? '',
       value: user.isAdmin.toString(),
     );
   }

@@ -4,6 +4,7 @@ import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cas
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/exception.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/home/presentation/views/widgets/navigation/widgets/carousel_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -44,6 +45,20 @@ class HomeView extends HookConsumerWidget {
               context.go(Screen.booksView.path);
             },
             label: 'Choisir un livre',
+            textColor: Theme.of(context).colorScheme.secondaryContainer,
+            backgroundColor:
+                Theme.of(context).colorScheme.surface.withOpacity(0.2),
+          ),
+        ),
+        Dimensions.xs(context).spaceH(),
+        Dimensions.xxs(context).spaceH(),
+        Dimensions.s(context).paddingW(
+          GypseElevatedButton(
+            context,
+            onPressed: () {
+              throw GypseException();
+            },
+            label: 'Crash',
             textColor: Theme.of(context).colorScheme.secondaryContainer,
             backgroundColor:
                 Theme.of(context).colorScheme.surface.withOpacity(0.2),

@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBzacRCp6FMp1lY6_yC8dB64sq13KSjdN0',
-    appId: '1:635658051968:web:7b61e07a8b42ae51256165',
-    messagingSenderId: '635658051968',
-    projectId: 'quiz-bible-44f41',
-    authDomain: 'quiz-bible-44f41.firebaseapp.com',
-    storageBucket: 'quiz-bible-44f41.appspot.com',
-    measurementId: 'G-C8TE4JRT4S',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDVko6hwucDs4tRTZ_fL_LfcpRELp3TcFM',
     appId: '1:635658051968:android:a17e9dd6333a3ac9256165',
@@ -62,17 +58,6 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAnWevd0FPPFLm5MArxw0wERJi4umcHu60',
-    appId: '1:635658051968:ios:7eb18cb6ae2a88eb256165',
-    messagingSenderId: '635658051968',
-    projectId: 'quiz-bible-44f41',
-    storageBucket: 'quiz-bible-44f41.appspot.com',
-    androidClientId: '635658051968-pm7m6md7q1sgo0vibb8te814issr8ka1.apps.googleusercontent.com',
-    iosClientId: '635658051968-14jhe8skp5dslo3atd785s6o5imis6s1.apps.googleusercontent.com',
-    iosBundleId: 'com.example.gypse',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAnWevd0FPPFLm5MArxw0wERJi4umcHu60',
     appId: '1:635658051968:ios:7eb18cb6ae2a88eb256165',
     messagingSenderId: '635658051968',

@@ -9,14 +9,11 @@ class WsAnswersService {
   WsAnswersService(this._client);
 
   Future<List<WsAnswerResponse>> fetchAnswers() async {
-    return await _client
-        .snapshots()
-        .map((QuerySnapshot<Map<String, dynamic>> snapshot) => snapshot
-            .docChanges
+    return await _client.get().then(
+        (QuerySnapshot<Map<String, dynamic>> snapshot) => snapshot.docChanges
             .map((DocumentChange<Map<String, dynamic>> changes) =>
                 WsAnswerResponse.fromMap(changes.doc.data()))
-            .toList())
-        .first;
+            .toList());
   }
 }
 

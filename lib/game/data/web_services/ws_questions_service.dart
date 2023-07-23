@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:gypse/common/clients/firebase_client.dart';
 import 'package:gypse/game/data/models/ws_question_response.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,14 +9,11 @@ class WsQuestionService {
   WsQuestionService(this._client);
 
   Future<List<WsQuestionResponse>> fetchQuestions() async {
-    return await _client
-        .snapshots()
-        .map((QuerySnapshot<Map<String, dynamic>> snapshot) => snapshot
-            .docChanges
-            .map((DocumentChange<Map<String, dynamic>> changes) =>
-                WsQuestionResponse.fromMap(changes.doc.data()))
-            .toList())
-        .first;
+    return await _client.get().then(
+        (QuerySnapshot<Map<String, dynamic>> snapshot) => snapshot.docs
+            .map((QueryDocumentSnapshot<Map<String, dynamic>> changes) =>
+                WsQuestionResponse.fromMap(changes.data()))
+            .toList());
   }
 }
 

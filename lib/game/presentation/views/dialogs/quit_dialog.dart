@@ -71,7 +71,7 @@ class QuitDialog extends HookConsumerWidget {
                   ),
                   Dimensions.xs(context).spaceH(),
                   Text(
-                    'Êtes-vous sûr.e de vouloir quitter la partie ?',
+                    'Es-tu sûr.e de vouloir quitter la partie ?',
                     style: GypseFont.m(
                         color: Theme.of(context).colorScheme.primary),
                     maxLines: 3,

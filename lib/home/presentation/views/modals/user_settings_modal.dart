@@ -64,7 +64,7 @@ class UserSettingsModal extends HookConsumerWidget {
         ),
         LevelRadioButtons(),
         Text(
-          'Chronomètre :',
+          'Temps :',
           style: GypseFont.m(
             color: Theme.of(context).colorScheme.primary,
           ),

@@ -51,7 +51,7 @@ class DeleteAccountDialog extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'SUPPRESSION DU PROFILE',
+                  'SUPPRESSION DU COMPTE',
                   style: GypseFont.l(
                     bold: true,
                     color: Theme.of(context).colorScheme.error,
@@ -62,7 +62,7 @@ class DeleteAccountDialog extends HookConsumerWidget {
                 ),
                 Dimensions.xs(context).spaceH(),
                 Text(
-                  'Êtes-vous sûr.e de vouloir supprimer votre profile GYPSE. Cette action est définitive.',
+                  'Es-tu sûr.e de vouloir supprimer ton compte GYPSE.',
                   style:
                       GypseFont.m(color: Theme.of(context).colorScheme.primary),
                   textAlign: TextAlign.center,

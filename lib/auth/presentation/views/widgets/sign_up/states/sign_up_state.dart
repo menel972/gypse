@@ -60,8 +60,7 @@ class SignUpCredentialsStateNotifier extends StateNotifier<CredentialsState> {
   }
 }
 
-final signUpCredentialsStateNotifierProvider =
-    StateNotifierProvider<SignUpCredentialsStateNotifier, CredentialsState>(
-        (ref) {
+final signUpCredentialsStateNotifierProvider = StateNotifierProvider
+    .autoDispose<SignUpCredentialsStateNotifier, CredentialsState>((ref) {
   return SignUpCredentialsStateNotifier();
 });

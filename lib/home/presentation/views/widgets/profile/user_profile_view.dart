@@ -21,7 +21,7 @@ class UserProfileView extends HookConsumerWidget {
     user = ref.watch(userProvider);
     ref
         .read(logDisplayUseCaseProvider)
-        .invoke(screen: Screen.homeView.path, details: 'Profile');
+        .invoke(screen: Screen.homeView.path, details: 'Profil');
 
     return Padding(
       padding: EdgeInsets.only(top: Dimensions.s(context).height),
@@ -30,8 +30,8 @@ class UserProfileView extends HookConsumerWidget {
         child: Column(children: [
           TabBar(
             tabs: user!.isAdmin
-                ? [Text('Mon Profile'), Text('Questions')]
-                : [Text('Mon Profile')],
+                ? [Text('Mon Compte'), Text('Questions')]
+                : [Text('Mon Compte')],
             isScrollable: true,
             indicatorColor: Theme.of(context).colorScheme.secondary,
             indicatorSize: TabBarIndicatorSize.label,

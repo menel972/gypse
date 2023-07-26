@@ -38,7 +38,7 @@ class PieChartStats extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Statistiques globales :', style: GypseFont.m()),
+              Text('Statistiques générales :', style: GypseFont.m()),
               Text(
                   'Questions répondues : ${ref.watch(userProvider)!.questions.length} / ${ref.watch(questionsProvider).length}',
                   style: GypseFont.xs()),

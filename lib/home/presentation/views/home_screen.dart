@@ -27,8 +27,12 @@ class HomeScreen extends HookConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        ref.read(homeNavigationStateProvider.notifier).updatePage(0);
-        return false;
+        if (navigationIndex == 0) {
+          return true;
+        } else {
+          ref.read(homeNavigationStateProvider.notifier).updatePage(0);
+          return false;
+        }
       },
       child: Scaffold(
           floatingActionButton: IconButton(

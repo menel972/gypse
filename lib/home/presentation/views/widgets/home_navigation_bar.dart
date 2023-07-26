@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/utils/enums.dart';
-import 'package:gypse/core/l10n/localizations.dart';
 import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,14 +28,14 @@ class HomeNavigationBar extends HookConsumerWidget {
                 ref.read(logNavigationUseCaseProvider).invoke(
                       from: Screen.homeView.path,
                       to: Screen.homeView.path,
-                      details: 'home',
+                      details: 'Accueil',
                     );
                 updatePage(0);
               },
               splashRadius: 20,
               splashColor: Couleur.secondary,
             ),
-            label: words(context).redir_acc),
+            label: 'Accueil'),
         BottomNavigationBarItem(
             icon: IconButton(
               icon: const Icon(Icons.bar_chart_outlined),
@@ -44,14 +43,14 @@ class HomeNavigationBar extends HookConsumerWidget {
                 ref.read(logNavigationUseCaseProvider).invoke(
                       from: Screen.homeView.path,
                       to: Screen.homeView.path,
-                      details: 'stats',
+                      details: 'scores',
                     );
                 updatePage(1);
               },
               splashRadius: 20,
               splashColor: Couleur.secondary,
             ),
-            label: words(context).redir_stat),
+            label: 'Scores'),
         BottomNavigationBarItem(
             icon: IconButton(
               icon: const Icon(Icons.person_outline),
@@ -59,14 +58,14 @@ class HomeNavigationBar extends HookConsumerWidget {
                 ref.read(logNavigationUseCaseProvider).invoke(
                       from: Screen.homeView.path,
                       to: Screen.homeView.path,
-                      details: 'profile',
+                      details: 'profil',
                     );
                 updatePage(2);
               },
               splashRadius: 20,
               splashColor: Couleur.secondary,
             ),
-            label: words(context).redir_profile),
+            label: 'Compte'),
       ],
     );
   }

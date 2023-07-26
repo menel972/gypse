@@ -27,112 +27,135 @@ class UserCredentialsView extends HookConsumerWidget {
         ref.read(changePasswordUseCaseProvider).invoke();
     Future<bool> signOutUseCase() => ref.read(signOutUseCaseProvider).invoke();
 
-    return ListView.separated(
-      itemCount: 5,
-      padding: EdgeInsets.only(
-        top: Dimensions.s(context).height,
-        bottom: Dimensions.xs(context).width,
-        left: Dimensions.xs(context).width,
-        right: Dimensions.xs(context).width,
-      ),
-      separatorBuilder: (context, index) {
-        switch (index) {
-          case 0:
-            return Dimensions.s(context).spaceH();
-          case 3:
-            return Dimensions.s(context).spaceH();
-          default:
-            return Dimensions.xxs(context).spaceH();
-        }
-      },
-      itemBuilder: (context, index) => [
-        Image.asset(
-          '$imagesPath/splash_logo.png',
-          height: Dimensions.s(context).height,
+    return Scrollbar(
+      thumbVisibility: true,
+      child: ListView.separated(
+        itemCount: 6,
+        padding: EdgeInsets.only(
+          top: Dimensions.s(context).height,
+          bottom: Dimensions.xs(context).width,
+          left: Dimensions.xs(context).width,
+          right: Dimensions.xs(context).width,
         ),
-        TextFormField(
-          enabled: false,
-          style: GypseFont.s(),
-          initialValue: user!.userName,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-              labelText: 'Nom d\'utilisateur',
-              suffix: Icon(
-                Icons.person_outline,
-                color: Theme.of(context).colorScheme.onPrimary,
-              )),
-        ),
-        TextFormField(
-          enabled: false,
-          style: GypseFont.s(),
-          initialValue: user!.credentials.email,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-              labelText: 'Adresse mail',
-              suffix: Icon(
-                Icons.alternate_email_outlined,
-                color: Theme.of(context).colorScheme.onPrimary,
-              )),
-        ),
-        InkWell(
-          onTap: () async {
-            ref.read(logActionUseCaseProvider).invoke(cta: 'update password');
-            bool result =
-                await changePasswordUseCase().onError((error, stackTrace) {
-              Navigator.pop(context);
-              return false;
-            });
-
-            if (result) {
-              'Un mail vous a été envoyé'.success(context);
-            } else {
-              'Une erreur est survenue'.failure(context);
-            }
-          },
-          child: TextFormField(
+        separatorBuilder: (context, index) {
+          switch (index) {
+            case 0:
+              return Dimensions.s(context).spaceH();
+            case 3:
+              return Dimensions.xxs(context).spaceH();
+            case 4:
+              return Dimensions.xs(context).spaceH();
+            default:
+              return Dimensions.xxs(context).spaceH();
+          }
+        },
+        itemBuilder: (context, index) => [
+          Image.asset(
+            '$imagesPath/splash_logo.png',
+            height: Dimensions.s(context).height,
+          ),
+          TextFormField(
             enabled: false,
-            style: GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-            initialValue: 'Changer de mot de passe',
+            style: GypseFont.s(),
+            initialValue: user!.userName,
             textAlign: TextAlign.center,
             decoration: InputDecoration(
-                labelText: 'Mot de passe',
+                labelText: 'Nom d\'utilisateur',
                 suffix: Icon(
-                  Icons.lock_outline,
+                  Icons.person_outline,
                   color: Theme.of(context).colorScheme.onPrimary,
                 )),
           ),
-        ),
-        Row(children: [
-          Expanded(
-            child: GypseElevatedButton(
-              context,
-              onPressed: () => DeleteAccountDialog(context),
-              label: 'Supression',
-              textColor: Theme.of(context).colorScheme.secondary,
-              backgroundColor:
-                  Theme.of(context).colorScheme.surface.withOpacity(0.2),
+          TextFormField(
+            enabled: false,
+            style: GypseFont.s(),
+            initialValue: user!.credentials.email,
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+                labelText: 'Adresse mail',
+                suffix: Icon(
+                  Icons.alternate_email_outlined,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )),
+          ),
+          InkWell(
+            onTap: () async {
+              ref.read(logActionUseCaseProvider).invoke(cta: 'update password');
+              bool result =
+                  await changePasswordUseCase().onError((error, stackTrace) {
+                Navigator.pop(context);
+                return false;
+              });
+
+              if (result) {
+                'Un mail vous a été envoyé'.success(context);
+              } else {
+                'Une erreur est survenue'.failure(context);
+              }
+            },
+            child: TextFormField(
+              enabled: false,
+              style:
+                  GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+              initialValue: 'Changer de mot de passe',
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                  labelText: 'Mot de passe',
+                  suffix: Icon(
+                    Icons.lock_outline,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  )),
             ),
           ),
-          Dimensions.xs(context).spaceW(),
-          Expanded(
-            child: GypseElevatedButton(
-              context,
-              onPressed: () async {
-                ref.read(logActionUseCaseProvider).invoke(cta: 'logout');
-                bool result = await signOutUseCase();
-                if (result) {
-                  context.go(Screen.authView.path);
-                } else {
-                  'Une erreur est survenue'.failure(context);
-                }
-              },
-              label: 'Déconnexion',
-              textColor: Theme.of(context).colorScheme.onPrimary,
-              backgroundColor: Theme.of(context).colorScheme.primary,
+          InkWell(
+            onTap: () async => await 'gypse.app@gmail.com'.mailTo(context),
+            child: TextFormField(
+              enabled: false,
+              style:
+                  GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+              initialValue: 'Nous contacter',
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                  labelText: 'Contact',
+                  suffix: Icon(
+                    Icons.mail,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  )),
             ),
           ),
-        ]),
-      ][index],
+          Row(children: [
+            Expanded(
+              child: GypseElevatedButton(
+                context,
+                onPressed: () => DeleteAccountDialog(context),
+                label: 'Supression',
+                textColor: Theme.of(context).colorScheme.secondary,
+                backgroundColor:
+                    Theme.of(context).colorScheme.surface.withOpacity(0.2),
+              ),
+            ),
+            Dimensions.xs(context).spaceW(),
+            Expanded(
+              child: GypseElevatedButton(
+                context,
+                onPressed: () async {
+                  ref.read(logActionUseCaseProvider).invoke(cta: 'logout');
+                  bool result = await signOutUseCase();
+                  if (result) {
+                    'À bientôt ${user?.userName}'.success(context);
+                    context.go(Screen.authView.path);
+                  } else {
+                    'Une erreur est survenue'.failure(context);
+                  }
+                },
+                label: 'Déconnexion',
+                textColor: Theme.of(context).colorScheme.onPrimary,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ]),
+        ][index],
+      ),
     );
   }
 }

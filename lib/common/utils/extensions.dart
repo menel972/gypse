@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 ///## Extension on [Dimensions]
@@ -131,6 +132,19 @@ extension WebView on String {
   Future<void> launch(BuildContext context) async {
     try {
       launchUrlString(this, mode: LaunchMode.externalApplication);
+    } on PlatformException catch (e) {
+      e.message?.failure(context);
+      e.message?.log();
+    }
+  }
+
+  Future<void> mailTo(BuildContext context) async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: this,
+    );
+    try {
+      launchUrl(emailLaunchUri);
     } on PlatformException catch (e) {
       e.message?.failure(context);
       e.message?.log();

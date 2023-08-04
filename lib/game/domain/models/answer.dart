@@ -5,7 +5,6 @@ import 'package:gypse/game/presentation/models/ui_answer.dart';
 ///## Answer's data <i><small>(received from the data layer)</small></i>
 ///
 ///```
-///final String id;
 ///final bool isRightAnswer;
 ///final String answer;
 ///final String url;
@@ -17,7 +16,6 @@ import 'package:gypse/game/presentation/models/ui_answer.dart';
 ///<br><br>
 ///It contains all the data for an answer.
 class Answer extends Equatable {
-  final String uId;
   final String qId;
   final bool isRightAnswer;
   final String answer;
@@ -31,7 +29,6 @@ class Answer extends Equatable {
   ///<br>
   ///It contains all the data for an answer.
   const Answer({
-    required this.uId,
     required this.qId,
     required this.isRightAnswer,
     required this.answer,
@@ -43,7 +40,6 @@ class Answer extends Equatable {
   @override
   List<Object> get props {
     return [
-      uId,
       qId,
       isRightAnswer,
       answer,
@@ -57,7 +53,6 @@ class Answer extends Equatable {
   /// Converts an `Answer` into an `UiAnswer`.
   UiAnswer toPresentation() {
     return UiAnswer(
-      uId,
       qId: qId,
       isRightAnswer: isRightAnswer,
       text: answer,

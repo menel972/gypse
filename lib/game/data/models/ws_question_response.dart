@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/game/data/models/ws_answer_response.dart';
 import 'package:gypse/game/domain/models/question.dart';
 
 /** WS QUESTION RESPONSE */
@@ -49,7 +50,7 @@ class WsQuestionResponse extends Equatable {
   factory WsQuestionResponse.fromMap(Map<String, dynamic>? map) {
     try {
       return WsQuestionResponse(
-        uId: map?['id'] ?? '',
+        uId: map?['uId'] ?? '',
         fr: WsQuestionData.fromMap(map?['fr']),
         en: WsQuestionData.fromMap(map?['en']),
         es: WsQuestionData.fromMap(map?['es']),
@@ -69,18 +70,24 @@ class WsQuestionResponse extends Equatable {
           uId: uId ?? '',
           question: fr?.question ?? '',
           book: fr?.book ?? '',
+          answers:
+              fr?.answers?.map((answer) => answer.toDomain()).toList() ?? [],
         );
       case Locales.en:
         return Question(
           uId: uId ?? '',
           question: en?.question ?? '',
           book: en?.book ?? '',
+          answers:
+              en?.answers?.map((answer) => answer.toDomain()).toList() ?? [],
         );
       default:
         return Question(
           uId: uId ?? '',
           question: es?.question ?? '',
           book: es?.book ?? '',
+          answers:
+              es?.answers?.map((answer) => answer.toDomain()).toList() ?? [],
         );
     }
   }
@@ -102,6 +109,7 @@ class WsQuestionResponse extends Equatable {
 class WsQuestionData extends Equatable {
   final String? question;
   final String? book;
+  final List<WsAnswerResponse>? answers;
 
   ///<i><small>`Data Layer`</small></i>
   ///### Question's informations <i><small>(received from the database)</small></i>
@@ -111,10 +119,11 @@ class WsQuestionData extends Equatable {
   WsQuestionData({
     this.question = '',
     this.book = '',
+    this.answers = const [],
   });
 
   @override
-  List<Object?> get props => [question, book];
+  List<Object?> get props => [question, book, answers];
 
   /// <i><small>`Data Layer`</small></i><br>
   /// <b>Tries to parse the database response in a [WsQuestionData].</b>
@@ -125,8 +134,10 @@ class WsQuestionData extends Equatable {
   factory WsQuestionData.fromMap(Map<String, dynamic>? map) {
     try {
       return WsQuestionData(
-        question: map?['texte'],
-        book: map?['livre'],
+        question: map?['question'],
+        book: map?['book'],
+        answers: ((map?['answers'] as List<dynamic>?)
+            ?.map((answer) => WsAnswerResponse.fromMap(answer)))?.toList(),
       );
     } catch (e) {
       e.log();

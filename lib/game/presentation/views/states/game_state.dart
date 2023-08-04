@@ -69,17 +69,26 @@ class GameStateNotifier extends StateNotifier<GameState> {
       state.answers.firstWhere((answer) => answer.isRightAnswer);
 
   void setSettings(UiGypseSettings settings) {
-    state.settings = settings;
+    state = state.copyWith(settings: settings);
     state.settings.level.log(tag: 'GameState Settings');
   }
 
   void setQuestion(UiQuestion question) {
-    state.question = question;
+    state = state.copyWith(question: question);
     state.question.uId.log(tag: 'GameState Question');
   }
 
-  void setAnswers(List<UiAnswer> answers) {
-    state.answers = answers;
+  void setAnswers(List<UiAnswer> answers, int level) {
+    List<UiAnswer> propositions;
+
+    propositions = [
+      answers.firstWhere((answer) => answer.isRightAnswer),
+      ...answers.where((answer) => !answer.isRightAnswer).take(level - 1)
+    ];
+
+    propositions.shuffle();
+
+    state = state.copyWith(answers: propositions);
     state.answers.length.log(tag: 'GameState Answers');
   }
 }

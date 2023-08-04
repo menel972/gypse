@@ -19,12 +19,6 @@ class FirebaseClients {
   final CollectionReference<Map<String, dynamic>> questionsDb =
       FirebaseFirestore.instance.collection(questionsPath);
 
-  ///## Answers database
-  ///
-  ///An instance of the collection in the Firebase Firestore database <b>where answers are stored</b>.
-  final CollectionReference<Map<String, dynamic>> answersDb =
-      FirebaseFirestore.instance.collection(answersPath);
-
   ///## Users database
   ///
   ///An instance of the collection in the Firebase Firestore database <b>where users are stored</b>.
@@ -47,13 +41,6 @@ AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
         Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
           (AutoDisposeProviderRef<CollectionReference> ref) =>
               FirebaseClients().questionsDb,
-        );
-
-AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
-    get answersDbProvider =>
-        Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
-          (AutoDisposeProviderRef<CollectionReference> ref) =>
-              FirebaseClients().answersDb,
         );
 
 AutoDisposeProvider<FirebaseAuth> get firebaseAuthProvider =>

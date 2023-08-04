@@ -9,7 +9,7 @@ class QuestionsProvider extends StateNotifier<Set<UiQuestion>> {
   QuestionsProvider() : super({});
 
   void addQuestions(List<UiQuestion> newQuestions) {
-    state = {...state, ...newQuestions.toSet()};
+    state = {...newQuestions.toSet()};
     state.length.log(tag: 'Stored Questions');
   }
 

@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 ///## Displayed answer <i><small>(received from the domain layer)</small></i>
 ///
 ///```
-///final String uId;
 ///final String qId;
 ///final bool isRightAnswer;
 ///final String text;
@@ -15,7 +14,6 @@ import 'package:equatable/equatable.dart';
 ///
 ///It contains all the data for an answer to be displayed on the screen.
 class UiAnswer extends Equatable {
-  final String uId;
   final String qId;
   final bool isRightAnswer;
   final String text;
@@ -28,8 +26,7 @@ class UiAnswer extends Equatable {
   ///#### `UiAnswer` constructor
   ///<br>
   ///It contains all the data for an answer to be displayed on the screen.
-  UiAnswer(
-    this.uId, {
+  UiAnswer({
     required this.qId,
     required this.isRightAnswer,
     required this.text,
@@ -40,5 +37,5 @@ class UiAnswer extends Equatable {
 
   @override
   List<Object> get props =>
-      [uId, qId, isRightAnswer, text, url, verse, verseReference];
+      [qId, isRightAnswer, text, url, verse, verseReference];
 }

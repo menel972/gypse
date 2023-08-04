@@ -1,23 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
-import 'package:gypse/auth/domain/usecase/user_use_case.dart';
-import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
 import 'package:gypse/books/presentation/views/book_screen.dart';
-import 'package:gypse/common/providers/answers_provider.dart';
-import 'package:gypse/common/providers/questions_provider.dart';
-import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/utils/enums.dart';
-import 'package:gypse/game/domain/usecases/answers_use_cases.dart';
-import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
-import 'package:gypse/game/presentation/models/ui_answer.dart';
-import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 ///## Gypse navigation system <i><small>(using [GoRouter])</small></i>
 ///
@@ -31,22 +20,7 @@ GoRouter gypseRouter = GoRouter(
     GoRoute(
       path: Screen.initView.path,
       builder: (context, state) {
-        return InitScreen(
-          getUserUidUseCase: (WidgetRef ref) =>
-              ref.read(getUserUidUseCaseProvider).invoke(),
-          fetchQuestionUseCase: (WidgetRef ref) =>
-              ref.read(fetchQuestionsUseCaseProvider).invoke(),
-          fetchAnswerUseCase: (WidgetRef ref) =>
-              ref.read(fetchAnswersUseCaseProvider).invoke(),
-          getCurrentUserUseCase: (WidgetRef ref, String id) =>
-              ref.read(getCurrentUserUseCaseProvider).invoke(id),
-          storeQuestions: (WidgetRef ref, List<UiQuestion> questions) =>
-              ref.read(questionsProvider.notifier).addQuestions(questions),
-          storeAnswers: (WidgetRef ref, List<UiAnswer> answers) =>
-              ref.read(answersProvider.notifier).addAnswers(answers),
-          storeUser: (WidgetRef ref, UiUser user) =>
-              ref.read(userProvider.notifier).setCurrentUser(user),
-        );
+        return InitScreen();
       },
     ),
     // NOTE : AUTH SCREEN

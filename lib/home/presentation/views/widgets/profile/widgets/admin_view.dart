@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:gypse/common/providers/answers_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
@@ -39,9 +38,23 @@ class AdminView extends HookConsumerWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                children: ref
-                    .read(answersProvider.notifier)
-                    .getAdminViewAnswers(context, questions[i].uId),
+                children: questions[i]
+                    .answers
+                    .map((answer) => ListTile(
+                          leading: Icon(
+                            answer.isRightAnswer
+                                ? Icons.check_circle_outline
+                                : Icons.highlight_off,
+                            color: answer.isRightAnswer
+                                ? Theme.of(context).colorScheme.secondary
+                                : Theme.of(context).colorScheme.error,
+                          ),
+                          title: Text(
+                            answer.text,
+                            style: GypseFont.xs(),
+                          ),
+                        ))
+                    .toList(),
               ),
             ),
           ),

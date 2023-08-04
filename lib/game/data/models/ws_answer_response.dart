@@ -11,7 +11,6 @@ import 'package:gypse/game/domain/models/answer.dart';
 ///## Answer's response <i><small>(received from the database)</small></i>
 ///
 ///```
-///final String? uId;
 ///final String? questionId;
 ///final bool? isRightAnswer;
 ///final WsAnswerData? fr;
@@ -25,7 +24,6 @@ import 'package:gypse/game/domain/models/answer.dart';
 ///<br><br>
 ///It contains the database response for an answer.
 class WsAnswerResponse extends Equatable {
-  final String? uId;
   final String? questionId;
   final bool? isRightAnswer;
   final WsAnswerData? fr;
@@ -40,7 +38,6 @@ class WsAnswerResponse extends Equatable {
   ///<br><br>
   ///It contains the database response for an answer.
   WsAnswerResponse({
-    this.uId = '',
     this.questionId = '',
     this.isRightAnswer = false,
     this.fr,
@@ -49,7 +46,13 @@ class WsAnswerResponse extends Equatable {
   });
 
   @override
-  List<Object?> get props => [uId, questionId, isRightAnswer, fr, en, es];
+  List<Object?> get props => [
+        questionId,
+        isRightAnswer,
+        fr,
+        en,
+        es,
+      ];
 
   /// <i><small>`Data Layer`</small></i><br>
   /// <b>Tries to parse the database response in a [WsAnswerResponse].</b>
@@ -60,9 +63,8 @@ class WsAnswerResponse extends Equatable {
   factory WsAnswerResponse.fromMap(Map<String, dynamic>? map) {
     try {
       return WsAnswerResponse(
-        uId: map?['uId'] ?? '',
         questionId: map?['questionId'] ?? '',
-        isRightAnswer: map?['confirme'] ?? false,
+        isRightAnswer: map?['isRightAnswer'] ?? false,
         fr: WsAnswerData.fromMap(map?['fr']),
         en: WsAnswerData.fromMap(map?['en']),
         es: WsAnswerData.fromMap(map?['es']),
@@ -79,7 +81,6 @@ class WsAnswerResponse extends Equatable {
     switch (locale) {
       case Locales.fr:
         return Answer(
-          uId: uId ?? '',
           qId: questionId ?? '',
           isRightAnswer: isRightAnswer ?? false,
           answer: fr?.answer ?? '',
@@ -89,7 +90,6 @@ class WsAnswerResponse extends Equatable {
         );
       case Locales.en:
         return Answer(
-          uId: uId ?? '',
           qId: questionId ?? '',
           isRightAnswer: isRightAnswer ?? false,
           answer: en?.answer ?? '',
@@ -99,7 +99,6 @@ class WsAnswerResponse extends Equatable {
         );
       default:
         return Answer(
-          uId: uId ?? '',
           qId: questionId ?? '',
           isRightAnswer: isRightAnswer ?? false,
           answer: es?.answer ?? '',
@@ -156,10 +155,10 @@ class WsAnswerData extends Equatable {
   factory WsAnswerData.fromMap(Map<String, dynamic>? map) {
     try {
       return WsAnswerData(
-        answer: map?['texte'],
-        url: map?['link'],
-        verse: map?['verset'],
-        verseReference: map?['versetRef'],
+        answer: map?['answer'],
+        url: map?['url'],
+        verse: map?['verse'],
+        verseReference: map?['verseReference'],
       );
     } catch (e) {
       e.log();

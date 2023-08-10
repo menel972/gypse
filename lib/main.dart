@@ -1,15 +1,15 @@
-import 'dart:async';
-
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/common/style/theme.dart';
+import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:gypse/core/commons/current_user.dart';
 import 'package:gypse/core/commons/is_answered_menu.dart';
-import 'package:gypse/core/router.dart';
-import 'package:gypse/core/themes/theme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:provider/provider.dart';
 
@@ -26,9 +26,17 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   /// Start app
   runApp(const riverpod.ProviderScope(child: MyApp()));
-  await Future.delayed(const Duration(seconds: 1));
 }
 
 /// Creates the app using the [CupertinoApp.router] constructor and [GoRouter] to navigate
@@ -73,10 +81,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
-        routerDelegate: router.routerDelegate,
-        theme: theme,
+        routeInformationParser: gypseRouter.routeInformationParser,
+        routeInformationProvider: gypseRouter.routeInformationProvider,
+        routerDelegate: gypseRouter.routerDelegate,
+        theme: gypseTheme,
       ),
     );
   }

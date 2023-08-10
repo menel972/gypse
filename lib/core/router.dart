@@ -1,10 +1,8 @@
 import 'package:go_router/go_router.dart';
-import 'package:gypse/core/bloc/bloc_provider.dart';
+import 'package:gypse/core/bloc/bloc_provider.dart' as bloc;
 import 'package:gypse/core/commons/enums.dart';
 import 'package:gypse/core/errors/errors_screen.dart';
 import 'package:gypse/domain/entities/user_entity.dart';
-import 'package:gypse/presenation/auth/auth_screen.dart';
-import 'package:gypse/presenation/auth/bloc/switch_view_bloc.dart';
 import 'package:gypse/presenation/books/books_screen.dart';
 import 'package:gypse/presenation/connection_check/connection_check_screen.dart';
 import 'package:gypse/presenation/game/bloc/user_bloc.dart';
@@ -48,7 +46,7 @@ GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '${ScreenPaths.game}/:book',
-      builder: (context, state) => BlocProvider<UserBloc>(
+      builder: (context, state) => bloc.BlocProvider<UserBloc>(
           bloc: UserBloc(state.extra as List<AnsweredQuestion>),
           child: GameScreen(state.params['book']!)),
     ),
@@ -56,11 +54,11 @@ GoRouter router = GoRouter(
       path: ScreenPaths.books,
       builder: (context, state) => const BooksScreen(),
     ),
-    GoRoute(
-      path: ScreenPaths.auth,
-      builder: (context, state) => BlocProvider<SwitchViewBloc>(
-          bloc: SwitchViewBloc(1), child: const AuthScreen()),
-    ),
+    // GoRoute(
+    //   path: ScreenPaths.auth,
+    //   builder: (context, state) => BlocProvider<AuthViewsBloc>(
+    //       create: (_) => AuthViewsBloc(), child: AuthScreen()),
+    // ),
   ],
   errorBuilder: (context, state) =>
       ErrorsScreen(ErrorCode.routing, error: state.error!),

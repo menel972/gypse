@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:635658051968:android:dbd8a99a36b6483f256165",
         "android_client_info": {
-          "package_name": "com.prod.bible_quiz"
+          "package_name": "com.example.bible_quiz"
         }
       },
       "oauth_client": [
@@ -42,10 +42,10 @@
               "client_type": 3
             },
             {
-              "client_id": "635658051968-ig9fgef45ffg8aehqovahdd1rrvivnce.apps.googleusercontent.com",
+              "client_id": "635658051968-14jhe8skp5dslo3atd785s6o5imis6s1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.bibleQuiz"
+                "bundle_id": "com.example.gypse"
               }
             }
           ]
@@ -56,7 +56,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:635658051968:android:a17e9dd6333a3ac9256165",
         "android_client_info": {
-          "package_name": "com.prod.gypse"
+          "package_name": "com.example.gypse"
         }
       },
       "oauth_client": [
@@ -81,10 +81,49 @@
               "client_type": 3
             },
             {
-              "client_id": "635658051968-ig9fgef45ffg8aehqovahdd1rrvivnce.apps.googleusercontent.com",
+              "client_id": "635658051968-14jhe8skp5dslo3atd785s6o5imis6s1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.bibleQuiz"
+                "bundle_id": "com.example.gypse"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635658051968:android:cf2073e2381be835256165",
+        "android_client_info": {
+          "package_name": "com.example.gypse_installer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635658051968-l3l9vu2q931rvpjs2ro7cg92dv6fkv16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVko6hwucDs4tRTZ_fL_LfcpRELp3TcFM"
+        },
+        {
+          "current_key": "AIzaSyDHHLcR4UWoXTbschYsGVG6eIgYJeQmjJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635658051968-l3l9vu2q931rvpjs2ro7cg92dv6fkv16.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "635658051968-14jhe8skp5dslo3atd785s6o5imis6s1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gypse"
               }
             }
           ]

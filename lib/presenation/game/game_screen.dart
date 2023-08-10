@@ -119,7 +119,8 @@ class GameScreen extends riverpod.HookConsumerWidget {
                                   ),
                                 ),
                               ),
-                            )),
+                      ),
+                    ),
                   ));
         });
   }

@@ -8,10 +8,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/theme.dart';
 import 'package:gypse/common/utils/gypse_router.dart';
-import 'package:gypse/core/commons/current_user.dart';
-import 'package:gypse/core/commons/is_answered_menu.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
-import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 
@@ -72,20 +69,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       DeviceOrientation.portraitUp,
     ]);
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: CurrentUser()),
-        ChangeNotifierProvider.value(value: IsAnsweredMenu()),
-      ],
-      child: MaterialApp.router(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        routeInformationParser: gypseRouter.routeInformationParser,
-        routeInformationProvider: gypseRouter.routeInformationProvider,
-        routerDelegate: gypseRouter.routerDelegate,
-        theme: gypseTheme,
-      ),
+    return MaterialApp.router(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      routeInformationParser: gypseRouter.routeInformationParser,
+      routeInformationProvider: gypseRouter.routeInformationProvider,
+      routerDelegate: gypseRouter.routerDelegate,
+      theme: gypseTheme,
     );
   }
 }

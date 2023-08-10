@@ -9,7 +9,6 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/core/l10n/localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ForgottenPasswordView extends HookConsumerWidget {
@@ -33,14 +32,14 @@ class ForgottenPasswordView extends HookConsumerWidget {
         children: [
           Dimensions.s(context).spaceH(),
           Text(
-            words(context).title_forget_mdp,
+            'Mot de passe oublié ?',
             style: GypseFont.xl(bold: true),
             textAlign: TextAlign.center,
             maxLines: 2,
           ),
           Dimensions.xxs(context).spaceH(),
           Text(
-            words(context).txt_forget_mdp,
+            'Réinitilisez votre mot de passe',
             style: GypseFont.m(bold: true),
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -48,7 +47,7 @@ class ForgottenPasswordView extends HookConsumerWidget {
           Dimensions.xs(context).spaceH(),
           TextFormField(
             decoration: InputDecoration(
-              labelText: words(context).label_mail,
+              labelText: 'Adresse mail',
               suffixIcon: Icons.alternate_email.show(),
             ),
             textInputAction: TextInputAction.done,
@@ -80,7 +79,7 @@ class ForgottenPasswordView extends HookConsumerWidget {
                       await forgottenPasswordUseCase(credentials.email)
                           .then((bool? result) {
                         if (result == true) {
-                          words(context).txt_mail.success(context);
+                          'Un mail vous a été envoyé'.success(context);
                           result?.log(tag: 'Change password error');
                         }
                       }).catchError((e) {
@@ -90,7 +89,7 @@ class ForgottenPasswordView extends HookConsumerWidget {
                       });
                     }
                   },
-                  label: words(context).btn_send,
+                  label: 'Envoyer',
                   textColor: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
@@ -101,7 +100,7 @@ class ForgottenPasswordView extends HookConsumerWidget {
                   onPressed: () => ref
                       .read(authStateNotifierProvider.notifier)
                       .onViewChanged(1),
-                  label: words(context).btn_annule,
+                  label: 'Annuler',
                   textColor: Theme.of(context).colorScheme.onPrimary,
                   backgroundColor:
                       Theme.of(context).colorScheme.onPrimary.withOpacity(0.2),

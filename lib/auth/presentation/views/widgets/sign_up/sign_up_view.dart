@@ -15,7 +15,6 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/core/l10n/localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignUpView extends HookConsumerWidget {
@@ -52,7 +51,7 @@ class SignUpView extends HookConsumerWidget {
         children: [
           Dimensions.xxs(context).spaceH(),
           Text(
-            words(context).btn_signin,
+            'Connexion',
             style: GypseFont.xxl(bold: true),
             textAlign: TextAlign.center,
           ),
@@ -60,7 +59,7 @@ class SignUpView extends HookConsumerWidget {
           // NOTE : USER NAME
           TextFormField(
             decoration: InputDecoration(
-              labelText: words(context).label_name,
+              labelText: 'Nom d\'utilisateur',
               suffixIcon: Icons.person_outline.show(),
             ),
             textInputAction: TextInputAction.next,
@@ -82,7 +81,7 @@ class SignUpView extends HookConsumerWidget {
           // NOTE : EMAIL
           TextFormField(
             decoration: InputDecoration(
-              labelText: words(context).label_mail,
+              labelText: 'Adresse mail',
               suffixIcon: Icons.alternate_email.show(),
             ),
             textInputAction: TextInputAction.next,
@@ -104,7 +103,7 @@ class SignUpView extends HookConsumerWidget {
           // NOTE : PASSWORD
           TextFormField(
             decoration: InputDecoration(
-              labelText: words(context).label_mdp,
+              labelText: 'Mot de passe',
               suffixIcon: IconButton(
                 onPressed: () => ref
                     .read(signUpCredentialsStateNotifierProvider.notifier)
@@ -136,7 +135,7 @@ class SignUpView extends HookConsumerWidget {
             context,
             onPressed: () async {
               if (!isFormValid()) {
-                words(context).snack_error_form.failure(context);
+                'Le formulaire n\'est pas valide'.failure(context);
                 ref
                     .read(loginStateNotifierProvider.notifier)
                     .updateState(LoginState.unauthenticated);
@@ -178,7 +177,7 @@ class SignUpView extends HookConsumerWidget {
                 }
               }
             },
-            label: words(context).btn_signin,
+            label: 'Connexion',
             textColor: Theme.of(context).colorScheme.onPrimary,
           ),
         ],

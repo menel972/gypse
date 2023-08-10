@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/utils/enums.dart';
-import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,7 +32,7 @@ class HomeNavigationBar extends HookConsumerWidget {
                 updatePage(0);
               },
               splashRadius: 20,
-              splashColor: Couleur.secondary,
+              splashColor: Theme.of(context).colorScheme.secondary,
             ),
             label: 'Accueil'),
         BottomNavigationBarItem(
@@ -48,7 +47,7 @@ class HomeNavigationBar extends HookConsumerWidget {
                 updatePage(1);
               },
               splashRadius: 20,
-              splashColor: Couleur.secondary,
+              splashColor: Theme.of(context).colorScheme.secondary,
             ),
             label: 'Scores'),
         BottomNavigationBarItem(
@@ -63,7 +62,7 @@ class HomeNavigationBar extends HookConsumerWidget {
                 updatePage(2);
               },
               splashRadius: 20,
-              splashColor: Couleur.secondary,
+              splashColor: Theme.of(context).colorScheme.secondary,
             ),
             label: 'Compte'),
       ],

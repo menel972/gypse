@@ -11,6 +11,6 @@ class HomeNavigationState extends StateNotifier<int> {
 }
 
 final homeNavigationStateProvider =
-    StateNotifierProvider.autoDispose<HomeNavigationState, int>((ref) {
+    StateNotifierProvider<HomeNavigationState, int>((ref) {
   return HomeNavigationState();
 });

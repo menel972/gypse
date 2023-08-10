@@ -203,6 +203,7 @@ enum Screen {
   homeView('/home'),
   gameView('/game'),
   booksView('/books'),
+  settingsView('/settings'),
   noQuestionView('/no_question'),
   errorView('/error');
 

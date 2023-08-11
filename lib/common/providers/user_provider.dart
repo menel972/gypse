@@ -20,7 +20,7 @@ class UserProvider extends StateNotifier<UiUser?> {
   }
 
   void updateSettings(UiGypseSettings newSettings) {
-    state?.settings = newSettings;
+    state = state?.copyWith(settings: newSettings);
     debugPrint(
         '[Settings Updated] : Level ${state?.settings.level}, Time ${state?.settings.time}');
   }

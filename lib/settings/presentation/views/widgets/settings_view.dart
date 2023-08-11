@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 
@@ -19,7 +21,8 @@ class SettingsView extends StatelessWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () => context
+                .go('${Screen.settingsView.path}/${Screen.gameSettings.path}'),
             splashColor: Theme.of(context).colorScheme.secondary,
             child: TextFormField(
               enabled: false,

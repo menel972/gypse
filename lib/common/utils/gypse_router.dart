@@ -7,6 +7,7 @@ import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
+import 'package:gypse/settings/presentation/views/game_settings/game_settings.dart';
 import 'package:gypse/settings/presentation/views/settings_screen.dart';
 
 ///## Gypse navigation system <i><small>(using [GoRouter])</small></i>
@@ -42,7 +43,14 @@ GoRouter gypseRouter = GoRouter(
         builder: (context, state) => GameScreen(state.params['book']!)),
     // NOTE : Settings SCREEN
     GoRoute(
-        path: Screen.settingsView.path,
-        builder: (context, state) => SettingsScreen()),
+      path: Screen.settingsView.path,
+      builder: (context, state) => SettingsScreen(),
+      routes: [
+        GoRoute(
+          path: Screen.gameSettings.path,
+          builder: (context, state) => GameSettings(),
+        ),
+      ],
+    ),
   ],
 );

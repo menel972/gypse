@@ -42,7 +42,8 @@ class SettingsView extends StatelessWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () => context.go(
+                '${Screen.settingsView.path}/${Screen.profileSettings.path}'),
             splashColor: Theme.of(context).colorScheme.secondary,
             child: TextFormField(
               enabled: false,

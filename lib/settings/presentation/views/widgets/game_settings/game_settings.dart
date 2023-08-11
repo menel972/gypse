@@ -6,8 +6,8 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/settings/presentation/views/game_settings/level_settings.dart';
-import 'package:gypse/settings/presentation/views/game_settings/time_settings.dart';
+import 'package:gypse/settings/presentation/views/widgets/game_settings/level_settings.dart';
+import 'package:gypse/settings/presentation/views/widgets/game_settings/time_settings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class GameSettings extends HookConsumerWidget {

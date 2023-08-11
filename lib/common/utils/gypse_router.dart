@@ -7,8 +7,9 @@ import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
-import 'package:gypse/settings/presentation/views/game_settings/game_settings.dart';
 import 'package:gypse/settings/presentation/views/settings_screen.dart';
+import 'package:gypse/settings/presentation/views/widgets/game_settings/game_settings.dart';
+import 'package:gypse/settings/presentation/views/widgets/profile_settings/profile_settings.dart';
 
 ///## Gypse navigation system <i><small>(using [GoRouter])</small></i>
 ///
@@ -49,6 +50,10 @@ GoRouter gypseRouter = GoRouter(
         GoRoute(
           path: Screen.gameSettings.path,
           builder: (context, state) => GameSettings(),
+        ),
+        GoRoute(
+          path: Screen.profileSettings.path,
+          builder: (context, state) => ProfileSettings(),
         ),
       ],
     ),

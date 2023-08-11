@@ -205,6 +205,7 @@ enum Screen {
   booksView('/books'),
   settingsView('/settings'),
   gameSettings('game'),
+  profileSettings('profile'),
   noQuestionView('/no_question'),
   errorView('/error');
 

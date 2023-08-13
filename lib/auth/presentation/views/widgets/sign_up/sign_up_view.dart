@@ -6,6 +6,7 @@ import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/auth/presentation/views/widgets/sign_up/states/check_legals_states.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up/states/sign_up_state.dart';
 import 'package:gypse/auth/presentation/views/widgets/states/credentials_state.dart';
 import 'package:gypse/auth/presentation/views/widgets/states/login_state.dart';
@@ -15,10 +16,12 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/settings/domain/use_cases/cloud_storage_use_cases.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignUpView extends HookConsumerWidget {
   late CredentialsState credentials;
+  late bool legals;
 
   SignUpView({super.key});
 
@@ -31,6 +34,8 @@ class SignUpView extends HookConsumerWidget {
     });
 
     credentials = ref.watch(signUpCredentialsStateNotifierProvider);
+
+    legals = ref.watch(checkLegalsNotifierProvider);
 
     bool isFormValid() => ref
         .read(signUpCredentialsStateNotifierProvider.notifier)
@@ -45,13 +50,16 @@ class SignUpView extends HookConsumerWidget {
     setUserNameUseCase(String userName) =>
         ref.read(setUserNameUseCaseProvider).invoke(userName);
 
+    Future<void> fetchLegalsUseCase(String path) =>
+        ref.read(fetchLegalsUseCaseProvider).invoke(context, path);
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Dimensions.xxs(context).spaceH(),
           Text(
-            'Connexion',
+            'Création du compte',
             style: GypseFont.xxl(bold: true),
             textAlign: TextAlign.center,
           ),
@@ -129,6 +137,33 @@ class SignUpView extends HookConsumerWidget {
               maxLines: 1,
             ),
           ),
+          Dimensions.xxxs(context).spaceH(),
+          CheckboxListTile(
+            value: legals,
+            onChanged: (_) => ref
+                .read(checkLegalsNotifierProvider.notifier)
+                .onCheckBoxClick(),
+            activeColor: Theme.of(context).colorScheme.secondary,
+            title: TextButton(
+              onPressed: () async => await fetchLegalsUseCase(Legals.cgu.path),
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'J\'accepte les ',
+                      style: GypseFont.xs(),
+                    ),
+                    TextSpan(
+                      text: 'conditions d\'utilisation',
+                      style: GypseFont.xs(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           Dimensions.xs(context).spaceH(),
           // NOTE : SIGNUP BUTTON
           GypseElevatedButton(
@@ -136,6 +171,12 @@ class SignUpView extends HookConsumerWidget {
             onPressed: () async {
               if (!isFormValid()) {
                 'Le formulaire n\'est pas valide'.failure(context);
+                ref
+                    .read(loginStateNotifierProvider.notifier)
+                    .updateState(LoginState.unauthenticated);
+              } else if (!legals) {
+                'Vous devez accepter les conditions d\'utilisation'
+                    .failure(context);
                 ref
                     .read(loginStateNotifierProvider.notifier)
                     .updateState(LoginState.unauthenticated);
@@ -177,7 +218,7 @@ class SignUpView extends HookConsumerWidget {
                 }
               }
             },
-            label: 'Connexion',
+            label: 'Créer le compte',
             textColor: Theme.of(context).colorScheme.onPrimary,
           ),
         ],

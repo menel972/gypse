@@ -1,12 +1,10 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
-import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
-import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
+import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
 import 'package:gypse/settings/presentation/views/settings_screen.dart';
 import 'package:gypse/settings/presentation/views/widgets/about_gypse/about_gypse.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/game_settings.dart';
@@ -30,8 +28,7 @@ GoRouter gypseRouter = GoRouter(
     // NOTE : AUTH SCREEN
     GoRoute(
       path: Screen.authView.path,
-      builder: (context, state) => BlocProvider<AuthViewsBloc>(
-          create: (_) => AuthViewsBloc(), child: AuthScreen()),
+      builder: (context, state) => AuthScreen(),
     ),
     // NOTE : HOME SCREEN
     GoRoute(

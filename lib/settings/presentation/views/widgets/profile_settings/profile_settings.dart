@@ -104,7 +104,7 @@ class ProfileSettings extends HookConsumerWidget {
                     child: GypseElevatedButton(
                       context,
                       onPressed: () => DeleteAccountDialog(context),
-                      label: 'Supression',
+                      label: 'Suppression',
                       textColor: Theme.of(context).colorScheme.secondary,
                       backgroundColor: Theme.of(context)
                           .colorScheme

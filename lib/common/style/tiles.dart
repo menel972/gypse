@@ -15,19 +15,23 @@ class GypseRadioButton extends RadioListTile {
     required super.groupValue,
     required super.onChanged,
     required this.textTitle,
-    required this.textSubTitle,
+    this.textSubTitle = '',
   });
+
+
+  @override
+  bool? get dense => true;
 
   @override
   EdgeInsetsGeometry? get contentPadding => const EdgeInsets.all(0);
 
   @override
-  Color? get activeColor => Theme.of(context).colorScheme.primary;
+  Color? get activeColor => Theme.of(context).colorScheme.secondary;
 
   @override
   Widget? get title => Text(
         textTitle,
-        style: GypseFont.s(color: Theme.of(context).colorScheme.primary),
+        style: GypseFont.s(color: Theme.of(context).colorScheme.onPrimary),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
@@ -35,7 +39,7 @@ class GypseRadioButton extends RadioListTile {
   @override
   Widget? get subtitle => Text(
         textSubTitle,
-        style: GypseFont.xs(color: Theme.of(context).colorScheme.primary),
+        style: GypseFont.xs(color: Theme.of(context).colorScheme.onPrimary),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );

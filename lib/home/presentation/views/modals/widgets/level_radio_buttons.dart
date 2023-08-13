@@ -38,8 +38,7 @@ class _LevelRadioButtonsState extends ConsumerState<LevelRadioButtons> {
       Expanded(
         child: GypseRadioButton(
           context,
-          textTitle: 'Moyen',
-          textSubTitle: '${Level.medium.propositions} Choix',
+          textTitle: '${Level.medium.propositions} Choix',
           value: Level.medium,
           groupValue: user?.settings.level,
           onChanged: (_) => setState(() {
@@ -51,7 +50,7 @@ class _LevelRadioButtonsState extends ConsumerState<LevelRadioButtons> {
       Expanded(
         child: GypseRadioButton(
           context,
-          textTitle: 'Difficile',
+          textTitle: 'Expert',
           textSubTitle: '${Level.hard.propositions} Choix',
           value: Level.hard,
           groupValue: user?.settings.level,

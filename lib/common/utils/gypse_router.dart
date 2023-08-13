@@ -8,6 +8,7 @@ import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
 import 'package:gypse/settings/presentation/views/settings_screen.dart';
+import 'package:gypse/settings/presentation/views/widgets/about_gypse/about_gypse.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/game_settings.dart';
 import 'package:gypse/settings/presentation/views/widgets/profile_settings/profile_settings.dart';
 
@@ -54,6 +55,10 @@ GoRouter gypseRouter = GoRouter(
         GoRoute(
           path: Screen.profileSettings.path,
           builder: (context, state) => ProfileSettings(),
+        ),
+        GoRoute(
+          path: Screen.aboutGypse.path,
+          builder: (context, state) => AboutGypse(),
         ),
       ],
     ),

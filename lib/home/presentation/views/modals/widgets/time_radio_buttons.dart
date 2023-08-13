@@ -52,7 +52,7 @@ class _TimeRadioButtonsState extends ConsumerState<TimeRadioButtons> {
       Expanded(
         child: GypseRadioButton(
           context,
-          textTitle: 'Difficile',
+          textTitle: 'Expert',
           textSubTitle: '${Time.hard.seconds} Sec',
           value: Time.hard,
           groupValue: user?.settings.time,

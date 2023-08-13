@@ -12,7 +12,7 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
-import 'package:gypse/home/presentation/views/widgets/profile/dialogs/delete_account_dialog.dart';
+import 'package:gypse/settings/presentation/views/widgets/profile_settings/dialogs/delete_account_dialog.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserCredentialsView extends HookConsumerWidget {

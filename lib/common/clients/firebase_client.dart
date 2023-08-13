@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -34,6 +35,12 @@ class FirebaseClients {
   ///
   ///An instance of the entry point of the <b>Firebase Analytics SDK</b>.
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+  ///## Firebase Cloud Storage client
+  ///
+  ///The cloud storage reference.
+  final Reference cloudStorage =
+      FirebaseStorage.instance.refFromURL(cloudStorageUrl);
 }
 
 AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
@@ -60,4 +67,9 @@ AutoDisposeProvider<FirebaseAnalytics> get firebaseAnalyticsProvider =>
     Provider.autoDispose<FirebaseAnalytics>(
       (AutoDisposeProviderRef<FirebaseAnalytics> ref) =>
           FirebaseClients().analytics,
+    );
+
+AutoDisposeProvider<Reference> get cloudStorageProvider =>
+    Provider.autoDispose<Reference>(
+      (AutoDisposeProviderRef<Reference> ref) => FirebaseClients().cloudStorage,
     );

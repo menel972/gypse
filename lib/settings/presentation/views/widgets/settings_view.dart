@@ -63,7 +63,8 @@ class SettingsView extends StatelessWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () => context
+                .go('${Screen.settingsView.path}/${Screen.aboutGypse.path}'),
             splashColor: Theme.of(context).colorScheme.secondary,
             child: TextFormField(
               enabled: false,
@@ -83,7 +84,7 @@ class SettingsView extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomRight,
             child: Text(
-              'version de l\'app: 1.2.0',
+              'version de l\'application : $appVersion',
               style: GypseFont.xs(),
             ),
           ),

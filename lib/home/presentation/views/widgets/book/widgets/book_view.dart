@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:gypse/books/presentation/views/states/book_state.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/cards.dart';
@@ -9,6 +8,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/home/presentation/views/widgets/book/states/book_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class BookView extends HookConsumerWidget {

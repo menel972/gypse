@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/auth/presentation/views/states/auth_views_bloc.dart';
-import 'package:gypse/books/presentation/views/book_screen.dart';
+import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';

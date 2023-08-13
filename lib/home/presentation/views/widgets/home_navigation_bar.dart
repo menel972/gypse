@@ -37,6 +37,21 @@ class HomeNavigationBar extends HookConsumerWidget {
             label: 'Accueil'),
         BottomNavigationBarItem(
             icon: IconButton(
+              icon: const Icon(Icons.menu_book_outlined),
+              onPressed: () {
+                ref.read(logNavigationUseCaseProvider).invoke(
+                      from: Screen.homeView.path,
+                      to: Screen.homeView.path,
+                      details: 'books',
+                    );
+                updatePage(1);
+              },
+              splashRadius: 20,
+              splashColor: Theme.of(context).colorScheme.secondary,
+            ),
+            label: 'Livres'),
+        BottomNavigationBarItem(
+            icon: IconButton(
               icon: const Icon(Icons.bar_chart_outlined),
               onPressed: () {
                 ref.read(logNavigationUseCaseProvider).invoke(
@@ -44,27 +59,12 @@ class HomeNavigationBar extends HookConsumerWidget {
                       to: Screen.homeView.path,
                       details: 'scores',
                     );
-                updatePage(1);
-              },
-              splashRadius: 20,
-              splashColor: Theme.of(context).colorScheme.secondary,
-            ),
-            label: 'Scores'),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: const Icon(Icons.person_outline),
-              onPressed: () {
-                ref.read(logNavigationUseCaseProvider).invoke(
-                      from: Screen.homeView.path,
-                      to: Screen.homeView.path,
-                      details: 'profil',
-                    );
                 updatePage(2);
               },
               splashRadius: 20,
               splashColor: Theme.of(context).colorScheme.secondary,
             ),
-            label: 'Compte'),
+            label: 'Scores'),
       ],
     );
   }

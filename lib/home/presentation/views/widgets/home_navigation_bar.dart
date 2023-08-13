@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/utils/enums.dart';
-import 'package:gypse/core/themes/theme.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,9 +32,24 @@ class HomeNavigationBar extends HookConsumerWidget {
                 updatePage(0);
               },
               splashRadius: 20,
-              splashColor: Couleur.secondary,
+              splashColor: Theme.of(context).colorScheme.secondary,
             ),
             label: 'Accueil'),
+        BottomNavigationBarItem(
+            icon: IconButton(
+              icon: const Icon(Icons.import_contacts_outlined),
+              onPressed: () {
+                ref.read(logNavigationUseCaseProvider).invoke(
+                      from: Screen.homeView.path,
+                      to: Screen.homeView.path,
+                      details: 'books',
+                    );
+                updatePage(1);
+              },
+              splashRadius: 20,
+              splashColor: Theme.of(context).colorScheme.secondary,
+            ),
+            label: 'Livres'),
         BottomNavigationBarItem(
             icon: IconButton(
               icon: const Icon(Icons.bar_chart_outlined),
@@ -45,27 +59,12 @@ class HomeNavigationBar extends HookConsumerWidget {
                       to: Screen.homeView.path,
                       details: 'scores',
                     );
-                updatePage(1);
-              },
-              splashRadius: 20,
-              splashColor: Couleur.secondary,
-            ),
-            label: 'Scores'),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: const Icon(Icons.person_outline),
-              onPressed: () {
-                ref.read(logNavigationUseCaseProvider).invoke(
-                      from: Screen.homeView.path,
-                      to: Screen.homeView.path,
-                      details: 'profil',
-                    );
                 updatePage(2);
               },
               splashRadius: 20,
-              splashColor: Couleur.secondary,
+              splashColor: Theme.of(context).colorScheme.secondary,
             ),
-            label: 'Compte'),
+            label: 'Scores'),
       ],
     );
   }

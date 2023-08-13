@@ -34,21 +34,6 @@ class HomeView extends HookConsumerWidget {
             backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
         ),
-        Dimensions.xxs(context).spaceH(),
-        Dimensions.s(context).paddingW(
-          GypseElevatedButton(
-            context,
-            onPressed: () {
-              ref.read(logNavigationUseCaseProvider).invoke(
-                  from: Screen.homeView.path, to: Screen.booksView.path);
-              context.go(Screen.booksView.path);
-            },
-            label: 'Choisir un livre',
-            textColor: Theme.of(context).colorScheme.secondaryContainer,
-            backgroundColor:
-                Theme.of(context).colorScheme.surface.withOpacity(0.2),
-          ),
-        ),
         Dimensions.xs(context).spaceH(),
       ],
     );

@@ -16,7 +16,6 @@ import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/common/utils/strings.dart';
-import 'package:gypse/core/l10n/localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthScreen extends HookConsumerWidget {
@@ -80,12 +79,12 @@ class AuthScreen extends HookConsumerWidget {
                             .onViewChanged(1),
                         child: RichText(
                           text: TextSpan(
-                            text: words(context).txt_yes_account,
+                            text: 'Déjà un compte ?',
                             style: GypseFont.xs(),
                             children: [
                               TextSpan(text: ' '),
                               TextSpan(
-                                  text: words(context).txt_signin,
+                                  text: 'Connectez-vous',
                                   style: GypseFont.s(
                                       color: Theme.of(context)
                                           .colorScheme
@@ -100,12 +99,12 @@ class AuthScreen extends HookConsumerWidget {
                             .onViewChanged(0),
                         child: RichText(
                           text: TextSpan(
-                            text: words(context).txt_no_account,
+                            text: 'Pas encore de compte ?',
                             style: GypseFont.xs(),
                             children: [
                               TextSpan(text: ' '),
                               TextSpan(
-                                  text: words(context).txt_signup,
+                                  text: 'Créer un compte',
                                   style: GypseFont.s(
                                       color: Theme.of(context)
                                           .colorScheme

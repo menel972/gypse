@@ -1,16 +1,25 @@
-# gypse
+# Gypse - Bible Quiz Mobile App
 
-A new Flutter project.
+<p align="center">
+<img src="assets/images/appicon_gypse.png" width="200">
+</p>
 
-## Getting Started
+**Gypse** is a captivating Bible quiz mobile application developed to enhance your knowledge of the Bible in an engaging and interactive way. With a user-friendly interface and a range of exciting features, Gypse offers both casual and devoted users a chance to explore the scriptures while having fun.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Book-specific Quizzes**: Test your knowledge of each book of the Bible with our carefully crafted quizzes.
+- **Random Quizzes**: Challenge yourself with random questions from different parts of the Bible.
+- **Difficulty Settings**: Adjust the number of options per question and the time limit for an added challenge.
+- **Biblical Excerpts**: Read contextual excerpts from the Bible to deepen your understanding.
+- **Direct Link to Bible**: Access the full Bible passage through a link to [YouVersion](https://www.bible.com).
+- **No Ads or In-App Purchases**: Enjoy a distraction-free experience without any ads or in-app purchases.
+- **Performance Stats**: Track your scores and gain insights into your progress.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Contact
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+If you have questions or feedback, feel free to reach out to us at <gypse.app@gmail.com>.
+
+Thank you for choosing Gypse to explore the Bible in an exciting and educational way!
+
+© 2023 Gypse App. All Rights Reserved.

@@ -203,6 +203,10 @@ enum Screen {
   homeView('/home'),
   gameView('/game'),
   booksView('/books'),
+  settingsView('/settings'),
+  gameSettings('game'),
+  profileSettings('profile'),
+  aboutGypse('about'),
   noQuestionView('/no_question'),
   errorView('/error');
 
@@ -217,4 +221,13 @@ enum EventName {
 
   final String name;
   const EventName(this.name);
+}
+
+enum Legals {
+  cgu('legals/gypse_cgu_1_0.pdf'),
+  privacy('legals/gypse_privacy_1_0.pdf'),
+  legal('legals/gypse_legals_1_0.pdf');
+
+  final String path;
+  const Legals(this.path);
 }

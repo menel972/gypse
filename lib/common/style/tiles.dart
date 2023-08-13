@@ -117,6 +117,6 @@ class AnswerPropositionTile extends ListTile {
 
   @override
   ShapeBorder? get shape => RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
       side: BorderSide(color: borderColor, width: 2));
 }

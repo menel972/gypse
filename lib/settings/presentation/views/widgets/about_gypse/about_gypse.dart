@@ -3,6 +3,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/settings/domain/use_cases/cloud_storage_use_cases.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,7 +22,13 @@ class AboutGypse extends HookConsumerWidget {
           style: GypseFont.m(),
         ),
       ),
-      body: Padding(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('$imagesPath/home_bkg.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         padding: EdgeInsets.symmetric(
           vertical: Dimensions.xs(context).height,
           horizontal: Dimensions.xs(context).width,

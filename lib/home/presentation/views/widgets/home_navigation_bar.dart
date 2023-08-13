@@ -37,7 +37,7 @@ class HomeNavigationBar extends HookConsumerWidget {
             label: 'Accueil'),
         BottomNavigationBarItem(
             icon: IconButton(
-              icon: const Icon(Icons.menu_book_outlined),
+              icon: const Icon(Icons.import_contacts_outlined),
               onPressed: () {
                 ref.read(logNavigationUseCaseProvider).invoke(
                       from: Screen.homeView.path,

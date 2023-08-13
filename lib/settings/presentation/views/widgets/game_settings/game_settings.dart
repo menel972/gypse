@@ -6,6 +6,7 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/level_settings.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/time_settings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,65 +30,92 @@ class GameSettings extends HookConsumerWidget {
           ),
           automaticallyImplyLeading: false,
         ),
-        body: ListView.separated(
-          padding: EdgeInsets.only(
-            top: Dimensions.xs(context).height,
-            left: Dimensions.xs(context).width,
-            right: Dimensions.xs(context).width,
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('$imagesPath/home_bkg.png'),
+              fit: BoxFit.cover,
+            ),
           ),
-          itemCount: 5,
-          separatorBuilder: (context, index) {
-            switch (index) {
-              case 0:
-                return Dimensions.xxs(context).spaceH();
-              case 1:
-                return Divider(
-                  color:
-                      Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),
-                  height: Dimensions.xs(context).height,
-                );
-              case 2:
-                return Dimensions.xxs(context).spaceH();
-              case 3:
-                return Dimensions.xs(context).spaceH();
-              default:
-                return SizedBox(height: 0);
-            }
-          },
-          itemBuilder: (context, index) => [
-            Text('Nombre de propositions :', style: GypseFont.m()),
-            LevelSettings(),
-            Text('Temps :', style: GypseFont.m()),
-            TimeSettings(),
-            Row(children: [
-              Expanded(
-                child: GypseElevatedButton(
-                  context,
-                  onPressed: () => Navigator.of(context).pop(),
-                  label: 'Annuler',
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  textColor: Theme.of(context).colorScheme.primary,
+          child: ListView.separated(
+            padding: EdgeInsets.only(
+              top: Dimensions.xs(context).height,
+              left: Dimensions.xs(context).width,
+              right: Dimensions.xs(context).width,
+            ),
+            itemCount: 3,
+            separatorBuilder: (context, index) {
+              return index == 0
+                  ? Dimensions.xxs(context).spaceH()
+                  : Dimensions.xs(context).spaceH();
+            },
+            itemBuilder: (context, index) => [
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface.withOpacity(0.1),
+                  border: Border.all(
+                    color: const Color.fromRGBO(70, 96, 192, 1),
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                padding: Dimensions.xxs(context).pad(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text('Nombre de propositions :', style: GypseFont.m()),
+                    LevelSettings(),
+                  ],
                 ),
               ),
-              Dimensions.xxs(context).spaceW(),
-              Expanded(
-                child: GypseElevatedButton(
-                  context,
-                  onPressed: () {
-                    if (!user.isNull) {
-                      onUserChangedUseCase(context, user!);
-                    } else {
-                      'No User Error'.failure(context);
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  label: 'Valider',
-                  textColor: Theme.of(context).colorScheme.surface,
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface.withOpacity(0.1),
+                  border: Border.all(
+                    color: const Color.fromRGBO(70, 96, 192, 1),
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                padding: Dimensions.xxs(context).pad(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text('Temps :', style: GypseFont.m()),
+                    TimeSettings(),
+                  ],
                 ),
               ),
-            ]),
-          ][index],
+              Row(children: [
+                Expanded(
+                  child: GypseElevatedButton(
+                    context,
+                    onPressed: () => Navigator.of(context).pop(),
+                    label: 'Annuler',
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    textColor: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                Dimensions.xxs(context).spaceW(),
+                Expanded(
+                  child: GypseElevatedButton(
+                    context,
+                    onPressed: () {
+                      if (!user.isNull) {
+                        onUserChangedUseCase(context, user!);
+                      } else {
+                        'No User Error'.failure(context);
+                      }
+                      Navigator.of(context).pop();
+                    },
+                    label: 'Valider',
+                    textColor: Theme.of(context).colorScheme.surface,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ]),
+            ][index],
+          ),
         ),
       ),
     );

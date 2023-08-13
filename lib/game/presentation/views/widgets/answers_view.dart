@@ -54,6 +54,7 @@ class AnswersView extends HookConsumerWidget {
 
                 if (!gameState.selectedAnswers.contains(index)) {
                   return Material(
+                    borderRadius: BorderRadius.circular(20),
                     child: AnswerPropositionTile(
                       context,
                       answer: answer,
@@ -73,6 +74,7 @@ class AnswersView extends HookConsumerWidget {
 
                 if (!answer.isRightAnswer) {
                   return Material(
+                    borderRadius: BorderRadius.circular(20),
                     child: AnswerPropositionTile.error(
                       context,
                       answer: answer,
@@ -81,6 +83,7 @@ class AnswersView extends HookConsumerWidget {
                   );
                 }
                 return Material(
+                  borderRadius: BorderRadius.circular(20),
                   child: AnswerPropositionTile.valid(
                     context,
                     answer: answer,

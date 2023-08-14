@@ -29,7 +29,7 @@ class ProfileSettings extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Informations personnelles',
+          'Mon profil',
           style: GypseFont.m(),
         ),
       ),

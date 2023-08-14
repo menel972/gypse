@@ -32,7 +32,7 @@ class SettingsView extends StatelessWidget {
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                   suffix: Icon(
-                Icons.casino_outlined,
+                Icons.gamepad_outlined,
                 color: Theme.of(context).colorScheme.onPrimary,
               )),
             ),
@@ -49,7 +49,7 @@ class SettingsView extends StatelessWidget {
               enabled: false,
               style:
                   GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-              initialValue: 'Voir le profil',
+              initialValue: 'Voir mon profil',
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                   suffix: Icon(

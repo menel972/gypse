@@ -70,7 +70,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
 
   void setSettings(UiGypseSettings settings) {
     state = state.copyWith(settings: settings);
-    state.settings.level.log(tag: 'GameState Settings');
+    state.settings.time.log(tag: 'GameState Settings');
   }
 
   void setQuestion(UiQuestion question) {
@@ -94,6 +94,6 @@ class GameStateNotifier extends StateNotifier<GameState> {
 }
 
 final gameStateNotifierProvider =
-    StateNotifierProvider.autoDispose<GameStateNotifier, GameState>((ref) {
+    StateNotifierProvider<GameStateNotifier, GameState>((ref) {
   return GameStateNotifier();
 });

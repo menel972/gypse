@@ -7,6 +7,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
+import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/level_settings.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/time_settings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -103,6 +104,9 @@ class GameSettings extends HookConsumerWidget {
                     onPressed: () {
                       if (!user.isNull) {
                         onUserChangedUseCase(context, user!);
+                        Future(() => ref
+                            .read(gameStateNotifierProvider.notifier)
+                            .setSettings(user.settings));
                       } else {
                         'No User Error'.failure(context);
                       }

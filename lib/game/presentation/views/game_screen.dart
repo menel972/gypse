@@ -57,9 +57,6 @@ class GameScreen extends HookConsumerWidget {
         UiQuestion question = questions.first;
         List<UiAnswer> answers = question.answers;
 
-        Future(() => ref
-            .read(gameStateNotifierProvider.notifier)
-            .setSettings(user.settings));
         Future(() =>
             ref.read(gameStateNotifierProvider.notifier).setQuestion(question));
         Future(() => ref

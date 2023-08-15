@@ -18,6 +18,7 @@ import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/game/domain/models/question.dart';
 import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
+import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class InitScreen extends HookConsumerWidget {
@@ -102,6 +103,9 @@ class InitScreen extends HookConsumerWidget {
                 ref.read(logUserUseCaseProvider).invoke(user: user!);
                 Future(() => storeQuestions(questions!));
                 Future(() => storeUser(user!));
+                Future(() => ref
+                    .read(gameStateNotifierProvider.notifier)
+                    .setSettings(user!.settings));
                 FlutterNativeSplash.remove();
 
                 Future(() => context.go(Screen.homeView.path));

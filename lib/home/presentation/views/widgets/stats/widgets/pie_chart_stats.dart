@@ -32,8 +32,13 @@ class PieChartStats extends HookConsumerWidget {
         ),
         Container(
           decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(20)),
+            color: Theme.of(context).colorScheme.surface.withOpacity(0.1),
+            border: Border.all(
+              color: const Color.fromRGBO(70, 96, 192, 1),
+              width: 2,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
           padding: Dimensions.xxs(context).pad(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

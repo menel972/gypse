@@ -80,4 +80,5 @@ abstract class AuthRepository {
 
   bool get isEmailVerified;
   String get getUserUid;
+  String get getUserEmail;
 }

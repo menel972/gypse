@@ -144,7 +144,7 @@ class WsAuthService {
     try {
       // NOTE: Send a reset password request to the user's email, then return true.
       return await _client
-          .sendPasswordResetEmail(email: email ?? _userEmail ?? '')
+          .sendPasswordResetEmail(email: email ?? userEmail ?? '')
           .then((_) => true);
     } on FirebaseAuthException catch (err) {
       // NOTE: If there is any Firebase authentication error, log it and throw a custom exception.
@@ -183,7 +183,7 @@ class WsAuthService {
    * UTILS
    **/
 
-  String? get _userEmail => _client.currentUser?.email;
+  String? get userEmail => _client.currentUser?.email;
 
   bool? get isEmailVerified => _client.currentUser?.emailVerified;
 

@@ -62,7 +62,7 @@ class ProfileSettings extends HookConsumerWidget {
             TextFormField(
               enabled: false,
               style: GypseFont.s(),
-              initialValue: user.credentials.email,
+              initialValue: ref.read(getUserEmailUseCaseProvider).invoke(),
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                   labelText: 'Adresse mail',

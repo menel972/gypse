@@ -18,7 +18,6 @@ import 'package:gypse/common/utils/enums.dart';
 ///LoginState status;
 ///List<AnsweredQuestions> questions;
 ///GypseSettings settings;
-///Credentials credentials;
 ///```
 ///
 ///The `User` is parsed to the `Presentation Layer` using the [User.toPresentation] method.
@@ -32,7 +31,6 @@ class User extends Equatable {
   LoginState status;
   List<AnsweredQuestions> questions;
   GypseSettings settings;
-  Credentials credentials;
 
   ///<i><small>`Domain Layer`</small></i>
   ///### User's data <i><small>(received from the data layer)</small></i>
@@ -47,7 +45,6 @@ class User extends Equatable {
     required this.status,
     required this.questions,
     required this.settings,
-    required this.credentials,
   });
 
   @override
@@ -60,7 +57,6 @@ class User extends Equatable {
       status,
       questions,
       settings,
-      credentials,
     ];
   }
 
@@ -77,7 +73,6 @@ class User extends Equatable {
           .map((uiQuestion) => AnsweredQuestions.fromPresentation(uiQuestion))
           .toList(),
       settings: GypseSettings.fromPresentation(uiUser.settings),
-      credentials: Credentials.fromPresentation(uiUser.credentials),
     );
   }
 
@@ -93,7 +88,6 @@ class User extends Equatable {
       questions: List<UiAnsweredQuestions>.from(
           questions.map((q) => q.toPresentation())),
       settings: settings.toPresentation(),
-      credentials: credentials.toPresentation(),
     );
   }
 }
@@ -187,56 +181,6 @@ class AnsweredQuestions extends Equatable {
       qId: id,
       level: level,
       isRightAnswer: isRightAnswer,
-    );
-  }
-}
-
-/** CREDENTIALS */
-
-///<i><small>`Domain Layer`</small></i>
-///## Credentials informations <i><small>(received from the data layer)</small></i>
-///
-///```
-///String? email;
-///String? password;
-///String? phone;
-///```
-///
-///The `Credentials` is parsed to the `Presentation Layer` using the [Credentials.toPresentation] method.
-///<br><br>
-///It contains login informations of a user.
-class Credentials extends Equatable {
-  String? email;
-  String? password;
-  String? phone;
-
-  ///<i><small>`Domain Layer`</small></i>
-  ///### Credentials informations <i><small>(received from the data layer)</small></i>
-  ///#### `Credentials` constructor
-  ///<br>
-  ///It contains login informations of a user.
-  Credentials({
-    this.email,
-    this.password,
-    this.phone,
-  });
-
-  @override
-  List<Object?> get props => [email, password, phone];
-
-  factory Credentials.fromPresentation(UiCredentials credentials) =>
-      Credentials(
-          email: credentials.email,
-          password: credentials.password,
-          phone: credentials.phone);
-
-  /// <i><small>`Domain Layer`</small></i><br>
-  /// Converts an `Credentials` into an `UiCredentials`.
-  UiCredentials toPresentation() {
-    return UiCredentials(
-      email: email ?? '',
-      password: password ?? '',
-      phone: phone ?? '',
     );
   }
 }

@@ -16,7 +16,6 @@ import 'package:gypse/common/utils/enums.dart';
 ///LoginState status;
 ///List<UiAnsweredQuestions> questions;
 ///UiGypseSettings settings;
-///UiCredentials credentials;
 ///```
 ///
 ///It contains all the data for an user.
@@ -28,7 +27,6 @@ class UiUser extends Equatable {
   LoginState status;
   List<UiAnsweredQuestions> questions;
   UiGypseSettings settings;
-  UiCredentials credentials;
 
   ///<i><small>`Presentation Layer`</small></i>
   ///### User's data' <i><small>(received from the domain layer)</small></i>
@@ -43,7 +41,6 @@ class UiUser extends Equatable {
     this.status = LoginState.loading,
     this.questions = const [],
     required this.settings,
-    required this.credentials,
   });
 
   @override
@@ -55,14 +52,12 @@ class UiUser extends Equatable {
         status,
         questions,
         settings,
-        credentials
       ];
 
   UiUser copyWith({
     LoginState? status,
     List<UiAnsweredQuestions>? questions,
     UiGypseSettings? settings,
-    UiCredentials? credentials,
   }) =>
       UiUser(
         this.uId,
@@ -72,7 +67,6 @@ class UiUser extends Equatable {
         status: status ?? this.status,
         questions: questions ?? this.questions,
         settings: settings ?? this.settings,
-        credentials: credentials ?? this.credentials,
       );
 }
 
@@ -137,36 +131,4 @@ class UiAnsweredQuestions extends Equatable {
 
   @override
   List<Object?> get props => [qId, level, isRightAnswer];
-}
-
-/** UI CREDENTIALS */
-
-///<i><small>`Presentation Layer`</small></i>
-///## Credentials informations <i><small>(received from the domain layer)</small></i>
-///
-///```
-///String email;
-///String password;
-///String phone;
-///```
-///
-///It contains login informations of a user.
-class UiCredentials extends Equatable {
-  String email;
-  String password;
-  String phone;
-
-  ///<i><small>`Presentation Layer`</small></i>
-  ///### Credentials informations <i><small>(received from the domain layer)</small></i>
-  ///#### `UiCredentials` constructor
-  ///<br>
-  ///It contains login informations of a user.
-  UiCredentials({
-    this.email = '',
-    this.password = '',
-    this.phone = '',
-  });
-
-  @override
-  List<Object?> get props => [email, password, phone];
 }

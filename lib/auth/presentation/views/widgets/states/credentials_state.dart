@@ -61,10 +61,6 @@ class CredentialsState extends Equatable {
       uid,
       userName: '$userName#${uid.substring(0, 4)}',
       settings: UiGypseSettings(),
-      credentials: UiCredentials(
-        email: email,
-        password: password,
-      ),
     );
   }
 }

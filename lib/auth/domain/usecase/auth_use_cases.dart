@@ -151,6 +151,22 @@ AutoDisposeProvider<GetUserUidUseCase> get getUserUidUseCaseProvider =>
         (AutoDisposeProviderRef<GetUserUidUseCase> ref) =>
             GetUserUidUseCase(ref.read(authRepositoryProvider)));
 
+class GetUserEmailUseCase {
+  final AuthRepository _repository;
+
+  GetUserEmailUseCase(this._repository);
+
+  String invoke() {
+    'start'.log(tag: 'GetUserEmailUseCase');
+    return _repository.getUserEmail;
+  }
+}
+
+AutoDisposeProvider<GetUserEmailUseCase> get getUserEmailUseCaseProvider =>
+    Provider.autoDispose<GetUserEmailUseCase>(
+        (AutoDisposeProviderRef<GetUserEmailUseCase> ref) =>
+            GetUserEmailUseCase(ref.read(authRepositoryProvider)));
+
 class IsEmailVerifiedUseCase {
   final AuthRepository _repository;
 

@@ -96,6 +96,9 @@ class AuthRepositoryImpl extends AuthRepository {
   String get getUserUid => _authService.getUserUid ?? '';
 
   @override
+  String get getUserEmail => _authService.userEmail ?? '';
+
+  @override
   bool get isEmailVerified => _authService.isEmailVerified ?? false;
 }
 

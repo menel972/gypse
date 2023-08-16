@@ -19,7 +19,6 @@ import 'package:gypse/common/utils/extensions.dart';
 ///bool? isAdmin;
 ///WsGypseSettings? userSettings;
 ///List<WsAnsweredQuestions?> questions;
-///WsCredentials? credentials;
 ///```
 ///
 ///Data received from the `Firebase Firestore database`is parsed into a `WsUserResponse` using the [WsUserResponse.fromMap] factory constructor.
@@ -39,7 +38,6 @@ class WsUserResponse extends Equatable {
   bool? isAdmin;
   WsGypseSettings? userSettings;
   List<WsAnsweredQuestions?> questions;
-  WsCredentials? credentials;
 
   ///<i><small>`Data Layer`</small></i>
   ///### User's response <i><small>(received from the database)</small></i>
@@ -54,7 +52,6 @@ class WsUserResponse extends Equatable {
     this.isAdmin = false,
     this.userSettings,
     this.questions = const [],
-    this.credentials,
   });
 
   @override
@@ -66,7 +63,6 @@ class WsUserResponse extends Equatable {
         isAdmin,
         userSettings,
         questions,
-        credentials,
       ];
 
   /// <i><small>`Data Layer`</small></i><br>
@@ -80,7 +76,6 @@ class WsUserResponse extends Equatable {
       'isAdmin': isAdmin,
       'settings': userSettings?.toMap(),
       'questions': questions.map((q) => q?.toMap()).toList(),
-      'credentials': credentials?.toMap(),
     };
   }
 
@@ -103,7 +98,6 @@ class WsUserResponse extends Equatable {
           (q) => WsAnsweredQuestions.fromMap(q),
         ),
       ),
-      credentials: WsCredentials.fromMap(map?['credentials']),
     );
   }
 
@@ -111,16 +105,16 @@ class WsUserResponse extends Equatable {
   /// Converts a `WsUserResponse` into a `User`.
   User toDomain() {
     return User(
-        uid: uid ?? '',
-        userName: userName ?? '',
-        isAdmin: isAdmin ?? false,
-        language: Locales.values.firstWhere((code) => code.name == locale),
-        status: LoginState.uninitialized,
-        questions:
-            List<AnsweredQuestions>.from(questions.map((q) => q?.toDomain())),
-        settings: userSettings?.toDomain() ??
-            GypseSettings(level: Level.medium, time: Time.medium),
-        credentials: credentials?.toDomain() ?? Credentials());
+      uid: uid ?? '',
+      userName: userName ?? '',
+      isAdmin: isAdmin ?? false,
+      language: Locales.values.firstWhere((code) => code.name == locale),
+      status: LoginState.uninitialized,
+      questions:
+          List<AnsweredQuestions>.from(questions.map((q) => q?.toDomain())),
+      settings: userSettings?.toDomain() ??
+          GypseSettings(level: Level.medium, time: Time.medium),
+    );
   }
 
   /// <i><small>`Data Layer`</small></i><br>
@@ -135,7 +129,6 @@ class WsUserResponse extends Equatable {
       userSettings: WsGypseSettings.fromDomain(domain.settings),
       questions: List<WsAnsweredQuestions?>.from(
           domain.questions.map((q) => WsAnsweredQuestions.fromDomain(q))),
-      credentials: WsCredentials.fromDomain(domain.credentials),
     );
   }
 }
@@ -309,91 +302,6 @@ class WsAnsweredQuestions extends Equatable {
       id: domain.id,
       isRightAnswer: domain.isRightAnswer,
       level: domain.level.id,
-    );
-  }
-}
-
-/** WS CREDENTIALS */
-
-///<i><small>`Data Layer`</small></i>
-///## Credentials informations <i><small>(received from the database)</small></i>
-///
-///```
-///String? email;
-///String? password;
-///String? phone;
-///```
-///
-///Data received from the `Firebase Firestore database`is parsed into a `WsCredentials` using the [WsCredentials.fromMap] factory constructor.
-///<br><br>
-///Data received from the `Domain Layer`is parsed into a `WsCredentials` using the [WsCredentials.fromDomain] factory constructor.
-///<br><br>
-///The `WsCredentials` is parsed to the `Domain Layer` using the [WsCredentials.toDomain] method.
-///<br><br>
-///It contains login informations of a user.
-class WsCredentials extends Equatable {
-  String? email;
-  String? password;
-  String? phone;
-
-  ///<i><small>`Data Layer`</small></i>
-  ///### Credentials informations <i><small>(received from the database)</small></i>
-  ///#### `WsCredentials` constructor
-  ///<br>
-  ///It contains login informations of a user.
-  WsCredentials({
-    this.email = '',
-    this.password = '',
-    this.phone = '',
-  });
-
-  @override
-  List<Object?> get props => [email, password, phone];
-
-  /// <i><small>`Data Layer`</small></i><br>
-  /// Converts a `WsCredentials` into an object.
-  Map<String, dynamic> toMap() => <String, dynamic>{
-        'email': email,
-        'password': password,
-        'phone': phone,
-      };
-
-  /// <i><small>`Data Layer`</small></i><br>
-  /// <b>Tries to parse the database response in a [WsCredentials].</b>
-  /// <br><hr><br>
-  ///<i>EXCEPTIONS :
-  /// <li>If any of the member variables are not present in the response, default null values will be assigned to them.
-  /// <li>If an exception occurs, the `catch` will return a new instance of `WsCredentials` with initial values.
-  factory WsCredentials.fromMap(Map<String, dynamic>? map) {
-    try {
-      return WsCredentials(
-        email: map?['email'],
-        password: map?['password'],
-        phone: map?['phone'],
-      );
-    } catch (e) {
-      e.log();
-      return WsCredentials();
-    }
-  }
-
-  /// <i><small>`Data Layer`</small></i><br>
-  /// Converts a `WsCredentials` into an `Credentials`.
-  Credentials toDomain() {
-    return Credentials(
-      email: email,
-      password: password,
-      phone: phone,
-    );
-  }
-
-  /// <i><small>`Data Layer`</small></i><br>
-  /// Parses the data received from `Domain Layer` into a `WsCredentials`.
-  factory WsCredentials.fromDomain(Credentials domain) {
-    return WsCredentials(
-      email: domain.email,
-      password: domain.password,
-      phone: domain.phone,
     );
   }
 }

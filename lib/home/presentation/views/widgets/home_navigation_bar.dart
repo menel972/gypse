@@ -17,55 +17,57 @@ class HomeNavigationBar extends HookConsumerWidget {
     updatePage(int index) =>
         ref.read(homeNavigationStateProvider.notifier).updatePage(index);
 
-    return BottomNavigationBar(
-      currentIndex: navigationIndex,
-      items: [
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: const Icon(Icons.home_outlined),
-              onPressed: () {
-                ref.read(logNavigationUseCaseProvider).invoke(
-                      from: Screen.homeView.path,
-                      to: Screen.homeView.path,
-                      details: 'Accueil',
-                    );
-                updatePage(0);
-              },
-              splashRadius: 20,
-              splashColor: Theme.of(context).colorScheme.secondary,
-            ),
-            label: 'Accueil'),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: const Icon(Icons.import_contacts_outlined),
-              onPressed: () {
-                ref.read(logNavigationUseCaseProvider).invoke(
-                      from: Screen.homeView.path,
-                      to: Screen.homeView.path,
-                      details: 'books',
-                    );
-                updatePage(1);
-              },
-              splashRadius: 20,
-              splashColor: Theme.of(context).colorScheme.secondary,
-            ),
-            label: 'Livres'),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: const Icon(Icons.bar_chart_outlined),
-              onPressed: () {
-                ref.read(logNavigationUseCaseProvider).invoke(
-                      from: Screen.homeView.path,
-                      to: Screen.homeView.path,
-                      details: 'scores',
-                    );
-                updatePage(2);
-              },
-              splashRadius: 20,
-              splashColor: Theme.of(context).colorScheme.secondary,
-            ),
-            label: 'Scores'),
-      ],
+    return Material(
+      child: BottomNavigationBar(
+        currentIndex: navigationIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: const Icon(Icons.home_outlined),
+                onPressed: () {
+                  ref.read(logNavigationUseCaseProvider).invoke(
+                        from: Screen.homeView.path,
+                        to: Screen.homeView.path,
+                        details: 'Accueil',
+                      );
+                  updatePage(0);
+                },
+                splashRadius: 20,
+                splashColor: Theme.of(context).colorScheme.secondary,
+              ),
+              label: 'Accueil'),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: const Icon(Icons.import_contacts_outlined),
+                onPressed: () {
+                  ref.read(logNavigationUseCaseProvider).invoke(
+                        from: Screen.homeView.path,
+                        to: Screen.homeView.path,
+                        details: 'books',
+                      );
+                  updatePage(1);
+                },
+                splashRadius: 20,
+                splashColor: Theme.of(context).colorScheme.secondary,
+              ),
+              label: 'Livres'),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: const Icon(Icons.bar_chart_outlined),
+                onPressed: () {
+                  ref.read(logNavigationUseCaseProvider).invoke(
+                        from: Screen.homeView.path,
+                        to: Screen.homeView.path,
+                        details: 'scores',
+                      );
+                  updatePage(2);
+                },
+                splashRadius: 20,
+                splashColor: Theme.of(context).colorScheme.secondary,
+              ),
+              label: 'Scores'),
+        ],
+      ),
     );
   }
 }

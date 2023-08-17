@@ -66,4 +66,7 @@ class GypseBottomBarTheme extends BottomNavigationBarThemeData {
         color: const Color.fromRGBO(10, 35, 128, 1),
         size: 25,
       );
+
+@override
+  Color? get backgroundColor => Colors.white;
 }

@@ -11,8 +11,8 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
-import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/states/answer_ratio_state.dart';
+import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AnswersView extends HookConsumerWidget {

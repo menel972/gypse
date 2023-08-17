@@ -1,4 +1,4 @@
-package com.example.gypse
+package com.gypse.gypse
 
 import io.flutter.embedding.android.FlutterActivity
 

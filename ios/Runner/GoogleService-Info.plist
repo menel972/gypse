@@ -3,43 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>635658051968-14jhe8skp5dslo3atd785s6o5imis6s1.apps.googleusercontent.com</string>
-	<key>
-			REVERSED_CLIENT_ID</key>
-	<string>
-			com.googleusercontent.apps.635658051968-14jhe8skp5dslo3atd785s6o5imis6s1</string>
-	<key>
-			ANDROID_CLIENT_ID</key>
-	<string>
-			635658051968-pm7m6md7q1sgo0vibb8te814issr8ka1.apps.googleusercontent.com</string>
+		<string>635658051968-ig9fgef45ffg8aehqovahdd1rrvivnce.apps.googleusercontent.com</string>
+		<key>REVERSED_CLIENT_ID</key>
+		<string>com.googleusercontent.apps.635658051968-ig9fgef45ffg8aehqovahdd1rrvivnce</string>
+		<key>ANDROID_CLIENT_ID</key>
+		<string>635658051968-pm7m6md7q1sgo0vibb8te814issr8ka1.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>
-			AIzaSyAnWevd0FPPFLm5MArxw0wERJi4umcHu60</string>
+		<string>AIzaSyAnWevd0FPPFLm5MArxw0wERJi4umcHu60</string>
 	<key>GCM_SENDER_ID</key>
 	<string>635658051968</string>
-	<key>
-			PLIST_VERSION</key>
+		<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-		<string>com.prod.gypse</string>
+		<string>com.example.bibleQuiz</string>
 	<key>PROJECT_ID</key>
 	<string>quiz-bible-44f41</string>
 	<key>STORAGE_BUCKET</key>
-	<string>
-			quiz-bible-44f41.appspot.com</string>
+		<string>quiz-bible-44f41.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>
-	<key>
-			IS_APPINVITE_ENABLED</key>
+		<key>IS_APPINVITE_ENABLED</key>
 	<true></true>
 	<key>IS_GCM_ENABLED</key>
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
-	<key>
-			GOOGLE_APP_ID</key>
-	<string>1:635658051968:ios:7eb18cb6ae2a88eb256165</string>
+		<key>GOOGLE_APP_ID</key>
+		<string>1:635658051968:ios:e7b548c0e12e1803256165</string>
 	</dict>
 </plist>

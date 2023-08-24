@@ -26,7 +26,10 @@ class SettingsScreen extends HookConsumerWidget {
                 );
             context.go(Screen.homeView.path);
           },
-          icon: Icon(Icons.home_outlined),
+          icon: Icon(
+            Icons.home_outlined,
+            semanticLabel: "Retour vers l'accueil",
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Container(

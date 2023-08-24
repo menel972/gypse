@@ -38,68 +38,80 @@ class AboutGypse extends HookConsumerWidget {
             InkWell(
               onTap: () async => await 'gypse.app@gmail.com'.mailTo(context),
               splashColor: Theme.of(context).colorScheme.secondary,
-              child: TextFormField(
-                enabled: false,
-                style:
-                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-                initialValue: 'Nous contacter',
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    suffix: Icon(
-                  Icons.mail_outline,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                )),
+              child: Semantics(
+                label: 'Nous contacter (bouton)',
+                child: TextFormField(
+                  enabled: false,
+                  style: GypseFont.s(
+                      color: Theme.of(context).colorScheme.secondary),
+                  initialValue: 'Nous contacter',
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      suffix: Icon(
+                    Icons.mail_outline,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  )),
+                ),
               ),
             ),
             Dimensions.xxs(context).spaceH(),
             InkWell(
               onTap: () async => await fetchLegalsUseCase(Legals.cgu.path),
               splashColor: Theme.of(context).colorScheme.secondary,
-              child: TextFormField(
-                enabled: false,
-                style:
-                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-                initialValue: 'Conditions d\'utilisation',
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    suffix: Icon(
-                  Icons.info_outline,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                )),
+              child: Semantics(
+                label: 'Conditions d\'utilisation (bouton)',
+                child: TextFormField(
+                  enabled: false,
+                  style: GypseFont.s(
+                      color: Theme.of(context).colorScheme.secondary),
+                  initialValue: 'Conditions d\'utilisation',
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      suffix: Icon(
+                    Icons.info_outline,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  )),
+                ),
               ),
             ),
             Dimensions.xxs(context).spaceH(),
             InkWell(
               onTap: () async => await fetchLegalsUseCase(Legals.privacy.path),
               splashColor: Theme.of(context).colorScheme.secondary,
-              child: TextFormField(
-                enabled: false,
-                style:
-                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-                initialValue: 'Politique de confidentialité',
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    suffix: Icon(
-                  Icons.info_outline,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                )),
+              child: Semantics(
+                label: 'Politique de confidentialité (bouton)',
+                child: TextFormField(
+                  enabled: false,
+                  style: GypseFont.s(
+                      color: Theme.of(context).colorScheme.secondary),
+                  initialValue: 'Politique de confidentialité',
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      suffix: Icon(
+                    Icons.info_outline,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  )),
+                ),
               ),
             ),
             Dimensions.xxs(context).spaceH(),
             InkWell(
               onTap: () async => await fetchLegalsUseCase(Legals.legal.path),
               splashColor: Theme.of(context).colorScheme.secondary,
-              child: TextFormField(
-                enabled: false,
-                style:
-                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-                initialValue: 'Mentions légales',
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    suffix: Icon(
-                  Icons.info_outline,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                )),
+              child: Semantics(
+                label: 'Mentions légales (bouton)',
+                child: TextFormField(
+                  enabled: false,
+                  style: GypseFont.s(
+                      color: Theme.of(context).colorScheme.secondary),
+                  initialValue: 'Mentions légales',
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      suffix: Icon(
+                    Icons.info_outline,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  )),
+                ),
               ),
             ),
           ],

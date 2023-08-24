@@ -46,30 +46,37 @@ class ProfileSettings extends HookConsumerWidget {
         ),
         child: Column(
           children: [
-            TextFormField(
-              enabled: false,
-              style: GypseFont.s(),
-              initialValue: user.userName,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                  labelText: 'Nom d\'utilisateur',
-                  suffix: Icon(
-                    Icons.person_outline,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  )),
+            Semantics(
+              label: 'Nom d\'utilisateur : ${user.userName}',
+              child: TextFormField(
+                enabled: false,
+                style: GypseFont.s(),
+                initialValue: user.userName,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    labelText: 'Nom d\'utilisateur',
+                    suffix: Icon(
+                      Icons.person_outline,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    )),
+              ),
             ),
             Dimensions.xxs(context).spaceH(),
-            TextFormField(
-              enabled: false,
-              style: GypseFont.s(),
-              initialValue: ref.read(getUserEmailUseCaseProvider).invoke(),
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                  labelText: 'Adresse mail',
-                  suffix: Icon(
-                    Icons.alternate_email_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  )),
+            Semantics(
+              label:
+                  'Adresse mail : ${ref.read(getUserEmailUseCaseProvider).invoke()}',
+              child: TextFormField(
+                enabled: false,
+                style: GypseFont.s(),
+                initialValue: ref.read(getUserEmailUseCaseProvider).invoke(),
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    labelText: 'Adresse mail',
+                    suffix: Icon(
+                      Icons.alternate_email_outlined,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    )),
+              ),
             ),
             Dimensions.xxs(context).spaceH(),
             InkWell(
@@ -89,18 +96,21 @@ class ProfileSettings extends HookConsumerWidget {
                   'Une erreur est survenue'.failure(context);
                 }
               },
-              child: TextFormField(
-                enabled: false,
-                style:
-                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-                initialValue: 'Changer de mot de passe',
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    labelText: 'Mot de passe',
-                    suffix: Icon(
-                      Icons.lock_outline,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    )),
+              child: Semantics(
+                label: 'Changer de mot de passe (bouton)',
+                child: TextFormField(
+                  enabled: false,
+                  style: GypseFont.s(
+                      color: Theme.of(context).colorScheme.secondary),
+                  initialValue: 'Changer de mot de passe',
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      labelText: 'Mot de passe',
+                      suffix: Icon(
+                        Icons.lock_outline,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      )),
+                ),
               ),
             ),
             Expanded(

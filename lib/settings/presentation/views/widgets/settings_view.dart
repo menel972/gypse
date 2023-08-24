@@ -24,17 +24,20 @@ class SettingsView extends StatelessWidget {
             onTap: () => context
                 .go('${Screen.settingsView.path}/${Screen.gameSettings.path}'),
             splashColor: Theme.of(context).colorScheme.secondary,
-            child: TextFormField(
-              enabled: false,
-              style:
-                  GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-              initialValue: 'Paramètres de jeu',
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                  suffix: Icon(
-                Icons.gamepad_outlined,
-                color: Theme.of(context).colorScheme.onPrimary,
-              )),
+            child: Semantics(
+              label: 'Paramètres de jeu (bouton)',
+              child: TextFormField(
+                enabled: false,
+                style:
+                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+                initialValue: 'Paramètres de jeu',
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    suffix: Icon(
+                  Icons.gamepad_outlined,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )),
+              ),
             ),
           ),
         ),
@@ -45,17 +48,20 @@ class SettingsView extends StatelessWidget {
             onTap: () => context.go(
                 '${Screen.settingsView.path}/${Screen.profileSettings.path}'),
             splashColor: Theme.of(context).colorScheme.secondary,
-            child: TextFormField(
-              enabled: false,
-              style:
-                  GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-              initialValue: 'Voir mon profil',
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                  suffix: Icon(
-                Icons.person_outline,
-                color: Theme.of(context).colorScheme.onPrimary,
-              )),
+            child: Semantics(
+              label: 'Voir mon profil (bouton)',
+              child: TextFormField(
+                enabled: false,
+                style:
+                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+                initialValue: 'Voir mon profil',
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    suffix: Icon(
+                  Icons.person_outline,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )),
+              ),
             ),
           ),
         ),
@@ -66,17 +72,20 @@ class SettingsView extends StatelessWidget {
             onTap: () => context
                 .go('${Screen.settingsView.path}/${Screen.aboutGypse.path}'),
             splashColor: Theme.of(context).colorScheme.secondary,
-            child: TextFormField(
-              enabled: false,
-              style:
-                  GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-              initialValue: 'À propos de GYPSE',
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                  suffix: Icon(
-                Icons.info_outline,
-                color: Theme.of(context).colorScheme.onPrimary,
-              )),
+            child: Semantics(
+              label: 'À propos de GYPSE (bouton)',
+              child: TextFormField(
+                enabled: false,
+                style:
+                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+                initialValue: 'À propos de GYPSE',
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    suffix: Icon(
+                  Icons.info_outline,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )),
+              ),
             ),
           ),
         ),

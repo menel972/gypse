@@ -65,6 +65,7 @@ class HomeCarouselCard extends GestureDetector {
             children: [
               Center(
                 child: Text(
+                  semanticsLabel: "Jouer avec le livre : ${book.fr}",
                   book.fr.toUpperCase(),
                   style: GypseFont.xl(bold: true),
                   maxLines: 1,
@@ -149,6 +150,8 @@ class BookFilterCard extends GestureDetector {
             ),
             Dimensions.xxxs(context).spaceH(),
             Text.rich(
+              semanticsLabel:
+                  "$answeredQuestions questions répondues sur $questions",
               TextSpan(
                 text: '$answeredQuestions',
                 style: GypseFont.s(

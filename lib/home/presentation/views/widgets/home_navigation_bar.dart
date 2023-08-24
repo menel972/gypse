@@ -23,7 +23,10 @@ class HomeNavigationBar extends HookConsumerWidget {
         items: [
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: const Icon(Icons.home_outlined),
+                icon: const Icon(
+                  Icons.home_outlined,
+                  semanticLabel: "Séléctionner Accueil onglet 1 sur 3",
+                ),
                 onPressed: () {
                   ref.read(logNavigationUseCaseProvider).invoke(
                         from: Screen.homeView.path,
@@ -38,7 +41,10 @@ class HomeNavigationBar extends HookConsumerWidget {
               label: 'Accueil'),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: const Icon(Icons.import_contacts_outlined),
+                icon: const Icon(
+                  Icons.import_contacts_outlined,
+                  semanticLabel: "Séléctionner Livres onglet 2 sur 3",
+                ),
                 onPressed: () {
                   ref.read(logNavigationUseCaseProvider).invoke(
                         from: Screen.homeView.path,
@@ -53,7 +59,10 @@ class HomeNavigationBar extends HookConsumerWidget {
               label: 'Livres'),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: const Icon(Icons.bar_chart_outlined),
+                icon: const Icon(
+                  Icons.bar_chart_outlined,
+                  semanticLabel: "Séléctionner Scores onglet 3 sur 3",
+                ),
                 onPressed: () {
                   ref.read(logNavigationUseCaseProvider).invoke(
                         from: Screen.homeView.path,

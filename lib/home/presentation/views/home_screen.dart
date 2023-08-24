@@ -41,7 +41,10 @@ class HomeScreen extends HookConsumerWidget {
               ref.read(logActionUseCaseProvider).invoke(cta: 'settings');
               context.go(Screen.settingsView.path);
             },
-            icon: const Icon(Icons.settings_outlined),
+            icon: const Icon(
+              Icons.settings_outlined,
+              semanticLabel: "Paramètres",
+            ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
           body: Container(

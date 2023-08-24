@@ -46,6 +46,8 @@ class PieChartStats extends HookConsumerWidget {
               Text('Statistiques générales :', style: GypseFont.m()),
               Text(
                   'Questions répondues : ${ref.watch(userProvider)!.questions.length} / ${ref.watch(questionsProvider).length}',
+                  semanticsLabel:
+                      'Questions répondues : ${ref.watch(userProvider)!.questions.length} sur ${ref.watch(questionsProvider).length}',
                   style: GypseFont.xs()),
               Expanded(
                 child: DChartPie(

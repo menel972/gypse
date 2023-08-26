@@ -75,6 +75,8 @@ class GameScreen extends HookConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
+        Future(() =>
+            ref.read(gameStateNotifierProvider.notifier).switchModalState());
         ref.read(gameStateNotifierProvider.notifier).pause();
         QuitDialog(context);
         return false;

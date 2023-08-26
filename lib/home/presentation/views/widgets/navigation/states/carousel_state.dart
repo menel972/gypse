@@ -18,6 +18,7 @@ class CarouselStateNotifier extends StateNotifier<List<Books>> {
 }
 
 carouselStateNotifierProvider(List<UiQuestion> questions) =>
-    StateNotifierProvider<CarouselStateNotifier, List<Books>>((ref) {
+    StateNotifierProvider.autoDispose<CarouselStateNotifier, List<Books>>(
+        (ref) {
       return CarouselStateNotifier(questions);
     });

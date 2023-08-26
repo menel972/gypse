@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/utils/extensions.dart';
@@ -13,23 +14,27 @@ class GameState extends Equatable {
   List<UiAnswer> answers;
   UiGypseSettings settings;
   bool isRight;
+  final CountDownController? timeController;
 
   GameState({
     this.selectedAnswers = const [],
     this.question = const UiQuestion(''),
     this.answers = const [],
     required this.settings,
+    this.timeController,
     this.isRight = false,
   }) : super();
 
   @override
-  List<Object?> get props => [selectedAnswers, question, answers, settings];
+  List<Object?> get props =>
+      [selectedAnswers, question, answers, settings, timeController, isRight];
 
   GameState copyWith({
     List<int>? selectedAnswers,
     UiQuestion? question,
     List<UiAnswer>? answers,
     UiGypseSettings? settings,
+    CountDownController? timeController,
     bool? isRight,
   }) {
     return GameState(
@@ -37,13 +42,17 @@ class GameState extends Equatable {
       question: question ?? this.question,
       answers: answers ?? this.answers,
       settings: settings ?? this.settings,
+      timeController: timeController ?? this.timeController,
       isRight: isRight ?? this.isRight,
     );
   }
 }
 
 class GameStateNotifier extends StateNotifier<GameState> {
-  GameStateNotifier() : super(GameState(settings: UiGypseSettings()));
+  GameStateNotifier() : super(GameState(settings: UiGypseSettings())) {
+    final CountDownController controller = CountDownController();
+    state = state.copyWith(timeController: controller);
+  }
 
   void addSelectedIndex(int index) {
     if (state.answers[index].isRightAnswer) {
@@ -57,6 +66,12 @@ class GameStateNotifier extends StateNotifier<GameState> {
           isRight: false);
     }
   }
+
+  void pause() => state.timeController?.pause();
+
+  void resume() => state.timeController?.resume();
+
+  void restart() => state.timeController?.restart();
 
   void clearSelectedIndex() => state = state.copyWith(selectedAnswers: []);
 

@@ -62,7 +62,12 @@ class GameScreen extends HookConsumerWidget {
       }
     }
 
-    initGameState();
+    if (!ref.read(gameStateNotifierProvider.notifier).isModal) {
+      initGameState();
+    } else {
+      Future(() =>
+          ref.read(gameStateNotifierProvider.notifier).switchModalState());
+    }
 
     ref
         .read(logDisplayUseCaseProvider)

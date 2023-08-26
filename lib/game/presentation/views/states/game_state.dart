@@ -14,6 +14,7 @@ class GameState extends Equatable {
   List<UiAnswer> answers;
   UiGypseSettings settings;
   bool isRight;
+  bool isModal;
   final CountDownController? timeController;
 
   GameState({
@@ -23,11 +24,19 @@ class GameState extends Equatable {
     required this.settings,
     this.timeController,
     this.isRight = false,
+    this.isModal = false,
   }) : super();
 
   @override
-  List<Object?> get props =>
-      [selectedAnswers, question, answers, settings, timeController, isRight];
+  List<Object?> get props => [
+        selectedAnswers,
+        question,
+        answers,
+        settings,
+        timeController,
+        isRight,
+        isModal
+      ];
 
   GameState copyWith({
     List<int>? selectedAnswers,
@@ -36,6 +45,7 @@ class GameState extends Equatable {
     UiGypseSettings? settings,
     CountDownController? timeController,
     bool? isRight,
+    bool? isModal,
   }) {
     return GameState(
       selectedAnswers: selectedAnswers ?? this.selectedAnswers,
@@ -44,6 +54,7 @@ class GameState extends Equatable {
       settings: settings ?? this.settings,
       timeController: timeController ?? this.timeController,
       isRight: isRight ?? this.isRight,
+      isModal: isModal ?? this.isModal,
     );
   }
 }
@@ -72,6 +83,10 @@ class GameStateNotifier extends StateNotifier<GameState> {
   void resume() => state.timeController?.resume();
 
   void restart() => state.timeController?.restart();
+
+  void switchModalState() => state = state.copyWith(isModal: !state.isModal);
+
+  bool get isModal => state.isModal;
 
   void clearSelectedIndex() => state = state.copyWith(selectedAnswers: []);
 

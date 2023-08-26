@@ -11,12 +11,10 @@ import 'package:gypse/game/presentation/views/widgets/difficulty_icon.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class QuestionView extends HookConsumerWidget {
-  final CountDownController timeController;
-
   late UiQuestion question;
   late GameState gameState;
 
-  QuestionView(this.timeController, {super.key});
+  QuestionView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,7 +50,8 @@ class QuestionView extends HookConsumerWidget {
               ),
               Dimensions.xxs(context).spaceW(),
               CircularCountDownTimer(
-                controller: timeController,
+                // controller: timeController,
+                controller: gameState.timeController,
                 width: Dimensions.xs(context).height,
                 height: Dimensions.xs(context).height,
                 fillColor: Theme.of(context).colorScheme.primary,
@@ -73,6 +72,7 @@ class QuestionView extends HookConsumerWidget {
                   }
                 },
               ),
+              // ref.watch(timerStateNotifierProvider(context)),
             ],
           ),
         ],

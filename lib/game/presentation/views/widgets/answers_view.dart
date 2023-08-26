@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
@@ -17,12 +16,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AnswersView extends HookConsumerWidget {
   final VoidCallback initGameState;
-  final CountDownController timeController;
 
   late double ratio;
   late GameState gameState;
 
-  AnswersView(this.initGameState, this.timeController, {super.key});
+  AnswersView(this.initGameState, {super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ratio = ref.watch(answerRatioStateProvider);
@@ -66,7 +64,8 @@ class AnswersView extends HookConsumerWidget {
                         ref
                             .read(gameStateNotifierProvider.notifier)
                             .addSelectedIndex(index);
-                        timeController.pause();
+                        ref.read(gameStateNotifierProvider.notifier).pause();
+                        ref.read(gameStateNotifierProvider.notifier).pause();
                       },
                     ),
                   );
@@ -133,7 +132,7 @@ class AnswersView extends HookConsumerWidget {
                       ref
                           .read(gameStateNotifierProvider.notifier)
                           .clearSelectedIndex();
-                      timeController.restart();
+                      ref.read(gameStateNotifierProvider.notifier).restart();
                     },
                     icon: Icons.keyboard_arrow_right,
                   ),

@@ -4,6 +4,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
+import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VerseModal extends HookConsumerWidget {
@@ -31,6 +32,8 @@ class VerseModal extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(logActionUseCaseProvider).invoke(cta: 'read verse');
+    Future(
+        () => ref.read(gameStateNotifierProvider.notifier).switchModalState());
 
     return Dimensions.xs(context).padding(Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

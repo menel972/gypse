@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:blur/blur.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
@@ -18,17 +17,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class QuitDialog extends HookConsumerWidget {
   final BuildContext context;
-  final CountDownController timeController;
 
   late GameState gameState;
   late UiUser user;
-  QuitDialog(this.context, {super.key, required this.timeController}) {
-    timeController.pause();
+  QuitDialog(this.context, {super.key}) {
     showDialog(context: context, builder: (context) => this);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(gameStateNotifierProvider.notifier).pause();
     gameState = ref.watch(gameStateNotifierProvider);
     user = ref.watch(userProvider)!;
 
@@ -38,7 +36,7 @@ class QuitDialog extends HookConsumerWidget {
     return WillPopScope(
       onWillPop: () async {
         if (gameState.selectedAnswers.isEmpty) {
-          timeController.resume();
+          ref.read(gameStateNotifierProvider.notifier).resume();
         }
         return true;
       },
@@ -104,7 +102,9 @@ class QuitDialog extends HookConsumerWidget {
                         label: 'Reprendre',
                         onPressed: () {
                           if (gameState.selectedAnswers.isEmpty) {
-                            timeController.resume();
+                            ref
+                                .read(gameStateNotifierProvider.notifier)
+                                .resume();
                           }
                           Navigator.pop(context);
                         },

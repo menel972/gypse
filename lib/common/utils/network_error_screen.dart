@@ -1,27 +1,27 @@
 import 'package:blur/blur.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NetworkErrorScreen extends HookConsumerWidget {
   final BuildContext context;
-  final CountDownController? timeController;
 
-  NetworkErrorScreen(this.context, {super.key, this.timeController = null}) {
-    timeController?.pause();
+  NetworkErrorScreen(this.context, {super.key}) {
     showDialog(context: context, builder: (context) => this);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(gameStateNotifierProvider.notifier).pause();
+
     ref.listen(connectivityNotifierProvider, (previous, next) {
       if (next != ConnectivityResult.none) {
-        timeController?.resume();
+        ref.read(gameStateNotifierProvider.notifier).resume();
         Navigator.pop(context);
       }
     });

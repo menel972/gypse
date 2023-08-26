@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
@@ -29,13 +28,11 @@ class GameScreen extends HookConsumerWidget {
     super.key,
   });
 
-  final CountDownController timeController = CountDownController();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(connectivityNotifierProvider, (previous, next) {
       if (next == ConnectivityResult.none) {
-        NetworkErrorScreen(context, timeController: timeController);
+        NetworkErrorScreen(context);
       }
     });
 
@@ -73,15 +70,13 @@ class GameScreen extends HookConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        QuitDialog(context, timeController: timeController);
+        ref.read(gameStateNotifierProvider.notifier).pause();
+        QuitDialog(context);
         return false;
       },
       child: Scaffold(
         floatingActionButton: IconButton(
-          onPressed: () => QuitDialog(
-            context,
-            timeController: timeController,
-          ),
+          onPressed: () => QuitDialog(context),
           icon: Icon(Icons.home_outlined),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
@@ -94,8 +89,8 @@ class GameScreen extends HookConsumerWidget {
           ),
           child: Column(
             children: [
-              Expanded(child: QuestionView(timeController)),
-              AnswersView(initGameState, timeController),
+              Expanded(child: QuestionView()),
+              AnswersView(initGameState),
             ],
           ),
         ),

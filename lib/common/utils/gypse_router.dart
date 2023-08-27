@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
+import 'package:gypse/auth/presentation/views/widgets/sign_up/welcome_dialog.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
@@ -32,7 +33,8 @@ GoRouter gypseRouter = GoRouter(
     ),
     // NOTE : HOME SCREEN
     GoRoute(
-        path: Screen.homeView.path, builder: (context, state) => HomeScreen()),
+        path: Screen.homeView.path,
+        builder: (context, state) => WelcomeDialog(context)),
     // NOTE : BOOK SCREEN
     GoRoute(
         path: Screen.booksView.path, builder: (context, state) => BookScreen()),

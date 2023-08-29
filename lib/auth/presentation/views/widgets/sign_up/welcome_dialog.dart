@@ -6,7 +6,6 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class WelcomeDialog extends HookConsumerWidget {
@@ -19,7 +18,7 @@ class WelcomeDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return WillPopScope(
-      onWillPop: () async => true,
+      onWillPop: () async => false,
       child: Center(
         child: Container(
           height: Dimensions.xxl(context).height,
@@ -50,27 +49,34 @@ class WelcomeDialog extends HookConsumerWidget {
                   ),
                   Dimensions.xs(context).spaceH(),
                   Text(
-                    'Avant de commencer choisis la difficulté avec laquelle tu veux jouer.',
+                    'Commence par choisir ton niveau de difficulté.',
                     style: GypseFont.m(
                         color: Theme.of(context).colorScheme.primary),
                     textAlign: TextAlign.center,
-                  ),
-                  Dimensions.xxs(context).spaceH(),
-                  Text(
-                    '(Tu peux à tout moment modifier ton choix dans les paramètres de jeu ⚙️)',
-                    style: GypseFont.s(
-                        color: Theme.of(context).colorScheme.primary),
-                    textAlign: TextAlign.center,
+
                   ),
                   Dimensions.xs(context).spaceH(),
+                  Text(
+                    'Modifie le à tout moment\ndans les paramètres de jeu ⚙️',
+                    style: GypseFont.s(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Dimensions.xxs(context).spaceH(),
                   GypseElevatedButton(
                     context,
                     label: 'Suivant',
-                    onPressed: () => context.go(
-                        '${Screen.settingsView.path}/${Screen.gameSettings.path}'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      context.go(
+                          '${Screen.settingsView.path}/${Screen.gameSettings.path}');
+                    },
                     textColor: Theme.of(context).colorScheme.surface,
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                   ),
+
                 ],
               ),
             ),

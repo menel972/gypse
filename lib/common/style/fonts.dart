@@ -63,6 +63,7 @@ class GypseFont extends TextStyle {
     this.bold = false,
     super.fontSize = 16,
     super.letterSpacing = 1,
+    super.fontStyle = FontStyle.normal,
   });
 
   ///## Gypse [TextStyle]

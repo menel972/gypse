@@ -16,6 +16,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:gypse/settings/domain/use_cases/cloud_storage_use_cases.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,8 +30,10 @@ class SignUpView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(loginStateNotifierProvider, (_, next) {
       next.log(tag: 'Current Login State');
-      if (next == LoginState.authenticated)
+      if (next == LoginState.authenticated) {
+        ref.read(initStateNotifierProvider.notifier).switchState();
         Future(() => context.go(Screen.initView.path));
+      }
     });
 
     credentials = ref.watch(signUpCredentialsStateNotifierProvider);

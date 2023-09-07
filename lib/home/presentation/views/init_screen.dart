@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/auth/presentation/views/widgets/sign_up/welcome_dialog.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
@@ -19,6 +20,7 @@ import 'package:gypse/game/domain/models/question.dart';
 import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class InitScreen extends HookConsumerWidget {
@@ -108,11 +110,15 @@ class InitScreen extends HookConsumerWidget {
                     .setSettings(user!.settings));
                 FlutterNativeSplash.remove();
 
-                Future(() => context.go(Screen.homeView.path));
+                if (ref.watch(initStateNotifierProvider)) {
+                  Future(() => WelcomeDialog(context));
+                } else {
+                  Future(() => context.go(Screen.homeView.path));
+                }
 
                 return GypseLoading(
                   context,
-                  message: 'Redirection vers la page d\'accueil...',
+                  message: 'Chargement de vos données...',
                 );
               }
 

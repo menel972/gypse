@@ -39,7 +39,7 @@ GoRouter gypseRouter = GoRouter(
     // NOTE : GAME SCREEN
     GoRoute(
         path: '${Screen.gameView.path}/:book',
-        builder: (context, state) => GameScreen(state.params['book']!)),
+        builder: (context, state) => GameScreen(state.pathParameters['book']!)),
     // NOTE : Settings SCREEN
     GoRoute(
       path: Screen.settingsView.path,

@@ -1,6 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:d_chart/d_chart.dart';
+import 'package:d_chart/commons/config_render.dart';
+import 'package:d_chart/commons/data_model.dart';
+import 'package:d_chart/commons/decorator.dart';
+import 'package:d_chart/commons/enums.dart';
+import 'package:d_chart/commons/style.dart';
+import 'package:d_chart/ordinal/pie.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
@@ -45,41 +50,42 @@ class PieChartStats extends HookConsumerWidget {
             children: [
               Text('Statistiques générales :', style: GypseFont.m()),
               Text(
-                  'Questions répondues : ${ref.watch(userProvider)!.questions.length} / ${ref.watch(questionsProvider).length}',
+                  'Questions répondues : ${ref.watch(userProvider)!.questions.length}',
                   semanticsLabel:
                       'Questions répondues : ${ref.watch(userProvider)!.questions.length} sur ${ref.watch(questionsProvider).length}',
                   style: GypseFont.xs()),
               Expanded(
-                child: DChartPie(
+                child: DChartPieO(
                   data: [
-                    {
-                      'domain': 'Positives',
-                      'measure': ref.read(userProvider.notifier).positivAnswers
-                    },
-                    {
-                      'domain': 'Erreurs',
-                      'measure': ref.read(userProvider.notifier).negativAnswers
-                    },
+                    OrdinalData(
+                      domain: 'Positives',
+                      measure: ref.read(userProvider.notifier).positivAnswers,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    OrdinalData(
+                      domain: 'Erreurs',
+                      measure: ref.read(userProvider.notifier).negativAnswers,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                   ],
-                  fillColor: (pieData, index) {
-                    switch (index) {
-                      case 0:
-                        return Theme.of(context).colorScheme.secondary;
-                      default:
-                        return Theme.of(context).colorScheme.error;
-                    }
-                  },
-                  pieLabel: (pieData, index) {
+                  configRenderPie: ConfigRenderPie(
+                    strokeWidthPx: 0,
+                    arcLabelDecorator: ArcLabelDecorator(
+                      insideLabelStyle: LabelStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      labelPosition: ArcLabelPosition.inside,
+                    ),
+                  ),
+                  customLabel: (pieData, index) {
                     if (state) {
-                      return '${pieData['measure']} ${pieData['domain']}';
+                      return '${pieData.measure} ${pieData.domain}';
                     } else {
                       return index == 0
                           ? '${ref.read(userProvider.notifier).positivAnswersPercent} %'
                           : '${ref.read(userProvider.notifier).negativAnswersPercent} %';
                     }
                   },
-                  labelColor: Theme.of(context).colorScheme.onPrimary,
-                  strokeWidth: 0,
                 ),
               ),
             ],

@@ -19,7 +19,7 @@ import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/game/domain/models/question.dart';
 import 'package:gypse/game/domain/usecases/questions_use_cases.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
-import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

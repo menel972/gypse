@@ -11,7 +11,7 @@ import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
 import 'package:gypse/game/presentation/views/states/answer_ratio_state.dart';
-import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AnswersView extends HookConsumerWidget {
@@ -25,6 +25,9 @@ class AnswersView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ratio = ref.watch(answerRatioStateProvider);
     gameState = ref.watch(gameStateNotifierProvider);
+
+    void updateRecap() =>
+        ref.read(recapSessionStateNotifierProvider.notifier).addGame(gameState);
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 900),
@@ -127,6 +130,8 @@ class AnswersView extends HookConsumerWidget {
                               qId: gameState.question.uId,
                               level: gameState.settings.level,
                               isRightAnswer: gameState.isRight));
+
+                      updateRecap();
 
                       initGameState();
                       ref

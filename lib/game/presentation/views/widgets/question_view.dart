@@ -6,7 +6,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
-import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:gypse/game/presentation/views/widgets/difficulty_icon.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

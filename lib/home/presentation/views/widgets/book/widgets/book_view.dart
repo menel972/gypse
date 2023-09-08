@@ -67,6 +67,10 @@ class BookView extends HookConsumerWidget {
                   child: GridView.count(
                     crossAxisCount: 2,
                     childAspectRatio: 1,
+                    padding: EdgeInsets.only(
+                      top: Dimensions.xxs(context).height,
+                      bottom: Dimensions.s(context).height,
+                    ),
                     children: [
                       ...books.map((book) {
                         List<String> questions = getQuestionsIdByBook(book);

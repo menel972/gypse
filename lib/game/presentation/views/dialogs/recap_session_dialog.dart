@@ -75,14 +75,14 @@ class RecapSessionDialog extends HookConsumerWidget {
                       child: DChartPieO(
                         data: [
                           OrdinalData(
-                            domain: 'Positives',
-                            measure: recap.scores.goodGames,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          OrdinalData(
                             domain: 'Erreurs',
                             measure: recap.scores.badGames,
                             color: Theme.of(context).colorScheme.error,
+                          ),
+                          OrdinalData(
+                            domain: 'Positives',
+                            measure: recap.scores.goodGames,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ],
                         configRenderPie: ConfigRenderPie(
@@ -102,9 +102,6 @@ class RecapSessionDialog extends HookConsumerWidget {
                   ),
                   Dimensions.xxs(context).spaceH(),
                   ...recap.gameBooks.map((book) {
-                    double ratio = recap.goodGamesByBook(book).goodGames /
-                        recap.goodGamesByBook(book).allGames;
-
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -120,36 +117,31 @@ class RecapSessionDialog extends HookConsumerWidget {
                             value: recap.goodGamesByBook(book).goodGames,
                             max: recap.goodGamesByBook(book).allGames,
                             foregroundLabel: Text(
-                              '${recap.goodGamesByBook(book).goodGames.toInt()} / ${recap.goodGamesByBook(book).allGames.toInt()}',
+                              recap
+                                  .goodGamesByBook(book)
+                                  .goodGames
+                                  .toInt()
+                                  .toString(),
                               style: GypseFont.xs(
                                   color:
                                       Theme.of(context).colorScheme.onPrimary),
                             ),
                             backgroundLabel: Text(
-                              recap.goodGamesByBook(book).goodGames == 0
-                                  ? '${recap.goodGamesByBook(book).goodGames.toInt()} / ${recap.goodGamesByBook(book).allGames.toInt()}'
-                                  : '',
+                              '${recap.goodGamesByBook(book).allGames.toInt() - recap.goodGamesByBook(book).goodGames.toInt()}',
                               style: GypseFont.xs(
                                   color:
                                       Theme.of(context).colorScheme.onPrimary),
                             ),
+                            foregroundLabelAlign: Alignment.centerLeft,
                             foregroundLabelPadding:
                                 Dimensions.xxxs(context).padW(),
                             backgroundLabelPadding:
                                 Dimensions.xxxs(context).padW(),
                             radius: BorderRadius.circular(20),
-                            foregroundColor: ratio >= 0.5
-                                ? Theme.of(context).colorScheme.secondary
-                                : Theme.of(context).colorScheme.error,
-                            backgroundColor: ratio >= 0.5
-                                ? Theme.of(context)
-                                    .colorScheme
-                                    .secondary
-                                    .withOpacity(0.5)
-                                : Theme.of(context)
-                                    .colorScheme
-                                    .error
-                                    .withOpacity(0.5),
+                            foregroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
                           ),
                         ),
                       ],

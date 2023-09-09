@@ -3,6 +3,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
@@ -56,6 +57,45 @@ class GameState extends Equatable {
       isRight: isRight ?? this.isRight,
       isModal: isModal ?? this.isModal,
     );
+  }
+}
+
+class RecapSessionState extends Equatable {
+  final List<GameState> games;
+  final bool details;
+
+  RecapSessionState({
+    this.games = const [],
+    this.details = false,
+  });
+
+  @override
+  List<Object?> get props => [games, details];
+
+  RecapSessionState copyWith({List<GameState>? games, bool? details}) {
+    return RecapSessionState(
+        games: games ?? this.games, details: details ?? this.details);
+  }
+
+  List<Books> get gameBooks =>
+      games.map((game) => game.question.book).toSet().toList();
+
+  ({int goodGames, int badGames}) get scores {
+    int goodGame = games.where((game) => game.isRight).length;
+    int badGame = games.where((game) => !game.isRight).length;
+
+    return (goodGames: goodGame, badGames: badGame);
+  }
+
+  ({double goodGames, double allGames}) goodGamesByBook(Books book) {
+    double goodGame = games
+        .where((game) => game.question.book == book && game.isRight)
+        .length
+        .toDouble();
+    double allGame =
+        games.where((game) => game.question.book == book).length.toDouble();
+
+    return (goodGames: goodGame, allGames: allGame);
   }
 }
 
@@ -126,4 +166,23 @@ class GameStateNotifier extends StateNotifier<GameState> {
 final gameStateNotifierProvider =
     StateNotifierProvider<GameStateNotifier, GameState>((ref) {
   return GameStateNotifier();
+});
+
+class RecapSessionStateNotifier extends StateNotifier<RecapSessionState> {
+  RecapSessionStateNotifier() : super(RecapSessionState());
+
+  void addGame(GameState game) =>
+      state = state.copyWith(games: [...state.games, game]);
+
+  void openDetails() => state = state.copyWith(details: true);
+
+  void clearState() {
+    state = RecapSessionState();
+    "clear recap".log(tag: "RECAP SESSION");
+  }
+}
+
+final recapSessionStateNotifierProvider =
+    StateNotifierProvider<RecapSessionStateNotifier, RecapSessionState>((ref) {
+  return RecapSessionStateNotifier();
 });

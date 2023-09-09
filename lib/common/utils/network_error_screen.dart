@@ -5,7 +5,7 @@ import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NetworkErrorScreen extends HookConsumerWidget {

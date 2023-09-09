@@ -15,7 +15,7 @@ import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
 import 'package:gypse/game/presentation/views/no_question_screen.dart';
-import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:gypse/game/presentation/views/widgets/answers_view.dart';
 import 'package:gypse/game/presentation/views/widgets/question_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

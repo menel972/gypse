@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +8,8 @@ import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/common/utils/strings.dart';
+import 'package:gypse/game/presentation/views/dialogs/recap_session_dialog.dart';
+import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
 import 'package:gypse/home/presentation/views/widgets/home_navigation_bar.dart';
@@ -14,7 +18,10 @@ import 'package:gypse/home/presentation/views/widgets/stats/user_stats_view.dart
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeScreen extends HookConsumerWidget {
-  const HomeScreen({super.key});
+  late int navigationIndex;
+  late RecapSessionState recap;
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +31,12 @@ class HomeScreen extends HookConsumerWidget {
       }
     });
 
-    int navigationIndex = ref.watch(homeNavigationStateProvider);
+    navigationIndex = ref.watch(homeNavigationStateProvider);
+    recap = ref.watch(recapSessionStateNotifierProvider);
+
+    if (recap != RecapSessionState()) {
+      Future(() => RecapSessionDialog(context));
+    }
 
     return WillPopScope(
       onWillPop: () async {

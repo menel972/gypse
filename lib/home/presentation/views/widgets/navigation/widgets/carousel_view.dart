@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
+import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
@@ -18,7 +19,8 @@ class CarouselView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    questions = ref.watch(questionsProvider).toList();
+    questions = ref.read(questionsProvider.notifier).getEnabledQuestions(
+        ref.read(userProvider.notifier).answeredQuestionsId);
     books = ref.watch(carouselStateNotifierProvider(questions));
 
     return FlutterCarousel.builder(

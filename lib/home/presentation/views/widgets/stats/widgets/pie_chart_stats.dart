@@ -58,14 +58,14 @@ class PieChartStats extends HookConsumerWidget {
                 child: DChartPieO(
                   data: [
                     OrdinalData(
-                      domain: 'Positives',
-                      measure: ref.read(userProvider.notifier).positivAnswers,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    OrdinalData(
                       domain: 'Erreurs',
                       measure: ref.read(userProvider.notifier).negativAnswers,
                       color: Theme.of(context).colorScheme.error,
+                    ),
+                    OrdinalData(
+                      domain: 'Positives',
+                      measure: ref.read(userProvider.notifier).positivAnswers,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ],
                   configRenderPie: ConfigRenderPie(

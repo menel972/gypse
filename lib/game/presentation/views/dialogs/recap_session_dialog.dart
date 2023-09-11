@@ -117,11 +117,13 @@ class RecapSessionDialog extends HookConsumerWidget {
                             value: recap.goodGamesByBook(book).goodGames,
                             max: recap.goodGamesByBook(book).allGames,
                             foregroundLabel: Text(
-                              recap
-                                  .goodGamesByBook(book)
-                                  .goodGames
-                                  .toInt()
-                                  .toString(),
+                              recap.goodGamesByBook(book).goodGames.toInt() != 0
+                                  ? recap
+                                      .goodGamesByBook(book)
+                                      .goodGames
+                                      .toInt()
+                                      .toString()
+                                  : '',
                               style: GypseFont.xs(
                                   color:
                                       Theme.of(context).colorScheme.onPrimary),

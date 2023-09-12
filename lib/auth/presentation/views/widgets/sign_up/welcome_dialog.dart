@@ -12,7 +12,7 @@ class WelcomeDialog extends HookConsumerWidget {
   final BuildContext context;
 
   WelcomeDialog(this.context, {super.key}) {
-    showAdaptiveDialog(context: context, builder: (context) => this);
+    showDialog(context: context, builder: (context) => this);
   }
 
   @override

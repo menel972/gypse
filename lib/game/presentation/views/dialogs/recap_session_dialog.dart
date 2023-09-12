@@ -20,7 +20,7 @@ class RecapSessionDialog extends HookConsumerWidget {
 
   late RecapSessionState recap;
   RecapSessionDialog(this.context, {super.key}) {
-    showAdaptiveDialog(context: context, builder: (context) => this);
+    showDialog(context: context, builder: (context) => this);
   }
 
   @override

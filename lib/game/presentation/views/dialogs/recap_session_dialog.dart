@@ -62,7 +62,9 @@ class RecapSessionDialog extends HookConsumerWidget {
                   ),
                   Dimensions.xxs(context).spaceH(),
                   Text(
-                    'Félicitations tu as répondu à ${recap.games.length} questions !',
+                    recap.games.length == 1
+                        ? 'Tu as répondu à ${recap.games.length} question'
+                        : 'Tu as répondu à ${recap.games.length} questions',
                     style: GypseFont.m(
                         color: Theme.of(context).colorScheme.primary),
                     textAlign: TextAlign.center,
@@ -75,12 +77,16 @@ class RecapSessionDialog extends HookConsumerWidget {
                       child: DChartPieO(
                         data: [
                           OrdinalData(
-                            domain: 'Erreurs',
+                            domain: recap.scores.badGames == 1
+                                ? 'Mauvaise'
+                                : 'Mauvaises',
                             measure: recap.scores.badGames,
                             color: Theme.of(context).colorScheme.error,
                           ),
                           OrdinalData(
-                            domain: 'Positives',
+                            domain: recap.scores.goodGames == 1
+                                ? 'Bonne'
+                                : 'Bonnes',
                             measure: recap.scores.goodGames,
                             color: Theme.of(context).colorScheme.secondary,
                           ),

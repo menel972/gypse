@@ -83,8 +83,8 @@ class BookView extends HookConsumerWidget {
                           BookFilterCard(
                             context,
                             book: book,
-                            questions: questions.length,
-                            answeredQuestions: getAnswersByIds(questions),
+                            badGames: getAnswersByIds(questions).badGames,
+                            goodGames: getAnswersByIds(questions).goodGames,
                             isEnabled: questions.isNotEmpty,
                             ref: ref,
                           ),

@@ -88,8 +88,8 @@ class PieChartStats extends HookConsumerWidget {
                       return '${pieData.measure} ${pieData.domain}';
                     } else {
                       return index == 0
-                          ? '${ref.read(userProvider.notifier).positivAnswersPercent} %'
-                          : '${ref.read(userProvider.notifier).negativAnswersPercent} %';
+                          ? '${ref.read(userProvider.notifier).negativAnswersPercent} %'
+                          : '${ref.read(userProvider.notifier).positivAnswersPercent} %';
                     }
                   },
                 ),

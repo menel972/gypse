@@ -28,10 +28,19 @@ class UserProvider extends StateNotifier<UiUser?> {
   Iterable<String> get answeredQuestionsId =>
       state!.questions.map((question) => question.qId);
 
-  int getAnswersByIds(List<String> questions) {
-    return state!.questions
-        .where((question) => questions.contains(question.qId))
-        .length;
+  ({double goodGames, double badGames}) getAnswersByIds(
+      List<String> questions) {
+    Iterable<UiAnsweredQuestions> answeredQuestions =
+        state!.questions.where((question) => questions.contains(question.qId));
+
+    double goodGame =
+        answeredQuestions.where((game) => game.isRightAnswer).length.toDouble();
+    double badGame = answeredQuestions
+        .where((game) => !game.isRightAnswer)
+        .length
+        .toDouble();
+
+    return (goodGames: goodGame, badGames: badGame);
   }
 
   int get positivAnswers =>

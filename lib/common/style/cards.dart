@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
@@ -88,16 +89,16 @@ class HomeCarouselCard extends GestureDetector {
 class BookFilterCard extends GestureDetector {
   final BuildContext context;
   final Books book;
-  final int questions;
-  final int answeredQuestions;
+  final double badGames;
+  final double goodGames;
   final bool isEnabled;
   final WidgetRef ref;
 
   BookFilterCard(
     this.context, {
     required this.book,
-    required this.questions,
-    required this.answeredQuestions,
+    required this.badGames,
+    required this.goodGames,
     required this.isEnabled,
     required this.ref,
   });
@@ -149,20 +150,24 @@ class BookFilterCard extends GestureDetector {
               textAlign: TextAlign.center,
             ),
             Dimensions.xxxs(context).spaceH(),
-            Text.rich(
-              semanticsLabel:
-                  "$answeredQuestions questions répondues sur $questions",
-              TextSpan(
-                text: '$answeredQuestions',
-                style: GypseFont.s(
-                    color: answeredQuestions == questions && questions != 0
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.onPrimary),
-                children: [
-                  TextSpan(text: ' / $questions', style: GypseFont.s())
-                ],
-              ),
-            ),
+            if (goodGames != 0) ...[
+              SizedBox(
+                height: Dimensions.xxs(context).width,
+                width: Dimensions.m(context).width,
+                child: DChartSingleBar(
+                  value: goodGames.toDouble(),
+                  max: badGames.toDouble(),
+                  foregroundLabelAlign: Alignment.centerLeft,
+                  foregroundLabelPadding: Dimensions.xxxs(context).padW(),
+                  backgroundLabelPadding: Dimensions.xxxs(context).padW(),
+                  radius: BorderRadius.circular(20),
+                  foregroundColor:
+                      Theme.of(context).colorScheme.secondary.withOpacity(0.8),
+                  backgroundColor:
+                      Theme.of(context).colorScheme.error.withOpacity(0.8),
+                ),
+              )
+            ],
           ]),
         ),
         Container(

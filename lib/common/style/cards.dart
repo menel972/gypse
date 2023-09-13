@@ -152,13 +152,13 @@ class BookFilterCard extends GestureDetector {
               overflow: TextOverflow.ellipsis,
             ),
             Dimensions.xxxs(context).spaceH(),
-            if (goodGames != 0) ...[
+            if (goodGames + badGames != 0) ...[
               SizedBox(
                 height: Dimensions.xxs(context).width,
                 width: Dimensions.m(context).width,
                 child: DChartSingleBar(
                   value: goodGames.toDouble(),
-                  max: badGames.toDouble(),
+                  max: badGames.toDouble() + goodGames.toDouble(),
                   foregroundLabelAlign: Alignment.centerLeft,
                   foregroundLabelPadding: Dimensions.xxxs(context).padW(),
                   backgroundLabelPadding: Dimensions.xxxs(context).padW(),

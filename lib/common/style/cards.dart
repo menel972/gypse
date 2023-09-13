@@ -147,7 +147,9 @@ class BookFilterCard extends GestureDetector {
               book.fr.toUpperCase(),
               style: GypseFont.xl(bold: true),
               maxLines: 1,
+              minFontSize: 14,
               textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
             ),
             Dimensions.xxxs(context).spaceH(),
             if (goodGames != 0) ...[

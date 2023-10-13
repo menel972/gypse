@@ -89,7 +89,7 @@ class QuitDialog extends HookConsumerWidget {
                                 to: Screen.homeView.path,
                               );
                           await updateUser(context, user);
-                          context.go(Screen.homeView.path);
+                          context.go(Screen.recapSession.path);
                         }
                       },
                       textColor: Theme.of(context).colorScheme.onError,

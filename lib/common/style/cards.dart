@@ -75,7 +75,8 @@ class HomeCarouselCard extends GestureDetector {
               Positioned(
                 bottom: 20,
                 child: GypseSmallButton(
-                  'Jouer',
+                  context,
+                  label: 'Jouer',
                   onPressed: () =>
                       context.go('${Screen.gameView.path}/${book.fr}'),
                 ),

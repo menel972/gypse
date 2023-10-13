@@ -44,9 +44,7 @@ class RecapView extends HookConsumerWidget {
             children: [
               Dimensions.xs(context).spaceH(),
               Text(
-                recap.games.length == 1
-                    ? '${recap.games.length} QUESTION REPONDUE !'
-                    : '${recap.games.length} QUESTIONS REPONDUES !',
+                'PARTIE TERMINÉE !',
                 style: GypseFont.l(
                   color: Theme.of(context).colorScheme.onPrimary,
                   bold: true,

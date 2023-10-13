@@ -17,22 +17,22 @@ class GaugeChartStats extends HookConsumerWidget {
           color: const Color.fromRGBO(70, 96, 192, 1),
           width: 2,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       padding: Dimensions.xxs(context).pad(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Statistiques par difficulté :', style: GypseFont.m()),
+          const Text('Statistiques par difficulté :', style: GypseFont.m()),
           Text(
               'Difficile : ${ref.read(userProvider.notifier).hardAnswers} questions répondues',
-              style: GypseFont.xs()),
+              style: const GypseFont.xs()),
           Text(
               'Moyen : ${ref.read(userProvider.notifier).mediumAnswers} questions répondues',
-              style: GypseFont.xs()),
+              style: const GypseFont.xs()),
           Text(
               'Facile : ${ref.read(userProvider.notifier).easyAnswers} questions répondues',
-              style: GypseFont.xs()),
+              style: const GypseFont.xs()),
           Expanded(
             child: Row(
               children: [
@@ -47,7 +47,7 @@ class GaugeChartStats extends HookConsumerWidget {
                           child: Stack(
                             alignment: AlignmentDirectional.center,
                             children: [
-                              Text('Difficile', style: GypseFont.xs()),
+                              const Text('Difficile', style: GypseFont.xs()),
                               DChartGauge(
                                 data: [
                                   {
@@ -87,7 +87,7 @@ class GaugeChartStats extends HookConsumerWidget {
                           child: Stack(
                             alignment: AlignmentDirectional.center,
                             children: [
-                              Text('Moyen', style: GypseFont.xs()),
+                              const Text('Moyen', style: GypseFont.xs()),
                               DChartGauge(
                                 data: [
                                   {
@@ -127,7 +127,7 @@ class GaugeChartStats extends HookConsumerWidget {
                           child: Stack(
                             alignment: AlignmentDirectional.center,
                             children: [
-                              Text('Facile', style: GypseFont.xs()),
+                              const Text('Facile', style: GypseFont.xs()),
                               DChartGauge(
                                 data: [
                                   {

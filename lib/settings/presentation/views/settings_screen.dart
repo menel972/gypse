@@ -26,7 +26,7 @@ class SettingsScreen extends HookConsumerWidget {
                 );
             context.go(Screen.homeView.path);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.home_outlined,
             semanticLabel: "Retour vers l'accueil",
           ),
@@ -45,7 +45,7 @@ class SettingsScreen extends HookConsumerWidget {
             left: Dimensions.xs(context).width,
             right: Dimensions.xs(context).width,
           ),
-          child: SettingsView(),
+          child: const SettingsView(),
         ),
       ),
     );

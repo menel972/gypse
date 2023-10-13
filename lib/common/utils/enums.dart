@@ -38,13 +38,14 @@ enum Locales {
 ///<li>medium - 3 propositions
 ///<li>hard - 4 propositions
 enum Level {
-  easy(1, 2),
-  medium(2, 3),
-  hard(3, 4);
+  easy(1, 2, 'Facile'),
+  medium(2, 3, 'Moyen'),
+  hard(3, 4, 'Difficile');
 
   final int id;
   final int propositions;
-  const Level(this.id, this.propositions);
+  final String label;
+  const Level(this.id, this.propositions, this.label);
 }
 
 /** TIME */
@@ -208,6 +209,7 @@ enum Screen {
   profileSettings('profile'),
   aboutGypse('about'),
   noQuestionView('/no_question'),
+  recapSession('/recap'),
   errorView('/error');
 
   final String path;

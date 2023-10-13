@@ -61,7 +61,7 @@ class SignUpView extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Dimensions.xxs(context).spaceH(),
-          Text(
+          const Text(
             'Création du compte',
             style: GypseFont.xxl(bold: true),
             textAlign: TextAlign.center,
@@ -152,7 +152,7 @@ class SignUpView extends HookConsumerWidget {
               child: Text.rich(
                 TextSpan(
                   children: [
-                    TextSpan(
+                    const TextSpan(
                       text: 'J\'accepte les ',
                       style: GypseFont.xs(),
                     ),

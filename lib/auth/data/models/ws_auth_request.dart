@@ -19,7 +19,7 @@ class WsAuthRequest extends Equatable {
   ///#### `WsAuthRequest` constructor
   ///<br>
   ///It contains user's credentials to perform his authentication request.
-  WsAuthRequest(this.email, this.password);
+  const WsAuthRequest(this.email, this.password);
 
   @override
   List<Object?> get props => [email, password];

@@ -25,8 +25,9 @@ class SignInView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(loginStateNotifierProvider, (_, next) {
       next.log(tag: 'Current Login State');
-      if (next == LoginState.authenticated)
+      if (next == LoginState.authenticated) {
         Future(() => context.go(Screen.initView.path));
+      }
     });
 
     credentials = ref.watch(signInCredentialsStateNotifierProvider);
@@ -43,7 +44,7 @@ class SignInView extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Dimensions.xxs(context).spaceH(),
-          Text(
+          const Text(
             'Connexion',
             style: GypseFont.xxl(bold: true),
             textAlign: TextAlign.center,

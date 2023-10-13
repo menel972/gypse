@@ -60,10 +60,10 @@ class UiUser extends Equatable {
     UiGypseSettings? settings,
   }) =>
       UiUser(
-        this.uId,
-        userName: this.userName,
-        isAdmin: this.isAdmin,
-        language: this.language,
+        uId,
+        userName: userName,
+        isAdmin: isAdmin,
+        language: language,
         status: status ?? this.status,
         questions: questions ?? this.questions,
         settings: settings ?? this.settings,

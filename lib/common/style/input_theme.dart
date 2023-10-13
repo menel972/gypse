@@ -8,34 +8,34 @@ class GypseInputTheme extends InputDecorationTheme {
   const GypseInputTheme();
 
   @override
-  TextStyle? get labelStyle => GypseFont.s();
+  TextStyle? get labelStyle => const GypseFont.s();
 
   @override
-  TextStyle? get counterStyle => GypseFont.s();
+  TextStyle? get counterStyle => const GypseFont.s();
 
   @override
   InputBorder? get border => OutlineInputBorder(
-        borderSide: BorderSide(color: const Color.fromRGBO(70, 96, 192, 1)),
+        borderSide: const BorderSide(color: Color.fromRGBO(70, 96, 192, 1)),
         borderRadius: BorderRadius.circular(20), 
       );
 
   @override
   InputBorder? get enabledBorder => OutlineInputBorder(
-        borderSide: BorderSide(color: const Color.fromRGBO(70, 96, 192, 1)),
+        borderSide: const BorderSide(color: Color.fromRGBO(70, 96, 192, 1)),
         borderRadius: BorderRadius.circular(20),
       );
 
   @override
   InputBorder? get focusedBorder => OutlineInputBorder(
         borderSide:
-            BorderSide(color: const Color.fromRGBO(207, 109, 18, 1), width: 2),
+            const BorderSide(color: Color.fromRGBO(207, 109, 18, 1), width: 2),
         borderRadius: BorderRadius.circular(20),
       );
 
   @override
   InputBorder? get errorBorder => OutlineInputBorder(
         borderSide:
-            BorderSide(color: const Color.fromRGBO(176, 0, 32, 1), width: 2),
+            const BorderSide(color: Color.fromRGBO(176, 0, 32, 1), width: 2),
         borderRadius: BorderRadius.circular(20),
       );
 

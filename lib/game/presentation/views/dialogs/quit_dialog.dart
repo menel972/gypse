@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +89,7 @@ class QuitDialog extends HookConsumerWidget {
                                 to: Screen.homeView.path,
                               );
                           await updateUser(context, user);
-                          context.go(Screen.homeView.path);
+                          context.go(Screen.recapSession.path);
                         }
                       },
                       textColor: Theme.of(context).colorScheme.onError,

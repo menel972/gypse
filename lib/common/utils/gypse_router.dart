@@ -5,6 +5,7 @@ import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
 import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
+import 'package:gypse/recap/presentation/views/recap_screen.dart';
 import 'package:gypse/settings/presentation/views/settings_screen.dart';
 import 'package:gypse/settings/presentation/views/widgets/about_gypse/about_gypse.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/game_settings.dart';
@@ -35,7 +36,7 @@ GoRouter gypseRouter = GoRouter(
         path: Screen.homeView.path, builder: (context, state) => HomeScreen()),
     // NOTE : BOOK SCREEN
     GoRoute(
-        path: Screen.booksView.path, builder: (context, state) => BookScreen()),
+        path: Screen.booksView.path, builder: (context, state) => const BookScreen()),
     // NOTE : GAME SCREEN
     GoRoute(
         path: '${Screen.gameView.path}/:book',
@@ -43,11 +44,11 @@ GoRouter gypseRouter = GoRouter(
     // NOTE : Settings SCREEN
     GoRoute(
       path: Screen.settingsView.path,
-      builder: (context, state) => SettingsScreen(),
+      builder: (context, state) => const SettingsScreen(),
       routes: [
         GoRoute(
           path: Screen.gameSettings.path,
-          builder: (context, state) => GameSettings(),
+          builder: (context, state) => const GameSettings(),
         ),
         GoRoute(
           path: Screen.profileSettings.path,
@@ -55,9 +56,14 @@ GoRouter gypseRouter = GoRouter(
         ),
         GoRoute(
           path: Screen.aboutGypse.path,
-          builder: (context, state) => AboutGypse(),
+          builder: (context, state) => const AboutGypse(),
         ),
       ],
+    ),
+    // NOTE : RECAP SESSION SCREEN
+    GoRoute(
+      path: Screen.recapSession.path,
+      builder: (context, state) => const RecapScreen(),
     ),
   ],
 );

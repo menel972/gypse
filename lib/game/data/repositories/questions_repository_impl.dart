@@ -14,8 +14,8 @@ class QuestionsRepositoryImpl extends QuestionsRepository {
     try {
       return await _questionsService.fetchQuestions().then((wsQuestionsList) =>
           wsQuestionsList.map((wsQuestion) => wsQuestion.toDomain()).toList());
-    } on GypseException catch (e) {
-      throw (e);
+    } on GypseException {
+      rethrow;
     }
   }
 }

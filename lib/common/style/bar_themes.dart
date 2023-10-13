@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/services/system_chrome.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -18,18 +20,18 @@ class GypseAppBarTheme extends AppBarTheme {
   bool? get centerTitle => true;
 
   @override
-  TextStyle? get titleTextStyle => GypseFont.m(bold: true);
+  TextStyle? get titleTextStyle => const GypseFont.m(bold: true);
 
   @override
   SystemUiOverlayStyle? get systemOverlayStyle =>
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
 
   @override
   double? get toolbarHeight => 40;
 
   @override
-  IconThemeData? get iconTheme => IconThemeData(
-        color: const Color.fromRGBO(196, 196, 196, 1),
+  IconThemeData? get iconTheme => const IconThemeData(
+        color: Color.fromRGBO(196, 196, 196, 1),
         size: 25,
         opacity: 0.8,
       );
@@ -50,20 +52,20 @@ class GypseBottomBarTheme extends BottomNavigationBarThemeData {
   Color? get selectedItemColor => const Color.fromRGBO(207, 109, 18, 1);
 
   @override
-  IconThemeData? get selectedIconTheme => IconThemeData(
-        color: const Color.fromRGBO(207, 109, 18, 1),
+  IconThemeData? get selectedIconTheme => const IconThemeData(
+        color: Color.fromRGBO(207, 109, 18, 1),
         size: 30,
       );
 
   @override
-  TextStyle? get selectedLabelStyle => GypseFont.xs();
+  TextStyle? get selectedLabelStyle => const GypseFont.xs();
 
   @override
   bool? get showUnselectedLabels => false;
 
   @override
-  IconThemeData? get unselectedIconTheme => IconThemeData(
-        color: const Color.fromRGBO(10, 35, 128, 1),
+  IconThemeData? get unselectedIconTheme => const IconThemeData(
+        color: Color.fromRGBO(10, 35, 128, 1),
         size: 25,
       );
 

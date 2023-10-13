@@ -7,7 +7,7 @@ import 'package:gypse/common/utils/strings.dart';
 class DifficultyIcon extends Row {
   final BuildContext context;
   final Level level;
-  DifficultyIcon(this.context, this.level, {super.key});
+  const DifficultyIcon(this.context, this.level, {super.key});
 
   String difficultyImage() {
     if (level == Level.easy) return 'easy.png';

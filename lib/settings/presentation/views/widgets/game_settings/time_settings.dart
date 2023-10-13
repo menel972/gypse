@@ -25,11 +25,11 @@ class TimeSettings extends HookConsumerWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(
+          title: const Text(
             'Facile',
             style: GypseFont.m(),
           ),
-          subtitle: Text('30 secondes'),
+          subtitle: const Text('30 secondes'),
           trailing: Icon(
             Icons.timer_sharp,
             size: Dimensions.xs(context).width,
@@ -42,11 +42,11 @@ class TimeSettings extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: Text(
+          title: const Text(
             'Moyen',
             style: GypseFont.m(),
           ),
-          subtitle: Text('20 secondes'),
+          subtitle: const Text('20 secondes'),
           trailing: Icon(
             Icons.timer_sharp,
             size: Dimensions.xs(context).width,
@@ -59,11 +59,11 @@ class TimeSettings extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: Text(
+          title: const Text(
             'Difficile',
             style: GypseFont.m(),
           ),
-          subtitle: Text('12 secondes'),
+          subtitle: const Text('12 secondes'),
           trailing: Icon(
             Icons.timer_sharp,
             size: Dimensions.xs(context).width,

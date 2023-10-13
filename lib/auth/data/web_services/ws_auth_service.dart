@@ -179,9 +179,8 @@ class WsAuthService {
     }
   }
 
-  /** 
-   * UTILS
-   **/
+  /// UTILS
+  ///
 
   String? get userEmail => _client.currentUser?.email;
 

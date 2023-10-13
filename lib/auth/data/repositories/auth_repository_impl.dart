@@ -18,8 +18,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return await _authService
               .signUpWithEmail(WsAuthRequest.fromDomain(request)) ??
           '';
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -29,8 +29,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return await _authService
               .signInWithEmail(WsAuthRequest.fromDomain(request)) ??
           '';
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -38,8 +38,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<bool> signOut() async {
     try {
       return await _authService.signOut() ?? false;
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -47,8 +47,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<bool> deleteAccount() async {
     try {
       return await _authService.deleteAccount() ?? false;
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -58,8 +58,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<bool> setUserName(String userName) async {
     try {
       return await _authService.setUserName(userName) ?? false;
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -67,8 +67,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<bool> changePassword() async {
     try {
       return await _authService.resetPassword() ?? false;
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -76,8 +76,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<bool?> forgottenPassword(String email) async {
     try {
       return await _authService.resetPassword(email: email) ?? false;
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -85,8 +85,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<bool> verifyEmail() async {
     try {
       return await _authService.verifyEmail() ?? false;
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 

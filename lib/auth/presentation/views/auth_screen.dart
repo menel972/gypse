@@ -42,7 +42,7 @@ class AuthScreen extends HookConsumerWidget {
         body: Container(
           height: Dimensions.screen(context).height,
           width: Dimensions.screen(context).width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: SweepGradient(
               colors: GypseColors.cardGradient,
               stops: [0, 0.39, 0.6, 0.9],
@@ -80,9 +80,9 @@ class AuthScreen extends HookConsumerWidget {
                         child: RichText(
                           text: TextSpan(
                             text: 'Déjà un compte ?',
-                            style: GypseFont.xs(),
+                            style: const GypseFont.xs(),
                             children: [
-                              TextSpan(text: ' '),
+                              const TextSpan(text: ' '),
                               TextSpan(
                                   text: 'Connectez-vous',
                                   style: GypseFont.s(
@@ -100,9 +100,9 @@ class AuthScreen extends HookConsumerWidget {
                         child: RichText(
                           text: TextSpan(
                             text: 'Pas encore de compte ?',
-                            style: GypseFont.xs(),
+                            style: const GypseFont.xs(),
                             children: [
-                              TextSpan(text: ' '),
+                              const TextSpan(text: ' '),
                               TextSpan(
                                   text: 'Créer un compte',
                                   style: GypseFont.s(
@@ -113,7 +113,7 @@ class AuthScreen extends HookConsumerWidget {
                           ),
                         ),
                       ),
-                      SizedBox(),
+                      const SizedBox(),
                     ][authState]
                   ],
                 )

@@ -42,7 +42,7 @@ class AnswersProvider extends StateNotifier<Set<UiAnswer>> {
               ),
               title: Text(
                 answer.text,
-                style: GypseFont.xs(),
+                style: const GypseFont.xs(),
               ),
             ))
         .toList();

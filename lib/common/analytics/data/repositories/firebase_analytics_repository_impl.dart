@@ -14,8 +14,8 @@ class FirebaseAnalyticsRepositoryImpl extends FirebaseAnalyticsRepository {
   Future<void> logAction({required String cta, String? details}) async {
     try {
       await _service.logAction(cta: cta, details: details);
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 
@@ -23,8 +23,8 @@ class FirebaseAnalyticsRepositoryImpl extends FirebaseAnalyticsRepository {
   Future<void> logDisplay({required String screen, String? details}) async {
     try {
       await _service.logDisplay(screen: screen, details: details);
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 
@@ -33,8 +33,8 @@ class FirebaseAnalyticsRepositoryImpl extends FirebaseAnalyticsRepository {
       {required String from, required String to, String? details}) async {
     try {
       await _service.logNavigation(from: from, to: to, details: details);
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 
@@ -42,8 +42,8 @@ class FirebaseAnalyticsRepositoryImpl extends FirebaseAnalyticsRepository {
   Future<void> logUser({required User user}) async {
     try {
       await _service.logUser(user: WsUserResponse.fromDomain(user));
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 
@@ -51,8 +51,8 @@ class FirebaseAnalyticsRepositoryImpl extends FirebaseAnalyticsRepository {
   Future<void> logLogin(String method) async {
     try {
       await _service.logLogin(method);
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 
@@ -60,8 +60,8 @@ class FirebaseAnalyticsRepositoryImpl extends FirebaseAnalyticsRepository {
   Future<void> logSignUp(String method) async {
     try {
       await _service.logSignUp(method);
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 }

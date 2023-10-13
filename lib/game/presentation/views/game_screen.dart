@@ -23,7 +23,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class GameScreen extends HookConsumerWidget {
   final String filter;
 
-  GameScreen(
+  const GameScreen(
     this.filter, {
     super.key,
   });
@@ -84,7 +84,7 @@ class GameScreen extends HookConsumerWidget {
       child: Scaffold(
         floatingActionButton: IconButton(
           onPressed: () => QuitDialog(context),
-          icon: Icon(Icons.home_outlined),
+          icon: const Icon(Icons.home_outlined),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Container(

@@ -60,7 +60,7 @@ class LogDisplayUseCase {
 
   Future<void> invoke({
     required String screen,
-    String? details = null,
+    String? details,
   }) async {
     'start'.log(tag: 'LogDisplayUseCase');
     return await _repository.logDisplay(screen: screen, details: details);
@@ -80,7 +80,7 @@ class LogNavigationUseCase {
   Future<void> invoke({
     required String from,
     required String to,
-    String? details = null,
+    String? details,
   }) async {
     'start'.log(tag: 'LogNavigationUseCase');
     return await _repository.logNavigation(
@@ -104,7 +104,7 @@ class LogActionUseCase {
 
   Future<void> invoke({
     required String cta,
-    String? details = null,
+    String? details,
   }) async {
     'start'.log(tag: 'LogActionUseCase');
     return await _repository.logAction(cta: cta, details: details);

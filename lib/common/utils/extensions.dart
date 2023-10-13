@@ -77,7 +77,7 @@ extension Print on Object {
   ///## Extension on any [Object]
   ///
   /// Logs the object to debug console using [debugPrint].
-  void log({String? tag = null}) =>
+  void log({String? tag}) =>
       debugPrint('${tag.isNull ? '[]' : '[$tag] :'} $this');
 }
 
@@ -101,7 +101,7 @@ extension Snack on Object {
   /// Use it to **inform the user of a successful event**.
   void success(BuildContext context) =>
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(this.toString(), style: GypseFont.xs()),
+        content: Text(toString(), style: const GypseFont.xs()),
         backgroundColor: const Color.fromRGBO(207, 109, 18, 1),
         duration: const Duration(seconds: 5),
       ));
@@ -113,8 +113,8 @@ extension Snack on Object {
   void failure(BuildContext context) =>
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
-          this.toString(),
-          style: GypseFont.xs(),
+          toString(),
+          style: const GypseFont.xs(),
         ),
         backgroundColor: const Color.fromRGBO(176, 0, 32, 1),
         duration: const Duration(seconds: 5),

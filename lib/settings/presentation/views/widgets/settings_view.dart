@@ -94,7 +94,7 @@ class SettingsView extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: Text(
               'version de l\'application : $appVersion',
-              style: GypseFont.xs(),
+              style: const GypseFont.xs(),
             ),
           ),
         )

@@ -39,7 +39,7 @@ class UserStatsView extends HookConsumerWidget {
         child: Column(children: [
           Expanded(child: PieChartStats()),
           Dimensions.xxs(context).spaceH(),
-          Expanded(child: GaugeChartStats()),
+          const Expanded(child: GaugeChartStats()),
         ]),
       ),
     );

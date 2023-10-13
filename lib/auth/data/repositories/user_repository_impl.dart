@@ -1,11 +1,14 @@
+// ignore_for_file: implementation_imports
+
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:gypse/auth/data/models/ws_user_response.dart';
 import 'package:gypse/auth/data/web_services/ws_user_service.dart';
 import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/auth/domain/repositories/user_repository.dart';
 import 'package:gypse/common/utils/exception.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final WsUserService _userService;
@@ -17,8 +20,8 @@ class UserRepositoryImpl extends UserRepository {
       await _userService
           .createUser(WsUserResponse.fromDomain(user))
           .onError((error, stackTrace) => null);
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -31,8 +34,8 @@ class UserRepositoryImpl extends UserRepository {
           .onError((error, stackTrace) => null);
 
       return wsUser!.toDomain();
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -46,8 +49,8 @@ class UserRepositoryImpl extends UserRepository {
               : null)
           .onError((GypseException error, stackTrace) =>
               error.message?.failure(context));
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 
@@ -60,8 +63,8 @@ class UserRepositoryImpl extends UserRepository {
               result == true ? 'Utilisateur supprimé'.success(context) : null)
           .onError((GypseException error, stackTrace) =>
               error.message?.failure(context));
-    } on GypseException catch (e) {
-      throw e;
+    } on GypseException {
+      rethrow;
     }
   }
 }

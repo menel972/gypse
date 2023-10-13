@@ -19,7 +19,7 @@ class AuthRequest extends Equatable {
   ///#### `AuthRequest` constructor
   ///<br>
   ///It contains user's credentials to perform his authentication request.
-  AuthRequest(this.email, this.password);
+  const AuthRequest(this.email, this.password);
 
   @override
   List<Object?> get props => [email, password];

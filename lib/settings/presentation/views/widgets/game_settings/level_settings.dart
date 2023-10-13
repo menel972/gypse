@@ -26,11 +26,11 @@ class LevelSettings extends HookConsumerWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(
+          title: const Text(
             'Facile',
             style: GypseFont.m(),
           ),
-          subtitle: Text('2 propositions'),
+          subtitle: const Text('2 propositions'),
           trailing: Image.asset(
             '$imagesPath/easy.png',
             height: Dimensions.xs(context).width,
@@ -43,11 +43,11 @@ class LevelSettings extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: Text(
+          title: const Text(
             'Moyen',
             style: GypseFont.m(),
           ),
-          subtitle: Text('3 propositions'),
+          subtitle: const Text('3 propositions'),
           trailing: Image.asset(
             '$imagesPath/medium.png',
             height: Dimensions.xs(context).width,
@@ -60,11 +60,11 @@ class LevelSettings extends HookConsumerWidget {
           },
         ),
         ListTile(
-          title: Text(
+          title: const Text(
             'Difficile',
             style: GypseFont.m(),
           ),
-          subtitle: Text('4 propositions'),
+          subtitle: const Text('4 propositions'),
           trailing: Image.asset(
             '$imagesPath/hard.png',
             height: Dimensions.xs(context).width,

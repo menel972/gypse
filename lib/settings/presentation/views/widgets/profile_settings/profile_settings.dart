@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +28,7 @@ class ProfileSettings extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Mon profil',
           style: GypseFont.m(),
         ),
@@ -50,7 +50,7 @@ class ProfileSettings extends HookConsumerWidget {
               label: 'Nom d\'utilisateur : ${user.userName}',
               child: TextFormField(
                 enabled: false,
-                style: GypseFont.s(),
+                style: const GypseFont.s(),
                 initialValue: user.userName,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -67,7 +67,7 @@ class ProfileSettings extends HookConsumerWidget {
                   'Adresse mail : ${ref.read(getUserEmailUseCaseProvider).invoke()}',
               child: TextFormField(
                 enabled: false,
-                style: GypseFont.s(),
+                style: const GypseFont.s(),
                 initialValue: ref.read(getUserEmailUseCaseProvider).invoke(),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(

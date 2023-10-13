@@ -26,13 +26,13 @@ class WsCloudStorageService {
           .then((docUrl) async => await docUrl.launch(context));
     } on FirebaseException catch (fe) {
       fe.log(tag: 'FETCH LEGALS | FIREBASE');
-      throw fe;
+      rethrow;
     } on PlatformException catch (pe) {
       pe.log(tag: 'FETCH LEGALS | PLATFORM');
-      throw pe;
+      rethrow;
     } catch (e) {
       e.log(tag: 'FETCH LEGALS');
-      throw e;
+      rethrow;
     }
   }
 }

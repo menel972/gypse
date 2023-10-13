@@ -32,7 +32,7 @@ class QuestionView extends HookConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(gameState.question.book.fr, style: GypseFont.m()),
+              Text(gameState.question.book.fr, style: const GypseFont.m()),
               DifficultyIcon(context, gameState.settings.level)
             ],
           ),
@@ -43,7 +43,7 @@ class QuestionView extends HookConsumerWidget {
               Expanded(
                 child: Text(
                   gameState.question.text,
-                  style: GypseFont.m(),
+                  style: const GypseFont.m(),
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -58,7 +58,7 @@ class QuestionView extends HookConsumerWidget {
                 ringColor: Theme.of(context).colorScheme.secondary,
                 duration: gameState.settings.time.seconds,
                 textFormat: 's',
-                textStyle: GypseFont.l(),
+                textStyle: const GypseFont.l(),
                 isReverse: true,
                 onStart: () => ref
                     .read(gameStateNotifierProvider.notifier)

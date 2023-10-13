@@ -4,7 +4,7 @@ import 'package:gypse/common/utils/gypse_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ForgottenPasswordStateNotifier extends StateNotifier<CredentialsState> {
-  ForgottenPasswordStateNotifier() : super(CredentialsState());
+  ForgottenPasswordStateNotifier() : super(const CredentialsState());
 
   void onEmailChanged(String value) {
     if (!isEmpty(value).isNull) {

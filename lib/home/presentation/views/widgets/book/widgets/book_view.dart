@@ -40,7 +40,7 @@ class BookView extends HookConsumerWidget {
             backgroundColor: Colors.transparent,
             floating: true,
             title: TextFormField(
-              style: GypseFont.l(),
+              style: const GypseFont.l(),
               decoration: InputDecoration(
                 labelText: 'Livre...',
                 suffixIcon: Icon(

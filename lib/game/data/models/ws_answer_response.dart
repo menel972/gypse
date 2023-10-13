@@ -37,7 +37,7 @@ class WsAnswerResponse extends Equatable {
   ///The `WsAnswerResponse` is parsed to the `Domain Layer` using the [WsAnswerResponse.toDomain] method.
   ///<br><br>
   ///It contains the database response for an answer.
-  WsAnswerResponse({
+  const WsAnswerResponse({
     this.questionId = '',
     this.isRightAnswer = false,
     this.fr,
@@ -71,7 +71,7 @@ class WsAnswerResponse extends Equatable {
       );
     } catch (e) {
       e.log();
-      return WsAnswerResponse();
+      return const WsAnswerResponse();
     }
   }
 
@@ -136,7 +136,7 @@ class WsAnswerData extends Equatable {
   ///#### `WsAnswerData` constructor
   ///<br>
   ///It contains the informations of an answer.
-  WsAnswerData({
+  const WsAnswerData({
     this.answer = '',
     this.url = '',
     this.verse = '',
@@ -162,7 +162,7 @@ class WsAnswerData extends Equatable {
       );
     } catch (e) {
       e.log();
-      return WsAnswerData();
+      return const WsAnswerData();
     }
   }
 }

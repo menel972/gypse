@@ -6,7 +6,7 @@ import 'package:gypse/common/utils/gypse_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignInCredentialsStateNotifier extends StateNotifier<CredentialsState> {
-  SignInCredentialsStateNotifier() : super(CredentialsState());
+  SignInCredentialsStateNotifier() : super(const CredentialsState());
 
   void onEmailChanged(String value) {
     if (!isEmpty(value).isNull) {

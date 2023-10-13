@@ -11,13 +11,13 @@ class CredentialsState extends Equatable {
   final String? userNameError;
   final bool isPasswordHidden;
 
-  CredentialsState({
+  const CredentialsState({
     this.email = '',
-    this.emailError = null,
+    this.emailError,
     this.password = '',
-    this.passwordError = null,
+    this.passwordError,
     this.userName = '',
-    this.userNameError = null,
+    this.userNameError,
     this.isPasswordHidden = true,
   });
 

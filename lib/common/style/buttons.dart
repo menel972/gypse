@@ -18,7 +18,7 @@ class GypseElevatedButton extends ElevatedButton {
   ///It defines the appearance of a **high emphasis button**.<br>
   ///Use it for the primary, most important, or most common action on a screen.
   const GypseElevatedButton(
-    this.context, {
+    this.context, {super.key, 
     required super.onPressed,
     super.child,
     required this.label,
@@ -41,7 +41,7 @@ class GypseElevatedButton extends ElevatedButton {
         backgroundColor:
             MaterialStateProperty.resolveWith((_) => backgroundColor),
         side: MaterialStateProperty.resolveWith((_) => const BorderSide(
-            width: 0.8, color: const Color.fromRGBO(255, 238, 221, 1))),
+            width: 0.8, color: Color.fromRGBO(255, 238, 221, 1))),
         shape: MaterialStateProperty.resolveWith(
           (_) =>
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -63,7 +63,7 @@ class GypseSmallButton extends ElevatedButton {
   ///It defines the appearance of a **low emphasis button**.<br>
   ///Use it for optional or supplementary actions with the least amount of prominence.
   const GypseSmallButton(
-    this.context, {
+    this.context, {super.key, 
     required this.label,
     required super.onPressed,
     this.textColor = const Color.fromRGBO(196, 196, 196, 1),
@@ -71,7 +71,7 @@ class GypseSmallButton extends ElevatedButton {
   });
 
   const GypseSmallButton.verse(
-    this.context, {
+    this.context, {super.key, 
     required this.label,
     required super.onPressed,
     this.textColor = const Color.fromRGBO(207, 109, 18, 1),
@@ -114,7 +114,7 @@ class GypseCircularButton extends ElevatedButton {
   ///It defines the appearance of a **circular button with an icon in the center**.<br>
   ///Use it for important actions with the least amount of prominence.
   const GypseCircularButton(
-    this.context, {
+    this.context, {super.key, 
     required super.onPressed,
     required this.icon,
     super.child,
@@ -132,5 +132,5 @@ class GypseCircularButton extends ElevatedButton {
       alignment: Alignment.center,
       backgroundColor:
           MaterialStateProperty.resolveWith((states) => backgroundColor),
-      shape: MaterialStateProperty.resolveWith((states) => CircleBorder()));
+      shape: MaterialStateProperty.resolveWith((states) => const CircleBorder()));
 }

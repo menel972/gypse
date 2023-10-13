@@ -13,7 +13,7 @@ class GypseBackground extends Container {
   ///## Gypse Background [Container]
   ///
   ///It defines the appearance the background of a screen.
-  GypseBackground(this.image, {super.child});
+  GypseBackground(this.image, {super.key, super.child});
 
   @override
   Decoration? get decoration =>
@@ -30,7 +30,7 @@ class GypseLoading extends Scaffold {
   ///## Gypse Loading screen [Scaffold]
   ///
   ///It defines the appearance the loading screen.
-  GypseLoading(this.context, {this.message});
+  const GypseLoading(this.context, {super.key, this.message});
 
   @override
   Widget? get body => Center(
@@ -44,7 +44,7 @@ class GypseLoading extends Scaffold {
             ),
             Dimensions.xs(context).padding(Text(
               message ?? '',
-              style: GypseFont.s(),
+              style: const GypseFont.s(),
               textAlign: TextAlign.center,
             )),
           ],

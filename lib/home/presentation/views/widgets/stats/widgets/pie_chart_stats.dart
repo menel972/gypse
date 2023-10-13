@@ -42,18 +42,18 @@ class PieChartStats extends HookConsumerWidget {
               color: const Color.fromRGBO(70, 96, 192, 1),
               width: 2,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           padding: Dimensions.xxs(context).pad(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Statistiques générales :', style: GypseFont.m()),
+              const Text('Statistiques générales :', style: GypseFont.m()),
               Text(
                   'Questions répondues : ${ref.watch(userProvider)!.questions.length}',
                   semanticsLabel:
                       'Questions répondues : ${ref.watch(userProvider)!.questions.length} sur ${ref.watch(questionsProvider).length}',
-                  style: GypseFont.xs()),
+                  style: const GypseFont.xs()),
               Expanded(
                 child: DChartPieO(
                   data: [

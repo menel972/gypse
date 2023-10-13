@@ -28,7 +28,7 @@ class RecapTableView extends HookConsumerWidget {
           color: const Color.fromRGBO(70, 96, 192, 1),
           width: 2,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       padding: Dimensions.xxs(context).pad(),
       child: Column(
@@ -50,7 +50,7 @@ class RecapTableView extends HookConsumerWidget {
               )
             ],
           ),
-          Divider(color: const Color.fromRGBO(70, 96, 192, 1)),
+          const Divider(color: Color.fromRGBO(70, 96, 192, 1)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -68,7 +68,7 @@ class RecapTableView extends HookConsumerWidget {
               )
             ],
           ),
-          Divider(color: const Color.fromRGBO(70, 96, 192, 1)),
+          const Divider(color: Color.fromRGBO(70, 96, 192, 1)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -86,7 +86,7 @@ class RecapTableView extends HookConsumerWidget {
               )
             ],
           ),
-          Divider(color: const Color.fromRGBO(70, 96, 192, 1)),
+          const Divider(color: Color.fromRGBO(70, 96, 192, 1)),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(0),

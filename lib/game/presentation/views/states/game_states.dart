@@ -64,7 +64,7 @@ class RecapSessionState extends Equatable {
   final List<GameState> games;
   final bool details;
 
-  RecapSessionState({
+  const RecapSessionState({
     this.games = const [],
     this.details = false,
   });
@@ -169,7 +169,7 @@ final gameStateNotifierProvider =
 });
 
 class RecapSessionStateNotifier extends StateNotifier<RecapSessionState> {
-  RecapSessionStateNotifier() : super(RecapSessionState());
+  RecapSessionStateNotifier() : super(const RecapSessionState());
 
   void addGame(GameState game) =>
       state = state.copyWith(games: [...state.games, game]);
@@ -177,7 +177,7 @@ class RecapSessionStateNotifier extends StateNotifier<RecapSessionState> {
   void openDetails() => state = state.copyWith(details: true);
 
   void clearState() {
-    state = RecapSessionState();
+    state = const RecapSessionState();
     "clear recap".log(tag: "RECAP SESSION");
   }
 }

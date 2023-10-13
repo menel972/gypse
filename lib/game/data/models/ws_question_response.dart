@@ -31,7 +31,7 @@ class WsQuestionResponse extends Equatable {
   ///#### `WsQuestionResponse` constructor
   ///<br>
   ///It contains the database response for a question.
-  WsQuestionResponse({
+  const WsQuestionResponse({
     this.uId = '',
     this.fr,
     this.en,
@@ -57,7 +57,7 @@ class WsQuestionResponse extends Equatable {
       );
     } catch (e) {
       e.log();
-      return WsQuestionResponse();
+      return const WsQuestionResponse();
     }
   }
 
@@ -116,7 +116,7 @@ class WsQuestionData extends Equatable {
   ///#### `WsQuestionData` constructor
   ///<br>
   ///It contains the informations of a question.
-  WsQuestionData({
+  const WsQuestionData({
     this.question = '',
     this.book = '',
     this.answers = const [],
@@ -141,7 +141,7 @@ class WsQuestionData extends Equatable {
       );
     } catch (e) {
       e.log();
-      return WsQuestionData();
+      return const WsQuestionData();
     }
   }
 }

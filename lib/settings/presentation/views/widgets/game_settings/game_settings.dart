@@ -25,7 +25,7 @@ class GameSettings extends HookConsumerWidget {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Paramètres du jeu',
             style: GypseFont.m(),
           ),
@@ -58,13 +58,13 @@ class GameSettings extends HookConsumerWidget {
                     color: const Color.fromRGBO(70, 96, 192, 1),
                     width: 2,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 padding: Dimensions.xxs(context).pad(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text('Nombre de propositions :', style: GypseFont.m()),
+                    const Text('Nombre de propositions :', style: GypseFont.m()),
                     LevelSettings(),
                   ],
                 ),
@@ -76,13 +76,13 @@ class GameSettings extends HookConsumerWidget {
                     color: const Color.fromRGBO(70, 96, 192, 1),
                     width: 2,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 padding: Dimensions.xxs(context).pad(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text('Temps :', style: GypseFont.m()),
+                    const Text('Temps :', style: GypseFont.m()),
                     TimeSettings(),
                   ],
                 ),

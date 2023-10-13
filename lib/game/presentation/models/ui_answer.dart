@@ -26,7 +26,7 @@ class UiAnswer extends Equatable {
   ///#### `UiAnswer` constructor
   ///<br>
   ///It contains all the data for an answer to be displayed on the screen.
-  UiAnswer({
+  const UiAnswer({
     required this.qId,
     required this.isRightAnswer,
     required this.text,

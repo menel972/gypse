@@ -59,8 +59,8 @@ class HomeScreen extends HookConsumerWidget {
               ),
             ),
             child: [
-              HomeView(),
-              BookScreen(),
+              const HomeView(),
+              const BookScreen(),
               UserStatsView(),
             ][navigationIndex],
           ),

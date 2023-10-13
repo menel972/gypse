@@ -31,14 +31,14 @@ class ForgottenPasswordView extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Dimensions.s(context).spaceH(),
-          Text(
+          const Text(
             'Mot de passe oublié ?',
             style: GypseFont.xl(bold: true),
             textAlign: TextAlign.center,
             maxLines: 2,
           ),
           Dimensions.xxs(context).spaceH(),
-          Text(
+          const Text(
             'Réinitilisez votre mot de passe',
             style: GypseFont.m(bold: true),
             textAlign: TextAlign.center,

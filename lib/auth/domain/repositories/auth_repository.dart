@@ -74,9 +74,8 @@ abstract class AuthRepository {
   ///<i>Errors are handled, logged and thrown with a [GypseException].</i>
   Future<bool?> verifyEmail();
 
-  /** 
-  * UTILS
-  **/
+  /// UTILS
+  ///
 
   bool get isEmailVerified;
   String get getUserUid;

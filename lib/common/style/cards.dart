@@ -19,7 +19,7 @@ class HomeCarouselCard extends GestureDetector {
   final WidgetRef ref;
 
   HomeCarouselCard(
-    this.context, {
+    this.context, {super.key, 
     required this.book,
     required this.ref,
   });
@@ -48,14 +48,14 @@ class HomeCarouselCard extends GestureDetector {
               endAngle: 6.5,
             ),
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.black,
                 offset: Offset(2, 1),
                 blurRadius: 4,
               ),
               BoxShadow(
                 color: Theme.of(context).colorScheme.primary,
-                offset: Offset(3, 2),
+                offset: const Offset(3, 2),
                 blurRadius: 10,
               ),
             ],
@@ -68,7 +68,7 @@ class HomeCarouselCard extends GestureDetector {
                 child: Text(
                   semanticsLabel: "Jouer avec le livre : ${book.fr}",
                   book.fr.toUpperCase(),
-                  style: GypseFont.xl(bold: true),
+                  style: const GypseFont.xl(bold: true),
                   maxLines: 1,
                 ),
               ),
@@ -96,7 +96,7 @@ class BookFilterCard extends GestureDetector {
   final WidgetRef ref;
 
   BookFilterCard(
-    this.context, {
+    this.context, {super.key, 
     required this.book,
     required this.badGames,
     required this.goodGames,
@@ -130,14 +130,14 @@ class BookFilterCard extends GestureDetector {
               endAngle: 6.5,
             ),
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.black,
                 offset: Offset(2, 1),
                 blurRadius: 4,
               ),
               BoxShadow(
                 color: Theme.of(context).colorScheme.primary,
-                offset: Offset(3, 2),
+                offset: const Offset(3, 2),
                 blurRadius: 10,
               ),
             ],
@@ -146,7 +146,7 @@ class BookFilterCard extends GestureDetector {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             AutoSizeText(
               book.fr.toUpperCase(),
-              style: GypseFont.xl(bold: true),
+              style: const GypseFont.xl(bold: true),
               maxLines: 1,
               minFontSize: 14,
               textAlign: TextAlign.center,

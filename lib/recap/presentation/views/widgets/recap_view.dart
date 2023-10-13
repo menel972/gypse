@@ -35,7 +35,7 @@ class RecapView extends HookConsumerWidget {
         clearState();
         return false;
       },
-      child: Container(
+      child: SizedBox(
         height: Dimensions.screen(context).height,
         child: Dimensions.xs(context).padding(
           Column(

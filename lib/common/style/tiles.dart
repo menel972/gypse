@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/material.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/extensions.dart';
@@ -49,26 +51,29 @@ class AnswerPropositionTile extends ListTile {
   final BuildContext context;
   final UiAnswer answer;
   final int index;
+  @override
   final Color textColor;
   final Color backgroundColor;
   final Color borderColor;
   final bool isSelected;
   final IconData? icon;
 
-  AnswerPropositionTile(
+  const AnswerPropositionTile(
     this.context, {
+    super.key, 
     required this.answer,
     required this.index,
     required super.enabled,
-    this.icon = null,
+    this.icon,
     this.isSelected = false,
     this.textColor = const Color.fromRGBO(10, 35, 128, 1),
     this.backgroundColor = const Color.fromRGBO(255, 238, 221, 1),
     this.borderColor = const Color.fromRGBO(255, 209, 163, 1),
     required super.onTap,
   });
-  AnswerPropositionTile.valid(
+  const AnswerPropositionTile.valid(
     this.context, {
+    super.key, 
     required this.answer,
     required this.index,
     super.enabled = false,
@@ -78,8 +83,9 @@ class AnswerPropositionTile extends ListTile {
     this.backgroundColor = const Color.fromRGBO(207, 109, 18, 1),
     this.borderColor = const Color.fromRGBO(255, 238, 221, 1),
   });
-  AnswerPropositionTile.error(
+  const AnswerPropositionTile.error(
     this.context, {
+    super.key, 
     required this.answer,
     required this.index,
     super.enabled = false,

@@ -7,11 +7,11 @@ import 'package:gypse/common/style/input_theme.dart';
 ///
 /// It defines the UI theme of the app.
 ThemeData gypseTheme = ThemeData(
-  colorScheme: GypseColors(),
+  colorScheme: const GypseColors(),
   scaffoldBackgroundColor: const Color.fromRGBO(10, 35, 128, 1),
   canvasColor: const Color.fromRGBO(196, 196, 196, 1),
-  appBarTheme: GypseAppBarTheme(),
-  bottomNavigationBarTheme: GypseBottomBarTheme(),
-  inputDecorationTheme: GypseInputTheme(),
+  appBarTheme: const GypseAppBarTheme(),
+  bottomNavigationBarTheme: const GypseBottomBarTheme(),
+  inputDecorationTheme: const GypseInputTheme(),
   useMaterial3: true,
 );

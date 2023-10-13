@@ -7,7 +7,7 @@ import 'package:gypse/recap/presentation/views/widgets/recap_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RecapScreen extends HookConsumerWidget {
-  RecapScreen({super.key});
+  const RecapScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

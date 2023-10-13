@@ -1,5 +1,6 @@
 name: gypse
-description: A new Flutter project.
+description: Gypse is a captivating Bible quiz mobile application developed to enhance your knowledge of the Bible in an engaging and interactive way. With a user-friendly interface and a range of exciting features, Gypse offers both casual and devoted users a chance to explore the scriptures while having fun.
+homepage: https://github.com/menel972/gypse
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -32,25 +33,25 @@ dependencies:
   auto_size_text: ^3.0.0
   blur: ^3.1.0
   circular_countdown_timer: ^0.2.3
-  cloud_firestore: ^4.9.1
-  connectivity_plus: ^4.0.2
+  cloud_firestore: ^4.9.3
+  connectivity_plus: ^5.0.0
   cupertino_icons: ^1.0.6
   d_chart: ^2.6.2
   equatable: ^2.0.5
-  firebase_analytics: ^10.4.5
-  firebase_auth: ^4.9.0
-  firebase_core: ^2.15.1
-  firebase_crashlytics: ^3.3.5
-  firebase_storage: ^11.2.6
+  firebase_analytics: ^10.5.1
+  firebase_auth: ^4.10.1
+  firebase_core: ^2.17.0
+  firebase_crashlytics: ^3.3.7
+  firebase_storage: ^11.2.8
   flutter:
     sdk: flutter
   flutter_carousel_widget: ^2.1.0
   flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: ^2.3.2
-  go_router: ^10.1.2
-  hooks_riverpod: ^2.4.0
+  flutter_native_splash: ^2.3.3
+  go_router: ^11.1.4
+  hooks_riverpod: ^2.4.3
   intl: ^0.18.1
   url_launcher: ^6.1.14
 
@@ -74,6 +75,11 @@ flutter_icons:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
+
+screenshots:
+  description: app icon
+  path: "assets/images/appicon_gypse.png"
+
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -110,3 +116,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+    

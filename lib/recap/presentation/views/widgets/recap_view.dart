@@ -27,12 +27,8 @@ class RecapView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     recap = ref.watch(recapSessionStateNotifierProvider);
 
-    void clearState() =>
-        ref.read(recapSessionStateNotifierProvider.notifier).clearState();
-
     return WillPopScope(
       onWillPop: () async {
-        clearState();
         return false;
       },
       child: SizedBox(
@@ -97,7 +93,8 @@ class RecapView extends HookConsumerWidget {
                         .read(homeNavigationStateProvider.notifier)
                         .updatePage(2);
                     context.go(Screen.homeView.path);
-                    clearState();
+                    Future(() =>
+                        ref.invalidate(recapSessionStateNotifierProvider));
                   },
                 ),
               ),
@@ -108,7 +105,8 @@ class RecapView extends HookConsumerWidget {
                 context,
                 onPressed: () {
                   context.go('${Screen.gameView.path}/ ');
-                  clearState();
+                  Future(
+                      () => ref.invalidate(recapSessionStateNotifierProvider));
                 },
                 label: 'Nouvelle partie',
                 textColor: Theme.of(context).colorScheme.onSurface,
@@ -117,9 +115,10 @@ class RecapView extends HookConsumerWidget {
               Dimensions.xxs(context).spaceH(),
               GypseElevatedButton(
                 context,
-                onPressed: () {
+                onPressed: () async {
                   context.go(Screen.homeView.path);
-                  clearState();
+                  Future(
+                      () => ref.invalidate(recapSessionStateNotifierProvider));
                 },
                 label: 'Accueil',
                 backgroundColor: Theme.of(context).colorScheme.surface,

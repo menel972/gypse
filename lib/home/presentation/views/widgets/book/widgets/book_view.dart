@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
@@ -71,9 +70,6 @@ class BookView extends HookConsumerWidget {
                     childAspectRatio: 1,
                     padding: EdgeInsets.only(
                       top: Dimensions.xxs(context).height,
-                      bottom: Platform.isIOS
-                          ? Dimensions.l(context).width
-                          : Dimensions.s(context).height,
                     ),
                     children: [
                       ...books.map((book) {
@@ -90,6 +86,7 @@ class BookView extends HookConsumerWidget {
                           ),
                         );
                       }),
+                      Dimensions.xxxs(context).spaceH(),
                     ],
                   ),
                 ),

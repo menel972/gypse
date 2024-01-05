@@ -29,7 +29,7 @@ class HomeView extends HookConsumerWidget {
                   .invoke(from: Screen.homeView.path, to: Screen.gameView.path);
               context.go('${Screen.gameView.path}/ ');
             },
-            label: 'Commencer',
+            label: 'Mode aléatoire',
             textColor: Theme.of(context).colorScheme.onSurface,
             backgroundColor: Theme.of(context).colorScheme.secondary,
           ),

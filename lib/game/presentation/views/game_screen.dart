@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
@@ -8,6 +10,7 @@ import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cas
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/common/utils/strings.dart';
@@ -82,11 +85,6 @@ class GameScreen extends HookConsumerWidget {
         return false;
       },
       child: Scaffold(
-        floatingActionButton: IconButton(
-          onPressed: () => QuitDialog(context),
-          icon: const Icon(Icons.home_outlined),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -94,11 +92,34 @@ class GameScreen extends HookConsumerWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Column(
-            children: [
-              Expanded(child: QuestionView()),
-              AnswersView(initGameState),
-            ],
+          child: SafeArea(
+            bottom: false,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Expanded(child: QuestionView()),
+                    AnswersView(initGameState),
+                  ],
+                ),
+                Positioned(
+                  top: 0,
+                  left: Dimensions.xxs(context).width,
+                  child: IconButton(
+                    onPressed: () => QuitDialog(context),
+                    icon: Icon(
+                      Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+                      semanticLabel: "Retour vers l'accueil",
+                    ),
+                    iconSize: Dimensions.s(context).width * 0.6,
+                    highlightColor: Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withOpacity(0.2),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

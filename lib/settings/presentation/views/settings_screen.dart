@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
@@ -18,20 +20,6 @@ class SettingsScreen extends HookConsumerWidget {
         return false;
       },
       child: Scaffold(
-        floatingActionButton: IconButton(
-          onPressed: () {
-            ref.read(logNavigationUseCaseProvider).invoke(
-                  from: Screen.settingsView.path,
-                  to: Screen.homeView.path,
-                );
-            context.go(Screen.homeView.path);
-          },
-          icon: const Icon(
-            Icons.home_outlined,
-            semanticLabel: "Retour vers l'accueil",
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -39,13 +27,39 @@ class SettingsScreen extends HookConsumerWidget {
               fit: BoxFit.cover,
             ),
           ),
-          padding: EdgeInsets.only(
-            top: Dimensions.s(context).height,
-            bottom: Dimensions.xxs(context).height,
-            left: Dimensions.xs(context).width,
-            right: Dimensions.xs(context).width,
-          ),
-          child: const SettingsView(),
+          child: SafeArea(
+              child: Stack(children: [
+            Padding(
+              padding: EdgeInsets.only(
+                top: Dimensions.s(context).height,
+                bottom: Dimensions.xxs(context).height,
+                left: Dimensions.xs(context).width,
+                right: Dimensions.xs(context).width,
+              ),
+              child: const SettingsView(),
+            ),
+            Positioned(
+              top: 0,
+              left: Dimensions.xxs(context).width,
+              child: IconButton(
+                onPressed: () {
+                  ref.read(logNavigationUseCaseProvider).invoke(
+                        from: Screen.settingsView.path,
+                        to: Screen.homeView.path,
+                      );
+                  context.go(Screen.homeView.path);
+                },
+                icon: Icon(
+                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+                  semanticLabel: "Retour vers l'accueil",
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+                iconSize: Dimensions.s(context).width * 0.6,
+                highlightColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+              ),
+            ),
+          ])),
         ),
       ),
     );

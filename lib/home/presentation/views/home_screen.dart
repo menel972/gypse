@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
+import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/common/utils/strings.dart';
-import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
 import 'package:gypse/home/presentation/views/widgets/home_navigation_bar.dart';
@@ -41,30 +41,45 @@ class HomeScreen extends HookConsumerWidget {
         }
       },
       child: Scaffold(
-          floatingActionButton: IconButton(
-            onPressed: () {
-              ref.read(logActionUseCaseProvider).invoke(cta: 'settings');
-              context.go(Screen.settingsView.path);
-            },
-            icon: const Icon(
-              Icons.settings_outlined,
-              semanticLabel: "Paramètres",
-            ),
-          ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
           body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('$imagesPath/home_bkg.png'),
-                fit: BoxFit.cover,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('$imagesPath/home_bkg.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: [
-              const HomeView(),
-              const BookScreen(),
-              UserStatsView(),
-            ][navigationIndex],
-          ),
+              child: SafeArea(
+                child: Stack(
+                  children: [
+                    [
+                      const HomeView(),
+                      const BookScreen(),
+                      UserStatsView(),
+                    ][navigationIndex],
+                    Positioned(
+                      top: 0,
+                      right: Dimensions.xxs(context).width,
+                      child: IconButton(
+                        onPressed: () {
+                          ref
+                              .read(logActionUseCaseProvider)
+                              .invoke(cta: 'settings');
+                          context.go(Screen.settingsView.path);
+                        },
+                        icon: Icon(
+                          Icons.settings_outlined,
+                          color: Theme.of(context).colorScheme.onBackground,
+                          semanticLabel: "Paramètres",
+                        ),
+                        highlightColor: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.2),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
           bottomNavigationBar: HomeNavigationBar(ref)),
     );
   }

@@ -98,50 +98,54 @@ class AnswersView extends HookConsumerWidget {
           Dimensions.xs(context).paddingW(
             Visibility(
               visible: gameState.selectedAnswers.isNotEmpty,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: GypseElevatedButton(
-                      context,
-                      onPressed: () => VerseModal(
-                          context,
-                          ref
-                              .read(gameStateNotifierProvider.notifier)
-                              .getRightAnswer()),
-                      label: 'Voir le verset',
-                      textColor: Theme.of(context).colorScheme.primary,
-                      backgroundColor: Theme.of(context)
-                          .colorScheme
-                          .surface
-                          .withOpacity(0.2),
+              child: SafeArea(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GypseElevatedButton(
+                        context,
+                        onPressed: () => VerseModal(
+                            context,
+                            ref
+                                .read(gameStateNotifierProvider.notifier)
+                                .getRightAnswer()),
+                        label: 'Voir le verset',
+                        textColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: Theme.of(context)
+                            .colorScheme
+                            .surface
+                            .withOpacity(0.2),
+                      ),
                     ),
-                  ),
-                  Dimensions.xs(context).spaceW(),
-                  GypseCircularButton(
-                    context,
-                    onPressed: () async {
-                      ref
-                          .read(logActionUseCaseProvider)
-                          .invoke(cta: 'next question');
-                      await ref.read(answerRatioStateProvider.notifier).slide();
+                    Dimensions.xs(context).spaceW(),
+                    GypseCircularButton(
+                      context,
+                      onPressed: () async {
+                        ref
+                            .read(logActionUseCaseProvider)
+                            .invoke(cta: 'next question');
+                        await ref
+                            .read(answerRatioStateProvider.notifier)
+                            .slide();
 
-                      ref.read(userProvider.notifier).updateAnsweredQuestions(
-                          UiAnsweredQuestions(
-                              qId: gameState.question.uId,
-                              level: gameState.settings.level,
-                              isRightAnswer: gameState.isRight));
+                        ref.read(userProvider.notifier).updateAnsweredQuestions(
+                            UiAnsweredQuestions(
+                                qId: gameState.question.uId,
+                                level: gameState.settings.level,
+                                isRightAnswer: gameState.isRight));
 
-                      updateRecap();
+                        updateRecap();
 
-                      initGameState();
-                      ref
-                          .read(gameStateNotifierProvider.notifier)
-                          .clearSelectedIndex();
-                      ref.read(gameStateNotifierProvider.notifier).restart();
-                    },
-                    icon: Icons.keyboard_arrow_right,
-                  ),
-                ],
+                        initGameState();
+                        ref
+                            .read(gameStateNotifierProvider.notifier)
+                            .clearSelectedIndex();
+                        ref.read(gameStateNotifierProvider.notifier).restart();
+                      },
+                      icon: Icons.keyboard_arrow_right,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

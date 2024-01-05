@@ -4,7 +4,6 @@ import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cas
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
-import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/home/presentation/views/widgets/book/widgets/book_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -20,14 +19,6 @@ class BookScreen extends HookConsumerWidget {
 
     ref.read(logDisplayUseCaseProvider).invoke(screen: Screen.booksView.path);
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('$imagesPath/game_bkg.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: BookView(),
-    );
+    return BookView();
   }
 }

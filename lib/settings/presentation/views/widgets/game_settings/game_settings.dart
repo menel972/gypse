@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/views/states/game_states.dart';
+import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/level_settings.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/time_settings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -64,7 +67,8 @@ class GameSettings extends HookConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text('Nombre de propositions :', style: GypseFont.m()),
+                    const Text('Nombre de propositions :',
+                        style: GypseFont.m()),
                     LevelSettings(),
                   ],
                 ),
@@ -88,16 +92,18 @@ class GameSettings extends HookConsumerWidget {
                 ),
               ),
               Row(children: [
-                Expanded(
-                  child: GypseElevatedButton(
-                    context,
-                    onPressed: () => Navigator.of(context).pop(),
-                    label: 'Annuler',
-                    backgroundColor: Theme.of(context).colorScheme.surface,
-                    textColor: Theme.of(context).colorScheme.primary,
+                if (!ref.watch(initStateNotifierProvider))
+                  Expanded(
+                    child: GypseElevatedButton(
+                      context,
+                      onPressed: () => Navigator.of(context).pop(),
+                      label: 'Annuler',
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      textColor: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
-                ),
-                Dimensions.xxs(context).spaceW(),
+                if (!ref.watch(initStateNotifierProvider))
+                  Dimensions.xxs(context).spaceW(),
                 Expanded(
                   child: GypseElevatedButton(
                     context,
@@ -110,7 +116,14 @@ class GameSettings extends HookConsumerWidget {
                       } else {
                         'No User Error'.failure(context);
                       }
-                      Navigator.of(context).pop();
+                      if (ref.watch(initStateNotifierProvider)) {
+                        Future(() => context.go(Screen.homeView.path));
+                        ref
+                            .read(initStateNotifierProvider.notifier)
+                            .switchState();
+                      } else {
+                        Navigator.of(context).pop();
+                      }
                     },
                     label: 'Valider',
                     textColor: Theme.of(context).colorScheme.surface,

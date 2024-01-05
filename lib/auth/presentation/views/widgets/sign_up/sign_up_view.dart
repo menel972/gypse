@@ -57,6 +57,7 @@ class SignUpView extends HookConsumerWidget {
         ref.read(fetchLegalsUseCaseProvider).invoke(context, path);
 
     return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -142,6 +143,7 @@ class SignUpView extends HookConsumerWidget {
           ),
           Dimensions.xxxs(context).spaceH(),
           CheckboxListTile(
+            visualDensity: VisualDensity.compact,
             value: legals,
             onChanged: (_) => ref
                 .read(checkLegalsNotifierProvider.notifier)

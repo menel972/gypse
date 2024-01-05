@@ -51,73 +51,75 @@ class AuthScreen extends HookConsumerWidget {
               endAngle: 6.5,
             ),
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: Dimensions.s(context).width,
-                horizontal: Dimensions.xs(context).width),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.asset(
-                  '$imagesPath/splash_logo.png',
-                  width: Dimensions.l(context).width,
-                ),
-                Expanded(
-                    flex: 3,
-                    child: [
-                      SignUpView(),
-                      SignInView(),
-                      ForgottenPasswordView(),
-                    ][authState]),
-                Column(
-                  children: [
-                    Dimensions.xxs(context).spaceH(),
-                    [
-                      InkWell(
-                        onTap: () => ref
-                            .read(authStateNotifierProvider.notifier)
-                            .onViewChanged(1),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Déjà un compte ?',
-                            style: const GypseFont.xs(),
-                            children: [
-                              const TextSpan(text: ' '),
-                              TextSpan(
-                                  text: 'Connectez-vous',
-                                  style: GypseFont.s(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary))
-                            ],
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: Dimensions.xs(context).width,
+                  horizontal: Dimensions.xs(context).width),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset(
+                    '$imagesPath/splash_logo.png',
+                    width: Dimensions.l(context).width,
+                  ),
+                  Expanded(
+                      flex: 3,
+                      child: [
+                        SignUpView(),
+                        SignInView(),
+                        ForgottenPasswordView(),
+                      ][authState]),
+                  Column(
+                    children: [
+                      Dimensions.xxs(context).spaceH(),
+                      [
+                        InkWell(
+                          onTap: () => ref
+                              .read(authStateNotifierProvider.notifier)
+                              .onViewChanged(1),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Déjà un compte ?',
+                              style: const GypseFont.xs(),
+                              children: [
+                                const TextSpan(text: ' '),
+                                TextSpan(
+                                    text: 'Connectez-vous',
+                                    style: GypseFont.s(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary))
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () => ref
-                            .read(authStateNotifierProvider.notifier)
-                            .onViewChanged(0),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Pas encore de compte ?',
-                            style: const GypseFont.xs(),
-                            children: [
-                              const TextSpan(text: ' '),
-                              TextSpan(
-                                  text: 'Créer un compte',
-                                  style: GypseFont.s(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary))
-                            ],
+                        InkWell(
+                          onTap: () => ref
+                              .read(authStateNotifierProvider.notifier)
+                              .onViewChanged(0),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Pas encore de compte ?',
+                              style: const GypseFont.xs(),
+                              children: [
+                                const TextSpan(text: ' '),
+                                TextSpan(
+                                    text: 'Créer un compte',
+                                    style: GypseFont.s(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary))
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(),
-                    ][authState]
-                  ],
-                )
-              ],
+                        const SizedBox(),
+                      ][authState]
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

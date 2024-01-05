@@ -40,6 +40,7 @@ class SignInView extends HookConsumerWidget {
         ref.read(signInUseCaseProvider).invoke(request);
 
     return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/anonymous_dialogs.dart';

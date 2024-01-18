@@ -22,6 +22,12 @@ abstract class AuthRepository {
   Future<String> signUp(AuthRequest request);
 
   ///<i><small>`Domain Layer`</small></i>
+  /// Performs an anonymous sign-up process.
+  /// Function to signs a user up anonymously and returns their UID identifier. <br><hr><br>
+  ///<i>Errors are handled, logged and thrown with a [GypseException].</i>
+  Future<String> anonymousSignUp();
+
+  ///<i><small>`Domain Layer`</small></i>
   ///## Authentication method
   ///
   ///Function to signs a user in <b>with their email and password</b>, and returns their UID identifier. <br><hr><br>

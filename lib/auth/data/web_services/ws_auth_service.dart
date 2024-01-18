@@ -11,6 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 ///It handles user authentication using the `Firebase Authentication SDK`.<br>
 ///`WsAuthService` contains methods to manage user account:
 ///<li>sign up - [signUpWithEmail]
+///<li>anonymous sign up - [anonymousSignUp]
 ///<li>sign in - [signInWithEmail]
 ///<li>sign out - [signOut]
 ///<li>delete - [deleteAccount]
@@ -38,6 +39,31 @@ class WsAuthService {
       return await _client
           .createUserWithEmailAndPassword(
               email: request.email, password: request.password)
+          .then((UserCredential credentials) => credentials.user?.uid);
+    } on FirebaseAuthException catch (err) {
+      // NOTE: If there is any Firebase authentication error, log it and throw a custom exception.
+      err.message?.log();
+      throw GypseException(code: err.code, message: err.message);
+    } on Exception catch (e) {
+      // NOTE: If there is any other exception caught, log the error and throw a custom exception.
+      e.log();
+      throw GypseException();
+    }
+  }
+
+  ///<i><small>`Data Layer`</small></i>
+  /// Performs an anonymous sign-up process.
+  ///
+  /// This method creates a new anonymous user and retrieves their UID identifier.
+  /// If there is any Firebase authentication error, it logs the error and throws a [GypseException] with the corresponding error code and message.
+  /// If any other exception is caught, it logs the error and throws a generic [GypseException].
+  ///
+  /// Returns the UID identifier of the newly created anonymous user, or `null` if the sign-up process fails.
+  Future<String?> anonymousSignUp() async {
+    try {
+      // NOTE: Create new anonymous user, then get their UID identifier.
+      return await _client
+          .signInAnonymously()
           .then((UserCredential credentials) => credentials.user?.uid);
     } on FirebaseAuthException catch (err) {
       // NOTE: If there is any Firebase authentication error, log it and throw a custom exception.

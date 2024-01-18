@@ -36,7 +36,7 @@ class SettingsScreen extends HookConsumerWidget {
                 left: Dimensions.xs(context).width,
                 right: Dimensions.xs(context).width,
               ),
-              child: const SettingsView(),
+              child: SettingsView(),
             ),
             Positioned(
               top: 0,

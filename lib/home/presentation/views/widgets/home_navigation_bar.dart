@@ -1,5 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
+import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/style/anonymous_dialogs.dart';
+import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,11 +15,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 /// HomeNavigationBar allows user to navigate between [HomeView], [ChartsView] and [AccountView]
 class HomeNavigationBar extends HookConsumerWidget {
   final WidgetRef ref;
-  const HomeNavigationBar(this.ref, {super.key});
+  HomeNavigationBar(this.ref, {super.key});
+
+  late int navigationIndex;
+  late bool anonymous;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int navigationIndex = ref.watch(homeNavigationStateProvider);
+    navigationIndex = ref.watch(homeNavigationStateProvider);
+    anonymous = ref.watch(userProvider)?.isAnonymous ?? false;
+
     updatePage(int index) =>
         ref.read(homeNavigationStateProvider.notifier).updatePage(index);
 
@@ -64,6 +75,15 @@ class HomeNavigationBar extends HookConsumerWidget {
                   semanticLabel: "Séléctionner Scores onglet 3 sur 3",
                 ),
                 onPressed: () {
+                  if (anonymous) {
+                    GypseDialog(
+                      context,
+                      child: const AnonymousDenied(
+                          'Les statistiques détaillées des scores sont réservées'),
+                    );
+                    return;
+                  }
+                  
                   ref.read(logNavigationUseCaseProvider).invoke(
                         from: Screen.homeView.path,
                         to: Screen.homeView.path,

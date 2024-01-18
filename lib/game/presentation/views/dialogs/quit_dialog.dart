@@ -91,9 +91,10 @@ class QuitDialog extends HookConsumerWidget {
                           await updateUser(context, user);
 
                           if (ref
-                              .watch(recapSessionStateNotifierProvider)
-                              .games
-                              .isEmpty) {
+                                  .watch(recapSessionStateNotifierProvider)
+                                  .games
+                                  .isEmpty ||
+                              user.isAnonymous) {
                             context.go(Screen.homeView.path);
                           } else {
                             context.go(Screen.recapSession.path);

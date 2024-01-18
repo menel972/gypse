@@ -53,20 +53,16 @@ class NoAuthDialog extends Column {
           textAlign: TextAlign.center,
         ),
         Dimensions.xxs(context).spaceH(),
-        Text(
-          '• Statistiques de tes performances.',
-          style: GypseFont.s(color: Theme.of(context).colorScheme.primary),
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          '• Récapitulatif de tes parties.',
-          style: GypseFont.s(color: Theme.of(context).colorScheme.primary),
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          '• Modification de la difficulté.',
-          style: GypseFont.s(color: Theme.of(context).colorScheme.primary),
-          textAlign: TextAlign.center,
+        ...[
+          'Statistiques de tes performances.',
+          'Récapitulatif de tes parties.',
+          'Modification de la difficulté.'
+        ].map(
+          (String feature) => Text(
+            '• $feature',
+            style: GypseFont.s(color: Theme.of(context).colorScheme.primary),
+            textAlign: TextAlign.center,
+          ),
         ),
         Dimensions.xs(context).spaceH(),
         GypseElevatedButton(

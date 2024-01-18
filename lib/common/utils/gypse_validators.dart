@@ -33,7 +33,7 @@ String? matchPassword(String value) {
     return 'Il manque au moins une majuscule.';
   }
   if (!minExp.hasMatch(value)) {
-    return 'Il manque au moins une minuscule.}';
+    return 'Il manque au moins une minuscule.';
   }
   if (!numExp.hasMatch(value)) {
     return 'Il manque au moins un chiffre.';
@@ -43,7 +43,7 @@ String? matchPassword(String value) {
   }
   if (value.length < 8) {
     num delta = 8 - value.length;
-    return 'Il manque au moins $delta caractères - min 8}';
+    return 'Il manque au moins $delta caractères - min 8';
   }
   return null;
 }

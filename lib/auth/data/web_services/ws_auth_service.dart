@@ -77,6 +77,33 @@ class WsAuthService {
   }
 
   ///<i><small>`Data Layer`</small></i>
+  /// Links an anonymous user account with the provided email and password credentials.
+  /// Returns the UID identifier of the linked user account.
+  /// Throws a [GypseException] if there is any authentication error.
+  /// Throws an [Exception] if there is any other exception caught.
+  Future<String?> linkAnonymousSignUp(WsAuthRequest request) async {
+    AuthCredential credential = EmailAuthProvider.credential(
+        email: request.email, password: request.password);
+
+    User? anonymousAuth = _client.currentUser;
+
+    try {
+      // NOTE: Links the user account with the given credentials, then get their UID identifier.
+      return await anonymousAuth
+          ?.linkWithCredential(credential)
+          .then((UserCredential credentials) => credentials.user?.uid);
+    } on FirebaseAuthException catch (err) {
+      // NOTE: If there is any Firebase authentication error, log it and throw a custom exception.
+      err.message?.log();
+      throw GypseException(code: err.code, message: err.message);
+    } on Exception catch (e) {
+      // NOTE: If there is any other exception caught, log the error and throw a custom exception.
+      e.log();
+      throw GypseException();
+    }
+  }
+
+  ///<i><small>`Data Layer`</small></i>
   ///## Authentication method
   ///
   ///Function using the `Firebase Authentication SDK` to signs a user in <b>with their email and password</b>, and returns their UID identifier. <br><hr><br>

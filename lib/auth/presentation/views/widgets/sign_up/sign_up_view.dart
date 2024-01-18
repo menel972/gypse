@@ -143,60 +143,38 @@ class SignUpView extends HookConsumerWidget {
               maxLines: 1,
             ),
           ),
-          Dimensions.xs(context).spaceH(),
-          GestureDetector(
-            onTap: () async => await fetchLegalsUseCase(Legals.cgu.path),
-            child: Text.rich(
-              textAlign: TextAlign.center,
-              TextSpan(
-                children: [
-                  const TextSpan(
-                    text: 'En créant un compte, j\'accepte les ',
-                    style: GypseFont.xs(),
-                  ),
-                  TextSpan(
-                    text: 'conditions d\'utilisation',
-                    style: GypseFont.xs(
-                      color: Theme.of(context).colorScheme.secondary,
+          Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () async => await fetchLegalsUseCase(Legals.cgu.path),
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        const TextSpan(
+                          text: 'J\'accepte les ',
+                          style: GypseFont.xs(),
+                        ),
+                        TextSpan(
+                          text: 'conditions d\'utilisation',
+                          style: GypseFont.xs(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+              Checkbox(
+                value: legals,
+                onChanged: (_) => ref
+                    .read(checkLegalsNotifierProvider.notifier)
+                    .onCheckBoxClick(),
+                activeColor: Theme.of(context).colorScheme.secondary,
+              ),
+            ],
           ),
-          // CheckboxListTile(
-          //   contentPadding: EdgeInsets.zero,
-          //   visualDensity: VisualDensity.compact,
-          //   value: legals,
-          //   onChanged: (_) => ref
-          //       .read(checkLegalsNotifierProvider.notifier)
-          //       .onCheckBoxClick(),
-          //   activeColor: Theme.of(context).colorScheme.secondary,
-          //   title: TextButton(
-          //     style: ButtonStyle(
-          //       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          //         EdgeInsets.zero,
-          //       ),
-          //     ),
-          //     onPressed: () async => await fetchLegalsUseCase(Legals.cgu.path),
-          //     child: Text.rich(
-          //       TextSpan(
-          //         children: [
-          //           const TextSpan(
-          //             text: 'J\'accepte les ',
-          //             style: GypseFont.xs(),
-          //           ),
-          //           TextSpan(
-          //             text: 'conditions d\'utilisation',
-          //             style: GypseFont.xs(
-          //               color: Theme.of(context).colorScheme.secondary,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Dimensions.xxxs(context).spaceH(),
           // NOTE : SIGNUP BUTTON
           GypseElevatedButton(
@@ -254,7 +232,7 @@ class SignUpView extends HookConsumerWidget {
             label: 'Créer le compte',
             textColor: Theme.of(context).colorScheme.onPrimary,
           ),
-          Dimensions.xxs(context).spaceH(),
+          Dimensions.xxxs(context).spaceH(),
           Row(
             children: [
               Expanded(
@@ -282,7 +260,7 @@ class SignUpView extends HookConsumerWidget {
               GypseDialog(
                 context,
                 height: Dimensions.xxl(context).height * 1.2,
-                child: NoAuthDialog(context),
+                child: const NoAuthDialog(),
               );
             },
             child: const Text(

@@ -43,6 +43,16 @@ class UiUser extends Equatable {
     required this.settings,
   });
 
+  factory UiUser.anonymous(String uId) => UiUser(
+        uId,
+        userName: '',
+        isAdmin: false,
+        language: Locales.fr,
+        status: LoginState.loading,
+        questions: const [],
+        settings: UiGypseSettings(),
+      );
+
   @override
   List<Object?> get props => [
         uId,
@@ -68,6 +78,8 @@ class UiUser extends Equatable {
         questions: questions ?? this.questions,
         settings: settings ?? this.settings,
       );
+
+  bool get isAnonymous => userName.isEmpty;
 }
 
 /** UI GYPSE SETTINGS */

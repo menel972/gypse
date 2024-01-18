@@ -141,7 +141,7 @@ class SettingsView extends HookConsumerWidget {
         if (anonymous)
           GypseElevatedButton(
             context,
-            onPressed: () {},
+            onPressed: () => context.go(Screen.authView.path),
             label: 'Je me connecte',
             textColor: Theme.of(context).colorScheme.onPrimary,
           ),

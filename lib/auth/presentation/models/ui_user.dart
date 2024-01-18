@@ -65,13 +65,14 @@ class UiUser extends Equatable {
       ];
 
   UiUser copyWith({
+    String? userName,
     LoginState? status,
     List<UiAnsweredQuestions>? questions,
     UiGypseSettings? settings,
   }) =>
       UiUser(
         uId,
-        userName: userName,
+        userName: userName ?? this.userName,
         isAdmin: isAdmin,
         language: language,
         status: status ?? this.status,

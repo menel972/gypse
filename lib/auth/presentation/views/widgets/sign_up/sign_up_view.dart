@@ -12,6 +12,7 @@ import 'package:gypse/auth/presentation/views/widgets/sign_up/states/sign_up_sta
 import 'package:gypse/auth/presentation/views/widgets/states/credentials_state.dart';
 import 'package:gypse/auth/presentation/views/widgets/states/login_state.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
+import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -25,6 +26,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class SignUpView extends HookConsumerWidget {
   late CredentialsState credentials;
   late bool legals;
+  late UiUser? user;
 
   SignUpView({super.key});
 
@@ -42,6 +44,8 @@ class SignUpView extends HookConsumerWidget {
 
     legals = ref.watch(checkLegalsNotifierProvider);
 
+    user = ref.watch(userProvider);
+
     bool isFormValid() => ref
         .read(signUpCredentialsStateNotifierProvider.notifier)
         .onSignUpRequest();
@@ -49,8 +53,14 @@ class SignUpView extends HookConsumerWidget {
     signUpUseCase(UiAuthRequest request) =>
         ref.read(signUpUseCaseProvider).invoke(request);
 
+    linkAnonymousSignUpUse(UiAuthRequest request) =>
+        ref.read(linkAnonymousSignUpUseCaseProvider).invoke(request);
+
     onNewUserUseCase(UiUser user) =>
         ref.read(onNewUserUseCaseProvider).invoke(user);
+
+    onUserChangedUseCase(UiUser user) =>
+        ref.read(onUserChangedUseCaseProvider).invoke(context, user);
 
     setUserNameUseCase(String userName) =>
         ref.read(setUserNameUseCaseProvider).invoke(userName);
@@ -195,6 +205,45 @@ class SignUpView extends HookConsumerWidget {
                 ref
                     .read(loginStateNotifierProvider.notifier)
                     .updateState(LoginState.loading);
+
+                if (user?.isAnonymous ?? false) {
+                  // NOTE : Try to link anonymous account
+                  String result =
+                      await linkAnonymousSignUpUse(credentials.toRequest())
+                          .then((String userId) {
+                    setUserNameUseCase(credentials.userName);
+
+                    return userId;
+                  }).catchError((e) {
+                    String msg = e.message as String;
+
+                    ref
+                        .read(loginStateNotifierProvider.notifier)
+                        .updateState(LoginState.unauthenticated);
+
+                    msg.failure(context);
+                    msg.log(tag: 'SignUp error');
+
+                    return '';
+                  });
+
+                  if (result.isNotEmpty) {
+                    UiUser linkedUser = user!.copyWith(
+                        userName:
+                            '${credentials.userName}#${result.substring(0, 4)}');
+
+                    await onUserChangedUseCase(linkedUser).whenComplete(() {
+                      ref
+                          .read(loginStateNotifierProvider.notifier)
+                          .updateState(LoginState.authenticated);
+
+                      ref.read(logSignUpUseCaseProvider).invoke();
+
+                      'Bienvenue ${credentials.userName} !'.success(context);
+                    });
+                  }
+                  return;
+                }
 
                 // NOTE : Try to signup
                 String result = await signUpUseCase(credentials.toRequest())

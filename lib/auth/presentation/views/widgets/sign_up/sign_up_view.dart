@@ -6,12 +6,14 @@ import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/auth/presentation/views/widgets/sign_up/no_auth_dialog.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up/states/check_legals_states.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up/states/sign_up_state.dart';
 import 'package:gypse/auth/presentation/views/widgets/states/credentials_state.dart';
 import 'package:gypse/auth/presentation/views/widgets/states/login_state.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/buttons.dart';
+import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
@@ -67,7 +69,7 @@ class SignUpView extends HookConsumerWidget {
             style: GypseFont.xxl(bold: true),
             textAlign: TextAlign.center,
           ),
-          Dimensions.xs(context).spaceH(),
+          Dimensions.xxs(context).spaceH(),
           // NOTE : USER NAME
           TextFormField(
             decoration: InputDecoration(
@@ -141,35 +143,61 @@ class SignUpView extends HookConsumerWidget {
               maxLines: 1,
             ),
           ),
-          Dimensions.xxxs(context).spaceH(),
-          CheckboxListTile(
-            visualDensity: VisualDensity.compact,
-            value: legals,
-            onChanged: (_) => ref
-                .read(checkLegalsNotifierProvider.notifier)
-                .onCheckBoxClick(),
-            activeColor: Theme.of(context).colorScheme.secondary,
-            title: TextButton(
-              onPressed: () async => await fetchLegalsUseCase(Legals.cgu.path),
-              child: Text.rich(
-                TextSpan(
-                  children: [
-                    const TextSpan(
-                      text: 'J\'accepte les ',
-                      style: GypseFont.xs(),
+          Dimensions.xs(context).spaceH(),
+          GestureDetector(
+            onTap: () async => await fetchLegalsUseCase(Legals.cgu.path),
+            child: Text.rich(
+              textAlign: TextAlign.center,
+              TextSpan(
+                children: [
+                  const TextSpan(
+                    text: 'En créant un compte, j\'accepte les ',
+                    style: GypseFont.xs(),
+                  ),
+                  TextSpan(
+                    text: 'conditions d\'utilisation',
+                    style: GypseFont.xs(
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
-                    TextSpan(
-                      text: 'conditions d\'utilisation',
-                      style: GypseFont.xs(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
-          Dimensions.xs(context).spaceH(),
+          // CheckboxListTile(
+          //   contentPadding: EdgeInsets.zero,
+          //   visualDensity: VisualDensity.compact,
+          //   value: legals,
+          //   onChanged: (_) => ref
+          //       .read(checkLegalsNotifierProvider.notifier)
+          //       .onCheckBoxClick(),
+          //   activeColor: Theme.of(context).colorScheme.secondary,
+          //   title: TextButton(
+          //     style: ButtonStyle(
+          //       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+          //         EdgeInsets.zero,
+          //       ),
+          //     ),
+          //     onPressed: () async => await fetchLegalsUseCase(Legals.cgu.path),
+          //     child: Text.rich(
+          //       TextSpan(
+          //         children: [
+          //           const TextSpan(
+          //             text: 'J\'accepte les ',
+          //             style: GypseFont.xs(),
+          //           ),
+          //           TextSpan(
+          //             text: 'conditions d\'utilisation',
+          //             style: GypseFont.xs(
+          //               color: Theme.of(context).colorScheme.secondary,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          Dimensions.xxxs(context).spaceH(),
           // NOTE : SIGNUP BUTTON
           GypseElevatedButton(
             context,
@@ -225,6 +253,43 @@ class SignUpView extends HookConsumerWidget {
             },
             label: 'Créer le compte',
             textColor: Theme.of(context).colorScheme.onPrimary,
+          ),
+          Dimensions.xxs(context).spaceH(),
+          Row(
+            children: [
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  endIndent: 20,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              const Text(
+                'ou',
+                style: GypseFont.xs(),
+              ),
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  indent: 20,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            ],
+          ),
+          GestureDetector(
+            onTap: () {
+              GypseDialog(
+                context,
+                height: Dimensions.xxl(context).height * 1.2,
+                child: NoAuthDialog(context),
+              );
+            },
+            child: const Text(
+              'Essayer Gypse sans se connecter',
+              style: GypseFont.xs(),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

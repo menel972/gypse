@@ -10,6 +10,7 @@ import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cas
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
@@ -81,7 +82,13 @@ class GameScreen extends HookConsumerWidget {
         Future(() =>
             ref.read(gameStateNotifierProvider.notifier).switchModalState());
         ref.read(gameStateNotifierProvider.notifier).pause();
-        QuitDialog(context);
+        GypseDialog(
+          context,
+          height: Dimensions.xl(context).height,
+          onDismiss: () =>
+              ref.read(gameStateNotifierProvider.notifier).resume(),
+          child: QuitDialog(),
+        );
         return false;
       },
       child: Scaffold(
@@ -106,7 +113,13 @@ class GameScreen extends HookConsumerWidget {
                   top: 0,
                   left: Dimensions.xxs(context).width,
                   child: IconButton(
-                    onPressed: () => QuitDialog(context),
+                    onPressed: () => GypseDialog(
+                      context,
+                      height: Dimensions.xl(context).height,
+                      onDismiss: () =>
+                          ref.read(gameStateNotifierProvider.notifier).resume(),
+                      child: QuitDialog(),
+                    ),
                     icon: Icon(
                       Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
                       semanticLabel: "Retour vers l'accueil",

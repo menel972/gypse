@@ -12,6 +12,7 @@ import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cas
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/gypse_background.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
@@ -111,7 +112,11 @@ class InitScreen extends HookConsumerWidget {
                 FlutterNativeSplash.remove();
 
                 if (ref.watch(initStateNotifierProvider)) {
-                  Future(() => WelcomeDialog(context));
+                  Future(() => GypseDialog(
+                        context,
+                        dismissible: false,
+                        child: const WelcomeDialog(),
+                      ));
                 } else {
                   Future(() => context.go(Screen.homeView.path));
                 }

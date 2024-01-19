@@ -226,8 +226,8 @@ enum EventName {
 }
 
 enum Legals {
-  cgu('legals/gypse_cgu_1_0.pdf'),
-  privacy('legals/gypse_privacy_1_0.pdf'),
+  cgu('legals/gypse_cgu_1_1.pdf'),
+  privacy('legals/gypse_privacy_1_1.pdf'),
   legal('legals/gypse_legals_1_0.pdf');
 
   final String path;

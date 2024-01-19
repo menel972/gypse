@@ -33,7 +33,12 @@ class HomeScreen extends HookConsumerWidget {
 
     ref.listen(connectivityNotifierProvider, (previous, next) {
       if (next == ConnectivityResult.none) {
-        NetworkErrorScreen(context);
+        GypseDialog(
+          context,
+          dismissible: false,
+          height: Dimensions.xl(context).height,
+          child: const NetworkErrorScreen(),
+        );
       }
     });
 

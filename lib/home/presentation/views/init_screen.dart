@@ -14,6 +14,7 @@ import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/gypse_background.dart';
+import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
@@ -50,7 +51,12 @@ class InitScreen extends HookConsumerWidget {
 
     ref.listen(connectivityNotifierProvider, (previous, next) {
       if (next == ConnectivityResult.none) {
-        NetworkErrorScreen(context);
+        GypseDialog(
+          context,
+          dismissible: false,
+          height: Dimensions.xl(context).height,
+          child: const NetworkErrorScreen(),
+        );
       }
     });
 

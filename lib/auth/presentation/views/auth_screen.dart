@@ -10,6 +10,7 @@ import 'package:gypse/auth/presentation/views/widgets/sign_up/sign_up_view.dart'
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/style/colors.dart';
+import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
@@ -27,7 +28,12 @@ class AuthScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(connectivityNotifierProvider, (previous, next) {
       if (next == ConnectivityResult.none) {
-        NetworkErrorScreen(context);
+        GypseDialog(
+          context,
+          dismissible: false,
+          height: Dimensions.xl(context).height,
+          child: const NetworkErrorScreen(),
+        );
       }
     });
 

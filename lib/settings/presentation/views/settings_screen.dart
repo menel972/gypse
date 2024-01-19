@@ -14,11 +14,9 @@ class SettingsScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return WillPopScope(
-      onWillPop: () async {
-        context.go(Screen.homeView.path);
-        return false;
-      },
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) => context.go(Screen.homeView.path),
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(

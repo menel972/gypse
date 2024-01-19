@@ -42,8 +42,8 @@ class AuthScreen extends HookConsumerWidget {
     authState = ref.watch(authStateNotifierProvider);
     FlutterNativeSplash.remove();
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: Container(
           height: Dimensions.screen(context).height,

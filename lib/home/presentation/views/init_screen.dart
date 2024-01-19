@@ -82,8 +82,8 @@ class InitScreen extends HookConsumerWidget {
     } else {
       'User logged !'.log(tag: 'Init - User Check');
 
-      return WillPopScope(
-        onWillPop: () async => false,
+      return PopScope(
+        canPop: false,
         child: FutureBuilder<List<dynamic>>(
             future: initFutureGroup(ref),
             builder: (context, snapshot) {

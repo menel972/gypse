@@ -82,8 +82,9 @@ class GameScreen extends HookConsumerWidget {
         .read(logDisplayUseCaseProvider)
         .invoke(screen: Screen.gameView.path, details: filter);
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) {
         Future(() =>
             ref.read(gameStateNotifierProvider.notifier).switchModalState());
         ref.read(gameStateNotifierProvider.notifier).pause();
@@ -94,7 +95,6 @@ class GameScreen extends HookConsumerWidget {
               ref.read(gameStateNotifierProvider.notifier).resume(),
           child: QuitDialog(),
         );
-        return false;
       },
       child: Scaffold(
         body: Container(

@@ -23,11 +23,9 @@ class GypseDialog extends HookConsumerWidget {
   }
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return WillPopScope(
-      onWillPop: () async {
-        onDismiss?.call();
-        return dismissible;
-      },
+    return PopScope(
+      canPop: dismissible,
+      onPopInvoked: (_) => onDismiss?.call(),
       child: Center(
         child: Container(
           height: height ?? Dimensions.xxl(context).height,

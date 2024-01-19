@@ -22,11 +22,9 @@ class NoQuestionScreen extends HookConsumerWidget {
         .read(logDisplayUseCaseProvider)
         .invoke(screen: Screen.noQuestionView.path, details: book);
 
-    return WillPopScope(
-      onWillPop: () async {
-        context.go(Screen.homeView.path);
-        return false;
-      },
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) => context.go(Screen.homeView.path),
       child: Center(
         child: Container(
           height: Dimensions.xl(context).height,

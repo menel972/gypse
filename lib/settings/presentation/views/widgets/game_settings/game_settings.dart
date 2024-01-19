@@ -24,8 +24,8 @@ class GameSettings extends HookConsumerWidget {
     onUserChangedUseCase(BuildContext context, UiUser user) =>
         ref.read(onUserChangedUseCaseProvider).invoke(context, user);
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(

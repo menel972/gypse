@@ -33,7 +33,12 @@ class HomeScreen extends HookConsumerWidget {
 
     ref.listen(connectivityNotifierProvider, (previous, next) {
       if (next == ConnectivityResult.none) {
-        NetworkErrorScreen(context);
+        GypseDialog(
+          context,
+          dismissible: false,
+          height: Dimensions.xl(context).height,
+          child: const NetworkErrorScreen(),
+        );
       }
     });
 
@@ -47,15 +52,12 @@ class HomeScreen extends HookConsumerWidget {
       }
     });
 
-
-    return WillPopScope(
-      onWillPop: () async {
-        if (navigationIndex == 0) {
-          return true;
-        } else {
-          ref.read(homeNavigationStateProvider.notifier).updatePage(0);
-          return false;
-        }
+    return PopScope(
+      canPop: navigationIndex == 0 ? true : false,
+      onPopInvoked: (bool didPop) {
+        didPop
+            ? null
+            : ref.read(homeNavigationStateProvider.notifier).updatePage(0);
       },
       child: Scaffold(
           body: Container(

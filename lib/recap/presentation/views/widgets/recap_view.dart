@@ -27,10 +27,8 @@ class RecapView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     recap = ref.watch(recapSessionStateNotifierProvider);
 
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: SizedBox(
         height: Dimensions.screen(context).height,
         child: Dimensions.xs(context).padding(

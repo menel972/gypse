@@ -11,11 +11,11 @@ class RecapScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (_) {
         ref.read(recapSessionStateNotifierProvider.notifier).clearState();
         context.go(Screen.homeView.path);
-        return true;
       },
       child: Scaffold(
         body: Container(

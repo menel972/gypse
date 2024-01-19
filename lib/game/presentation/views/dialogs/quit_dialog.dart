@@ -131,7 +131,7 @@ class QuitDialog extends HookConsumerWidget {
                   Visibility(
                     visible: gameState.selectedAnswers.isNotEmpty,
                     child: Text(
-                      'Au moins une réponse est sélectionnée.\nPassez à la question suivante pour quitter la partie.',
+                      'Au moins une réponse est sélectionnée.\nPasse à la question suivante pour quitter la partie.',
                       style: GypseFont.xs(
                           color: Theme.of(context).colorScheme.error),
                       maxLines: 2,

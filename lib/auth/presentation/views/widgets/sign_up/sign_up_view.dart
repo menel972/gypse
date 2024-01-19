@@ -105,7 +105,7 @@ class SignUpView extends HookConsumerWidget {
           // NOTE : EMAIL
           TextFormField(
             decoration: InputDecoration(
-              labelText: 'Adresse mail',
+              labelText: 'Email',
               suffixIcon: Icons.alternate_email.show(),
             ),
             textInputAction: TextInputAction.next,
@@ -278,7 +278,7 @@ class SignUpView extends HookConsumerWidget {
                 }
               }
             },
-            label: 'Créer le compte',
+            label: 'Crée ton compte',
             textColor: Theme.of(context).colorScheme.onPrimary,
           ),
           Dimensions.xxxs(context).spaceH(),
@@ -308,12 +308,12 @@ class SignUpView extends HookConsumerWidget {
             onTap: () {
               GypseDialog(
                 context,
-                height: Dimensions.xxl(context).height * 1.2,
+                // height: Dimensions.xxl(context).height * 1.2,
                 child: const NoAuthDialog(),
               );
             },
             child: const Text(
-              'Essayer Gypse sans se connecter',
+              'Joue sans te connecter',
               style: GypseFont.xs(),
               textAlign: TextAlign.center,
             ),

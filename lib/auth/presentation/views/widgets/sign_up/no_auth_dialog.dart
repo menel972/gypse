@@ -27,7 +27,7 @@ class NoAuthDialog extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Bienvenue sur Gypse !',
+          'Bienvenue sur Gypse',
           style: GypseFont.l(
             bold: true,
             color: Theme.of(context).colorScheme.secondary,
@@ -41,38 +41,23 @@ class NoAuthDialog extends HookConsumerWidget {
           TextSpan(
             children: [
               TextSpan(
-                text: 'Tu es sur le point d\'essayer Gypse ',
+                text: 'En utilisant Gypse ',
                 style:
                     GypseFont.s(color: Theme.of(context).colorScheme.primary),
               ),
               TextSpan(
-                text: 'sans créer de compte.',
+                text: 'sans créer de compte ',
                 style: GypseFont.s(
                     color: Theme.of(context).colorScheme.primary, bold: true),
+              ),
+              TextSpan(
+                text: 'tu passes à côté de certaines fonctionnalités.',
+                style:
+                    GypseFont.s(color: Theme.of(context).colorScheme.primary),
               ),
             ],
           ),
           textAlign: TextAlign.center,
-        ),
-        Dimensions.xs(context).spaceH(),
-        Text(
-          '⚠️ Certaines fonctionnalités ne te seront pas disponibles :',
-          style: GypseFont.s(
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        Dimensions.xxs(context).spaceH(),
-        ...[
-          'Statistiques de tes performances.',
-          'Récapitulatif de tes parties.',
-          'Modification de la difficulté.'
-        ].map(
-          (String feature) => Text(
-            '• $feature',
-            style: GypseFont.s(color: Theme.of(context).colorScheme.primary),
-            textAlign: TextAlign.center,
-          ),
         ),
         Dimensions.xs(context).spaceH(),
         GypseElevatedButton(
@@ -110,7 +95,7 @@ class NoAuthDialog extends HookConsumerWidget {
               });
             }
           },
-          label: 'Essayer Gypse !',
+          label: 'Commencer',
           textColor: Theme.of(context).colorScheme.onPrimary,
         ),
         Dimensions.xxs(context).spaceH(),
@@ -121,7 +106,7 @@ class NoAuthDialog extends HookConsumerWidget {
               children: [
                 TextSpan(
                   text:
-                      'Pour pleinement profiter de l\'expérience Gypse, on te recommande de',
+                      'Pour profiter pleinement de l\'aventure Gypse, on te recommande de',
                   style: GypseFont.xs(
                       color: Theme.of(context).colorScheme.primary),
                 ),

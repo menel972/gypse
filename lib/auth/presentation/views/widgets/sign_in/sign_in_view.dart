@@ -55,7 +55,7 @@ class SignInView extends HookConsumerWidget {
           // NOTE : EMAIL
           TextFormField(
             decoration: InputDecoration(
-              labelText: 'Adresse mail',
+              labelText: 'Email',
               suffixIcon: Icons.alternate_email.show(),
             ),
             textInputAction: TextInputAction.next,

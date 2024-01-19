@@ -78,11 +78,11 @@ class HomeNavigationBar extends HookConsumerWidget {
                     GypseDialog(
                       context,
                       child: const AnonymousDenied(
-                          'Les statistiques détaillées des scores sont réservées'),
+                          'L\'affichage des scores'),
                     );
                     return;
                   }
-                  
+
                   ref.read(logNavigationUseCaseProvider).invoke(
                         from: Screen.homeView.path,
                         to: Screen.homeView.path,

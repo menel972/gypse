@@ -19,7 +19,7 @@ class AnonymousDenied extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Débloque toutes les fonctionnalités de Gypse !',
+          'Débloque toutes les fonctionnalités de Gypse',
           style: GypseFont.l(
             bold: true,
             color: Theme.of(context).colorScheme.secondary,
@@ -32,7 +32,7 @@ class AnonymousDenied extends HookConsumerWidget {
         Text.rich(
           TextSpan(children: [
             TextSpan(
-              text: feature,
+              text: '$feature est réservé',
               style: GypseFont.s(
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -49,7 +49,7 @@ class AnonymousDenied extends HookConsumerWidget {
         ),
         Dimensions.xxs(context).spaceH(),
         Text(
-          'Connecte-toi ou crée un compte pour en profiter !',
+          'Connecte-toi ou crée un compte pour en profiter.',
           style: GypseFont.s(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -59,7 +59,7 @@ class AnonymousDenied extends HookConsumerWidget {
         GypseElevatedButton(
           context,
           onPressed: () => context.go(Screen.authView.path),
-          label: 'Je me connecte',
+          label: 'Connecte-toi',
           textColor: Theme.of(context).colorScheme.onPrimary,
         ),
       ],
@@ -87,7 +87,7 @@ class AnonymousMigration extends HookConsumerWidget {
         ),
         Dimensions.xs(context).spaceH(),
         Text(
-          'Approfondi ton expérience grâce aux fonctionnalités exclusives aux utilisateurs connectés :',
+          'Profite pleinement de l\'aventure Gypse grâce aux fonctionnalités réservées aux utilisateurs connectés :',
           style: GypseFont.s(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -95,19 +95,30 @@ class AnonymousMigration extends HookConsumerWidget {
         ),
         Dimensions.xxs(context).spaceH(),
         ...[
+          'Plus de challenge en adaptant la difficulté.',
           'Des statistiques de tes performances.',
-          'Un Récap de tes parties.',
-          'Plus de challenge en adaptant la difficulté.'
+          'Un résumé de tes parties.',
         ].map(
-          (String feature) => Text(
-            '• $feature',
-            style: GypseFont.s(color: Theme.of(context).colorScheme.primary),
-            textAlign: TextAlign.center,
+          (String feature) => Wrap(
+            direction: Axis.vertical,
+            children: [
+              Container(
+                width: Dimensions.screen(context).width * 0.85,
+                alignment: Alignment.center,
+                child: Text(
+                  '• $feature',
+                  style:
+                      GypseFont.s(color: Theme.of(context).colorScheme.primary),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Dimensions.xxxs(context).spaceH(),
+            ],
           ),
         ),
         Dimensions.xxs(context).spaceH(),
         Text(
-          'Connecte-toi ou crée un compte pour en profiter !',
+          'Connecte-toi ou crée un compte pour en profiter.',
           style: GypseFont.s(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -117,7 +128,7 @@ class AnonymousMigration extends HookConsumerWidget {
         GypseElevatedButton(
           context,
           onPressed: () => context.go(Screen.authView.path),
-          label: 'Je me connecte',
+          label: 'Connecte-toi',
           textColor: Theme.of(context).colorScheme.onPrimary,
         ),
       ],

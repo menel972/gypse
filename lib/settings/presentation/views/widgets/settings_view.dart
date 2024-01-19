@@ -36,7 +36,7 @@ class SettingsView extends HookConsumerWidget {
               if (anonymous) {
                 GypseDialog(context,
                     child: const AnonymousDenied(
-                        'Modifier les paramètres de jeu est réservé'));
+                        'Modifier les paramètres de jeu'));
                 return;
               }
               context.go(
@@ -59,12 +59,6 @@ class SettingsView extends HookConsumerWidget {
                     Icons.gamepad_outlined,
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
-                  prefix: anonymous
-                      ? Icon(
-                          Icons.block,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        )
-                      : null,
                 ),
               ),
             ),
@@ -77,8 +71,7 @@ class SettingsView extends HookConsumerWidget {
             onTap: () {
               if (anonymous) {
                 GypseDialog(context,
-                    child: const AnonymousDenied(
-                        'Consulter les informations de son profil est réservé'));
+                    child: const AnonymousDenied('L\'affichage de son profil'));
                 return;
               }
 
@@ -102,12 +95,6 @@ class SettingsView extends HookConsumerWidget {
                     Icons.person_outline,
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
-                  prefix: anonymous
-                      ? Icon(
-                          Icons.block,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        )
-                      : null,
                 ),
               ),
             ),
@@ -142,7 +129,7 @@ class SettingsView extends HookConsumerWidget {
           GypseElevatedButton(
             context,
             onPressed: () => context.go(Screen.authView.path),
-            label: 'Je me connecte',
+            label: 'Connecte-toi',
             textColor: Theme.of(context).colorScheme.onPrimary,
           ),
         Expanded(

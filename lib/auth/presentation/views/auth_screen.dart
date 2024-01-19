@@ -85,7 +85,7 @@ class AuthScreen extends HookConsumerWidget {
                               children: [
                                 const TextSpan(text: ' '),
                                 TextSpan(
-                                    text: 'Connectez-vous',
+                                    text: ' Connecte-toi',
                                     style: GypseFont.s(
                                         color: Theme.of(context)
                                             .colorScheme
@@ -105,7 +105,7 @@ class AuthScreen extends HookConsumerWidget {
                               children: [
                                 const TextSpan(text: ' '),
                                 TextSpan(
-                                    text: 'Créer un compte',
+                                    text: ' Crée ton compte',
                                     style: GypseFont.s(
                                         color: Theme.of(context)
                                             .colorScheme

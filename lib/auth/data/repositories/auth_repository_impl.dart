@@ -24,6 +24,26 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
+  Future<String> anonymousSignUp() async {
+    try {
+      return await _authService.anonymousSignUp() ?? '';
+    } on GypseException {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<String> linkAnonymousSignUp(AuthRequest request) async {
+    try {
+      return await _authService
+              .linkAnonymousSignUp(WsAuthRequest.fromDomain(request)) ??
+          '';
+    } on GypseException {
+      rethrow;
+    }
+  }
+
+  @override
   Future<String> signIn(AuthRequest request) async {
     try {
       return await _authService

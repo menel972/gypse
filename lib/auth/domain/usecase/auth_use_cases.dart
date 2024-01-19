@@ -23,6 +23,41 @@ AutoDisposeProvider<SignUpUseCase> get signUpUseCaseProvider =>
         (AutoDisposeProviderRef<SignUpUseCase> ref) =>
             SignUpUseCase(ref.read(authRepositoryProvider)));
 
+class AnonymousSignUpUseCase {
+  final AuthRepository _repository;
+
+  AnonymousSignUpUseCase(this._repository);
+
+  Future<String> invoke() async {
+    'start'.log(tag: 'AnonymousSignUp');
+    return await _repository.anonymousSignUp();
+  }
+}
+
+AutoDisposeProvider<AnonymousSignUpUseCase>
+    get anonymousSignUpUseCaseProvider =>
+        Provider.autoDispose<AnonymousSignUpUseCase>(
+            (AutoDisposeProviderRef<AnonymousSignUpUseCase> ref) =>
+                AnonymousSignUpUseCase(ref.read(authRepositoryProvider)));
+
+class LinkAnonymousSignUpUseCase {
+  final AuthRepository _repository;
+
+  LinkAnonymousSignUpUseCase(this._repository);
+
+  Future<String> invoke(UiAuthRequest request) async {
+    'start'.log(tag: 'LinkAnonymousSignUpUseCase');
+    return await _repository
+        .linkAnonymousSignUp(AuthRequest.fromPresentation(request));
+  }
+}
+
+AutoDisposeProvider<LinkAnonymousSignUpUseCase>
+    get linkAnonymousSignUpUseCaseProvider =>
+        Provider.autoDispose<LinkAnonymousSignUpUseCase>(
+            (AutoDisposeProviderRef<LinkAnonymousSignUpUseCase> ref) =>
+                LinkAnonymousSignUpUseCase(ref.read(authRepositoryProvider)));
+
 class SignInUseCase {
   final AuthRepository _repository;
 

@@ -2,16 +2,20 @@
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// #region Models
 class GameState extends Equatable {
   List<int> selectedAnswers;
-  UiQuestion question;
+  List<UiQuestion> questions;
+  UiQuestion currentQuestion;
   List<UiAnswer> answers;
   UiGypseSettings settings;
   bool isRight;
@@ -20,7 +24,8 @@ class GameState extends Equatable {
 
   GameState({
     this.selectedAnswers = const [],
-    this.question = const UiQuestion(''),
+    this.questions = const [],
+    this.currentQuestion = const UiQuestion(''),
     this.answers = const [],
     required this.settings,
     this.timeController,
@@ -31,7 +36,7 @@ class GameState extends Equatable {
   @override
   List<Object?> get props => [
         selectedAnswers,
-        question,
+        currentQuestion,
         answers,
         settings,
         timeController,
@@ -41,7 +46,8 @@ class GameState extends Equatable {
 
   GameState copyWith({
     List<int>? selectedAnswers,
-    UiQuestion? question,
+    List<UiQuestion>? questions,
+    UiQuestion? currentQuestion,
     List<UiAnswer>? answers,
     UiGypseSettings? settings,
     CountDownController? timeController,
@@ -50,7 +56,8 @@ class GameState extends Equatable {
   }) {
     return GameState(
       selectedAnswers: selectedAnswers ?? this.selectedAnswers,
-      question: question ?? this.question,
+      questions: questions ?? this.questions,
+      currentQuestion: currentQuestion ?? this.currentQuestion,
       answers: answers ?? this.answers,
       settings: settings ?? this.settings,
       timeController: timeController ?? this.timeController,
@@ -78,7 +85,7 @@ class RecapSessionState extends Equatable {
   }
 
   List<Books> get gameBooks =>
-      games.map((game) => game.question.book).toSet().toList();
+      games.map((game) => game.currentQuestion.book).toSet().toList();
 
   ({int goodGames, int badGames}) get scores {
     int goodGame = games.where((game) => game.isRight).length;
@@ -89,22 +96,98 @@ class RecapSessionState extends Equatable {
 
   ({double goodGames, double allGames}) goodGamesByBook(Books book) {
     double goodGame = games
-        .where((game) => game.question.book == book && game.isRight)
+        .where((game) => game.currentQuestion.book == book && game.isRight)
         .length
         .toDouble();
-    double allGame =
-        games.where((game) => game.question.book == book).length.toDouble();
+    double allGame = games
+        .where((game) => game.currentQuestion.book == book)
+        .length
+        .toDouble();
 
     return (goodGames: goodGame, allGames: allGame);
   }
 }
+// #endregion
 
+// #region States
 class GameStateNotifier extends StateNotifier<GameState> {
   GameStateNotifier() : super(GameState(settings: UiGypseSettings())) {
     final CountDownController controller = CountDownController();
     state = state.copyWith(timeController: controller);
   }
+  int questionIndex = 0;
 
+  bool init(WidgetRef ref, String filter) {
+    List<UiQuestion> questions =
+        ref.read(questionsProvider.notifier).getGameQuestions(book: filter);
+
+    if (questions.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _setQuestions(questions);
+        setNextQuestion();
+      });
+    }
+    return questions.isNotEmpty;
+  }
+
+// #region Setters
+  void setNextQuestion() {
+    List<UiQuestion> questions = state.questions;
+    UiQuestion question = questions[questionIndex];
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _setCurrentQuestion(question);
+      _setAnswers(question.answers, state.settings.level.propositions);
+    });
+
+    if (questionIndex == state.questions.length - 1) {
+      questions.shuffle();
+      _setQuestions(questions);
+      questionIndex = 0;
+    }
+    questionIndex++;
+  }
+
+  void setSettings(UiGypseSettings settings) {
+    state = state.copyWith(settings: settings);
+    state.settings.time.log(tag: 'GameState Settings');
+  }
+
+  void _setQuestions(List<UiQuestion> questions) {
+    state = state.copyWith(questions: questions);
+    state.questions[0].uId.log(tag: 'GameState Questions');
+  }
+
+  void _setCurrentQuestion(UiQuestion question) {
+    state = state.copyWith(currentQuestion: question);
+    state.currentQuestion.uId.log(tag: 'GameState CurrentQuestion');
+  }
+
+  void _setAnswers(List<UiAnswer> answers, int level) {
+    List<UiAnswer> propositions;
+
+    propositions = [
+      answers.firstWhere((answer) => answer.isRightAnswer),
+      ...answers.where((answer) => !answer.isRightAnswer).take(level - 1)
+    ];
+
+    propositions.shuffle();
+
+    state = state.copyWith(answers: propositions);
+    state.answers.length.log(tag: 'GameState Answers');
+  }
+
+// #endregion
+
+// #region TimeController
+  void pause() => state.timeController?.pause();
+
+  void resume() => state.timeController?.resume();
+
+  void restart() => state.timeController?.restart();
+// #endregion
+
+// #region Game Logic
   void addSelectedIndex(int index) {
     if (state.answers[index].isRightAnswer) {
       state = state.copyWith(
@@ -118,18 +201,6 @@ class GameStateNotifier extends StateNotifier<GameState> {
     }
   }
 
-  void pause() => state.timeController?.pause();
-
-  void resume() => state.timeController?.resume();
-
-  void restart() => state.timeController?.restart();
-
-  void switchModalState() => state = state.copyWith(isModal: !state.isModal);
-
-  bool get isModal => state.isModal;
-
-  void clearSelectedIndex() => state = state.copyWith(selectedAnswers: []);
-
   void selecteAllIndex() =>
       state = state.copyWith(selectedAnswers: [0, 1, 2, 3], isRight: false);
 
@@ -138,35 +209,13 @@ class GameStateNotifier extends StateNotifier<GameState> {
   UiAnswer getRightAnswer() =>
       state.answers.firstWhere((answer) => answer.isRightAnswer);
 
-  void setSettings(UiGypseSettings settings) {
-    state = state.copyWith(settings: settings);
-    state.settings.time.log(tag: 'GameState Settings');
-  }
+  void clearSelectedIndex() => state = state.copyWith(selectedAnswers: []);
+// #endregion
 
-  void setQuestion(UiQuestion question) {
-    state = state.copyWith(question: question);
-    state.question.uId.log(tag: 'GameState Question');
-  }
+  void switchModalState() => state = state.copyWith(isModal: !state.isModal);
 
-  void setAnswers(List<UiAnswer> answers, int level) {
-    List<UiAnswer> propositions;
-
-    propositions = [
-      answers.firstWhere((answer) => answer.isRightAnswer),
-      ...answers.where((answer) => !answer.isRightAnswer).take(level - 1)
-    ];
-
-    propositions.shuffle();
-
-    state = state.copyWith(answers: propositions);
-    state.answers.length.log(tag: 'GameState Answers');
-  }
+  bool get isModal => state.isModal;
 }
-
-final gameStateNotifierProvider =
-    StateNotifierProvider<GameStateNotifier, GameState>((ref) {
-  return GameStateNotifier();
-});
 
 class RecapSessionStateNotifier extends StateNotifier<RecapSessionState> {
   RecapSessionStateNotifier() : super(const RecapSessionState());
@@ -182,7 +231,16 @@ class RecapSessionStateNotifier extends StateNotifier<RecapSessionState> {
   }
 }
 
+// #endregion
+
+// #region Providers
+final gameStateNotifierProvider =
+    StateNotifierProvider<GameStateNotifier, GameState>((ref) {
+  return GameStateNotifier();
+});
+
 final recapSessionStateNotifierProvider =
     StateNotifierProvider<RecapSessionStateNotifier, RecapSessionState>((ref) {
   return RecapSessionStateNotifier();
 });
+// #endregion

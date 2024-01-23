@@ -32,7 +32,8 @@ class QuestionView extends HookConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(gameState.question.book.fr, style: const GypseFont.m()),
+              Text(gameState.currentQuestion.book.fr,
+                  style: const GypseFont.m()),
               DifficultyIcon(context, gameState.settings.level)
             ],
           ),
@@ -42,7 +43,7 @@ class QuestionView extends HookConsumerWidget {
             children: [
               Expanded(
                 child: Text(
-                  gameState.question.text,
+                  gameState.currentQuestion.text,
                   style: const GypseFont.m(),
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,

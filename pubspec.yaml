@@ -54,7 +54,8 @@ dependencies:
   hooks_riverpod: ^2.4.9
   intl: ^0.18.1
   url_launcher: ^6.2.3
-
+  shimmer: ^3.0.0
+  
 dev_dependencies:
   flutter_lints: ^3.0.1
   flutter_test:

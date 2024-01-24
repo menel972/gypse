@@ -162,3 +162,18 @@ extension ShowIcon on IconData {
   Icon show({Color? color = const Color.fromRGBO(196, 196, 196, 1)}) =>
       Icon(this, color: color);
 }
+
+///## Extension on [double]
+///
+/// Convert a number to a percentage string representation.
+extension Percent on double {
+  /// Converts the number to a percentage string representation.
+  ///
+  /// If the number is an integer, it returns the integer value as a string.
+  /// Otherwise, it returns the number rounded to one decimal place as a string.
+  String get toPercent {
+    if (this % 1 == 0) return '${toInt()}%';
+
+    return '${toStringAsFixed(1)}%';
+  }
+}

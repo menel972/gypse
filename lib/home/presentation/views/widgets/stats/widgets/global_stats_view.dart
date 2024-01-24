@@ -37,6 +37,7 @@ class GlobalStatsView extends HookConsumerWidget {
               answeredQuestionsQuantity: state.answeredQuestionsQuantity,
               successRatio: state.successRatio,
               successRatioString: state.successRatioString,
+              bestTime: state.bestTimeString,
             ),
             StatsContainer(
               loading: state.loading,
@@ -45,6 +46,7 @@ class GlobalStatsView extends HookConsumerWidget {
                   state.levelAnsweredQuestionsQuantity(Level.hard),
               successRatio: state.levelSuccessRatio(Level.hard),
               successRatioString: state.levelSuccessRatioString(Level.hard),
+              bestTime: state.levelBestTimeString(Level.hard),
             ),
             StatsContainer(
               loading: state.loading,
@@ -53,6 +55,7 @@ class GlobalStatsView extends HookConsumerWidget {
                   state.levelAnsweredQuestionsQuantity(Level.medium),
               successRatio: state.levelSuccessRatio(Level.medium),
               successRatioString: state.levelSuccessRatioString(Level.medium),
+              bestTime: state.levelBestTimeString(Level.medium),
             ),
             StatsContainer(
               loading: state.loading,
@@ -61,6 +64,7 @@ class GlobalStatsView extends HookConsumerWidget {
                   state.levelAnsweredQuestionsQuantity(Level.easy),
               successRatio: state.levelSuccessRatio(Level.easy),
               successRatioString: state.levelSuccessRatioString(Level.easy),
+              bestTime: state.levelBestTimeString(Level.easy),
             ),
             Dimensions.xxs(context).spaceH(),
           ][i];

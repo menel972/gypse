@@ -33,6 +33,18 @@ class StatsState extends Equatable {
     return successRatio.toPercent;
   }
 
+  String get bestTimeString {
+    List<double?> answeredQuestionTimes =
+        answeredQuestions.map((q) => q.time).toList();
+    answeredQuestionTimes.removeWhere((q) => q == null);
+
+    answeredQuestionTimes.sort();
+
+    return answeredQuestionTimes.isEmpty
+        ? '--'
+        : '${answeredQuestionTimes.first?.toInt()}"';
+  }
+
   int levelAnsweredQuestionsQuantity(Level level) {
     return answeredQuestions
         .where((question) => question.level == level)
@@ -55,6 +67,21 @@ class StatsState extends Equatable {
     return levelAnsweredQuestionsQuantity(level) == 0
         ? '--'
         : levelSuccessRatio(level).toPercent;
+  }
+
+  String levelBestTimeString(Level level) {
+    List<double?> answeredQuestionTimes = answeredQuestions
+        .where((question) => question.level == level)
+        .map((q) => q.time)
+        .toList();
+
+    answeredQuestionTimes.removeWhere((q) => q == null);
+
+    answeredQuestionTimes.sort();
+
+    return answeredQuestionTimes.isEmpty
+        ? '--'
+        : '${answeredQuestionTimes.first?.toInt()}"';
   }
 
   StatsState copyWith({

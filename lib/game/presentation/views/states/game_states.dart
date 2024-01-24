@@ -20,6 +20,7 @@ class GameState extends Equatable {
   UiGypseSettings settings;
   bool isRight;
   bool isModal;
+  double time;
   final CountDownController? timeController;
 
   GameState({
@@ -31,6 +32,7 @@ class GameState extends Equatable {
     this.timeController,
     this.isRight = false,
     this.isModal = false,
+    this.time = 0,
   }) : super();
 
   @override
@@ -41,7 +43,8 @@ class GameState extends Equatable {
         settings,
         timeController,
         isRight,
-        isModal
+        isModal,
+        time,
       ];
 
   GameState copyWith({
@@ -53,6 +56,7 @@ class GameState extends Equatable {
     CountDownController? timeController,
     bool? isRight,
     bool? isModal,
+    double? time,
   }) {
     return GameState(
       selectedAnswers: selectedAnswers ?? this.selectedAnswers,
@@ -63,6 +67,7 @@ class GameState extends Equatable {
       timeController: timeController ?? this.timeController,
       isRight: isRight ?? this.isRight,
       isModal: isModal ?? this.isModal,
+      time: time ?? this.time,
     );
   }
 }
@@ -177,6 +182,13 @@ class GameStateNotifier extends StateNotifier<GameState> {
     state.answers.length.log(tag: 'GameState Answers');
   }
 
+  void _setTime() {
+    double remainingTime =
+        double.tryParse(state.timeController?.getTime() ?? '0') ?? 0;
+    double elapsedTime = state.settings.time.seconds - remainingTime;
+
+    state = state.copyWith(time: elapsedTime);
+  }
 // #endregion
 
 // #region TimeController
@@ -199,6 +211,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
           selectedAnswers: [...state.selectedAnswers, index, i],
           isRight: false);
     }
+    _setTime();
   }
 
   void selecteAllIndex() =>

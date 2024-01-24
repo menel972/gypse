@@ -153,6 +153,7 @@ class AnsweredQuestions extends Equatable {
   final String id;
   final Level level;
   final bool isRightAnswer;
+  final double? time;
 
   ///<i><small>`Domain Layer`</small></i>
   ///### Already answered question <i><small>(received from the data layer)</small></i>
@@ -163,16 +164,19 @@ class AnsweredQuestions extends Equatable {
     required this.id,
     required this.level,
     required this.isRightAnswer,
+    this.time,
   });
 
   @override
-  List<Object> get props => [id, level, isRightAnswer];
+  List<Object?> get props => [id, level, isRightAnswer, time];
 
   factory AnsweredQuestions.fromPresentation(UiAnsweredQuestions uiQuestion) =>
       AnsweredQuestions(
-          id: uiQuestion.qId,
-          level: uiQuestion.level,
-          isRightAnswer: uiQuestion.isRightAnswer);
+        id: uiQuestion.qId,
+        level: uiQuestion.level,
+        isRightAnswer: uiQuestion.isRightAnswer,
+        time: uiQuestion.time,
+      );
 
   /// <i><small>`Domain Layer`</small></i><br>
   /// Converts an `AnsweredQuestions` into an `UiAnsweredQuestions`.
@@ -181,6 +185,7 @@ class AnsweredQuestions extends Equatable {
       qId: id,
       level: level,
       isRightAnswer: isRightAnswer,
+      time: time,
     );
   }
 }

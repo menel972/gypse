@@ -130,6 +130,7 @@ class UiAnsweredQuestions extends Equatable {
   final String qId;
   final Level level;
   final bool isRightAnswer;
+  final double? time;
 
   ///<i><small>`Presentation Layer`</small></i>
   ///### Already answered question <i><small>(received from the domain layer)</small></i>
@@ -140,8 +141,9 @@ class UiAnsweredQuestions extends Equatable {
     required this.qId,
     required this.level,
     required this.isRightAnswer,
+    this.time,
   });
 
   @override
-  List<Object?> get props => [qId, level, isRightAnswer];
+  List<Object?> get props => [qId, level, isRightAnswer, time];
 }

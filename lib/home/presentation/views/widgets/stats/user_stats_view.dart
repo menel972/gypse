@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
+import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/home/presentation/views/widgets/dialogs/no_data_dialog.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/states/stats_states.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/widgets/book_stats_view.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/widgets/global_stats_view.dart';
@@ -14,6 +17,17 @@ class UserStatsView extends HookConsumerWidget {
   const UserStatsView({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (ref.watch(userProvider)!.questions.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        GypseDialog(
+          context,
+          height: Dimensions.xl(context).height,
+          dismissible: false,
+          child: const NoDataDialog(),
+        );
+      });
+    }
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(statsStateNotifierProvider.notifier).init(ref);
     });

@@ -128,11 +128,14 @@ class AnswersView extends HookConsumerWidget {
                             .read(answerRatioStateProvider.notifier)
                             .slide();
 
-                        ref.read(userProvider.notifier).updateAnsweredQuestions(
-                            UiAnsweredQuestions(
-                                qId: gameState.currentQuestion.uId,
-                                level: gameState.settings.level,
-                                isRightAnswer: gameState.isRight));
+                        ref
+                            .read(userProvider.notifier)
+                            .updateAnsweredQuestions(UiAnsweredQuestions(
+                              qId: gameState.currentQuestion.uId,
+                              level: gameState.settings.level,
+                              isRightAnswer: gameState.isRight,
+                              time: gameState.time,
+                            ));
 
                         updateRecap();
 

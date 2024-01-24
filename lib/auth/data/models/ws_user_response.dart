@@ -241,6 +241,7 @@ class WsAnsweredQuestions extends Equatable {
   final String? id;
   int? level;
   bool? isRightAnswer;
+  final double? time;
 
   ///<i><small>`Data Layer`</small></i>
   ///### Already answered question <i><small>(received from the database)</small></i>
@@ -251,10 +252,11 @@ class WsAnsweredQuestions extends Equatable {
     this.id = '',
     this.level = 2,
     this.isRightAnswer = false,
+    this.time = 0,
   });
 
   @override
-  List<Object?> get props => [id, level, isRightAnswer];
+  List<Object?> get props => [id, level, isRightAnswer, time];
 
   /// <i><small>`Data Layer`</small></i><br>
   /// Converts a `WsAnsweredQuestions` into an object.
@@ -263,6 +265,7 @@ class WsAnsweredQuestions extends Equatable {
       'qId': id,
       'niveau': level,
       'valid': isRightAnswer,
+      'time': time,
     };
   }
 
@@ -278,6 +281,7 @@ class WsAnsweredQuestions extends Equatable {
         id: map?['qId'],
         level: map?['niveau'],
         isRightAnswer: map?['valid'],
+        time: map?['time'],
       );
     } catch (e) {
       e.log();
@@ -292,6 +296,7 @@ class WsAnsweredQuestions extends Equatable {
       id: id ?? '',
       level: Level.values.firstWhere((value) => value.id == level),
       isRightAnswer: isRightAnswer ?? false,
+      time: time,
     );
   }
 
@@ -302,6 +307,7 @@ class WsAnsweredQuestions extends Equatable {
       id: domain.id,
       isRightAnswer: domain.isRightAnswer,
       level: domain.level.id,
+      time: domain.time,
     );
   }
 }

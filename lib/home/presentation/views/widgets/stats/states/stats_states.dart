@@ -45,6 +45,28 @@ class StatsState extends Equatable {
         : '${answeredQuestionTimes.first?.toInt()}"';
   }
 
+  String get bestGoodAnswersSerie {
+    int maxGoodAnswersSerie = 0;
+    int currentGoodAnswersSerie = 0;
+
+    for (int i = 0; i < answeredQuestions.length; i++) {
+      if (answeredQuestions[i].isRightAnswer) {
+        currentGoodAnswersSerie++;
+      } else {
+        if (currentGoodAnswersSerie > maxGoodAnswersSerie) {
+          maxGoodAnswersSerie = currentGoodAnswersSerie;
+        }
+        currentGoodAnswersSerie = 0;
+      }
+    }
+
+    if (currentGoodAnswersSerie > maxGoodAnswersSerie) {
+      maxGoodAnswersSerie = currentGoodAnswersSerie;
+    }
+
+    return answeredQuestions.isEmpty ? '--' : maxGoodAnswersSerie.toString();
+  }
+
   int levelAnsweredQuestionsQuantity(Level level) {
     return answeredQuestions
         .where((question) => question.level == level)
@@ -82,6 +104,33 @@ class StatsState extends Equatable {
     return answeredQuestionTimes.isEmpty
         ? '--'
         : '${answeredQuestionTimes.first?.toInt()}"';
+  }
+
+  String levelBestGoodAnswersSerie(Level level) {
+    int maxGoodAnswersSerie = 0;
+    int currentGoodAnswersSerie = 0;
+
+    List<UiAnsweredQuestions> levelAnsweredQuestions =
+        answeredQuestions.where((question) => question.level == level).toList();
+
+    for (int i = 0; i < levelAnsweredQuestions.length; i++) {
+      if (levelAnsweredQuestions[i].isRightAnswer) {
+        currentGoodAnswersSerie++;
+      } else {
+        if (currentGoodAnswersSerie > maxGoodAnswersSerie) {
+          maxGoodAnswersSerie = currentGoodAnswersSerie;
+        }
+        currentGoodAnswersSerie = 0;
+      }
+    }
+
+    if (currentGoodAnswersSerie > maxGoodAnswersSerie) {
+      maxGoodAnswersSerie = currentGoodAnswersSerie;
+    }
+
+    return levelAnsweredQuestions.isEmpty
+        ? '--'
+        : maxGoodAnswersSerie.toString();
   }
 
   StatsState copyWith({

@@ -107,9 +107,7 @@ class InitScreen extends HookConsumerWidget {
                   child: const WelcomeDialog(),
                 );
               } else {
-                WidgetsBinding.instance.addPostFrameCallback((_) async {
-                  context.go(Screen.homeView.path);
-                });
+                Future(() => context.go(Screen.homeView.path));
               }
             }
 

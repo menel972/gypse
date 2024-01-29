@@ -12,6 +12,7 @@ class StatsContainer extends HookConsumerWidget {
   final double successRatio;
   final String successRatioString;
   final String bestTime;
+  final String bestGoodAnswersSerie;
 
   const StatsContainer({
     required this.loading,
@@ -20,6 +21,7 @@ class StatsContainer extends HookConsumerWidget {
     required this.successRatio,
     required this.successRatioString,
     required this.bestTime,
+    required this.bestGoodAnswersSerie,
     super.key,
   });
   @override
@@ -128,6 +130,38 @@ class StatsContainer extends HookConsumerWidget {
                       ),
                       Text(
                         bestTime,
+                        style: const GypseFont.m(bold: true),
+                      ),
+                    ],
+                  ),
+                ),
+                Dimensions.xxxs(context).spaceH(),
+                GypseContainer(
+                  context,
+                  radius: 10,
+                  pad: EdgeInsets.symmetric(
+                    vertical: Dimensions.xxxs(context).height,
+                    horizontal: Dimensions.xxs(context).width,
+                  ),
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      const Wrap(
+                        direction: Axis.vertical,
+                        children: [
+                          Text(
+                            'Série sans erreur',
+                            style: GypseFont.m(),
+                          ),
+                          Text(
+                            '',
+                            style: GypseFont.m(),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        bestGoodAnswersSerie,
                         style: const GypseFont.m(bold: true),
                       ),
                     ],

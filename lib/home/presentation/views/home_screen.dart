@@ -73,7 +73,7 @@ class HomeScreen extends HookConsumerWidget {
                     [
                       const HomeView(),
                       const BookScreen(),
-                      UserStatsView(),
+                      const UserStatsView(),
                     ][navigationIndex],
                     Positioned(
                       top: 0,

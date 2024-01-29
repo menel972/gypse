@@ -35,7 +35,7 @@ class SignUpView extends HookConsumerWidget {
     ref.listen(loginStateNotifierProvider, (_, next) {
       next.log(tag: 'Current Login State');
       if (next == LoginState.authenticated) {
-        ref.read(initStateNotifierProvider.notifier).switchState();
+        ref.read(initStateNotifierProvider.notifier).switchLoginMethod();
         Future(() => context.go(Screen.initView.path));
       }
     });

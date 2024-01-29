@@ -15,12 +15,12 @@ import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AnswersView extends HookConsumerWidget {
-  final VoidCallback initGameState;
+  final VoidCallback nextQuestion;
 
   late double ratio;
   late GameState gameState;
 
-  AnswersView(this.initGameState, {super.key});
+  AnswersView(this.nextQuestion, {super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ratio = ref.watch(answerRatioStateProvider);
@@ -128,15 +128,18 @@ class AnswersView extends HookConsumerWidget {
                             .read(answerRatioStateProvider.notifier)
                             .slide();
 
-                        ref.read(userProvider.notifier).updateAnsweredQuestions(
-                            UiAnsweredQuestions(
-                                qId: gameState.question.uId,
-                                level: gameState.settings.level,
-                                isRightAnswer: gameState.isRight));
+                        ref
+                            .read(userProvider.notifier)
+                            .updateAnsweredQuestions(UiAnsweredQuestions(
+                              qId: gameState.currentQuestion.uId,
+                              level: gameState.settings.level,
+                              isRightAnswer: gameState.isRight,
+                              time: gameState.time,
+                            ));
 
                         updateRecap();
 
-                        initGameState();
+                        nextQuestion();
                         ref
                             .read(gameStateNotifierProvider.notifier)
                             .clearSelectedIndex();

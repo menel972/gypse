@@ -40,6 +40,20 @@ class QuestionsProvider extends StateNotifier<Set<UiQuestion>> {
 
     return questions;
   }
+
+  List<UiQuestion> getGameQuestions({String book = ' '}) {
+    List<UiQuestion> questions;
+
+    if (book == ' ') {
+      questions = state.toList();
+    } else {
+      questions = state.where((question) => question.book.fr == book).toList();
+    }
+
+    questions.shuffle();
+
+    return questions;
+  }
 }
 
 final questionsProvider =

@@ -120,7 +120,7 @@ class GameSettings extends HookConsumerWidget {
                         Future(() => context.go(Screen.homeView.path));
                         ref
                             .read(initStateNotifierProvider.notifier)
-                            .switchState();
+                            .switchLoginMethod();
                       } else {
                         Navigator.of(context).pop();
                       }

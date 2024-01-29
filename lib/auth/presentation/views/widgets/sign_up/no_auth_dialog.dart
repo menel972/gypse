@@ -85,7 +85,9 @@ class NoAuthDialog extends HookConsumerWidget {
 
             if (result.isNotEmpty) {
               await onNewUserUseCase(UiUser.anonymous(result)).whenComplete(() {
-                ref.read(initStateNotifierProvider.notifier).switchState();
+                ref
+                    .read(initStateNotifierProvider.notifier)
+                    .switchLoginMethod();
 
                 ref
                     .read(loginStateNotifierProvider.notifier)

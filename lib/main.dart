@@ -10,6 +10,7 @@ import 'package:gypse/common/style/theme.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'firebase_options.dart';
 
@@ -70,13 +71,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       DeviceOrientation.portraitUp,
     ]);
 
-    return MaterialApp.router(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      routeInformationParser: gypseRouter.routeInformationParser,
-      routeInformationProvider: gypseRouter.routeInformationProvider,
-      routerDelegate: gypseRouter.routerDelegate,
-      theme: gypseTheme,
+    return Consumer(
+      builder: (context, ref, child) {
+        return MaterialApp.router(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routeInformationParser: gypseRouter.routeInformationParser,
+          routeInformationProvider: gypseRouter.routeInformationProvider,
+          routerDelegate: gypseRouter.routerDelegate,
+          theme: gypseTheme,
+        );
+      },
     );
   }
 }

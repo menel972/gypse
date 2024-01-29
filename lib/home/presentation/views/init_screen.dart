@@ -3,6 +3,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:games_services/games_services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
@@ -82,6 +83,7 @@ class InitScreen extends HookConsumerWidget {
       return Container();
     } else {
       'User logged !'.log(tag: 'Init - User Check');
+      GameAuth.signIn();
 
       return PopScope(
         canPop: false,

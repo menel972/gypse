@@ -99,7 +99,9 @@ class StatsState extends Equatable {
         .map((q) => q.time)
         .toList();
 
-    answeredQuestionTimes.removeWhere((q) => q == null);
+    answeredQuestionTimes
+      ..removeWhere((q) => q == null)
+      ..removeWhere((e) => e == 0);
 
     answeredQuestionTimes.sort();
 

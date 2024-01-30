@@ -12,6 +12,7 @@ import 'package:gypse/auth/presentation/views/widgets/sign_up/welcome_dialog.dar
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/shared_preferences/shared_preferences_service.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/gypse_background.dart';
 import 'package:gypse/common/utils/dimensions.dart';
@@ -69,6 +70,7 @@ class InitScreen extends HookConsumerWidget {
         initQuestions()
             .whenComplete(() => 'Complete'.log(tag: 'InitQuestions')),
         initUser(userUid).whenComplete(() => 'Complete'.log(tag: 'InitUser')),
+        SharedPreferencesService().init(),
       ]);
     }
 

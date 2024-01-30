@@ -2,6 +2,8 @@
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:games_services/games_services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
@@ -59,47 +61,77 @@ class HomeScreen extends HookConsumerWidget {
             ? null
             : ref.read(homeNavigationStateProvider.notifier).updatePage(0);
       },
-      child: Scaffold(
-          body: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('$imagesPath/home_bkg.png'),
-                  fit: BoxFit.cover,
+      child: AnnotatedRegion(
+        value: const SystemUiOverlayStyle(
+          statusBarColor: Colors.red,
+          statusBarIconBrightness: Brightness.light,
+        ),
+        child: Scaffold(
+            extendBody: true,
+            body: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('$imagesPath/home_bkg.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: SafeArea(
-                child: Stack(
-                  children: [
-                    [
-                      const HomeView(),
-                      const BookScreen(),
-                      const UserStatsView(),
-                    ][navigationIndex],
-                    Positioned(
-                      top: 0,
-                      right: Dimensions.xxs(context).width,
-                      child: IconButton(
-                        onPressed: () {
-                          ref
-                              .read(logActionUseCaseProvider)
-                              .invoke(cta: 'settings');
-                          context.go(Screen.settingsView.path);
-                        },
-                        icon: Icon(
-                          Icons.settings_outlined,
-                          color: Theme.of(context).colorScheme.onBackground,
-                          semanticLabel: "Paramètres",
+                child: SafeArea(
+                  child: Stack(
+                    children: [
+                      [
+                        const HomeView(),
+                        const BookScreen(),
+                        const UserStatsView(),
+                      ][navigationIndex],
+                      Positioned(
+                        top: 0,
+                        right: Dimensions.xxs(context).width,
+                        child: Wrap(
+                          spacing: Dimensions.xxxs(context).width,
+                          children: [
+                            IconButton(
+                              onPressed: () async {
+                                Achievements.showAchievements();
+                              },
+                              icon: Icon(
+                                Icons.emoji_events_outlined,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                size: Dimensions.screen(context).width * 0.08,
+                                semanticLabel: "Rewards",
+                              ),
+                              highlightColor: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.2),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                ref
+                                    .read(logActionUseCaseProvider)
+                                    .invoke(cta: 'settings');
+                                context.go(Screen.settingsView.path);
+                              },
+                              icon: Icon(
+                                Icons.settings_outlined,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                size: Dimensions.screen(context).width * 0.08,
+                                semanticLabel: "Paramètres",
+                              ),
+                              highlightColor: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.2),
+                            ),
+                          ],
                         ),
-                        highlightColor: Theme.of(context)
-                            .colorScheme
-                            .secondary
-                            .withOpacity(0.2),
                       ),
-                    ),
-                  ],
-                ),
-              )),
-          bottomNavigationBar: HomeNavigationBar(ref)),
+                    ],
+                  ),
+                )),
+            bottomNavigationBar: HomeNavigationBar(ref)),
+      ),
     );
   }
 }

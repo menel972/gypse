@@ -7,4 +7,4 @@ String usersPath = 'user';
 String cloudStorageUrl = 'gs://quiz-bible-44f41.appspot.com';
 
 /// APP CONFIG
-String appVersion = '1.7.0';
+String appVersion = '2.0.0';

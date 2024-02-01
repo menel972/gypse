@@ -240,12 +240,12 @@ enum RewardKey {
   q20S('5Q20S', 5),
   q30S('5Q30S', 5),
   qDiff('1QDiff', 1),
-  serie3('Serie3', 3),
-  serie10('Serie10', 10),
-  serie20('Serie20', 20),
-  qAll('100', null),
-  platine('Platine', null),
-  book('Book100', null),
+  serie3('Serie3', 1),
+  serie10('Serie10', 1),
+  serie20('Serie20', 1),
+  qAll('100', 1),
+  platine('Platine', 1),
+  book('Book100', 1),
   random20('20QR', 20),
   random100('100QR', 100),
   easy3('3QE', 3),
@@ -259,6 +259,6 @@ enum RewardKey {
   hard50('50QH', 50);
 
   final String id;
-  final int? condition;
+  final int condition;
   const RewardKey(this.id, this.condition);
 }

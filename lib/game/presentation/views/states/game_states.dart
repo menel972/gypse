@@ -1,10 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
+import 'dart:async';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
+import 'package:gypse/common/rewards/rewards_service.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
@@ -149,6 +152,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
       questions.shuffle();
       _setQuestions(questions);
       questionIndex = 0;
+      unawaited(RewardsService().onAchievement([RewardKey.book]));
     }
     questionIndex++;
   }

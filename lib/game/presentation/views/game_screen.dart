@@ -86,6 +86,7 @@ class GameScreen extends HookConsumerWidget {
                     Expanded(child: QuestionView()),
                     AnswersView(
                       nextQuestion,
+                      filter: filter.isEmpty ? null : filter,
                     ),
                   ],
                 ),

@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:async';
+
 import 'package:d_chart/commons/config_render.dart';
 import 'package:d_chart/commons/data_model.dart';
 import 'package:d_chart/commons/decorator.dart';
@@ -8,6 +10,7 @@ import 'package:d_chart/commons/style.dart';
 import 'package:d_chart/ordinal/pie.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/common/rewards/rewards_service.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
@@ -26,6 +29,11 @@ class RecapView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     recap = ref.watch(recapSessionStateNotifierProvider);
+
+    unawaited(RewardsService().checkSerieCompletion(recap));
+    unawaited(RewardsService().checkDifficultyCompletion());
+    unawaited(RewardsService().checkAllQuestionsCompletion(ref));
+    unawaited(RewardsService().checkPlatineCompletion());
 
     return PopScope(
       canPop: false,

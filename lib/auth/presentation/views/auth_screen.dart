@@ -16,7 +16,6 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
-import 'package:gypse/common/utils/strings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthScreen extends HookConsumerWidget {
@@ -45,6 +44,7 @@ class AuthScreen extends HookConsumerWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           height: Dimensions.screen(context).height,
           width: Dimensions.screen(context).width,
@@ -65,10 +65,6 @@ class AuthScreen extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    '$imagesPath/splash_logo.png',
-                    width: Dimensions.l(context).width,
-                  ),
                   Expanded(
                       flex: 3,
                       child: [

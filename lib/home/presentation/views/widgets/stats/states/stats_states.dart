@@ -44,7 +44,7 @@ class StatsState extends Equatable {
 
     return answeredQuestionTimes.isEmpty
         ? '--'
-        : '${answeredQuestionTimes.first?.toInt()}"';
+        : '${answeredQuestionTimes.first?.toInt()} sec';
   }
 
   String get bestGoodAnswersSerie {
@@ -107,7 +107,7 @@ class StatsState extends Equatable {
 
     return answeredQuestionTimes.isEmpty
         ? '--'
-        : '${answeredQuestionTimes.first?.toInt()}"';
+        : '${answeredQuestionTimes.first?.toInt()} sec';
   }
 
   String levelBestGoodAnswersSerie(Level level) {

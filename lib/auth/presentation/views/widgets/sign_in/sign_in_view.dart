@@ -14,6 +14,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/common/utils/strings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignInView extends HookConsumerWidget {
@@ -41,120 +42,136 @@ class SignInView extends HookConsumerWidget {
 
     return SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Dimensions.xxs(context).spaceH(),
-          const Text(
-            'Connexion',
-            style: GypseFont.xxl(bold: true),
-            textAlign: TextAlign.center,
-          ),
-          Dimensions.xs(context).spaceH(),
-
-          // NOTE : EMAIL
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Email',
-              suffixIcon: Icons.alternate_email.show(),
-            ),
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.emailAddress,
-            onChanged: (value) => ref
-                .read(signInCredentialsStateNotifierProvider.notifier)
-                .onEmailChanged(value),
-          ),
-          Visibility(
-            visible:
-                !credentials.emailError.isNull || credentials.emailError != '',
-            child: Text(
-              credentials.emailError ?? '',
-              style: GypseFont.xs(color: Theme.of(context).colorScheme.error),
-              maxLines: 1,
-            ),
-          ),
-          Dimensions.xxxs(context).spaceH(),
-          // NOTE : PASSWORD
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Mot de passe',
-              suffixIcon: IconButton(
-                onPressed: () => ref
-                    .read(signInCredentialsStateNotifierProvider.notifier)
-                    .onPasswordVisibilityChanged(),
-                icon: credentials.isPasswordHidden
-                    ? Icons.remove_red_eye_outlined.show()
-                    : Icons.visibility_off_outlined.show(),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: AnimatedSlide(
+        duration: const Duration(milliseconds: 200),
+        offset: MediaQuery.of(context).viewInsets.bottom == 0
+            ? const Offset(0, 0)
+            : const Offset(0, -0.3),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AnimatedScale(
+              duration: const Duration(milliseconds: 250),
+              scale: MediaQuery.of(context).viewInsets.bottom == 0 ? 1.0 : 0,
+              child: Image.asset(
+                '$imagesPath/splash_logo.png',
+                height: Dimensions.xl(context).width,
               ),
             ),
-            textInputAction: TextInputAction.done,
-            keyboardType: TextInputType.visiblePassword,
-            obscureText: credentials.isPasswordHidden,
-            onChanged: (value) => ref
-                .read(signInCredentialsStateNotifierProvider.notifier)
-                .onPasswordChanged(value),
-          ),
-          Visibility(
-            visible: !credentials.passwordError.isNull ||
-                credentials.passwordError != '',
-            child: Text(
-              credentials.passwordError ?? '',
-              style: GypseFont.xs(color: Theme.of(context).colorScheme.error),
-              maxLines: 1,
+            Dimensions.xxs(context).spaceH(),
+            const Text(
+              'Connexion',
+              style: GypseFont.xxl(bold: true),
+              textAlign: TextAlign.center,
             ),
-          ),
-          Dimensions.xxxs(context).spaceH(),
-          // NOTE : FORGOTTEN PASSWORD BUTTON
-          TextButton(
-            onPressed: () =>
-                ref.read(authStateNotifierProvider.notifier).onViewChanged(2),
-            child: Text(
-              'Mot de passe oublié ?',
-              style:
-                  GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+            Dimensions.xs(context).spaceH(),
+
+            // NOTE : EMAIL
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Email',
+                suffixIcon: Icons.alternate_email.show(),
+              ),
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.emailAddress,
+              onChanged: (value) => ref
+                  .read(signInCredentialsStateNotifierProvider.notifier)
+                  .onEmailChanged(value),
             ),
-          ),
-          // CONNECTION BUTTON
-          GypseElevatedButton(
-            context,
-            label: 'Connexion',
-            textColor: Theme.of(context).colorScheme.onPrimary,
-            onPressed: () async {
-              if (!isFormValid()) {
-                'Le formulaire n\'est pas valide'.failure(context);
-                ref
-                    .read(loginStateNotifierProvider.notifier)
-                    .updateState(LoginState.unauthenticated);
-              } else {
-                ref
-                    .read(loginStateNotifierProvider.notifier)
-                    .updateState(LoginState.loading);
-
-                // NOTE : Try to login
-                await signInUseCase(credentials.toRequest())
-                    .then((String userId) {
-                  ref
-                      .read(loginStateNotifierProvider.notifier)
-                      .updateState(LoginState.authenticated);
-
-                  ref.read(logLoginUseCaseProvider).invoke();
-
-                  'Bienvenue !'.success(context);
-                  userId.log(tag: 'Login success');
-                }).catchError((e) {
-                  String msg = e.message as String;
-
+            Visibility(
+              visible: !credentials.emailError.isNull ||
+                  credentials.emailError != '',
+              child: Text(
+                credentials.emailError ?? '',
+                style: GypseFont.xs(color: Theme.of(context).colorScheme.error),
+                maxLines: 1,
+              ),
+            ),
+            Dimensions.xxxs(context).spaceH(),
+            // NOTE : PASSWORD
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Mot de passe',
+                suffixIcon: IconButton(
+                  onPressed: () => ref
+                      .read(signInCredentialsStateNotifierProvider.notifier)
+                      .onPasswordVisibilityChanged(),
+                  icon: credentials.isPasswordHidden
+                      ? Icons.remove_red_eye_outlined.show()
+                      : Icons.visibility_off_outlined.show(),
+                ),
+              ),
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: credentials.isPasswordHidden,
+              onChanged: (value) => ref
+                  .read(signInCredentialsStateNotifierProvider.notifier)
+                  .onPasswordChanged(value),
+            ),
+            Visibility(
+              visible: !credentials.passwordError.isNull ||
+                  credentials.passwordError != '',
+              child: Text(
+                credentials.passwordError ?? '',
+                style: GypseFont.xs(color: Theme.of(context).colorScheme.error),
+                maxLines: 1,
+              ),
+            ),
+            Dimensions.xxxs(context).spaceH(),
+            // NOTE : FORGOTTEN PASSWORD BUTTON
+            TextButton(
+              onPressed: () =>
+                  ref.read(authStateNotifierProvider.notifier).onViewChanged(2),
+              child: Text(
+                'Mot de passe oublié ?',
+                style:
+                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+              ),
+            ),
+            // CONNECTION BUTTON
+            GypseElevatedButton(
+              context,
+              label: 'Connexion',
+              textColor: Theme.of(context).colorScheme.onPrimary,
+              onPressed: () async {
+                if (!isFormValid()) {
+                  'Le formulaire n\'est pas valide'.failure(context);
                   ref
                       .read(loginStateNotifierProvider.notifier)
                       .updateState(LoginState.unauthenticated);
+                } else {
+                  ref
+                      .read(loginStateNotifierProvider.notifier)
+                      .updateState(LoginState.loading);
 
-                  msg.failure(context);
-                  msg.log(tag: 'Login error');
-                });
-              }
-            },
-          ),
-        ],
+                  // NOTE : Try to login
+                  await signInUseCase(credentials.toRequest())
+                      .then((String userId) {
+                    ref
+                        .read(loginStateNotifierProvider.notifier)
+                        .updateState(LoginState.authenticated);
+
+                    ref.read(logLoginUseCaseProvider).invoke();
+
+                    'Bienvenue !'.success(context);
+                    userId.log(tag: 'Login success');
+                  }).catchError((e) {
+                    String msg = e.message as String;
+
+                    ref
+                        .read(loginStateNotifierProvider.notifier)
+                        .updateState(LoginState.unauthenticated);
+
+                    msg.failure(context);
+                    msg.log(tag: 'Login error');
+                  });
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

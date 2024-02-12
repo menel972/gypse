@@ -25,6 +25,9 @@ class GameSettings extends HookConsumerWidget {
     onUserChangedUseCase(BuildContext context, UiUser user) =>
         ref.read(onUserChangedUseCaseProvider).invoke(context, user);
 
+    // Reset the recap session state in case of click on notification
+    Future(() => ref.invalidate(recapSessionStateNotifierProvider));
+
     return PopScope(
       canPop: false,
       child: Scaffold(

@@ -10,6 +10,9 @@ import 'package:d_chart/commons/style.dart';
 import 'package:d_chart/ordinal/pie.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/common/notifications/level_unlock_service.dart';
+import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/rewards/rewards_service.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -23,12 +26,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RecapView extends HookConsumerWidget {
   late RecapSessionState recap;
+  late UiUser user;
 
   RecapView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     recap = ref.watch(recapSessionStateNotifierProvider);
+    user = ref.watch(userProvider)!;
+
+    LevelUnlockService().unlockedLevel(user);
 
     unawaited(RewardsService().checkSerieCompletion(recap));
     unawaited(RewardsService().checkDifficultyCompletion());

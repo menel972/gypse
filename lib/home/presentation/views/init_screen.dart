@@ -61,6 +61,13 @@ class InitScreen extends HookConsumerWidget {
       UiUser user =
           await ref.read(getCurrentUserUseCaseProvider).invoke(userId);
 
+      SharedPreferencesService()
+          .sharedPreferences
+          .setBool(Level.medium.name, user.levelMedUnlocked.$1);
+      SharedPreferencesService()
+          .sharedPreferences
+          .setBool(Level.hard.name, user.levelHardUnlocked.$1);
+
       ref.read(userProvider.notifier).setCurrentUser(user);
       ref.read(gameStateNotifierProvider.notifier).setSettings(user.settings);
     }

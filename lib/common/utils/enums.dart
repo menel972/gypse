@@ -1,5 +1,7 @@
 /** LOGIN STATE */
 
+import 'package:gypse/common/notifications/local_notification.dart';
+
 ///## Authentication state enumeration
 ///
 ///It represents the login state of a user.<br>
@@ -261,4 +263,22 @@ enum RewardKey {
   final String id;
   final int condition;
   const RewardKey(this.id, this.condition);
+enum LocalNotif {
+  levelMed(
+    LocalNotification(
+      id: 0,
+      title: 'Niveau débloqué',
+      body: 'Félicitations tu as débloqué le niveau moyen !',
+    ),
+  ),
+  levelHard(
+    LocalNotification(
+      id: 1,
+      title: 'Niveau débloqué',
+      body: 'Félicitations tu as débloqué le niveau difficile !',
+    ),
+  );
+
+  final LocalNotification notif;
+  const LocalNotif(this.notif);
 }

@@ -2,6 +2,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/extensions.dart';
 
 /** UI USER */
 
@@ -81,6 +82,28 @@ class UiUser extends Equatable {
       );
 
   bool get isAnonymous => userName.isEmpty;
+
+  (bool, int?) get levelMedUnlocked {
+    int? delta;
+
+    final List<UiAnsweredQuestions> condition = questions
+        .where((q) => q.level == Level.easy && q.isRightAnswer)
+        .toList();
+
+    if (condition.length < 3) delta = 3 - condition.length;
+    return (delta.isNull, delta);
+  }
+
+  (bool, int?) get levelHardUnlocked {
+    int? delta;
+
+    final List<UiAnsweredQuestions> condition = questions
+        .where((q) => q.level == Level.medium && q.isRightAnswer)
+        .toList();
+
+    if (condition.length < 10) delta = 10 - condition.length;
+    return (delta.isNull, delta);
+  }
 }
 
 /** UI GYPSE SETTINGS */

@@ -69,7 +69,60 @@ class InitScreen extends HookConsumerWidget {
           .setBool(Level.hard.name, user.levelHardUnlocked.$1);
 
       ref.read(userProvider.notifier).setCurrentUser(user);
-      ref.read(gameStateNotifierProvider.notifier).setSettings(user.settings);
+
+      if (user.settings.level == Level.easy) {
+        ref.read(gameStateNotifierProvider.notifier).setSettings(user.settings);
+      }
+
+      if (user.settings.level == Level.medium) {
+        if (user.levelMedUnlocked.$1) {
+          ref
+              .read(gameStateNotifierProvider.notifier)
+              .setSettings(user.settings);
+        } else {
+          user.settings = UiGypseSettings(
+            level: Level.easy,
+            time: user.settings.time,
+          );
+
+          ref
+              .read(gameStateNotifierProvider.notifier)
+              .setSettings(user.settings);
+          Future(() =>
+              ref.read(onUserChangedUseCaseProvider).invoke(context, user));
+        }
+      }
+
+      if (user.settings.level == Level.hard) {
+        if (user.levelHardUnlocked.$1) {
+          ref
+              .read(gameStateNotifierProvider.notifier)
+              .setSettings(user.settings);
+        } else {
+          if (user.levelMedUnlocked.$1) {
+            user.settings = UiGypseSettings(
+              level: Level.medium,
+              time: user.settings.time,
+            );
+
+            ref
+                .read(gameStateNotifierProvider.notifier)
+                .setSettings(user.settings);
+            Future(() =>
+                ref.read(onUserChangedUseCaseProvider).invoke(context, user));
+          } else {
+            user.settings = UiGypseSettings(
+              level: Level.easy,
+              time: user.settings.time,
+            );
+            ref
+                .read(gameStateNotifierProvider.notifier)
+                .setSettings(user.settings);
+            Future(() =>
+                ref.read(onUserChangedUseCaseProvider).invoke(context, user));
+          }
+        }
+      }
     }
 
     Future<List<dynamic>> initFutureGroup() async {

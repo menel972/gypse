@@ -1,12 +1,14 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/common/notifications/local_notification.dart';
+import 'package:gypse/common/utils/gypse_router.dart';
 
 class LocalNotificationService {
-  static final LocalNotificationService _localNotificationService =
+  static LocalNotificationService _localNotificationService() =>
       LocalNotificationService._internal();
 
   factory LocalNotificationService() {
-    return _localNotificationService;
+    return _localNotificationService();
   }
   LocalNotificationService._internal();
 
@@ -28,6 +30,9 @@ class LocalNotificationService {
     );
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
+      onDidReceiveNotificationResponse: (details) {
+        notifiRedirection(details.payload!);
+      },
     );
   }
 
@@ -39,5 +44,9 @@ class LocalNotificationService {
       null,
       payload: notif.payload,
     );
+  }
+
+  Future notifiRedirection(String payload) async {
+    ctx!.go(payload);
   }
 }

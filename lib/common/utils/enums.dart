@@ -263,19 +263,23 @@ enum RewardKey {
   final String id;
   final int condition;
   const RewardKey(this.id, this.condition);
+}
+
 enum LocalNotif {
   levelMed(
     LocalNotification(
       id: 0,
-      title: 'Niveau débloqué',
-      body: 'Félicitations tu as débloqué le niveau moyen !',
+      title: 'Niveau moyen débloqué !',
+      body: 'Va vite dans les réglages et augmente la difficulté.',
+      payload: '/settings/game',
     ),
   ),
   levelHard(
     LocalNotification(
       id: 1,
-      title: 'Niveau débloqué',
-      body: 'Félicitations tu as débloqué le niveau difficile !',
+      title: 'Niveau difficile débloqué !',
+      body: 'Va vite dans les réglages et augmente la difficulté.',
+      payload: '/settings/game',
     ),
   );
 

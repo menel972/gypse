@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/common/notifications/local_notification_service.dart';
 import 'package:gypse/common/style/theme.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/gypse_router.dart';
@@ -33,6 +34,8 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+
+  LocalNotificationService().init();
 
   /// Start app
   runApp(const riverpod.ProviderScope(child: MyApp()));

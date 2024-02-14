@@ -4,6 +4,7 @@ import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
+import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
@@ -23,6 +24,9 @@ class GameSettings extends HookConsumerWidget {
 
     onUserChangedUseCase(BuildContext context, UiUser user) =>
         ref.read(onUserChangedUseCaseProvider).invoke(context, user);
+
+    // Reset the recap session state in case of click on notification
+    Future(() => ref.invalidate(recapSessionStateNotifierProvider));
 
     return PopScope(
       canPop: false,
@@ -54,16 +58,9 @@ class GameSettings extends HookConsumerWidget {
                   : Dimensions.xs(context).spaceH();
             },
             itemBuilder: (context, index) => [
-              Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface.withOpacity(0.1),
-                  border: Border.all(
-                    color: const Color.fromRGBO(70, 96, 192, 1),
-                    width: 2,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                ),
-                padding: Dimensions.xxs(context).pad(),
+              GypseContainer(
+                context,
+                pad: Dimensions.xxs(context).pad(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -73,16 +70,9 @@ class GameSettings extends HookConsumerWidget {
                   ],
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface.withOpacity(0.1),
-                  border: Border.all(
-                    color: const Color.fromRGBO(70, 96, 192, 1),
-                    width: 2,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                ),
-                padding: Dimensions.xxs(context).pad(),
+              GypseContainer(
+                context,
+                pad: Dimensions.xxs(context).pad(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

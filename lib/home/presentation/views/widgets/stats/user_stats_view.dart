@@ -39,7 +39,7 @@ class UserStatsView extends HookConsumerWidget {
     return Center(
       child: Padding(
         padding: EdgeInsets.only(
-          top: Dimensions.xs(context).height,
+          top: Dimensions.screen(context).height * 0.07,
           left: Dimensions.xxs(context).width,
           right: Dimensions.xxs(context).width,
         ),

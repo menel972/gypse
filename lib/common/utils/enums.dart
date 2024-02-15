@@ -1,3 +1,4 @@
+library;
 /** LOGIN STATE */
 
 import 'package:gypse/common/notifications/local_notification.dart';
@@ -206,6 +207,7 @@ enum Screen {
   homeView('/home'),
   gameView('/game'),
   booksView('/books'),
+  tutorialView('tutorial'),
   settingsView('/settings'),
   gameSettings('game'),
   profileSettings('profile'),

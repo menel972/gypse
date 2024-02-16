@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -66,7 +67,10 @@ class TutorialScreen extends HookConsumerWidget {
               }
             }
           },
-          icon: isLastIndex ? Icons.check : Icons.keyboard_arrow_right,
+          icon: SvgPicture.asset(
+            isLastIndex ? GypseIcon.check.path : GypseIcon.arrowRight.path,
+            width: Dimensions.iconL(context).width,
+          ),
         ),
       ),
       appBar: AppBar(

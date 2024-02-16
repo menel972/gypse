@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -49,7 +50,7 @@ class LevelSettings extends HookConsumerWidget {
                   style: GypseFont.m(),
                 )
               : Wrap(
-                  spacing: Dimensions.xxxs(context).width,
+                  spacing: Dimensions.xxs(context).width,
                   children: [
                     Text(
                       'Moyen',
@@ -59,12 +60,15 @@ class LevelSettings extends HookConsumerWidget {
                               .onPrimary
                               .withOpacity(0.5)),
                     ),
-                    Icon(
-                      Icons.lock,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withOpacity(0.4),
+                    SvgPicture.asset(GypseIcon.lock.path,
+                        width: Dimensions.iconXS(context).width,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context)
+                              .colorScheme
+                              .onPrimary
+                              .withOpacity(0.5),
+                          BlendMode.srcIn,
+                        )
                     ),
                   ],
                 ),
@@ -96,7 +100,7 @@ class LevelSettings extends HookConsumerWidget {
             style: GypseFont.m(),
                 )
               : Wrap(
-                  spacing: Dimensions.xxxs(context).width,
+                  spacing: Dimensions.xxs(context).width,
                   children: [
                     Text(
                       'Difficile',
@@ -106,12 +110,15 @@ class LevelSettings extends HookConsumerWidget {
                               .onPrimary
                               .withOpacity(0.5)),
                     ),
-                    Icon(
-                      Icons.lock,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withOpacity(0.4),
+                    SvgPicture.asset(GypseIcon.lock.path,
+                        width: Dimensions.iconXS(context).width,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context)
+                              .colorScheme
+                              .onPrimary
+                              .withOpacity(0.5),
+                          BlendMode.srcIn,
+                        )
                     ),
                   ],
           ),

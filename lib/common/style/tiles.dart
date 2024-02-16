@@ -1,7 +1,9 @@
 // ignore_for_file: overridden_fields
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 
@@ -19,7 +21,6 @@ class GypseRadioButton extends RadioListTile {
     required this.textTitle,
     this.textSubTitle = '',
   });
-
 
   @override
   bool? get dense => true;
@@ -56,11 +57,11 @@ class AnswerPropositionTile extends ListTile {
   final Color backgroundColor;
   final Color borderColor;
   final bool isSelected;
-  final IconData? icon;
+  final String? icon;
 
   const AnswerPropositionTile(
     this.context, {
-    super.key, 
+    super.key,
     required this.answer,
     required this.index,
     required super.enabled,
@@ -73,24 +74,24 @@ class AnswerPropositionTile extends ListTile {
   });
   const AnswerPropositionTile.valid(
     this.context, {
-    super.key, 
+    super.key,
     required this.answer,
     required this.index,
     super.enabled = false,
     this.isSelected = true,
-    this.icon = Icons.check_circle_outline,
+    this.icon = 'assets/icons/fi-rr-check.svg',
     this.textColor = const Color.fromRGBO(255, 238, 221, 1),
     this.backgroundColor = const Color.fromRGBO(207, 109, 18, 1),
     this.borderColor = const Color.fromRGBO(255, 238, 221, 1),
   });
   const AnswerPropositionTile.error(
     this.context, {
-    super.key, 
+    super.key,
     required this.answer,
     required this.index,
     super.enabled = false,
     this.isSelected = true,
-    this.icon = Icons.highlight_off,
+    this.icon = 'assets/icons/fi-rr-cross-circle.svg',
     this.textColor = const Color.fromRGBO(176, 0, 32, 1),
     this.backgroundColor = const Color.fromRGBO(255, 238, 221, 1),
     this.borderColor = const Color.fromRGBO(176, 0, 32, 1),
@@ -113,9 +114,10 @@ class AnswerPropositionTile extends ListTile {
   @override
   Widget? get trailing => icon.isNull
       ? null
-      : Icon(
-          icon,
-          color: textColor,
+      : SvgPicture.asset(
+          icon!,
+          width: Dimensions.iconXS(context).width,
+          colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
         );
 
   @override

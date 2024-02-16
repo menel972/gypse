@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
@@ -30,9 +31,15 @@ class TimeSettings extends HookConsumerWidget {
             style: GypseFont.m(),
           ),
           subtitle: const Text('30 secondes'),
-          trailing: Icon(
-            Icons.timer_sharp,
-            size: Dimensions.xs(context).width,
+          trailing: SvgPicture.asset(
+            GypseIcon.timeEasy.path,
+            colorFilter: ColorFilter.mode(
+              time == Time.easy
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.onPrimary,
+              BlendMode.srcIn,
+            ),
+            width: Dimensions.iconS(context).width,
           ),
           selected: time == Time.easy,
           selectedColor: Theme.of(context).colorScheme.secondary,
@@ -47,9 +54,15 @@ class TimeSettings extends HookConsumerWidget {
             style: GypseFont.m(),
           ),
           subtitle: const Text('20 secondes'),
-          trailing: Icon(
-            Icons.timer_sharp,
-            size: Dimensions.xs(context).width,
+          trailing: SvgPicture.asset(
+            GypseIcon.timeMedium.path,
+            colorFilter: ColorFilter.mode(
+              time == Time.medium
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.onPrimary,
+              BlendMode.srcIn,
+            ),
+            width: Dimensions.iconS(context).width,
           ),
           selected: time == Time.medium,
           selectedColor: Theme.of(context).colorScheme.secondary,
@@ -64,9 +77,15 @@ class TimeSettings extends HookConsumerWidget {
             style: GypseFont.m(),
           ),
           subtitle: const Text('12 secondes'),
-          trailing: Icon(
-            Icons.timer_sharp,
-            size: Dimensions.xs(context).width,
+          trailing: SvgPicture.asset(
+            GypseIcon.timeHard.path,
+            colorFilter: ColorFilter.mode(
+              time == Time.hard
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.onPrimary,
+              BlendMode.srcIn,
+            ),
+            width: Dimensions.iconS(context).width,
           ),
           selected: time == Time.hard,
           selectedColor: Theme.of(context).colorScheme.secondary,

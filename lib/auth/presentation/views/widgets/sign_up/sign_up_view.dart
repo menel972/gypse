@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
@@ -96,7 +97,10 @@ class SignUpView extends HookConsumerWidget {
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Nom d\'utilisateur',
-                suffixIcon: Icons.person_outline.show(),
+                suffixIcon: SvgPicture.asset(
+                  GypseIcon.user.path,
+                  fit: BoxFit.scaleDown,
+                ),
               ),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.name,
@@ -119,7 +123,10 @@ class SignUpView extends HookConsumerWidget {
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Email',
-                suffixIcon: Icons.alternate_email.show(),
+                suffixIcon: SvgPicture.asset(
+                  GypseIcon.at.path,
+                  fit: BoxFit.scaleDown,
+                ),
               ),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
@@ -146,8 +153,14 @@ class SignUpView extends HookConsumerWidget {
                       .read(signUpCredentialsStateNotifierProvider.notifier)
                       .onPasswordVisibilityChanged(),
                   icon: credentials.isPasswordHidden
-                      ? Icons.remove_red_eye_outlined.show()
-                      : Icons.visibility_off_outlined.show(),
+                      ? SvgPicture.asset(
+                          GypseIcon.eye.path,
+                          fit: BoxFit.scaleDown,
+                        )
+                      : SvgPicture.asset(
+                          GypseIcon.eyeOff.path,
+                          fit: BoxFit.scaleDown,
+                        ),
                 ),
               ),
               textInputAction: TextInputAction.done,

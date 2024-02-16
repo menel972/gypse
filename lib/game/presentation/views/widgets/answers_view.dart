@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/user_provider.dart';
@@ -8,6 +9,7 @@ import 'package:gypse/common/rewards/rewards_service.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/tiles.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
@@ -153,7 +155,10 @@ class AnswersView extends HookConsumerWidget {
                             .clearSelectedIndex();
                         ref.read(gameStateNotifierProvider.notifier).restart();
                       },
-                      icon: Icons.keyboard_arrow_right,
+                      icon: SvgPicture.asset(
+                        GypseIcon.arrowRight.path,
+                        width: Dimensions.iconL(context).width,
+                      ),
                     ),
                   ],
                 ),

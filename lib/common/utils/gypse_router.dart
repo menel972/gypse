@@ -11,6 +11,7 @@ import 'package:gypse/settings/presentation/views/settings_screen.dart';
 import 'package:gypse/settings/presentation/views/widgets/about_gypse/about_gypse.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/game_settings.dart';
 import 'package:gypse/settings/presentation/views/widgets/profile_settings/profile_settings.dart';
+import 'package:gypse/tutorial/presentation/views/tutorial_screen.dart';
 
 ///## Gypse navigation system <i><small>(using [GoRouter])</small></i>
 ///
@@ -51,6 +52,10 @@ GoRouter gypseRouter = GoRouter(
         GoRoute(
           path: Screen.gameSettings.path,
           builder: (context, state) => const GameSettings(),
+        ),
+        GoRoute(
+          path: Screen.tutorialView.path,
+          builder: (context, state) => TutorialScreen(),
         ),
         GoRoute(
           path: Screen.profileSettings.path,

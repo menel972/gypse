@@ -165,10 +165,14 @@ class InitScreen extends HookConsumerWidget {
             // NOTE : On Success
             if (snapshot.hasData) {
               if (fromAccountCreation) {
-                GypseDialog(
-                  context,
-                  dismissible: false,
-                  child: const WelcomeDialog(),
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (timeStamp) {
+                    GypseDialog(
+                      context,
+                      dismissible: false,
+                      child: const WelcomeDialog(),
+                    );
+                  },
                 );
               } else {
                 Future(() => context.go(Screen.homeView.path));

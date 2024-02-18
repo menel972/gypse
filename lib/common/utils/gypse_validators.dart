@@ -24,25 +24,25 @@ String? matchEmail(String value) {
 ///### Whether a String is a password
 ///Returns an error message if test negative.
 String? matchPassword(String value) {
-  RegExp majExp = RegExp(r"^(?=.*?[A-Z])");
+  // RegExp majExp = RegExp(r"^(?=.*?[A-Z])");
   RegExp minExp = RegExp(r"^(?=.*?[a-z])");
   RegExp numExp = RegExp(r"^(?=.*?[0-9])");
-  RegExp speExp = RegExp(r"^(?=.*?[#?!@$ %^&*_-])");
+  // RegExp speExp = RegExp(r"^(?=.*?[#?!@$ %^&*_-])");
 
-  if (!majExp.hasMatch(value)) {
-    return 'Il manque au moins une majuscule.';
-  }
+  // if (!majExp.hasMatch(value)) {
+  //   return 'Il manque au moins une majuscule.';
+  // }
   if (!minExp.hasMatch(value)) {
     return 'Il manque au moins une minuscule.';
   }
   if (!numExp.hasMatch(value)) {
     return 'Il manque au moins un chiffre.';
   }
-  if (!speExp.hasMatch(value)) {
-    return 'Il manque au moins un caractère spécial.';
-  }
-  if (value.length < 8) {
-    num delta = 8 - value.length;
+  // if (!speExp.hasMatch(value)) {
+  //   return 'Il manque au moins un caractère spécial.';
+  // }
+  if (value.length < 6) {
+    num delta = 6 - value.length;
     return 'Il manque au moins $delta caractères - min 8';
   }
   return null;

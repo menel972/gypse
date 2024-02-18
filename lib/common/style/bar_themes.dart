@@ -50,24 +50,12 @@ class GypseBottomBarTheme extends BottomNavigationBarThemeData {
 
   @override
   Color? get selectedItemColor => const Color.fromRGBO(207, 109, 18, 1);
-
-  @override
-  IconThemeData? get selectedIconTheme => const IconThemeData(
-        color: Color.fromRGBO(207, 109, 18, 1),
-        size: 30,
-      );
-
+  
   @override
   TextStyle? get selectedLabelStyle => const GypseFont.xs();
 
   @override
   bool? get showUnselectedLabels => false;
-
-  @override
-  IconThemeData? get unselectedIconTheme => const IconThemeData(
-        color: Color.fromRGBO(10, 35, 128, 1),
-        size: 25,
-      );
 
   @override
   Color? get backgroundColor => Colors.white;

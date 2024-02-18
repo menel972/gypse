@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/utils/dimensions.dart';
@@ -47,10 +48,12 @@ class SettingsScreen extends HookConsumerWidget {
                       );
                   context.go(Screen.homeView.path);
                 },
-                icon: Icon(
-                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                  semanticLabel: "Retour vers l'accueil",
-                  color: Theme.of(context).colorScheme.onBackground,
+                icon: SvgPicture.asset(
+                  Platform.isIOS
+                      ? GypseIcon.arrowLeft.path
+                      : GypseIcon.arrowLeftAndroid.path,
+                  semanticsLabel: "Retour vers l'accueil",
+                  width: Dimensions.iconM(context).width,
                 ),
                 iconSize: Dimensions.s(context).width * 0.6,
                 highlightColor:

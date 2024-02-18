@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
@@ -47,10 +48,11 @@ class AboutGypse extends HookConsumerWidget {
                   initialValue: 'Nous contacter',
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      suffix: Icon(
-                    Icons.mail_outline,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  )),
+                    suffix: SvgPicture.asset(
+                      GypseIcon.mail.path,
+                      width: Dimensions.iconXS(context).width,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -67,10 +69,11 @@ class AboutGypse extends HookConsumerWidget {
                   initialValue: 'Conditions d\'utilisation',
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      suffix: Icon(
-                    Icons.info_outline,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  )),
+                    suffix: SvgPicture.asset(
+                      GypseIcon.info.path,
+                      width: Dimensions.iconXS(context).width,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -87,10 +90,11 @@ class AboutGypse extends HookConsumerWidget {
                   initialValue: 'Politique de confidentialité',
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      suffix: Icon(
-                    Icons.info_outline,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  )),
+                    suffix: SvgPicture.asset(
+                      GypseIcon.info.path,
+                      width: Dimensions.iconXS(context).width,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -107,10 +111,11 @@ class AboutGypse extends HookConsumerWidget {
                   initialValue: 'Mentions légales',
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      suffix: Icon(
-                    Icons.info_outline,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  )),
+                    suffix: SvgPicture.asset(
+                      GypseIcon.info.path,
+                      width: Dimensions.iconXS(context).width,
+                    ),
+                  ),
                 ),
               ),
             ),

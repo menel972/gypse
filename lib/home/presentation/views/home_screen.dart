@@ -2,6 +2,7 @@
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:games_services/games_services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
@@ -81,17 +82,16 @@ class HomeScreen extends HookConsumerWidget {
                       top: 0,
                       right: Dimensions.xxs(context).width,
                       child: Wrap(
-                        spacing: Dimensions.xxxs(context).width,
+                        spacing: Dimensions.xs(context).width,
                         children: [
                           IconButton(
                             onPressed: () async {
                               Achievements.showAchievements();
                             },
-                            icon: Icon(
-                              Icons.emoji_events_outlined,
-                              color: Theme.of(context).colorScheme.onBackground,
-                              size: Dimensions.screen(context).width * 0.08,
-                              semanticLabel: "Rewards",
+                            icon: SvgPicture.asset(
+                              GypseIcon.trophy.path,
+                              semanticsLabel: "Récompenses",
+                              height: Dimensions.iconS(context).height,
                             ),
                             highlightColor: Theme.of(context)
                                 .colorScheme
@@ -105,11 +105,10 @@ class HomeScreen extends HookConsumerWidget {
                                   .invoke(cta: 'settings');
                               context.go(Screen.settingsView.path);
                             },
-                            icon: Icon(
-                              Icons.settings_outlined,
-                              color: Theme.of(context).colorScheme.onBackground,
-                              size: Dimensions.screen(context).width * 0.08,
-                              semanticLabel: "Paramètres",
+                            icon: SvgPicture.asset(
+                              GypseIcon.settings.path,
+                              semanticsLabel: "Paramètres",
+                              height: Dimensions.iconS(context).height,
                             ),
                             highlightColor: Theme.of(context)
                                 .colorScheme

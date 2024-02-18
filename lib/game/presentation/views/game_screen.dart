@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/style/dialogs.dart';
@@ -101,9 +102,12 @@ class GameScreen extends HookConsumerWidget {
                           ref.read(gameStateNotifierProvider.notifier).resume(),
                       child: QuitDialog(),
                     ),
-                    icon: Icon(
-                      Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                      semanticLabel: "Retour vers l'accueil",
+                    icon: SvgPicture.asset(
+                      Platform.isIOS
+                          ? GypseIcon.arrowLeft.path
+                          : GypseIcon.arrowLeftAndroid.path,
+                      semanticsLabel: "Quitter la partie",
+                      width: Dimensions.iconM(context).width,
                     ),
                     iconSize: Dimensions.s(context).width * 0.6,
                     highlightColor: Theme.of(context)

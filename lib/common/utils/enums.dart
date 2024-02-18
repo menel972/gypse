@@ -288,3 +288,32 @@ enum LocalNotif {
   final LocalNotification notif;
   const LocalNotif(this.notif);
 }
+
+/// Enum representing Gypse icons.
+enum GypseIcon {
+  settings('assets/icons/fi-rr-settings.svg'),
+  settingsSlider('assets/icons/fi-rr-settings-sliders.svg'),
+  check('assets/icons/fi-rr-check.svg'),
+  crossCircle('assets/icons/fi-rr-cross-circle.svg'),
+  search('assets/icons/fi-rr-search.svg'),
+  mail('assets/icons/fi-rr-envelope.svg'),
+  at('assets/icons/fi-rr-at.svg'),
+  lock('assets/icons/fi-rr-lock.svg'),
+  stats('assets/icons/fi-rr-stats.svg'),
+  timeEasy('assets/icons/fi-rr-time-quarter-to.svg'),
+  timeMedium('assets/icons/fi-rr-time-half-past.svg'),
+  timeHard('assets/icons/fi-rr-time-quarter-past.svg'),
+  info('assets/icons/fi-rr-info.svg'),
+  book('assets/icons/fi-rr-book-alt.svg'),
+  trophy('assets/icons/fi-rr-trophy.svg'),
+  home('assets/icons/fi-rr-home.svg'),
+  user('assets/icons/fi-rr-user.svg'),
+  eye('assets/icons/fi-rr-eye.svg'),
+  eyeOff('assets/icons/fi-rr-eye-crossed.svg'),
+  arrowLeft('assets/icons/fi-rr-angle-small-left.svg'),
+  arrowLeftAndroid('assets/icons/fi-rr-arrow-small-left.svg'),
+  arrowRight('assets/icons/fi-rr-angle-small-right.svg');
+
+  final String path;
+  const GypseIcon(this.path);
+}

@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -84,6 +86,8 @@ class HomeScreen extends HookConsumerWidget {
                       child: Wrap(
                         spacing: Dimensions.xs(context).width,
                         children: [
+
+                          if (Platform.isIOS)
                           IconButton(
                             onPressed: () async {
                               Achievements.showAchievements();

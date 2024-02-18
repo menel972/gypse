@@ -2,6 +2,7 @@
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:games_services/games_services.dart';
 import 'package:go_router/go_router.dart';
@@ -145,7 +146,11 @@ class InitScreen extends HookConsumerWidget {
       return Container();
     } else {
       'User logged !'.log(tag: 'Init - User Check');
-      GameAuth.signIn();
+      try {
+        GamesServices.signIn();
+      } on PlatformException catch (e) {
+        e.log(tag: 'GamesServices.signIn');
+      }
 
       return PopScope(
         canPop: false,

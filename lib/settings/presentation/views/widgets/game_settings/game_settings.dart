@@ -86,7 +86,16 @@ class GameSettings extends HookConsumerWidget {
                   Expanded(
                     child: GypseElevatedButton(
                       context,
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () {
+                        if (ref.watch(initStateNotifierProvider)) {
+                          Future(() => context.go(Screen.homeView.path));
+                          ref
+                              .read(initStateNotifierProvider.notifier)
+                              .switchLoginMethod();
+                        } else {
+                          Navigator.of(context).pop();
+                        }
+                      },
                       label: 'Annuler',
                       backgroundColor: Theme.of(context).colorScheme.surface,
                       textColor: Theme.of(context).colorScheme.primary,

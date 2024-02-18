@@ -24,9 +24,14 @@ class LocalNotificationService {
       requestAlertPermission: true,
     );
 
+    //Local notifications initialization Settings for Android devices
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('appicon_gypse');
+
     const InitializationSettings initializationSettings =
         InitializationSettings(
       iOS: initializationSettingsIOS,
+      android: initializationSettingsAndroid,
     );
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
@@ -41,7 +46,15 @@ class LocalNotificationService {
       notif.id,
       notif.title,
       notif.body,
-      null,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          '${notif.id}',
+          notif.title!,
+          importance: Importance.max,
+          priority: Priority.high,
+          icon: 'appicon_gypse',
+        ),
+      ),
       payload: notif.payload,
     );
   }

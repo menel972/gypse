@@ -23,11 +23,11 @@ class TutorialScreen extends HookConsumerWidget {
   TutorialScreen({super.key});
 
   static List<String> tutos = [
-    '$imagesPath/tuto_carousel.png',
-    '$imagesPath/tuto_random.png',
-    '$imagesPath/tuto_settings.png',
-    '$imagesPath/tuto_game.png',
-    '$imagesPath/tuto_verse.png',
+    '$imagesPath/tuto_carousel.svg',
+    '$imagesPath/tuto_random.svg',
+    '$imagesPath/tuto_settings.svg',
+    '$imagesPath/tuto_game.svg',
+    '$imagesPath/tuto_verse.svg',
   ];
 
   final CarouselController swipeController = CarouselController();
@@ -106,10 +106,16 @@ class TutorialScreen extends HookConsumerWidget {
       ),
       body: FlutterCarousel.builder(
         itemCount: tutos.length,
-        itemBuilder: (context, index, realIndex) => Image.asset(
+        itemBuilder: (context, index, realIndex) =>
+            // Image.asset(
+            //   tutos[index],
+            //   width: Dimensions.screen(context).width,
+            //   // height: Dimensions.screen(context).height,
+            //   fit: BoxFit.cover,
+            // ),
+            SvgPicture.asset(
           tutos[index],
           width: Dimensions.screen(context).width,
-          // height: Dimensions.screen(context).height,
           fit: BoxFit.cover,
         ),
         options: TutorialOptions(

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/anonymous_dialogs.dart';
@@ -55,11 +56,36 @@ class SettingsView extends HookConsumerWidget {
                 initialValue: 'Paramètres de jeu',
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                  suffix: Icon(
-                    Icons.gamepad_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                  suffix: SvgPicture.asset(
+                    GypseIcon.settingsSlider.path,
+                    semanticsLabel: "Paramètres de jeu (icon)",
+                    width: Dimensions.iconXS(context).width,
                   ),
                 ),
+              ),
+            ),
+          ),
+        ),
+        Dimensions.xxs(context).spaceH(),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => context
+                .go('${Screen.settingsView.path}/${Screen.tutorialView.path}'),
+            splashColor: Theme.of(context).colorScheme.secondary,
+            child: Semantics(
+              label: 'Revoir le tutoriel de GYPSE (bouton)',
+              child: TextFormField(
+                enabled: false,
+                style:
+                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+                initialValue: 'Comment jouer',
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    suffix: Icon(
+                  Icons.question_mark_outlined,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )),
               ),
             ),
           ),
@@ -91,9 +117,10 @@ class SettingsView extends HookConsumerWidget {
                 initialValue: 'Voir mon profil',
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                  suffix: Icon(
-                    Icons.person_outline,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                  suffix: SvgPicture.asset(
+                    GypseIcon.user.path,
+                    semanticsLabel: "Voir mon profil (icon)",
+                    width: Dimensions.iconXS(context).width,
                   ),
                 ),
               ),
@@ -116,10 +143,12 @@ class SettingsView extends HookConsumerWidget {
                 initialValue: 'À propos de GYPSE',
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                    suffix: Icon(
-                  Icons.info_outline,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                )),
+                  suffix: SvgPicture.asset(
+                    GypseIcon.info.path,
+                    semanticsLabel: "À propos de GYPSE (icon)",
+                    width: Dimensions.iconXS(context).width,
+                  ),
+                ),
               ),
             ),
           ),

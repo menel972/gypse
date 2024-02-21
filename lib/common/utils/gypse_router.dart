@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/common/utils/enums.dart';
@@ -10,6 +11,7 @@ import 'package:gypse/settings/presentation/views/settings_screen.dart';
 import 'package:gypse/settings/presentation/views/widgets/about_gypse/about_gypse.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/game_settings.dart';
 import 'package:gypse/settings/presentation/views/widgets/profile_settings/profile_settings.dart';
+import 'package:gypse/tutorial/presentation/views/tutorial_screen.dart';
 
 ///## Gypse navigation system <i><small>(using [GoRouter])</small></i>
 ///
@@ -36,7 +38,8 @@ GoRouter gypseRouter = GoRouter(
         path: Screen.homeView.path, builder: (context, state) => HomeScreen()),
     // NOTE : BOOK SCREEN
     GoRoute(
-        path: Screen.booksView.path, builder: (context, state) => const BookScreen()),
+        path: Screen.booksView.path,
+        builder: (context, state) => const BookScreen()),
     // NOTE : GAME SCREEN
     GoRoute(
         path: '${Screen.gameView.path}/:book',
@@ -49,6 +52,10 @@ GoRouter gypseRouter = GoRouter(
         GoRoute(
           path: Screen.gameSettings.path,
           builder: (context, state) => const GameSettings(),
+        ),
+        GoRoute(
+          path: Screen.tutorialView.path,
+          builder: (context, state) => TutorialScreen(),
         ),
         GoRoute(
           path: Screen.profileSettings.path,
@@ -67,3 +74,5 @@ GoRouter gypseRouter = GoRouter(
     ),
   ],
 );
+
+BuildContext? get ctx => gypseRouter.routerDelegate.navigatorKey.currentContext;

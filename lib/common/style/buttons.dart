@@ -105,7 +105,7 @@ class GypseSmallButton extends ElevatedButton {
 ///Use it for important actions with the least amount of prominence.
 class GypseCircularButton extends ElevatedButton {
   final BuildContext context;
-  final IconData icon;
+  final Widget icon;
   final Color iconColor;
   final Color backgroundColor;
 
@@ -123,7 +123,7 @@ class GypseCircularButton extends ElevatedButton {
   });
 
   @override
-  Widget? get child => Icon(icon, color: iconColor, size: 35);
+  Widget? get child => icon;
 
   @override
   ButtonStyle? get style => ButtonStyle(

@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/cards.dart';
@@ -27,7 +28,7 @@ class BookView extends HookConsumerWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: Dimensions.xs(context).height,
+        top: Dimensions.screen(context).height * 0.07,
         left: Dimensions.xxs(context).width,
         right: Dimensions.xxs(context).width,
       ),
@@ -42,9 +43,9 @@ class BookView extends HookConsumerWidget {
               style: const GypseFont.l(),
               decoration: InputDecoration(
                 labelText: 'Livre...',
-                suffixIcon: Icon(
-                  Icons.search_outlined,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                suffixIcon: SvgPicture.asset(
+                  GypseIcon.search.path,
+                  fit: BoxFit.scaleDown,
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(

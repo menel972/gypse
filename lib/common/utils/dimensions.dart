@@ -38,8 +38,56 @@ class Dimensions extends Size {
   /// ```
   Dimensions.xs(this.context)
       : super(
-          MediaQuery.of(context).size.width * 0.05,
+          MediaQuery.of(context).size.width * 0.055,
           MediaQuery.of(context).size.height * 0.05,
+        );
+
+  ///## Responsive [Size]
+  ///
+  /// Returns **5% of the screen dimensions**.
+  /// ```
+  /// final BuildContext context;
+  /// ```
+  Dimensions.iconXS(this.context)
+      : super(
+          MediaQuery.of(context).size.width * 0.055,
+          MediaQuery.of(context).size.height * 0.055,
+        );
+
+  ///## Responsive [Size]
+  ///
+  /// Returns **6,5% of the screen dimensions**.
+  /// ```
+  /// final BuildContext context;
+  /// ```
+  Dimensions.iconS(this.context)
+      : super(
+          MediaQuery.of(context).size.width * 0.065,
+          MediaQuery.of(context).size.width * 0.065,
+        );
+
+  ///## Responsive [Size]
+  ///
+  /// Returns **7,7% of the screen dimensions**.
+  /// ```
+  /// final BuildContext context;
+  /// ```
+  Dimensions.iconM(this.context)
+      : super(
+          MediaQuery.of(context).size.width * 0.077,
+          MediaQuery.of(context).size.width * 0.077,
+        );
+
+  ///## Responsive [Size]
+  ///
+  /// Returns **8,9% of the screen dimensions**.
+  /// ```
+  /// final BuildContext context;
+  /// ```
+  Dimensions.iconL(this.context)
+      : super(
+          MediaQuery.of(context).size.width * 0.089,
+          MediaQuery.of(context).size.width * 0.089,
         );
 
   ///## Responsive [Size]

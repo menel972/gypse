@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
@@ -72,7 +73,10 @@ class SignInView extends HookConsumerWidget {
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Email',
-                suffixIcon: Icons.alternate_email.show(),
+                suffixIcon: SvgPicture.asset(
+                  GypseIcon.at.path,
+                  fit: BoxFit.scaleDown,
+                ),
               ),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
@@ -99,8 +103,14 @@ class SignInView extends HookConsumerWidget {
                       .read(signInCredentialsStateNotifierProvider.notifier)
                       .onPasswordVisibilityChanged(),
                   icon: credentials.isPasswordHidden
-                      ? Icons.remove_red_eye_outlined.show()
-                      : Icons.visibility_off_outlined.show(),
+                      ? SvgPicture.asset(
+                          GypseIcon.eye.path,
+                          fit: BoxFit.scaleDown,
+                        )
+                      : SvgPicture.asset(
+                          GypseIcon.eyeOff.path,
+                          fit: BoxFit.scaleDown,
+                        ),
                 ),
               ),
               textInputAction: TextInputAction.done,

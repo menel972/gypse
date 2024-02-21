@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Google Play game services IDs. Save this file as res/values/games-ids.xml in your project.-->
+<resources>
+  <!--app_id-->
+  <string name="app_id" translatable="false">635658051968</string>
+  <!--package_name-->
+  <string name="package_name" translatable="false">com.gypse.gypse</string>
+  <!--achievement 2 Cor 6:2-->
+  <string name="achievement_2_cor_62" translatable="false">CgkIgMOwgcASEAIQAg</string>
+</resources>

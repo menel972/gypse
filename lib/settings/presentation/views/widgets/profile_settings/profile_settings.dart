@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
@@ -55,11 +56,12 @@ class ProfileSettings extends HookConsumerWidget {
                 initialValue: user.userName,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                    labelText: 'Nom d\'utilisateur',
-                    suffix: Icon(
-                      Icons.person_outline,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    )),
+                  labelText: 'Nom d\'utilisateur',
+                  suffix: SvgPicture.asset(
+                    GypseIcon.user.path,
+                    width: Dimensions.iconXS(context).width,
+                  ),
+                ),
               ),
             ),
             Dimensions.xxs(context).spaceH(),
@@ -72,11 +74,12 @@ class ProfileSettings extends HookConsumerWidget {
                 initialValue: ref.read(getUserEmailUseCaseProvider).invoke(),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                    labelText: 'Adresse mail',
-                    suffix: Icon(
-                      Icons.alternate_email_outlined,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    )),
+                  labelText: 'Adresse mail',
+                  suffix: SvgPicture.asset(
+                    GypseIcon.at.path,
+                    width: Dimensions.iconXS(context).width,
+                  ),
+                ),
               ),
             ),
             Dimensions.xxs(context).spaceH(),
@@ -106,11 +109,12 @@ class ProfileSettings extends HookConsumerWidget {
                   initialValue: 'Changer de mot de passe',
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      labelText: 'Mot de passe',
-                      suffix: Icon(
-                        Icons.lock_outline,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      )),
+                    labelText: 'Mot de passe',
+                    suffix: SvgPicture.asset(
+                      GypseIcon.lock.path,
+                      width: Dimensions.iconXS(context).width,
+                    ),
+                  ),
                 ),
               ),
             ),

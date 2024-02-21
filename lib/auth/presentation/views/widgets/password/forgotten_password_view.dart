@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/presentation/views/states/auth_state.dart';
 import 'package:gypse/auth/presentation/views/widgets/password/states/forgotten_password_state.dart';
@@ -8,6 +9,7 @@ import 'package:gypse/auth/presentation/views/widgets/states/credentials_state.d
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -48,7 +50,10 @@ class ForgottenPasswordView extends HookConsumerWidget {
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Adresse mail',
-              suffixIcon: Icons.alternate_email.show(),
+              suffixIcon: SvgPicture.asset(
+                GypseIcon.at.path,
+                fit: BoxFit.scaleDown,
+              ),
             ),
             textInputAction: TextInputAction.done,
             keyboardType: TextInputType.emailAddress,

@@ -28,13 +28,13 @@ class WelcomeDialog extends HookConsumerWidget {
         ),
         Dimensions.xs(context).spaceH(),
         Text(
-          'Commence par choisir ton niveau de difficulté.',
+          'Découvre comment jouer à Gypse.',
           style: GypseFont.m(color: Theme.of(context).colorScheme.primary),
           textAlign: TextAlign.center,
         ),
         Dimensions.xs(context).spaceH(),
         Text(
-          'Modifie le à tout moment\ndans les paramètres de jeu ⚙️',
+          'Tu peux revoir le tutoriel à tout moment\ndans les paramètres ⚙️',
           style: GypseFont.s(
             color: Theme.of(context).colorScheme.primary,
             fontStyle: FontStyle.italic,
@@ -48,7 +48,7 @@ class WelcomeDialog extends HookConsumerWidget {
           onPressed: () {
             Navigator.pop(context);
             context
-                .go('${Screen.settingsView.path}/${Screen.gameSettings.path}');
+                .go('${Screen.settingsView.path}/${Screen.tutorialView.path}');
           },
           textColor: Theme.of(context).colorScheme.surface,
           backgroundColor: Theme.of(context).colorScheme.secondary,

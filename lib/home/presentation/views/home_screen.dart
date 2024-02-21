@@ -1,7 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:games_services/games_services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
@@ -60,6 +64,7 @@ class HomeScreen extends HookConsumerWidget {
             : ref.read(homeNavigationStateProvider.notifier).updatePage(0);
       },
       child: Scaffold(
+          extendBody: true,
           body: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -78,22 +83,43 @@ class HomeScreen extends HookConsumerWidget {
                     Positioned(
                       top: 0,
                       right: Dimensions.xxs(context).width,
-                      child: IconButton(
-                        onPressed: () {
-                          ref
-                              .read(logActionUseCaseProvider)
-                              .invoke(cta: 'settings');
-                          context.go(Screen.settingsView.path);
-                        },
-                        icon: Icon(
-                          Icons.settings_outlined,
-                          color: Theme.of(context).colorScheme.onBackground,
-                          semanticLabel: "Paramètres",
-                        ),
-                        highlightColor: Theme.of(context)
-                            .colorScheme
-                            .secondary
-                            .withOpacity(0.2),
+                      child: Wrap(
+                        spacing: Dimensions.xs(context).width,
+                        children: [
+
+                          if (Platform.isIOS)
+                          IconButton(
+                            onPressed: () async {
+                              Achievements.showAchievements();
+                            },
+                            icon: SvgPicture.asset(
+                              GypseIcon.trophy.path,
+                              semanticsLabel: "Récompenses",
+                              height: Dimensions.iconS(context).height,
+                            ),
+                            highlightColor: Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.2),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              ref
+                                  .read(logActionUseCaseProvider)
+                                  .invoke(cta: 'settings');
+                              context.go(Screen.settingsView.path);
+                            },
+                            icon: SvgPicture.asset(
+                              GypseIcon.settings.path,
+                              semanticsLabel: "Paramètres",
+                              height: Dimensions.iconS(context).height,
+                            ),
+                            highlightColor: Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.2),
+                          ),
+                        ],
                       ),
                     ),
                   ],

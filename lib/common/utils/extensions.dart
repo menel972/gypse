@@ -91,6 +91,11 @@ extension Null on Object? {
   bool get isNull => this == null;
 }
 
+extension Value on String? {
+  bool get isNullOrEmpty => this?.isEmpty ?? true;
+  bool get isNotNullOrEmpty => this?.isEmpty ?? false;
+}
+
 ///## Extension on [String]
 ///
 /// Snack adds methods [success] and [failure] that return custom [SnackBar].

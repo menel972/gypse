@@ -1,23 +1,31 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
+import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/game/presentation/views/states/game_states.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NetworkErrorScreen extends HookConsumerWidget {
-  const NetworkErrorScreen({super.key});
+  late UiUser? user;
+
+  NetworkErrorScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(gameStateNotifierProvider.notifier).pause();
+    user = ref.watch(userProvider);
 
     ref.listen(connectivityNotifierProvider, (previous, next) {
       if (next != ConnectivityResult.none) {
-        ref.read(gameStateNotifierProvider.notifier).resume();
-        Navigator.pop(context);
+        user.isNull
+            ? context.go(Screen.authView.path)
+            : context.go(Screen.homeView.path);
       }
     });
 

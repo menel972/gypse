@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/buttons.dart';
@@ -10,6 +11,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -91,8 +93,6 @@ class HomeCarouselCard extends GestureDetector {
 class BookFilterCard extends GestureDetector {
   final BuildContext context;
   final Books book;
-  final double badGames;
-  final double goodGames;
   final bool isEnabled;
   final WidgetRef ref;
 
@@ -100,22 +100,18 @@ class BookFilterCard extends GestureDetector {
     this.context, {
     super.key,
     required this.book,
-    required this.badGames,
-    required this.goodGames,
     required this.isEnabled,
     required this.ref,
   });
 
   @override
   GestureTapCallback? get onTap => () {
-        if (isEnabled) {
-          ref.read(logNavigationUseCaseProvider).invoke(
-                from: Screen.booksView.path,
-                to: Screen.gameView.path,
-                details: book.fr,
-              );
-          context.go('${Screen.gameView.path}/${book.fr}');
-        }
+        ref.read(logNavigationUseCaseProvider).invoke(
+              from: Screen.booksView.path,
+              to: Screen.gameView.path,
+              details: book.fr,
+            );
+        ctx?.go('${Screen.gameView.path}/${book.fr}', extra: !isEnabled);
       };
 
   @override
@@ -154,6 +150,14 @@ class BookFilterCard extends GestureDetector {
             overflow: TextOverflow.ellipsis,
           ),
         ),
+        if (!isEnabled)
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: Dimensions.xs(context).padH(),
+              child: SvgPicture.asset(GypseIcon.refresh.path),
+            ),
+          ),
         Container(
           alignment: Alignment.center,
           decoration: BoxDecoration(

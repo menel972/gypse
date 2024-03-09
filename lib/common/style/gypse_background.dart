@@ -38,8 +38,8 @@ class GypseLoading extends Scaffold {
           children: [
             Expanded(
               child: Image.asset(
-                '$imagesPath/splash_logo.png',
-                width: Dimensions.l(context).width,
+                '$imagesPath/logo_gypse_splash.png',
+                width: Dimensions.xxxl(context).width,
               ),
             ),
             Dimensions.xs(context).padding(Text(

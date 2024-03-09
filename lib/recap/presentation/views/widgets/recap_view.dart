@@ -19,7 +19,7 @@ import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/game/presentation/views/states/game_states.dart';
+import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:gypse/recap/presentation/views/widgets/recap_table_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -107,7 +107,9 @@ class RecapView extends HookConsumerWidget {
                         .updatePage(2);
                     context.go(Screen.homeView.path);
                     Future(() =>
-                        ref.invalidate(recapSessionStateNotifierProvider));
+                        ref
+                        .read(recapSessionStateNotifierProvider.notifier)
+                        .clearState());
                   },
                 ),
               ),
@@ -119,7 +121,9 @@ class RecapView extends HookConsumerWidget {
                 onPressed: () {
                   context.go('${Screen.gameView.path}/ ');
                   Future(
-                      () => ref.invalidate(recapSessionStateNotifierProvider));
+                      () => ref
+                      .read(recapSessionStateNotifierProvider.notifier)
+                      .clearState());
                 },
                 label: 'Nouvelle partie',
                 textColor: Theme.of(context).colorScheme.onSurface,
@@ -131,7 +135,9 @@ class RecapView extends HookConsumerWidget {
                 onPressed: () async {
                   context.go(Screen.homeView.path);
                   Future(
-                      () => ref.invalidate(recapSessionStateNotifierProvider));
+                      () => ref
+                      .read(recapSessionStateNotifierProvider.notifier)
+                      .clearState());
                 },
                 label: 'Accueil',
                 backgroundColor: Theme.of(context).colorScheme.surface,

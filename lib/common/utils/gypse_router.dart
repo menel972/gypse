@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
+import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
 import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
@@ -35,15 +38,23 @@ GoRouter gypseRouter = GoRouter(
     ),
     // NOTE : HOME SCREEN
     GoRoute(
-        path: Screen.homeView.path, builder: (context, state) => HomeScreen()),
+      path: Screen.homeView.path,
+      builder: (context, state) => HomeScreen(),
+    ),
     // NOTE : BOOK SCREEN
     GoRoute(
         path: Screen.booksView.path,
         builder: (context, state) => const BookScreen()),
     // NOTE : GAME SCREEN
     GoRoute(
-        path: '${Screen.gameView.path}/:book',
-        builder: (context, state) => GameScreen(state.pathParameters['book']!)),
+      path: '${Screen.gameView.path}/:book',
+      builder: (context, state) => GameScreen(state.pathParameters['book']!),
+      onExit: (context) async {
+        Future.delayed(
+            1.seconds, () => context.read<GameStateCubit>().dispose());
+        return true;
+      },
+    ),
     // NOTE : Settings SCREEN
     GoRoute(
       path: Screen.settingsView.path,

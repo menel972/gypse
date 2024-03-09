@@ -1,5 +1,8 @@
 name: gypse
-description: Gypse is a captivating Bible quiz mobile application developed to enhance your knowledge of the Bible in an engaging and interactive way. With a user-friendly interface and a range of exciting features, Gypse offers both casual and devoted users a chance to explore the scriptures while having fun.
+description: Gypse is a captivating Bible quiz mobile application developed to
+  enhance your knowledge of the Bible in an engaging and interactive way. With a
+  user-friendly interface and a range of exciting features, Gypse offers both
+  casual and devoted users a chance to explore the scriptures while having fun.
 homepage: https://github.com/menel972/gypse
 
 # The following line prevents the package from being accidentally published to
@@ -18,7 +21,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.6.0
+version: 1.6.1
 
 environment:
   sdk: ">=3.0.0"
@@ -45,20 +48,22 @@ dependencies:
   firebase_storage: ^11.6.0
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.0
+  flutter_bloc: ^8.1.4
   flutter_carousel_widget: ^2.2.0
   flutter_launcher_icons: ^0.13.1
+  flutter_local_notifications: ^16.3.2
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: ^2.3.9
+  flutter_svg: ^2.0.9
+  games_services: ^4.0.0
   go_router: ^13.0.1
   hooks_riverpod: ^2.4.9
   intl: ^0.18.1
-  url_launcher: ^6.2.3
-  shimmer: ^3.0.0
-  games_services: ^4.0.0
   shared_preferences: ^2.2.2
-  flutter_local_notifications: ^16.3.2
-  flutter_svg: ^2.0.9
+  shimmer: ^3.0.0
+  url_launcher: ^6.2.3
 
 dev_dependencies:
   flutter_lints: ^3.0.1
@@ -81,7 +86,6 @@ flutter_icons:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
-
 screenshots:
   description: app icon
   path: "assets/images/appicon_gypse.png"

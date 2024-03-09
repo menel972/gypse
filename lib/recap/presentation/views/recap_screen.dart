@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/strings.dart';
-import 'package:gypse/game/presentation/views/states/game_states.dart';
+import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/recap/presentation/views/widgets/recap_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

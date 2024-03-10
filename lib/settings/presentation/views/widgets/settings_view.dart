@@ -70,30 +70,6 @@ class SettingsView extends HookConsumerWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () => context
-                .go('${Screen.settingsView.path}/${Screen.tutorialView.path}'),
-            splashColor: Theme.of(context).colorScheme.secondary,
-            child: Semantics(
-              label: 'Revoir le tutoriel de GYPSE (bouton)',
-              child: TextFormField(
-                enabled: false,
-                style:
-                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
-                initialValue: 'Comment jouer',
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    suffix: Icon(
-                  Icons.question_mark_outlined,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                )),
-              ),
-            ),
-          ),
-        ),
-        Dimensions.xxs(context).spaceH(),
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
             onTap: () {
               if (anonymous) {
                 GypseDialog(context,
@@ -123,6 +99,30 @@ class SettingsView extends HookConsumerWidget {
                     width: Dimensions.iconXS(context).width,
                   ),
                 ),
+              ),
+            ),
+          ),
+        ),
+        Dimensions.xxs(context).spaceH(),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => context
+                .go('${Screen.settingsView.path}/${Screen.tutorialView.path}'),
+            splashColor: Theme.of(context).colorScheme.secondary,
+            child: Semantics(
+              label: 'Revoir le tutoriel de GYPSE (bouton)',
+              child: TextFormField(
+                enabled: false,
+                style:
+                    GypseFont.s(color: Theme.of(context).colorScheme.secondary),
+                initialValue: 'Comment jouer',
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    suffix: Icon(
+                  Icons.question_mark_outlined,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )),
               ),
             ),
           ),

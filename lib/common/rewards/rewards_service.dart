@@ -7,7 +7,7 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/shared_preferences/shared_preferences_service.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/game/presentation/views/states/game_states.dart';
+import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

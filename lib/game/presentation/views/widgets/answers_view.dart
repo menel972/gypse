@@ -1,173 +1,172 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gypse/auth/presentation/models/ui_user.dart';
-import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
-import 'package:gypse/common/providers/user_provider.dart';
-import 'package:gypse/common/rewards/rewards_service.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/tiles.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
-import 'package:gypse/game/presentation/views/states/answer_ratio_state.dart';
-import 'package:gypse/game/presentation/views/states/game_states.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
+import 'package:gypse/game/presentation/views/states/game_state.dart';
 
-class AnswersView extends HookConsumerWidget {
-  final VoidCallback nextQuestion;
-  final String? filter;
+class AnswersView extends StatelessWidget {
+  const AnswersView({super.key});
 
-  late double ratio;
-  late GameState gameState;
-
-  AnswersView(this.nextQuestion, {this.filter, super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ratio = ref.watch(answerRatioStateProvider);
-    gameState = ref.watch(gameStateNotifierProvider);
-
-    void updateRecap() =>
-        ref.read(recapSessionStateNotifierProvider.notifier).addGame(gameState);
-
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 900),
-      curve: Curves.easeInOut,
-      height: Dimensions.screen(context).height * ratio,
-      width: Dimensions.screen(context).width,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-        color: Theme.of(context).colorScheme.surface.withOpacity(0.8),
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: gameState.settings.level.propositions,
-              padding: Dimensions.xs(context).pad(),
-              separatorBuilder: (context, index) =>
-                  Dimensions.xxxs(context).spaceH(),
-              itemBuilder: (context, index) {
-                UiAnswer answer = gameState.answers[index];
-
-                if (!gameState.selectedAnswers.contains(index)) {
-                  return Material(
-                    borderRadius: BorderRadius.circular(20),
-                    child: AnswerPropositionTile(
-                      context,
-                      answer: answer,
-                      index: index + 1,
-                      enabled: ref
-                          .read(gameStateNotifierProvider.notifier)
-                          .isAnswerEnabled(),
-                      onTap: () {
-                        ref
-                            .read(gameStateNotifierProvider.notifier)
-                            .addSelectedIndex(index);
-                        ref.read(gameStateNotifierProvider.notifier).pause();
-                        ref.read(gameStateNotifierProvider.notifier).pause();
-                      },
+  Widget build(BuildContext context) {
+    return BlocBuilder<GameStateCubit, GameState>(
+      builder: (context, state) {
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 900),
+          curve: Curves.easeInOut,
+          height: Dimensions.screen(context).height * state.ratio,
+          width: Dimensions.screen(context).width,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+            color: Theme.of(context).colorScheme.surface.withOpacity(0.8),
+          ),
+          child: Column(
+            children: [
+              if (state.status == StateStatus.initial ||
+                  state.status == StateStatus.loading)
+                Expanded(
+                  child: Center(
+                    child: SvgPicture.asset(
+                      '$imagesPath/logo_gypse_blue.svg',
+                      height: Dimensions.m(context).height,
+                    ).animate(
+                      onPlay: (controller) => controller.repeat(),
+                      effects: [
+                        ShimmerEffect(
+                          duration: 3.seconds,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ],
                     ),
-                  );
-                }
-
-                if (!answer.isRightAnswer) {
-                  return Material(
-                    borderRadius: BorderRadius.circular(20),
-                    child: AnswerPropositionTile.error(
-                      context,
-                      answer: answer,
-                      index: index + 1,
-                    ),
-                  );
-                }
-                return Material(
-                  borderRadius: BorderRadius.circular(20),
-                  child: AnswerPropositionTile.valid(
-                    context,
-                    answer: answer,
-                    index: index + 1,
                   ),
-                );
-              },
-            ),
-          ),
-          Dimensions.xs(context).paddingW(
-            Visibility(
-              visible: gameState.selectedAnswers.isNotEmpty,
-              child: SafeArea(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: GypseElevatedButton(
-                        context,
-                        onPressed: () => VerseModal(
-                            context,
-                            ref
-                                .read(gameStateNotifierProvider.notifier)
-                                .getRightAnswer()),
-                        label: 'Voir le verset',
-                        textColor: Theme.of(context).colorScheme.primary,
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .surface
-                            .withOpacity(0.2),
-                      ),
-                    ),
-                    Dimensions.xs(context).spaceW(),
-                    GypseCircularButton(
-                      context,
-                      onPressed: () async {
-                        ref
-                            .read(logActionUseCaseProvider)
-                            .invoke(cta: 'next question');
-                        await ref
-                            .read(answerRatioStateProvider.notifier)
-                            .slide();
-
-                        ref
-                            .read(userProvider.notifier)
-                            .updateAnsweredQuestions(UiAnsweredQuestions(
-                              qId: gameState.currentQuestion.uId,
-                              level: gameState.settings.level,
-                              isRightAnswer: gameState.isRight,
-                              time: gameState.time,
-                            ));
-                        await RewardsService().onQuestionAnswered(
-                          settings: gameState.settings,
-                          isCorrect: gameState.isRight,
-                          filter: filter,
-                        );
-
-                        updateRecap();
-
-                        nextQuestion();
-
-                        ref
-                            .read(gameStateNotifierProvider.notifier)
-                            .clearSelectedIndex();
-                        ref.read(gameStateNotifierProvider.notifier).restart();
-                      },
-                      icon: SvgPicture.asset(
-                        GypseIcon.arrowRight.path,
-                        width: Dimensions.iconL(context).width,
-                      ),
-                    ),
-                  ],
                 ),
-              ),
-            ),
+              if (state.status == StateStatus.partialLoading ||
+                  state.status == StateStatus.finish)
+                Expanded(
+                  child: Center(
+                    child: SvgPicture.asset(
+                      '$imagesPath/logo_gypse_blue.svg',
+                      height: Dimensions.m(context).height,
+                    ).animate(effects: [
+                      FadeEffect(
+                        duration: 1100.ms,
+                        begin: 0.8,
+                        end: 0,
+                      )
+                    ]),
+                  ),
+                ),
+              if (state.status != StateStatus.initial &&
+                  state.status != StateStatus.loading &&
+                  state.status != StateStatus.partialLoading &&
+                  state.status != StateStatus.finish) ...[
+                Expanded(
+                  child: ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.settings.level.propositions,
+                    padding: Dimensions.xs(context).pad(),
+                    separatorBuilder: (context, index) =>
+                        Dimensions.xxxs(context).spaceH(),
+                    itemBuilder: (context, index) {
+                      UiAnswer answer = state.answers[index];
+
+                      if (!state.selectedAnswers.contains(index)) {
+                        return Material(
+                          borderRadius: BorderRadius.circular(20),
+                          child: AnswerPropositionTile(
+                            context,
+                            answer: answer,
+                            index: index + 1,
+                            enabled: state.selectedAnswers.isEmpty,
+                            onTap: () {
+                              context
+                                  .read<GameStateCubit>()
+                                  .saveGameState(index);
+                            },
+                          ),
+                        );
+                      }
+
+                      if (!answer.isRightAnswer) {
+                        return Material(
+                          borderRadius: BorderRadius.circular(20),
+                          child: AnswerPropositionTile.error(
+                            context,
+                            answer: answer,
+                            index: index + 1,
+                          ),
+                        );
+                      }
+                      return Material(
+                        borderRadius: BorderRadius.circular(20),
+                        child: AnswerPropositionTile.valid(
+                          context,
+                          answer: answer,
+                          index: index + 1,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Dimensions.xs(context).paddingW(
+                  Visibility(
+                    visible: state.selectedAnswers.isNotEmpty,
+                    child: SafeArea(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: GypseElevatedButton(
+                              context,
+                              onPressed: () {
+                                'Voir le verset'.log(tag: 'ANSWER VIEW');
+                                VerseModal(context);
+                              },
+                              label: 'Voir le verset',
+                              textColor: Theme.of(context).colorScheme.primary,
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .surface
+                                  .withOpacity(0.2),
+                            ),
+                          ),
+                          Dimensions.xs(context).spaceW(),
+                          GypseCircularButton(
+                            context,
+                            onPressed: () async {
+                              context
+                                  .read<GameStateCubit>()
+                                  .updateStatus(StateStatus.reloading);
+                            },
+                            icon: SvgPicture.asset(
+                              GypseIcon.arrowRight.path,
+                              width: Dimensions.iconL(context).width,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Dimensions.xxs(context).spaceH()
+              ],
+            ],
           ),
-          Dimensions.xxs(context).spaceH(),
-        ],
-      ),
+        );
+      },
     );
   }
 }

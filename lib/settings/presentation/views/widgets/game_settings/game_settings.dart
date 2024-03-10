@@ -10,7 +10,7 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
-import 'package:gypse/game/presentation/views/states/game_states.dart';
+import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/level_settings.dart';
 import 'package:gypse/settings/presentation/views/widgets/game_settings/time_settings.dart';
@@ -26,7 +26,8 @@ class GameSettings extends HookConsumerWidget {
         ref.read(onUserChangedUseCaseProvider).invoke(context, user);
 
     // Reset the recap session state in case of click on notification
-    Future(() => ref.invalidate(recapSessionStateNotifierProvider));
+    Future(() =>
+        ref.read(recapSessionStateNotifierProvider.notifier).clearState());
 
     return PopScope(
       canPop: false,
@@ -109,9 +110,6 @@ class GameSettings extends HookConsumerWidget {
                     onPressed: () {
                       if (!user.isNull) {
                         onUserChangedUseCase(context, user!);
-                        Future(() => ref
-                            .read(gameStateNotifierProvider.notifier)
-                            .setSettings(user.settings));
                       } else {
                         'No User Error'.failure(context);
                       }

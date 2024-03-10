@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gypse/auth/presentation/views/states/auth_state.dart';
@@ -8,14 +7,11 @@ import 'package:gypse/auth/presentation/views/widgets/password/forgotten_passwor
 import 'package:gypse/auth/presentation/views/widgets/sign_in/sign_in_view.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up/sign_up_view.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
-import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/style/colors.dart';
-import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthScreen extends HookConsumerWidget {
@@ -25,17 +21,6 @@ class AuthScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(connectivityNotifierProvider, (previous, next) {
-      if (next == ConnectivityResult.none) {
-        GypseDialog(
-          context,
-          dismissible: false,
-          height: Dimensions.xl(context).height,
-          child: const NetworkErrorScreen(),
-        );
-      }
-    });
-
     ref.read(logDisplayUseCaseProvider).invoke(screen: Screen.authView.path);
 
     authState = ref.watch(authStateNotifierProvider);

@@ -51,7 +51,7 @@ class UiUser extends Equatable {
         language: Locales.fr,
         status: LoginState.loading,
         questions: const [],
-        settings: UiGypseSettings(),
+        settings: const UiGypseSettings(),
       );
 
   @override
@@ -126,15 +126,15 @@ class UiUser extends Equatable {
 ///
 ///It contains user's settings.
 class UiGypseSettings extends Equatable {
-  Level level;
-  Time time;
+  final Level level;
+  final Time time;
 
   ///<i><small>`Presentation Layer`</small></i>
   ///### User settings <i><small>(received from the domain layer)</small></i>
   ///#### `UiGypseSettings` constructor
   ///<br>
   ///It contains user's settings.
-  UiGypseSettings({this.level = Level.easy, this.time = Time.medium});
+  const UiGypseSettings({this.level = Level.easy, this.time = Time.medium});
 
   @override
   List<Object?> get props => [level, time];

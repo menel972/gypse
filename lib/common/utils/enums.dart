@@ -312,8 +312,22 @@ enum GypseIcon {
   eyeOff('assets/icons/fi-rr-eye-crossed.svg'),
   arrowLeft('assets/icons/fi-rr-angle-small-left.svg'),
   arrowLeftAndroid('assets/icons/fi-rr-arrow-small-left.svg'),
-  arrowRight('assets/icons/fi-rr-angle-small-right.svg');
+  arrowRight('assets/icons/fi-rr-angle-small-right.svg'),
+  refresh('assets/icons/prop=Refresh.svg');
 
   final String path;
   const GypseIcon(this.path);
+}
+
+enum StateStatus {
+  initial,
+  reloading,
+  pause,
+  resume,
+  timeOut,
+  loading,
+  partialLoading,
+  finish,
+  success,
+  error,
 }

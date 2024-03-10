@@ -176,7 +176,7 @@ class GypseContainer extends Container {
   GypseContainer(
     this.context, {
     required super.child,
-    this.radius = 20,
+    this.radius = 10,
     this.pad,
     super.key,
   });
@@ -201,7 +201,7 @@ class GypseSkeleton extends Container {
 
   GypseSkeleton(
     this.context, {
-    this.radius = 20,
+    this.radius = 10,
     super.height,
     super.key,
   });
@@ -229,7 +229,7 @@ class GypseContainerGradient extends Container {
     this.context, {
     required super.child,
     required this.gradient,
-    this.radius = 20,
+    this.radius = 10,
     this.pad,
     super.key,
   });
@@ -256,8 +256,8 @@ class GypseContainerGradient extends Container {
   Decoration? get decoration => BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).colorScheme.secondary.withOpacity(0.8),
-            Theme.of(context).colorScheme.secondary.withOpacity(0.0),
+            Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+            Theme.of(context).colorScheme.tertiary.withOpacity(0.0),
           ],
           stops: [
             startGradient,

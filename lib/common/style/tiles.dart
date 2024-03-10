@@ -81,7 +81,7 @@ class AnswerPropositionTile extends ListTile {
     this.isSelected = true,
     this.icon = 'assets/icons/fi-rr-check.svg',
     this.textColor = const Color.fromRGBO(255, 238, 221, 1),
-    this.backgroundColor = const Color.fromRGBO(207, 109, 18, 1),
+    this.backgroundColor = const Color.fromRGBO(72, 142, 45, 1),
     this.borderColor = const Color.fromRGBO(255, 238, 221, 1),
   });
   const AnswerPropositionTile.error(
@@ -91,7 +91,7 @@ class AnswerPropositionTile extends ListTile {
     required this.index,
     super.enabled = false,
     this.isSelected = true,
-    this.icon = 'assets/icons/fi-rr-cross-circle.svg',
+    this.icon = 'assets/icons/cross.svg',
     this.textColor = const Color.fromRGBO(176, 0, 32, 1),
     this.backgroundColor = const Color.fromRGBO(255, 238, 221, 1),
     this.borderColor = const Color.fromRGBO(176, 0, 32, 1),
@@ -116,7 +116,9 @@ class AnswerPropositionTile extends ListTile {
       ? null
       : SvgPicture.asset(
           icon!,
-          width: Dimensions.iconXS(context).width,
+          width: answer.verse.isEmpty
+              ? Dimensions.iconXXS(context).width
+              : Dimensions.iconXS(context).width,
           colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
         );
 

@@ -8,12 +8,12 @@ class GypseColors extends ColorScheme {
     // NOTE : GLOBAL COLORS
     super.brightness = Brightness.light,
     super.background = const Color.fromRGBO(10, 35, 128, 1),
-    super.onBackground = const Color.fromRGBO(196, 196, 196, 1),
+    super.onBackground = const Color.fromRGBO(245, 245, 245, 1),
 
     // NOTE : PRIMARY COLORS
     super.primary = const Color.fromRGBO(10, 35, 128, 1),
     super.primaryContainer = const Color.fromRGBO(70, 96, 192, 1),
-    super.onPrimary = const Color.fromRGBO(196, 196, 196, 1),
+    super.onPrimary = const Color.fromRGBO(245, 245, 245, 1),
 
     // NOTE : SECONDAY COLORS
     super.secondary = const Color.fromRGBO(207, 109, 18, 1),
@@ -26,7 +26,8 @@ class GypseColors extends ColorScheme {
 
     // NOTE : ERROR
     super.error = const Color.fromRGBO(176, 0, 32, 1),
-    super.onError = const Color.fromRGBO(196, 196, 196, 1),
+    super.onError = const Color.fromRGBO(245, 245, 245, 1),
+    super.tertiary = const Color.fromRGBO(72, 142, 45, 1),
   });
 
   /// Card Colors

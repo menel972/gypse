@@ -77,7 +77,7 @@ class RecapView extends HookConsumerWidget {
                           domain:
                               recap.scores.goodGames == 1 ? 'Bonne' : 'Bonnes',
                           measure: recap.scores.goodGames,
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ],
                       configRenderPie: ConfigRenderPie(

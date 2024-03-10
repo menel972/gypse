@@ -133,7 +133,7 @@ class RecapTableView extends HookConsumerWidget {
                                 Dimensions.xxxs(context).padW(),
                             radius: BorderRadius.circular(20),
                             foregroundColor:
-                                Theme.of(context).colorScheme.secondary,
+                                Theme.of(context).colorScheme.tertiary,
                             backgroundColor:
                                 Theme.of(context).colorScheme.error,
                           ),

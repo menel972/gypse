@@ -294,7 +294,7 @@ enum GypseIcon {
   settings('assets/icons/fi-rr-settings.svg'),
   settingsSlider('assets/icons/fi-rr-settings-sliders.svg'),
   check('assets/icons/fi-rr-check.svg'),
-  crossCircle('assets/icons/fi-rr-cross-circle.svg'),
+  cross('assets/icons/cross.svg'),
   search('assets/icons/fi-rr-search.svg'),
   mail('assets/icons/fi-rr-envelope.svg'),
   at('assets/icons/fi-rr-at.svg'),

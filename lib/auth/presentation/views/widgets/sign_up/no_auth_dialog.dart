@@ -60,7 +60,7 @@ class NoAuthDialog extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           onPressed: () async {
             ref
@@ -98,7 +98,6 @@ class NoAuthDialog extends HookConsumerWidget {
             }
           },
           label: 'Commencer',
-          textColor: Theme.of(context).colorScheme.onPrimary,
         ),
         Dimensions.xxs(context).spaceH(),
         GestureDetector(

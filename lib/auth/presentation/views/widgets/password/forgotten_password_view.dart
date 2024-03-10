@@ -74,7 +74,7 @@ class ForgottenPasswordView extends HookConsumerWidget {
           Row(
             children: [
               Expanded(
-                child: GypseElevatedButton(
+                child: GypseButton.orange(
                   context,
                   onPressed: () async {
                     if (!isFormValid()) {
@@ -95,20 +95,16 @@ class ForgottenPasswordView extends HookConsumerWidget {
                     }
                   },
                   label: 'Envoyer',
-                  textColor: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Dimensions.xxs(context).spaceW(),
               Expanded(
-                child: GypseElevatedButton(
+                child: GypseButton.outlined(
                   context,
                   onPressed: () => ref
                       .read(authStateNotifierProvider.notifier)
                       .onViewChanged(1),
                   label: 'Annuler',
-                  textColor: Theme.of(context).colorScheme.onPrimary,
-                  backgroundColor:
-                      Theme.of(context).colorScheme.onPrimary.withOpacity(0.2),
                 ),
               ),
             ],

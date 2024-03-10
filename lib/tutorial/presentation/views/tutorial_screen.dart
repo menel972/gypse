@@ -67,10 +67,8 @@ class TutorialScreen extends HookConsumerWidget {
               }
             }
           },
-          icon: SvgPicture.asset(
-            isLastIndex ? GypseIcon.check.path : GypseIcon.arrowRight.path,
-            width: Dimensions.iconL(context).width,
-          ),
+          icon: isLastIndex ? GypseIcon.check.path : GypseIcon.arrowRight.path,
+          iconSize: Dimensions.iconL(context).width,
         ),
       ),
       appBar: AppBar(

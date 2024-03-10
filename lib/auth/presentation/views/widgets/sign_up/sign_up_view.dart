@@ -201,7 +201,7 @@ class SignUpView extends HookConsumerWidget {
             ),
             Dimensions.xxxs(context).spaceH(),
             // NOTE : SIGNUP BUTTON
-            GypseElevatedButton(
+            GypseButton.orange(
               context,
               onPressed: () async {
                 if (!isFormValid()) {
@@ -287,7 +287,6 @@ class SignUpView extends HookConsumerWidget {
                 }
               },
               label: 'Crée ton compte',
-              textColor: Theme.of(context).colorScheme.onPrimary,
             ),
             Dimensions.xxxs(context).spaceH(),
             Row(

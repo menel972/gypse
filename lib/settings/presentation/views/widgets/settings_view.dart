@@ -155,11 +155,10 @@ class SettingsView extends HookConsumerWidget {
         ),
         Dimensions.xs(context).spaceH(),
         if (anonymous)
-          GypseElevatedButton(
+          GypseButton.orange(
             context,
             onPressed: () => context.go(Screen.authView.path),
             label: 'Connecte-toi',
-            textColor: Theme.of(context).colorScheme.onPrimary,
           ),
         Expanded(
           child: Align(

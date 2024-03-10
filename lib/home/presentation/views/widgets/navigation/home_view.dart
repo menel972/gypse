@@ -21,7 +21,7 @@ class HomeView extends HookConsumerWidget {
       children: [
         Expanded(child: CarouselView()),
         Dimensions.s(context).paddingW(
-          GypseElevatedButton(
+          GypseButton.orange(
             context,
             onPressed: () {
               ref
@@ -30,8 +30,6 @@ class HomeView extends HookConsumerWidget {
               context.go('${Screen.gameView.path}/ ');
             },
             label: 'Mode aléatoire',
-            textColor: Theme.of(context).colorScheme.onSurface,
-            backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
         ),
         Dimensions.xs(context).spaceH(),

@@ -36,26 +36,21 @@ class NoDataDialog extends HookConsumerWidget {
         Row(
           children: [
             Expanded(
-              child: GypseElevatedButton(
+              child: GypseButton.red(
                 context,
                 label: 'Retour',
                 onPressed: () {
                   ref.read(homeNavigationStateProvider.notifier).updatePage(0);
                   Navigator.pop(context);
                 },
-                textColor: Theme.of(context).colorScheme.primary,
-                backgroundColor:
-                    Theme.of(context).colorScheme.surface.withOpacity(0.2),
               ),
             ),
             Dimensions.xxs(context).spaceW(),
             Expanded(
-              child: GypseElevatedButton(
+              child: GypseButton.orange(
                 context,
                 label: 'Jouer',
                 onPressed: () => context.go('${Screen.gameView.path}/ '),
-                textColor: Theme.of(context).colorScheme.surface,
-                backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ],

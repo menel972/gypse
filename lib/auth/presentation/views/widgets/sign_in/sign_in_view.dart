@@ -141,10 +141,9 @@ class SignInView extends HookConsumerWidget {
               ),
             ),
             // CONNECTION BUTTON
-            GypseElevatedButton(
+            GypseButton.orange(
               context,
               label: 'Connexion',
-              textColor: Theme.of(context).colorScheme.onPrimary,
               onPressed: () async {
                 if (!isFormValid()) {
                   'Le formulaire n\'est pas valide'.failure(context);

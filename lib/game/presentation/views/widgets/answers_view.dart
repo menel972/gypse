@@ -129,18 +129,13 @@ class AnswersView extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: GypseElevatedButton(
+                            child: GypseButton.grey(
                               context,
                               onPressed: () {
                                 'Voir le verset'.log(tag: 'ANSWER VIEW');
                                 VerseModal(context);
                               },
                               label: 'Voir le verset',
-                              textColor: Theme.of(context).colorScheme.primary,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .surface
-                                  .withOpacity(0.2),
                             ),
                           ),
                           Dimensions.xs(context).spaceW(),
@@ -151,10 +146,8 @@ class AnswersView extends StatelessWidget {
                                   .read<GameStateCubit>()
                                   .updateStatus(StateStatus.reloading);
                             },
-                            icon: SvgPicture.asset(
-                              GypseIcon.arrowRight.path,
-                              width: Dimensions.iconL(context).width,
-                            ),
+                            icon: GypseIcon.arrowRight.path,
+                            iconSize: Dimensions.iconL(context).width,
                           ),
                         ],
                       ),

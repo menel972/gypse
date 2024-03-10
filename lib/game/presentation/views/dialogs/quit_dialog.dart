@@ -58,7 +58,7 @@ class QuitDialog extends HookConsumerWidget {
             Dimensions.xs(context).spaceH(),
             Row(children: [
               Expanded(
-                  child: GypseElevatedButton(
+                  child: GypseButton.red(
                 context,
                 label: 'Quitter',
                 onPressed: () async {
@@ -73,18 +73,13 @@ class QuitDialog extends HookConsumerWidget {
                         : context.go(Screen.recapSession.path);
                   }
                 },
-                textColor: Theme.of(context).colorScheme.onError,
-                backgroundColor: Theme.of(context).colorScheme.error,
               )),
               Dimensions.xxs(context).spaceW(),
               Expanded(
-                child: GypseElevatedButton(
+                child: GypseButton.outlined(
                   context,
                   label: 'Reprendre',
                   onPressed: () => Navigator.pop(context),
-                  textColor: Theme.of(context).colorScheme.primary,
-                  backgroundColor:
-                      Theme.of(context).colorScheme.surface.withOpacity(0.2),
                 ),
               ),
             ]),

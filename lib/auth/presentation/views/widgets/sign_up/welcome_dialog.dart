@@ -42,7 +42,7 @@ class WelcomeDialog extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xxs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           label: 'Suivant',
           onPressed: () {
@@ -50,8 +50,6 @@ class WelcomeDialog extends HookConsumerWidget {
             context
                 .go('${Screen.settingsView.path}/${Screen.tutorialView.path}');
           },
-          textColor: Theme.of(context).colorScheme.surface,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
       ],
     );

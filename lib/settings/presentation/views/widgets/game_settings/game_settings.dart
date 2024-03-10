@@ -85,7 +85,7 @@ class GameSettings extends HookConsumerWidget {
               Row(children: [
                 if (!ref.watch(initStateNotifierProvider))
                   Expanded(
-                    child: GypseElevatedButton(
+                    child: GypseButton.outlined(
                       context,
                       onPressed: () {
                         if (ref.watch(initStateNotifierProvider)) {
@@ -98,14 +98,12 @@ class GameSettings extends HookConsumerWidget {
                         }
                       },
                       label: 'Annuler',
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                      textColor: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 if (!ref.watch(initStateNotifierProvider))
                   Dimensions.xxs(context).spaceW(),
                 Expanded(
-                  child: GypseElevatedButton(
+                  child: GypseButton.blue(
                     context,
                     onPressed: () {
                       if (!user.isNull) {
@@ -123,8 +121,6 @@ class GameSettings extends HookConsumerWidget {
                       }
                     },
                     label: 'Valider',
-                    textColor: Theme.of(context).colorScheme.surface,
-                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ]),

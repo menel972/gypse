@@ -116,7 +116,7 @@ class RecapView extends HookConsumerWidget {
               Dimensions.xxxs(context).spaceH(),
               RecapTableView(recap),
               Dimensions.xs(context).spaceH(),
-              GypseElevatedButton(
+              GypseButton.orange(
                 context,
                 onPressed: () {
                   context.go('${Screen.gameView.path}/ ');
@@ -126,11 +126,9 @@ class RecapView extends HookConsumerWidget {
                       .clearState());
                 },
                 label: 'Nouvelle partie',
-                textColor: Theme.of(context).colorScheme.onSurface,
-                backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
               Dimensions.xxs(context).spaceH(),
-              GypseElevatedButton(
+              GypseButton.outlined(
                 context,
                 onPressed: () async {
                   context.go(Screen.homeView.path);
@@ -140,8 +138,6 @@ class RecapView extends HookConsumerWidget {
                       .clearState());
                 },
                 label: 'Accueil',
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                textColor: Theme.of(context).colorScheme.primary,
               ),
               Dimensions.xxs(context).spaceH(),
             ],

@@ -56,11 +56,10 @@ class AnonymousDenied extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           onPressed: () => context.go(Screen.authView.path),
           label: 'Connecte-toi',
-          textColor: Theme.of(context).colorScheme.onPrimary,
         ),
       ],
     );
@@ -125,11 +124,10 @@ class AnonymousMigration extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           onPressed: () => context.go(Screen.authView.path),
           label: 'Connecte-toi',
-          textColor: Theme.of(context).colorScheme.onPrimary,
         ),
       ],
     );

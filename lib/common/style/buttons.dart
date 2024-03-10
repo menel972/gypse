@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
@@ -7,23 +8,74 @@ import 'package:gypse/common/utils/extensions.dart';
 ///
 ///It defines the appearance of a **high emphasis button**.<br>
 ///Use it for the primary, most important, or most common action on a screen.
-class GypseElevatedButton extends ElevatedButton {
+class GypseButton extends ElevatedButton {
   final BuildContext context;
   final String label;
-  final Color? textColor;
+  final Color textColor;
   final Color backgroundColor;
 
   ///## Gypse [ElevatedButton]
   ///
   ///It defines the appearance of a **high emphasis button**.<br>
   ///Use it for the primary, most important, or most common action on a screen.
-  const GypseElevatedButton(
-    this.context, {super.key, 
-    required super.onPressed,
-    super.child,
+  const GypseButton(
+    this.context, {
     required this.label,
-    this.textColor,
+    required super.onPressed,
+    required this.textColor,
+    required this.backgroundColor,
+    super.child,
+    super.key,
+  });
+
+  const GypseButton.orange(
+    this.context, {
+    required this.label,
+    required super.onPressed,
+    this.textColor = const Color.fromRGBO(245, 245, 245, 1),
     this.backgroundColor = const Color.fromRGBO(207, 109, 18, 1),
+    super.child,
+    super.key,
+  });
+
+  const GypseButton.blue(
+    this.context, {
+    required this.label,
+    required super.onPressed,
+    this.textColor = const Color.fromRGBO(245, 245, 245, 1),
+    this.backgroundColor = const Color.fromRGBO(10, 35, 128, 1),
+    super.child,
+    super.key,
+  });
+
+  const GypseButton.grey(
+    this.context, {
+    required this.label,
+    required super.onPressed,
+    this.textColor = const Color.fromRGBO(10, 35, 128, 1),
+    this.backgroundColor = const Color.fromRGBO(245, 245, 245, 0.5),
+    super.child,
+    super.key,
+  });
+
+  const GypseButton.outlined(
+    this.context, {
+    required this.label,
+    required super.onPressed,
+    this.textColor = const Color.fromRGBO(245, 245, 245, 1),
+    this.backgroundColor = const Color.fromRGBO(239, 242, 255, 0.1),
+    super.child,
+    super.key,
+  });
+
+  const GypseButton.red(
+    this.context, {
+    required this.label,
+    required super.onPressed,
+    this.textColor = const Color.fromRGBO(245, 245, 245, 1),
+    this.backgroundColor = const Color.fromRGBO(176, 0, 32, 1),
+    super.child,
+    super.key,
   });
 
   @override
@@ -41,10 +93,11 @@ class GypseElevatedButton extends ElevatedButton {
         backgroundColor:
             MaterialStateProperty.resolveWith((_) => backgroundColor),
         side: MaterialStateProperty.resolveWith((_) => const BorderSide(
-            width: 0.8, color: Color.fromRGBO(255, 238, 221, 1))),
+              color: Color.fromRGBO(255, 238, 221, 1),
+            )),
         shape: MaterialStateProperty.resolveWith(
           (_) =>
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       );
 }
@@ -63,15 +116,17 @@ class GypseSmallButton extends ElevatedButton {
   ///It defines the appearance of a **low emphasis button**.<br>
   ///Use it for optional or supplementary actions with the least amount of prominence.
   const GypseSmallButton(
-    this.context, {super.key, 
+    this.context, {
     required this.label,
     required super.onPressed,
-    this.textColor = const Color.fromRGBO(196, 196, 196, 1),
+    this.textColor = const Color.fromRGBO(245, 245, 245, 1),
     super.child,
+    super.key,
   });
 
   const GypseSmallButton.verse(
-    this.context, {super.key, 
+    this.context, {
+    super.key,
     required this.label,
     required super.onPressed,
     this.textColor = const Color.fromRGBO(207, 109, 18, 1),
@@ -90,12 +145,12 @@ class GypseSmallButton extends ElevatedButton {
         elevation: 0,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(
-          vertical: Dimensions.xxxs(context).width,
+          vertical: Dimensions.xxxs(context).height,
           horizontal: Dimensions.xxxs(context).height,
         ),
         backgroundColor: textColor.withOpacity(0.2),
         foregroundColor: Theme.of(context).colorScheme.secondary,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       );
 }
 
@@ -105,25 +160,46 @@ class GypseSmallButton extends ElevatedButton {
 ///Use it for important actions with the least amount of prominence.
 class GypseCircularButton extends ElevatedButton {
   final BuildContext context;
-  final Widget icon;
+  final String icon;
+  final double iconSize;
   final Color iconColor;
   final Color backgroundColor;
+  final Color? borderColor;
 
   ///## Gypse [ElevatedButton]
   ///
   ///It defines the appearance of a **circular button with an icon in the center**.<br>
   ///Use it for important actions with the least amount of prominence.
   const GypseCircularButton(
-    this.context, {super.key, 
-    required super.onPressed,
+    this.context, {
     required this.icon,
-    super.child,
-    this.iconColor = const Color.fromRGBO(196, 196, 196, 1),
+    required super.onPressed,
+    this.iconSize = 25,
+    this.iconColor = const Color.fromRGBO(245, 245, 245, 1),
     this.backgroundColor = const Color.fromRGBO(10, 35, 128, 1),
+    this.borderColor,
+    super.child,
+    super.key,
+  });
+
+  const GypseCircularButton.outlined(
+    this.context, {
+    required this.icon,
+    required super.onPressed,
+    this.iconSize = 25,
+    this.iconColor = const Color.fromRGBO(10, 35, 128, 1),
+    this.backgroundColor = const Color.fromRGBO(10, 35, 128, 0),
+    this.borderColor = const Color.fromRGBO(10, 35, 128, 1),
+    super.child,
+    super.key,
   });
 
   @override
-  Widget? get child => icon;
+  Widget? get child => SvgPicture.asset(
+        icon,
+        colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+        width: iconSize,
+      );
 
   @override
   ButtonStyle? get style => ButtonStyle(
@@ -132,5 +208,9 @@ class GypseCircularButton extends ElevatedButton {
       alignment: Alignment.center,
       backgroundColor:
           MaterialStateProperty.resolveWith((states) => backgroundColor),
-      shape: MaterialStateProperty.resolveWith((states) => const CircleBorder()));
+      side: MaterialStateProperty.resolveWith((states) => BorderSide(
+            color: borderColor ?? backgroundColor.withOpacity(0),
+          )),
+      shape:
+          MaterialStateProperty.resolveWith((states) => const CircleBorder()));
 }

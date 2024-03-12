@@ -38,6 +38,13 @@ class GypseColors extends ColorScheme {
     Color.fromRGBO(248, 119, 0, 1),
   ];
 
+  /// Card Linear Colors
+  static const List<Color> cardLinearGradient = [
+    Color.fromRGBO(27, 58, 177, 1),
+    Color.fromRGBO(141, 21, 183, 1),
+    Color.fromRGBO(255, 122, 0, 1),
+  ];
+
   /// Gauge Background
   static List<Color> gaugeGradient = [
     const Color.fromRGBO(10, 35, 128, 0.9),

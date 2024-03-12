@@ -43,23 +43,24 @@ class HomeCarouselCard extends GestureDetector {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: const SweepGradient(
-              colors: GypseColors.cardGradient,
-              stops: [0, 0.39, 0.6, 0.9],
-              center: Alignment(1, 0.2),
-              startAngle: -0.8,
-              endAngle: 6.5,
+            gradient: const LinearGradient(
+              colors: GypseColors.cardLinearGradient,
+              stops: [-0.5, 0.65, 1.1],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
             ),
             boxShadow: [
               const BoxShadow(
                 color: Colors.black,
-                offset: Offset(2, 1),
+                offset: Offset(1, 0),
                 blurRadius: 4,
+                blurStyle: BlurStyle.inner,
               ),
               BoxShadow(
                 color: Theme.of(context).colorScheme.primary,
-                offset: const Offset(3, 2),
-                blurRadius: 10,
+                offset: const Offset(2, 1),
+                blurRadius: 5,
+                blurStyle: BlurStyle.inner,
               ),
             ],
           ),
@@ -120,23 +121,24 @@ class BookFilterCard extends GestureDetector {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: const SweepGradient(
-              colors: GypseColors.cardGradient,
-              stops: [0, 0.39, 0.6, 0.9],
-              center: Alignment(1, 0.2),
-              startAngle: -0.8,
-              endAngle: 6.5,
+            gradient: const LinearGradient(
+              colors: GypseColors.cardLinearGradient,
+              stops: [-0.5, 0.65, 1.1],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
             ),
             boxShadow: [
               const BoxShadow(
                 color: Colors.black,
-                offset: Offset(2, 1),
+                offset: Offset(1, 0),
                 blurRadius: 4,
+                blurStyle: BlurStyle.inner,
               ),
               BoxShadow(
                 color: Theme.of(context).colorScheme.primary,
-                offset: const Offset(3, 2),
-                blurRadius: 10,
+                offset: const Offset(2, 1),
+                blurRadius: 5,
+                blurStyle: BlurStyle.inner,
               ),
             ],
           ),

@@ -1,70 +1,70 @@
 /// Enum representing different icons used in the Gypse application.
 enum GypseIcon {
   /// Settings icon.
-  settings('assets/icons/fi-rr-settings.svg'),
+  settings('assets/icons/prop=Settings.svg'),
 
   /// Settings slider icon.
-  settingsSlider('assets/icons/fi-rr-settings-sliders.svg'),
+  settingsSlider('assets/icons/prop=SettingsSlider.svg'),
 
   /// Check icon.
-  check('assets/icons/fi-rr-check.svg'),
+  check('assets/icons/prop=Check.svg'),
 
   /// Cross icon.
-  cross('assets/icons/cross.svg'),
+  cross('assets/icons/prop=Cross.svg'),
 
   /// Search icon.
-  search('assets/icons/fi-rr-search.svg'),
+  search('assets/icons/prop=Search.svg'),
 
   /// Mail icon.
-  mail('assets/icons/fi-rr-envelope.svg'),
+  mail('assets/icons/prop=Mail.svg'),
 
   /// At icon.
-  at('assets/icons/fi-rr-at.svg'),
+  at('assets/icons/prop=At.svg'),
 
   /// Lock icon.
-  lock('assets/icons/fi-rr-lock.svg'),
+  lock('assets/icons/prop=Lock.svg'),
 
   /// Stats icon.
-  stats('assets/icons/fi-rr-stats.svg'),
+  stats('assets/icons/prop=Stats.svg'),
 
   /// Easy time icon.
-  timeEasy('assets/icons/fi-rr-time-quarter-to.svg'),
+  timeEasy('assets/icons/prop=TimeEasy.svg'),
 
   /// Medium time icon.
-  timeMedium('assets/icons/fi-rr-time-half-past.svg'),
+  timeMedium('assets/icons/prop=TimeMedium.svg'),
 
   /// Hard time icon.
-  timeHard('assets/icons/fi-rr-time-quarter-past.svg'),
+  timeHard('assets/icons/prop=TimeHard.svg'),
 
   /// Info icon.
-  info('assets/icons/fi-rr-info.svg'),
+  info('assets/icons/prop=Info.svg'),
 
   /// Book icon.
-  book('assets/icons/fi-rr-book-alt.svg'),
+  book('assets/icons/prop=Book.svg'),
 
   /// Trophy icon.
-  trophy('assets/icons/fi-rr-trophy.svg'),
+  trophy('assets/icons/prop=Trophy.svg'),
 
   /// Home icon.
-  home('assets/icons/fi-rr-home.svg'),
+  home('assets/icons/prop=Home.svg'),
 
   /// User icon.
-  user('assets/icons/fi-rr-user.svg'),
+  user('assets/icons/prop=User.svg'),
 
   /// Eye icon.
-  eye('assets/icons/fi-rr-eye.svg'),
+  eye('assets/icons/prop=Eye.svg'),
 
   /// Crossed eye icon.
-  eyeOff('assets/icons/fi-rr-eye-crossed.svg'),
+  eyeOff('assets/icons/prop=EyeCrossed.svg'),
 
   /// Left arrow icon.
-  arrowLeft('assets/icons/fi-rr-angle-small-left.svg'),
+  arrowLeft('assets/icons/prop=ArrowLeft.svg'),
 
   /// Left arrow icon for Android.
-  arrowLeftAndroid('assets/icons/fi-rr-arrow-small-left.svg'),
+  arrowLeftAndroid('assets/icons/prop=ArrowLeftAndroid.svg'),
 
   /// Right arrow icon.
-  arrowRight('assets/icons/fi-rr-angle-small-right.svg'),
+  arrowRight('assets/icons/prop=ArrowRight.svg'),
 
   /// Refresh icon.
   refresh('assets/icons/prop=Refresh.svg');

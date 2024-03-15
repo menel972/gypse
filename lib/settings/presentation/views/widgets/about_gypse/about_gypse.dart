@@ -18,9 +18,9 @@ class AboutGypse extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'À propos de GYPSE',
-          style: GypseFont.m(),
+        title: Text(
+          'À propos de GYPSE'.toUpperCase(),
+          style: const GypseFont.m(bold: true),
         ),
       ),
       body: Container(

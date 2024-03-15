@@ -33,9 +33,9 @@ class GameSettings extends HookConsumerWidget {
       canPop: false,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Paramètres du jeu',
-            style: GypseFont.m(),
+          title: Text(
+            'Paramètres du jeu'.toUpperCase(),
+            style: const GypseFont.m(bold: true),
           ),
           automaticallyImplyLeading: false,
         ),

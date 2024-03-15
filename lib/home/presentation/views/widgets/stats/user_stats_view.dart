@@ -48,9 +48,9 @@ class UserStatsView extends HookConsumerWidget {
           child: Column(
             children: [
               TabBar(
-                tabs: const [
-                  Text('Générales'),
-                  Text('Livres'),
+                tabs: [
+                  Text('Générales'.toUpperCase()),
+                  Text('Livres'.toUpperCase()),
                 ],
                 labelStyle: const GypseFont.s(bold: true),
                 unselectedLabelStyle:

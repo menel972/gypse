@@ -30,9 +30,9 @@ class ProfileSettings extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Mon profil',
-          style: GypseFont.m(),
+        title: Text(
+          'Mon profil'.toUpperCase(),
+          style: const GypseFont.m(bold: true),
         ),
       ),
       body: Container(

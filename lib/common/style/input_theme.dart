@@ -16,27 +16,27 @@ class GypseInputTheme extends InputDecorationTheme {
   @override
   InputBorder? get border => OutlineInputBorder(
         borderSide: const BorderSide(color: Color.fromRGBO(70, 96, 192, 1)),
-        borderRadius: BorderRadius.circular(20), 
+        borderRadius: BorderRadius.circular(10), 
       );
 
   @override
   InputBorder? get enabledBorder => OutlineInputBorder(
         borderSide: const BorderSide(color: Color.fromRGBO(70, 96, 192, 1)),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       );
 
   @override
   InputBorder? get focusedBorder => OutlineInputBorder(
         borderSide:
             const BorderSide(color: Color.fromRGBO(207, 109, 18, 1), width: 2),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       );
 
   @override
   InputBorder? get errorBorder => OutlineInputBorder(
         borderSide:
             const BorderSide(color: Color.fromRGBO(176, 0, 32, 1), width: 2),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       );
 
   @override

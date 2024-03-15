@@ -116,7 +116,7 @@ class RecapView extends HookConsumerWidget {
               Dimensions.xxxs(context).spaceH(),
               RecapTableView(recap),
               Dimensions.xs(context).spaceH(),
-              GypseButton.orange(
+              GypseButton.grey(
                 context,
                 onPressed: () {
                   context.go('${Screen.gameView.path}/ ');
@@ -128,7 +128,7 @@ class RecapView extends HookConsumerWidget {
                 label: 'Nouvelle partie',
               ),
               Dimensions.xxs(context).spaceH(),
-              GypseButton.outlined(
+              GypseButton.blue(
                 context,
                 onPressed: () async {
                   context.go(Screen.homeView.path);

@@ -27,7 +27,7 @@ class GypseColors extends ColorScheme {
     // NOTE : ERROR
     super.error = const Color.fromRGBO(176, 0, 32, 1),
     super.onError = const Color.fromRGBO(245, 245, 245, 1),
-    super.tertiary = const Color.fromRGBO(72, 142, 45, 1),
+    super.tertiary = const Color.fromRGBO(70, 116, 37, 1),
   });
 
   /// Card Colors

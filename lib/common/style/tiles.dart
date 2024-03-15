@@ -81,7 +81,7 @@ class AnswerPropositionTile extends ListTile {
     this.isSelected = true,
     this.icon = 'assets/icons/fi-rr-check.svg',
     this.textColor = const Color.fromRGBO(255, 238, 221, 1),
-    this.backgroundColor = const Color.fromRGBO(72, 142, 45, 1),
+    this.backgroundColor = const Color.fromRGBO(70, 116, 37, 1),
     this.borderColor = const Color.fromRGBO(255, 238, 221, 1),
   });
   const AnswerPropositionTile.error(

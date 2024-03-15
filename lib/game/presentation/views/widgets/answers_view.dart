@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/tiles.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/icons_enum.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
@@ -42,7 +42,7 @@ class AnswersView extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: SvgPicture.asset(
-                      '$imagesPath/logo_gypse_blue.svg',
+                      GypseLogo.hybrid.path,
                       height: Dimensions.m(context).height,
                     ).animate(
                       onPlay: (controller) => controller.repeat(),

@@ -12,7 +12,7 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/anonymous_dialogs.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/icons_enum.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';

@@ -17,11 +17,10 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/icons_enum.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:gypse/settings/domain/use_cases/cloud_storage_use_cases.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -83,8 +82,8 @@ class SignUpView extends HookConsumerWidget {
             AnimatedScale(
               duration: const Duration(milliseconds: 250),
               scale: MediaQuery.of(context).viewInsets.bottom == 0 ? 1.0 : 0,
-              child: Image.asset(
-                '$imagesPath/splash_logo.png',
+              child: SvgPicture.asset(
+                GypseLogo.orange.path,
                 height: Dimensions.xl(context).width,
               ),
             ),

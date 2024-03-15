@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/strings.dart';
 
 ///## Gypse Background [Container]
 ///
@@ -37,10 +38,14 @@ class GypseLoading extends Scaffold {
         child: Column(
           children: [
             Expanded(
-              child: Image.asset(
-                '$imagesPath/logo_gypse_splash.png',
-                width: Dimensions.xxxl(context).width,
+              child: SvgPicture.asset(
+                GypseLogo.orangeText.path,
+                width: Dimensions.xxl(context).width,
               ),
+              // child: Image.asset(
+              //   '$imagesPath/logo_gypse_splash.png',
+              //   width: Dimensions.xxxl(context).width,
+              // ),
             ),
             Dimensions.xs(context).padding(Text(
               message ?? '',

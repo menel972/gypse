@@ -6,7 +6,7 @@ import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/icons_enum.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/settings/presentation/views/states/settings_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

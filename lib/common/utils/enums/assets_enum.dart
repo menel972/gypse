@@ -72,3 +72,42 @@ enum GypseIcon {
   final String path;
   const GypseIcon(this.path);
 }
+
+/// Enum representing different Gypse logos.
+enum GypseLogo {
+  /// Blue logo.
+  blue('assets/images/logos/logo_b.svg'),
+
+  /// Blue logo with text.
+  blueText('assets/images/logos/logo_bt.svg'),
+
+  /// Blue transparent logo.
+  blueTransparent('assets/images/logos/logo_tb.svg'),
+
+  /// Blue transparent logo with text.
+  blueTransparentText('assets/images/logos/logo_tbt.svg'),
+
+  /// Orange logo.
+  orange('assets/images/logos/logo_o.svg'),
+
+  /// Orange logo with text.
+  orangeText('assets/images/logos/logo_ot.svg'),
+
+  /// Orange transparent logo.
+  orangeTransparent('assets/images/logos/logo_to.svg'),
+
+  /// Orange transparent logo with text.
+  orangeTransparentText('assets/images/logos/logo_tot.svg'),
+
+  /// Hybrid logo.
+  hybrid('assets/images/logos/logo_h.svg'),
+
+  /// Hybrid logo with white text.
+  hybridTextWhite('assets/images/logos/logo_htw.svg'),
+
+  /// Hybrid logo with blue text.
+  hybridTextBlue('assets/images/logos/logo_htb.svg');
+
+  final String path;
+  const GypseLogo(this.path);
+}

@@ -1,0 +1,18 @@
+{
+	"applinks": {
+		"details": [
+			{
+				"appID": "5FTP6Q9GM6.com.example.gypse",
+				"paths": [
+					"*"
+				]
+			},
+			{
+				"appID": "5FTP6Q9GM6.com.gypse.gypse",
+				"paths": [
+					"*"
+				]
+			}
+		]
+	}
+}

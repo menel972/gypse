@@ -1,0 +1,40 @@
+[
+	{
+		"relation": [
+			"delegate_permission/common.handle_all_urls"
+		],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "com.example.bible_quiz",
+			"sha256_cert_fingerprints": [
+				"01:7D:3E:06:A1:0E:D2:32:E2:B0:88:A8:AF:F7:67:74:22:7B:5D:21:FC:96:2A:90:92:E8:5E:8B:3C:C5:32:E5",
+				"DE:AD:DF:34:87:AF:52:57:C3:28:57:CD:88:BF:BA:A7:DE:39:33:C5:1A:3D:D8:7E:C8:04:F8:B5:54:0B:49:76"
+			]
+		}
+	},
+	{
+		"relation": [
+			"delegate_permission/common.handle_all_urls"
+		],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "com.example.gypse",
+			"sha256_cert_fingerprints": [
+				"DE:AD:DF:34:87:AF:52:57:C3:28:57:CD:88:BF:BA:A7:DE:39:33:C5:1A:3D:D8:7E:C8:04:F8:B5:54:0B:49:76",
+				"AF:6E:D0:E0:AE:1C:64:DA:9B:74:C3:83:40:A5:2D:B6:10:E1:33:B6:78:4C:9C:84:2A:E5:CA:F2:60:6B:82:75"
+			]
+		}
+	},
+	{
+		"relation": [
+			"delegate_permission/common.handle_all_urls"
+		],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "com.gypse.gypse",
+			"sha256_cert_fingerprints": [
+				"DE:AD:DF:34:87:AF:52:57:C3:28:57:CD:88:BF:BA:A7:DE:39:33:C5:1A:3D:D8:7E:C8:04:F8:B5:54:0B:49:76"
+			]
+		}
+	}
+]

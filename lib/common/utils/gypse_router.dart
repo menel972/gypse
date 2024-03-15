@@ -83,6 +83,12 @@ GoRouter gypseRouter = GoRouter(
       path: Screen.recapSession.path,
       builder: (context, state) => const RecapScreen(),
     ),
+    GoRoute(
+      path: '/details',
+      builder: (_, __) => Scaffold(
+        appBar: AppBar(title: const Text('Details Screen')),
+      ),
+    ),
   ],
 );
 

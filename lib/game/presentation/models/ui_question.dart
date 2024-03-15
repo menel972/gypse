@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
 
-import 'package:gypse/common/utils/enums.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 
 ///<i><small>`Presentation Layer`</small></i>

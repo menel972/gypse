@@ -7,7 +7,7 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';

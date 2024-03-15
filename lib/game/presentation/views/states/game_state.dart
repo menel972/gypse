@@ -3,7 +3,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 

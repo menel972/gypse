@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/home/presentation/views/widgets/navigation/widgets/carousel_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

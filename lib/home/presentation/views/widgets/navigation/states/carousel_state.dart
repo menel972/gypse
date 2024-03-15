@@ -1,4 +1,4 @@
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

@@ -1,4 +1,4 @@
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginStateNotifier extends StateNotifier<LoginState> {

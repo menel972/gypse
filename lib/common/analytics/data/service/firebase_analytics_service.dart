@@ -1,7 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:gypse/auth/data/models/ws_user_response.dart';
 import 'package:gypse/common/clients/firebase_client.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/analytics_enum.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class FirebaseAnalyticsService {

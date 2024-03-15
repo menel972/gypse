@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 /** AUTH CREDENTIALS STATE */
 
 ///<i><small>`BLoC state`</small></i>

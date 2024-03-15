@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/states/stats_states.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -3,7 +3,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:gypse/auth/domain/models/user.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/locales_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 
 /** WS USER RESPONSE */

@@ -17,7 +17,7 @@ import 'package:gypse/common/rewards/rewards_service.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';

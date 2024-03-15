@@ -6,7 +6,7 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/home/presentation/views/widgets/dialogs/no_data_dialog.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/states/stats_states.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/widgets/book_stats_view.dart';

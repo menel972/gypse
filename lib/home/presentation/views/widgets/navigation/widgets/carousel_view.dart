@@ -6,7 +6,7 @@ import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/home/presentation/views/widgets/navigation/states/carousel_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

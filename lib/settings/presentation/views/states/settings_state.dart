@@ -1,5 +1,5 @@
 // ignore: unused_import
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LevelSettingsStateNotifier extends StateNotifier<Level> {

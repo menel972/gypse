@@ -31,7 +31,7 @@ class GypseAppBarTheme extends AppBarTheme {
 
   @override
   IconThemeData? get iconTheme => const IconThemeData(
-        color: Color.fromRGBO(196, 196, 196, 1),
+        color: Color.fromRGBO(245, 245, 245, 1),
         size: 25,
         opacity: 0.8,
       );

@@ -9,7 +9,7 @@ import 'package:gypse/common/style/input_theme.dart';
 ThemeData gypseTheme = ThemeData(
   colorScheme: const GypseColors(),
   scaffoldBackgroundColor: const Color.fromRGBO(10, 35, 128, 1),
-  canvasColor: const Color.fromRGBO(196, 196, 196, 1),
+  canvasColor: const Color.fromRGBO(245, 245, 245, 1),
   appBarTheme: const GypseAppBarTheme(),
   bottomNavigationBarTheme: const GypseBottomBarTheme(),
   inputDecorationTheme: const GypseInputTheme(),

@@ -164,7 +164,7 @@ extension ShowIcon on IconData {
   ///## Extension on [IconData]
   ///
   /// Returns an [Icon] with the given `IconData`.
-  Icon show({Color? color = const Color.fromRGBO(196, 196, 196, 1)}) =>
+  Icon show({Color? color = const Color.fromRGBO(245, 245, 245, 1)}) =>
       Icon(this, color: color);
 }
 

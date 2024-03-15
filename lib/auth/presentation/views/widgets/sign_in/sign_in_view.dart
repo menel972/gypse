@@ -13,9 +13,10 @@ import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cas
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/strings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignInView extends HookConsumerWidget {
@@ -56,8 +57,8 @@ class SignInView extends HookConsumerWidget {
             AnimatedScale(
               duration: const Duration(milliseconds: 250),
               scale: MediaQuery.of(context).viewInsets.bottom == 0 ? 1.0 : 0,
-              child: Image.asset(
-                '$imagesPath/splash_logo.png',
+              child: SvgPicture.asset(
+                GypseLogo.orange.path,
                 height: Dimensions.xl(context).width,
               ),
             ),
@@ -141,10 +142,9 @@ class SignInView extends HookConsumerWidget {
               ),
             ),
             // CONNECTION BUTTON
-            GypseElevatedButton(
+            GypseButton.orange(
               context,
               label: 'Connexion',
-              textColor: Theme.of(context).colorScheme.onPrimary,
               onPressed: () async {
                 if (!isFormValid()) {
                   'Le formulaire n\'est pas valide'.failure(context);

@@ -7,7 +7,8 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/home/presentation/views/widgets/book/states/book_state.dart';
@@ -26,8 +27,6 @@ class BookView extends HookConsumerWidget {
     getQuestionsIdByBook(Books filter) => ref
         .read(questionsProvider.notifier)
         .getEnabledQuestions(userQuestions, book: filter.fr);
-    getAnswersByIds(List<String> questions) =>
-        ref.read(userProvider.notifier).getAnswersByIds(questions);
 
     return Padding(
       padding: EdgeInsets.only(

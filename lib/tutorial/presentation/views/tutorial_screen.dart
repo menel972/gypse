@@ -7,7 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:gypse/tutorial/presentation/states/tutorial_state.dart';
@@ -67,10 +68,8 @@ class TutorialScreen extends HookConsumerWidget {
               }
             }
           },
-          icon: SvgPicture.asset(
-            isLastIndex ? GypseIcon.check.path : GypseIcon.arrowRight.path,
-            width: Dimensions.iconL(context).width,
-          ),
+          icon: isLastIndex ? GypseIcon.check.path : GypseIcon.arrowRight.path,
+          iconSize: Dimensions.iconL(context).width,
         ),
       ),
       appBar: AppBar(

@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:equatable/equatable.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/locales_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/domain/models/answer.dart';
 

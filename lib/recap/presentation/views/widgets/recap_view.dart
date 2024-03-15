@@ -17,7 +17,7 @@ import 'package:gypse/common/rewards/rewards_service.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
@@ -77,7 +77,7 @@ class RecapView extends HookConsumerWidget {
                           domain:
                               recap.scores.goodGames == 1 ? 'Bonne' : 'Bonnes',
                           measure: recap.scores.goodGames,
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ],
                       configRenderPie: ConfigRenderPie(
@@ -116,7 +116,7 @@ class RecapView extends HookConsumerWidget {
               Dimensions.xxxs(context).spaceH(),
               RecapTableView(recap),
               Dimensions.xs(context).spaceH(),
-              GypseElevatedButton(
+              GypseButton.grey(
                 context,
                 onPressed: () {
                   context.go('${Screen.gameView.path}/ ');
@@ -126,11 +126,9 @@ class RecapView extends HookConsumerWidget {
                       .clearState());
                 },
                 label: 'Nouvelle partie',
-                textColor: Theme.of(context).colorScheme.onSurface,
-                backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
               Dimensions.xxs(context).spaceH(),
-              GypseElevatedButton(
+              GypseButton.blue(
                 context,
                 onPressed: () async {
                   context.go(Screen.homeView.path);
@@ -140,8 +138,6 @@ class RecapView extends HookConsumerWidget {
                       .clearState());
                 },
                 label: 'Accueil',
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                textColor: Theme.of(context).colorScheme.primary,
               ),
               Dimensions.xxs(context).spaceH(),
             ],

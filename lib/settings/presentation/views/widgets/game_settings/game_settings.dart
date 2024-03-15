@@ -7,7 +7,7 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
@@ -33,9 +33,9 @@ class GameSettings extends HookConsumerWidget {
       canPop: false,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Paramètres du jeu',
-            style: GypseFont.m(),
+          title: Text(
+            'Paramètres du jeu'.toUpperCase(),
+            style: const GypseFont.m(bold: true),
           ),
           automaticallyImplyLeading: false,
         ),
@@ -85,7 +85,7 @@ class GameSettings extends HookConsumerWidget {
               Row(children: [
                 if (!ref.watch(initStateNotifierProvider))
                   Expanded(
-                    child: GypseElevatedButton(
+                    child: GypseButton.outlined(
                       context,
                       onPressed: () {
                         if (ref.watch(initStateNotifierProvider)) {
@@ -98,14 +98,12 @@ class GameSettings extends HookConsumerWidget {
                         }
                       },
                       label: 'Annuler',
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                      textColor: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 if (!ref.watch(initStateNotifierProvider))
                   Dimensions.xxs(context).spaceW(),
                 Expanded(
-                  child: GypseElevatedButton(
+                  child: GypseButton.blue(
                     context,
                     onPressed: () {
                       if (!user.isNull) {
@@ -123,8 +121,6 @@ class GameSettings extends HookConsumerWidget {
                       }
                     },
                     label: 'Valider',
-                    textColor: Theme.of(context).colorScheme.surface,
-                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ]),

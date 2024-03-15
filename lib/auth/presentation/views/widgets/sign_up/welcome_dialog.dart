@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -42,7 +42,7 @@ class WelcomeDialog extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xxs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           label: 'Suivant',
           onPressed: () {
@@ -50,8 +50,6 @@ class WelcomeDialog extends HookConsumerWidget {
             context
                 .go('${Screen.settingsView.path}/${Screen.tutorialView.path}');
           },
-          textColor: Theme.of(context).colorScheme.surface,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
       ],
     );

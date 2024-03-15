@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/notifications/local_notification_service.dart';
 import 'package:gypse/common/shared_preferences/shared_preferences_service.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/notifs_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LevelUnlockService {

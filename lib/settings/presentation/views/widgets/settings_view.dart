@@ -9,7 +9,8 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,8 +26,8 @@ class SettingsView extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Image.asset(
-          '$imagesPath/splash_logo.png',
+        SvgPicture.asset(
+          GypseLogo.orange.path,
           height: Dimensions.l(context).width,
         ),
         Dimensions.s(context).spaceH(),
@@ -155,11 +156,10 @@ class SettingsView extends HookConsumerWidget {
         ),
         Dimensions.xs(context).spaceH(),
         if (anonymous)
-          GypseElevatedButton(
+          GypseButton.orange(
             context,
             onPressed: () => context.go(Screen.authView.path),
             label: 'Connecte-toi',
-            textColor: Theme.of(context).colorScheme.onPrimary,
           ),
         Expanded(
           child: Align(

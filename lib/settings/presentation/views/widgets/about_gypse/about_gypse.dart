@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/settings/domain/use_cases/cloud_storage_use_cases.dart';
@@ -18,9 +19,9 @@ class AboutGypse extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'À propos de GYPSE',
-          style: GypseFont.m(),
+        title: Text(
+          'À propos de GYPSE'.toUpperCase(),
+          style: const GypseFont.m(bold: true),
         ),
       ),
       body: Container(

@@ -1,7 +1,9 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/locales_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 
 /** UI USER */

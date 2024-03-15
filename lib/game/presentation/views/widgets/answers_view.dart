@@ -7,7 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/tiles.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
@@ -41,7 +42,7 @@ class AnswersView extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: SvgPicture.asset(
-                      '$imagesPath/logo_gypse_blue.svg',
+                      GypseLogo.hybrid.path,
                       height: Dimensions.m(context).height,
                     ).animate(
                       onPlay: (controller) => controller.repeat(),
@@ -129,18 +130,13 @@ class AnswersView extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: GypseElevatedButton(
+                            child: GypseButton.grey(
                               context,
                               onPressed: () {
                                 'Voir le verset'.log(tag: 'ANSWER VIEW');
                                 VerseModal(context);
                               },
                               label: 'Voir le verset',
-                              textColor: Theme.of(context).colorScheme.primary,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .surface
-                                  .withOpacity(0.2),
                             ),
                           ),
                           Dimensions.xs(context).spaceW(),
@@ -151,10 +147,8 @@ class AnswersView extends StatelessWidget {
                                   .read<GameStateCubit>()
                                   .updateStatus(StateStatus.reloading);
                             },
-                            icon: SvgPicture.asset(
-                              GypseIcon.arrowRight.path,
-                              width: Dimensions.iconL(context).width,
-                            ),
+                            icon: GypseIcon.arrowRight.path,
+                            iconSize: Dimensions.iconL(context).width,
                           ),
                         ],
                       ),

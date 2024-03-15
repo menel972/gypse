@@ -60,7 +60,7 @@ class CredentialsState extends Equatable {
     return UiUser(
       uid,
       userName: '$userName#${uid.substring(0, 4)}',
-      settings: UiGypseSettings(),
+      settings: const UiGypseSettings(),
     );
   }
 }

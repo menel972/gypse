@@ -9,7 +9,9 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/colors.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -43,23 +45,24 @@ class HomeCarouselCard extends GestureDetector {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: const SweepGradient(
-              colors: GypseColors.cardGradient,
-              stops: [0, 0.39, 0.6, 0.9],
-              center: Alignment(1, 0.2),
-              startAngle: -0.8,
-              endAngle: 6.5,
+            gradient: const LinearGradient(
+              colors: GypseColors.cardLinearGradient,
+              stops: [-0.5, 0.65, 1.1],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
             ),
             boxShadow: [
               const BoxShadow(
                 color: Colors.black,
-                offset: Offset(2, 1),
+                offset: Offset(1, 0),
                 blurRadius: 4,
+                blurStyle: BlurStyle.inner,
               ),
               BoxShadow(
                 color: Theme.of(context).colorScheme.primary,
-                offset: const Offset(3, 2),
-                blurRadius: 10,
+                offset: const Offset(2, 1),
+                blurRadius: 5,
+                blurStyle: BlurStyle.inner,
               ),
             ],
           ),
@@ -120,23 +123,24 @@ class BookFilterCard extends GestureDetector {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: const SweepGradient(
-              colors: GypseColors.cardGradient,
-              stops: [0, 0.39, 0.6, 0.9],
-              center: Alignment(1, 0.2),
-              startAngle: -0.8,
-              endAngle: 6.5,
+            gradient: const LinearGradient(
+              colors: GypseColors.cardLinearGradient,
+              stops: [-0.5, 0.65, 1.1],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
             ),
             boxShadow: [
               const BoxShadow(
                 color: Colors.black,
-                offset: Offset(2, 1),
+                offset: Offset(1, 0),
                 blurRadius: 4,
+                blurStyle: BlurStyle.inner,
               ),
               BoxShadow(
                 color: Theme.of(context).colorScheme.primary,
-                offset: const Offset(3, 2),
-                blurRadius: 10,
+                offset: const Offset(2, 1),
+                blurRadius: 5,
+                blurStyle: BlurStyle.inner,
               ),
             ],
           ),
@@ -176,7 +180,7 @@ class GypseContainer extends Container {
   GypseContainer(
     this.context, {
     required super.child,
-    this.radius = 20,
+    this.radius = 10,
     this.pad,
     super.key,
   });
@@ -201,7 +205,7 @@ class GypseSkeleton extends Container {
 
   GypseSkeleton(
     this.context, {
-    this.radius = 20,
+    this.radius = 10,
     super.height,
     super.key,
   });
@@ -229,7 +233,7 @@ class GypseContainerGradient extends Container {
     this.context, {
     required super.child,
     required this.gradient,
-    this.radius = 20,
+    this.radius = 10,
     this.pad,
     super.key,
   });
@@ -256,8 +260,8 @@ class GypseContainerGradient extends Container {
   Decoration? get decoration => BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).colorScheme.secondary.withOpacity(0.8),
-            Theme.of(context).colorScheme.secondary.withOpacity(0.0),
+            Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+            Theme.of(context).colorScheme.tertiary.withOpacity(0.0),
           ],
           stops: [
             startGradient,

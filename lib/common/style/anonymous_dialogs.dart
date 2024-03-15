@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -56,11 +56,10 @@ class AnonymousDenied extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           onPressed: () => context.go(Screen.authView.path),
           label: 'Connecte-toi',
-          textColor: Theme.of(context).colorScheme.onPrimary,
         ),
       ],
     );
@@ -125,11 +124,10 @@ class AnonymousMigration extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           onPressed: () => context.go(Screen.authView.path),
           label: 'Connecte-toi',
-          textColor: Theme.of(context).colorScheme.onPrimary,
         ),
       ],
     );

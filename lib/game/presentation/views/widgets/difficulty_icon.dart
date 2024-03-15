@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/strings.dart';
 
 class DifficultyIcon extends Row {

@@ -11,7 +11,8 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/settings/presentation/views/widgets/profile_settings/dialogs/delete_account_dialog.dart';
@@ -30,9 +31,9 @@ class ProfileSettings extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Mon profil',
-          style: GypseFont.m(),
+        title: Text(
+          'Mon profil'.toUpperCase(),
+          style: const GypseFont.m(bold: true),
         ),
       ),
       body: Container(
@@ -123,7 +124,7 @@ class ProfileSettings extends HookConsumerWidget {
                 alignment: Alignment.bottomCenter,
                 child: Row(children: [
                   Expanded(
-                    child: GypseElevatedButton(
+                    child: GypseButton.outlined(
                       context,
                       onPressed: () => GypseDialog(
                         context,
@@ -131,16 +132,11 @@ class ProfileSettings extends HookConsumerWidget {
                         child: DeleteAccountDialog(),
                       ),
                       label: 'Suppression',
-                      textColor: Theme.of(context).colorScheme.secondary,
-                      backgroundColor: Theme.of(context)
-                          .colorScheme
-                          .surface
-                          .withOpacity(0.2),
                     ),
                   ),
                   Dimensions.xs(context).spaceW(),
                   Expanded(
-                    child: GypseElevatedButton(
+                    child: GypseButton.blue(
                       context,
                       onPressed: () async {
                         ref
@@ -155,8 +151,6 @@ class ProfileSettings extends HookConsumerWidget {
                         }
                       },
                       label: 'Déconnexion',
-                      textColor: Theme.of(context).colorScheme.onPrimary,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ]),

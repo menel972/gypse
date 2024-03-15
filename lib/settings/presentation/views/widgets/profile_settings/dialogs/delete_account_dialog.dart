@@ -13,7 +13,8 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -109,7 +110,7 @@ class DeleteAccountDialog extends HookConsumerWidget {
           Row(
             children: [
               Expanded(
-                child: GypseElevatedButton(
+                child: GypseButton.red(
                   context,
                   label: 'Supprimer',
                   onPressed: () async {
@@ -142,19 +143,16 @@ class DeleteAccountDialog extends HookConsumerWidget {
                       return;
                     }
                   },
-                  textColor: Theme.of(context).colorScheme.onError,
-                  backgroundColor: Theme.of(context).colorScheme.error,
                 ),
               ),
               Dimensions.xxs(context).spaceW(),
               Expanded(
-                child: GypseElevatedButton(
+                child: GypseButton.outlined(
                   context,
                   label: 'Annuler',
                   onPressed: () => Navigator.pop(context),
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   textColor: Theme.of(context).colorScheme.primary,
-                  backgroundColor:
-                      Theme.of(context).colorScheme.surface.withOpacity(0.2),
                 ),
               ),
             ],

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

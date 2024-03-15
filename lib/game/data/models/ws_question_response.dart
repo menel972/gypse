@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/locales_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/data/models/ws_answer_response.dart';
 import 'package:gypse/game/domain/models/question.dart';

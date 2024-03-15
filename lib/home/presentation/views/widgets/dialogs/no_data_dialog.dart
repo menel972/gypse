@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,26 +36,21 @@ class NoDataDialog extends HookConsumerWidget {
         Row(
           children: [
             Expanded(
-              child: GypseElevatedButton(
+              child: GypseButton.red(
                 context,
                 label: 'Retour',
                 onPressed: () {
                   ref.read(homeNavigationStateProvider.notifier).updatePage(0);
                   Navigator.pop(context);
                 },
-                textColor: Theme.of(context).colorScheme.primary,
-                backgroundColor:
-                    Theme.of(context).colorScheme.surface.withOpacity(0.2),
               ),
             ),
             Dimensions.xxs(context).spaceW(),
             Expanded(
-              child: GypseElevatedButton(
+              child: GypseButton.orange(
                 context,
                 label: 'Jouer',
                 onPressed: () => context.go('${Screen.gameView.path}/ '),
-                textColor: Theme.of(context).colorScheme.surface,
-                backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ],

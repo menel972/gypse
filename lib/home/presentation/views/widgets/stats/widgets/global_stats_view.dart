@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/states/stats_states.dart';
 import 'package:gypse/home/presentation/views/widgets/stats/widgets/stats_container.dart';

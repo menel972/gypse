@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/home/presentation/views/widgets/navigation/widgets/carousel_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,7 +21,7 @@ class HomeView extends HookConsumerWidget {
       children: [
         Expanded(child: CarouselView()),
         Dimensions.s(context).paddingW(
-          GypseElevatedButton(
+          GypseButton.orange(
             context,
             onPressed: () {
               ref
@@ -30,8 +30,6 @@ class HomeView extends HookConsumerWidget {
               context.go('${Screen.gameView.path}/ ');
             },
             label: 'Mode aléatoire',
-            textColor: Theme.of(context).colorScheme.onSurface,
-            backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
         ),
         Dimensions.xs(context).spaceH(),

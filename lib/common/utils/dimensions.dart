@@ -39,7 +39,19 @@ class Dimensions extends Size {
   Dimensions.xs(this.context)
       : super(
           MediaQuery.of(context).size.width * 0.055,
-          MediaQuery.of(context).size.height * 0.05,
+          MediaQuery.of(context).size.height * 0.055,
+        );
+
+  ///## Responsive [Size]
+  ///
+  /// Returns **5% of the screen dimensions**.
+  /// ```
+  /// final BuildContext context;
+  /// ```
+  Dimensions.iconXXS(this.context)
+      : super(
+          MediaQuery.of(context).size.width * 0.04,
+          MediaQuery.of(context).size.height * 0.04,
         );
 
   ///## Responsive [Size]

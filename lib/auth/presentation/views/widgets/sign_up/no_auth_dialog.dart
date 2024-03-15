@@ -6,7 +6,7 @@ import 'package:gypse/auth/presentation/views/widgets/states/login_state.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/home/presentation/views/states/init_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -60,7 +60,7 @@ class NoAuthDialog extends HookConsumerWidget {
           textAlign: TextAlign.center,
         ),
         Dimensions.xs(context).spaceH(),
-        GypseElevatedButton(
+        GypseButton.orange(
           context,
           onPressed: () async {
             ref
@@ -98,7 +98,6 @@ class NoAuthDialog extends HookConsumerWidget {
             }
           },
           label: 'Commencer',
-          textColor: Theme.of(context).colorScheme.onPrimary,
         ),
         Dimensions.xxs(context).spaceH(),
         GestureDetector(

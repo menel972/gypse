@@ -12,7 +12,7 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
@@ -58,7 +58,7 @@ class QuitDialog extends HookConsumerWidget {
             Dimensions.xs(context).spaceH(),
             Row(children: [
               Expanded(
-                  child: GypseElevatedButton(
+                  child: GypseButton.red(
                 context,
                 label: 'Quitter',
                 onPressed: () async {
@@ -73,18 +73,13 @@ class QuitDialog extends HookConsumerWidget {
                         : context.go(Screen.recapSession.path);
                   }
                 },
-                textColor: Theme.of(context).colorScheme.onError,
-                backgroundColor: Theme.of(context).colorScheme.error,
               )),
               Dimensions.xxs(context).spaceW(),
               Expanded(
-                child: GypseElevatedButton(
+                child: GypseButton.outlined(
                   context,
                   label: 'Reprendre',
                   onPressed: () => Navigator.pop(context),
-                  textColor: Theme.of(context).colorScheme.primary,
-                  backgroundColor:
-                      Theme.of(context).colorScheme.surface.withOpacity(0.2),
                 ),
               ),
             ]),

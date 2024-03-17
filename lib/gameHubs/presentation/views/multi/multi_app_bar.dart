@@ -1,7 +1,7 @@
-part of '../book_screen.dart';
+part of '../multi_screen.dart';
 
-class BookAppBar extends StatelessWidget {
-  const BookAppBar({super.key});
+class MultiAppBar extends StatelessWidget {
+  const MultiAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +22,10 @@ class BookAppBar extends StatelessWidget {
             Theme.of(context).colorScheme.secondary.withOpacity(0.2),
       ),
       title: Text(
-        'choix du livre'.toUpperCase(),
+        'duel'.toUpperCase(),
         style: const GypseFont.xl(bold: true),
       ),
       centerTitle: true,
-      actions: [
-        IconButton(
-          onPressed: () {
-            context.go(Screen.settingsView.path);
-          },
-          icon: SvgPicture.asset(
-            GypseIcon.settings.path,
-            semanticsLabel: "Paramètres",
-            height: Dimensions.iconS(context).height,
-          ),
-          highlightColor:
-              Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-        ),
-      ],
     );
   }
 }

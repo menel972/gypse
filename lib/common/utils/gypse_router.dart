@@ -8,6 +8,7 @@ import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/gameHubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
+import 'package:gypse/gameHubs/presentation/views/multi_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
 import 'package:gypse/gameHubs/presentation/views/book_screen.dart';
@@ -43,10 +44,6 @@ GoRouter gypseRouter = GoRouter(
       path: Screen.homeView.path,
       builder: (context, state) => HomeScreen(),
     ),
-    // NOTE : BOOK SCREEN
-    GoRoute(
-        path: Screen.booksView.path,
-        builder: (context, state) => const BookScreen()),
     // NOTE : GAME SCREEN
     GoRoute(
       path: '${Screen.gameView.path}/:book',
@@ -65,6 +62,16 @@ GoRouter gypseRouter = GoRouter(
             .firstWhere((e) => e.name == state.pathParameters['mode']!);
         return GameHubScreen(mode);
       },
+      routes: [
+        GoRoute(
+          path: Screen.multiView.path,
+          builder: (context, state) => const MultiScreen(),
+        ),
+        GoRoute(
+          path: Screen.booksView.path,
+          builder: (context, state) => const BookScreen(),
+        ),
+      ],
     ),
     // NOTE : Settings SCREEN
     GoRoute(

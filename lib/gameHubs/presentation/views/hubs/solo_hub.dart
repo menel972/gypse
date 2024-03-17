@@ -10,6 +10,7 @@ class SoloHub extends StatelessWidget {
       mainAxisSpacing: Dimensions.xxs(context).width,
       crossAxisSpacing: Dimensions.xxs(context).width,
       physics: const ClampingScrollPhysics(),
+      childAspectRatio: 1,
       padding: EdgeInsets.symmetric(
         horizontal: Dimensions.xxs(context).width,
         vertical: Dimensions.xs(context).height,
@@ -25,7 +26,8 @@ class SoloHub extends StatelessWidget {
           title: 'Choix du livre',
           icon: GypseIcon.target.path,
           mode: GameMode.solo,
-          onTap: () => context.go(Screen.booksView.path),
+          onTap: () => context.go(
+              '${Screen.hubView.path}/${GameMode.solo.name}/${Screen.booksView.path}'),
         ),
       ],
     );

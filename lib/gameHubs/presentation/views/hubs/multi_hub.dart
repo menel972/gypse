@@ -19,7 +19,8 @@ class MultiHub extends StatelessWidget {
           title: 'Duel',
           icon: GypseIcon.duel.path,
           mode: GameMode.multi,
-          onTap: () => context.go('${Screen.gameView.path}/ '),
+          onTap: () => context.go(
+              '${Screen.hubView.path}/${GameMode.multi.name}/${Screen.multiView.path}'),
         ),
       ],
     );

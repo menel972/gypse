@@ -12,15 +12,14 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
-import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/gameHubs/presentation/views/states/book_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-part 'books/book_view.dart';
 part 'books/book_app_bar.dart';
+part 'books/book_view.dart';
 
 class BookScreen extends HookConsumerWidget {
   const BookScreen({super.key});

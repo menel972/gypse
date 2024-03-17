@@ -4,6 +4,7 @@ enum Screen {
   authView('/auth'),
   homeView('/home'),
   gameView('/game'),
+  hubView('/hub'),
   booksView('/books'),
   tutorialView('tutorial'),
   settingsView('/settings'),

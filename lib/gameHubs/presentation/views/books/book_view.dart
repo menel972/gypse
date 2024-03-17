@@ -1,18 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gypse/common/providers/questions_provider.dart';
-import 'package:gypse/common/providers/user_provider.dart';
-import 'package:gypse/common/style/cards.dart';
-import 'package:gypse/common/style/fonts.dart';
-import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/books_enum.dart';
-import 'package:gypse/common/utils/enums/assets_enum.dart';
-import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/game/presentation/models/ui_question.dart';
-import 'package:gypse/home/presentation/views/widgets/book/states/book_state.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+part of '../book_screen.dart';
 
 class BookView extends HookConsumerWidget {
   late List<Books> books;
@@ -30,7 +18,7 @@ class BookView extends HookConsumerWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: Dimensions.screen(context).height * 0.07,
+        top: Dimensions.xxxs(context).height,
         left: Dimensions.xxs(context).width,
         right: Dimensions.xxs(context).width,
       ),

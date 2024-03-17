@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:games_services/games_services.dart';
@@ -10,17 +8,26 @@ import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cas
 import 'package:gypse/common/providers/data_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/anonymous_dialogs.dart';
+import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/dialogs.dart';
+import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
+import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
-import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
-import 'package:gypse/home/presentation/views/widgets/home_navigation_bar.dart';
-import 'package:gypse/home/presentation/views/widgets/navigation/home_view.dart';
-import 'package:gypse/home/presentation/views/widgets/stats/user_stats_view.dart';
+import 'package:gypse/home/presentation/views/widgets/dialogs/no_data_dialog.dart';
+import 'package:gypse/home/presentation/views/widgets/navigation/widgets/carousel_view.dart';
+import 'package:gypse/home/presentation/views/widgets/stats/states/stats_states.dart';
+import 'package:gypse/home/presentation/views/widgets/stats/widgets/book_stats_view.dart';
+import 'package:gypse/home/presentation/views/widgets/stats/widgets/global_stats_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+part 'widgets/home_navigation_bar.dart';
+part 'widgets/navigation/home_view.dart';
+part 'widgets/stats/user_stats_view.dart';
 
 class HomeScreen extends HookConsumerWidget {
   late int navigationIndex;
@@ -64,48 +71,27 @@ class HomeScreen extends HookConsumerWidget {
                   children: [
                     [
                       const HomeView(),
-                      const BookScreen(),
                       const UserStatsView(),
                     ][navigationIndex],
                     Positioned(
                       top: 0,
                       right: Dimensions.xxs(context).width,
-                      child: Wrap(
-                        spacing: Dimensions.xs(context).width,
-                        children: [
-                          if (Platform.isIOS)
-                            IconButton(
-                              onPressed: () async {
-                                Achievements.showAchievements();
-                              },
-                              icon: SvgPicture.asset(
-                                GypseIcon.trophy.path,
-                                semanticsLabel: "Récompenses",
-                                height: Dimensions.iconS(context).height,
-                              ),
-                              highlightColor: Theme.of(context)
-                                  .colorScheme
-                                  .secondary
-                                  .withOpacity(0.2),
-                            ),
-                          IconButton(
-                            onPressed: () {
-                              ref
-                                  .read(logActionUseCaseProvider)
-                                  .invoke(cta: 'settings');
-                              context.go(Screen.settingsView.path);
-                            },
-                            icon: SvgPicture.asset(
-                              GypseIcon.settings.path,
-                              semanticsLabel: "Paramètres",
-                              height: Dimensions.iconS(context).height,
-                            ),
-                            highlightColor: Theme.of(context)
-                                .colorScheme
-                                .secondary
-                                .withOpacity(0.2),
-                          ),
-                        ],
+                      child: IconButton(
+                        onPressed: () {
+                          ref
+                              .read(logActionUseCaseProvider)
+                              .invoke(cta: 'settings');
+                          context.go(Screen.settingsView.path);
+                        },
+                        icon: SvgPicture.asset(
+                          GypseIcon.settings.path,
+                          semanticsLabel: "Paramètres",
+                          height: Dimensions.iconS(context).height,
+                        ),
+                        highlightColor: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.2),
                       ),
                     ),
                   ],

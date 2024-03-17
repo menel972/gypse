@@ -29,3 +29,24 @@ enum Time {
   final int seconds;
   const Time(this.seconds);
 }
+
+/// Represents the different game modes available.
+enum GameMode {
+  /// Solo game mode.
+  solo,
+
+  /// Multiplayer game mode.
+  multi,
+
+  /// Book game mode.
+  book,
+
+  /// Random game mode.
+  random,
+
+  /// Confrontation game mode.
+  confrontation,
+
+  /// Time-based game mode.
+  time,
+}

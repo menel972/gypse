@@ -12,6 +12,7 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -277,4 +278,74 @@ class GypseContainerGradient extends Container {
 
   @override
   EdgeInsetsGeometry? get padding => pad ?? Dimensions.xxs(context).pad();
+}
+
+class GameHubItem extends StatelessWidget {
+  final String title;
+  final String icon;
+  final GameMode mode;
+  final Function() onTap;
+
+  GameHubItem(
+      {required this.title,
+      required this.icon,
+      required this.mode,
+      required this.onTap,
+      super.key});
+
+  bool get isMultiMode =>
+      mode == GameMode.multi ||
+      mode == GameMode.random ||
+      mode == GameMode.time;
+
+  final List<Color> soloColors = [
+    const Color.fromRGBO(207, 109, 18, 1),
+    const Color.fromRGBO(255, 178, 102, 1),
+  ];
+
+  final List<Color> multiColors = [
+    const Color.fromRGBO(53, 78, 171, 1),
+    const Color.fromRGBO(99, 122, 207, 1),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: isMultiMode ? multiColors : soloColors,
+            stops: const [0.4, 1],
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Stack(
+          children: [
+            Dimensions.xs(context).padding(
+              Text(
+                title,
+                style: const GypseFont.l(bold: true),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Positioned(
+              bottom: -20,
+              left: -50,
+              child: SvgPicture.asset(icon,
+                  height: Dimensions.screen(context).height * 0.15,
+                  colorFilter: ColorFilter.mode(
+                    isMultiMode
+                        ? Theme.of(context).colorScheme.primary.withOpacity(0.6)
+                        : Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  )),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

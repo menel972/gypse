@@ -1,17 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/material.dart';
-import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
-import 'package:gypse/common/providers/user_provider.dart';
-import 'package:gypse/common/style/dialogs.dart';
-import 'package:gypse/common/style/fonts.dart';
-import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/path_enum.dart';
-import 'package:gypse/home/presentation/views/widgets/dialogs/no_data_dialog.dart';
-import 'package:gypse/home/presentation/views/widgets/stats/states/stats_states.dart';
-import 'package:gypse/home/presentation/views/widgets/stats/widgets/book_stats_view.dart';
-import 'package:gypse/home/presentation/views/widgets/stats/widgets/global_stats_view.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+part of '../../home_screen.dart';
 
 class UserStatsView extends HookConsumerWidget {
   const UserStatsView({super.key});

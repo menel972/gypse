@@ -10,11 +10,10 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
-import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 
 class AnswersView extends StatelessWidget {
   const AnswersView({super.key});
@@ -60,7 +59,7 @@ class AnswersView extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: SvgPicture.asset(
-                      '$imagesPath/logo_gypse_blue.svg',
+                      GypseLogo.hybrid.path,
                       height: Dimensions.m(context).height,
                     ).animate(effects: [
                       FadeEffect(

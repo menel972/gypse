@@ -1,15 +1,25 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+part of 'tutorial_cubit.dart';
 
-///<i><small>`Presenation Layer`</small></i>
-///
-/// Documentation here
-class TutorialStateNotifier extends StateNotifier<int> {
-  TutorialStateNotifier() : super(0);
+class TutorialState extends Equatable {
+  final int index;
+  final StateStatus status;
 
-  void setCurrentIndex(int index) => state = index;
+  const TutorialState({required this.index, required this.status});
+  const TutorialState.initial({
+    this.index = 0,
+    this.status = StateStatus.initial,
+  });
+
+  @override
+  List<Object?> get props => [index, status];
+
+  TutorialState copyWith({
+    int? index,
+    StateStatus? status,
+  }) {
+    return TutorialState(
+      index: index ?? this.index,
+      status: status ?? this.status,
+    );
+  }
 }
-
-final tutorialStateNotifierProvider =
-    StateNotifierProvider.autoDispose<TutorialStateNotifier, int>((ref) {
-  return TutorialStateNotifier();
-});

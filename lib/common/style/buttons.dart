@@ -81,7 +81,7 @@ class GypseButton extends ElevatedButton {
   @override
   Widget? get child => Text(
         label,
-        style: GypseFont.s(color: textColor),
+        style: GypseFont.s(color: textColor, bold: true),
         maxLines: 1,
       );
 

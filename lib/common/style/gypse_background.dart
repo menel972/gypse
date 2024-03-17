@@ -40,12 +40,7 @@ class GypseLoading extends Scaffold {
             Expanded(
               child: SvgPicture.asset(
                 GypseLogo.orangeText.path,
-                width: Dimensions.xxl(context).width,
               ),
-              // child: Image.asset(
-              //   '$imagesPath/logo_gypse_splash.png',
-              //   width: Dimensions.xxxl(context).width,
-              // ),
             ),
             Dimensions.xs(context).padding(Text(
               message ?? '',

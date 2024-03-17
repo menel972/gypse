@@ -67,7 +67,19 @@ enum GypseIcon {
   arrowRight('assets/icons/prop=ArrowRight.svg'),
 
   /// Refresh icon.
-  refresh('assets/icons/prop=Refresh.svg');
+  refresh('assets/icons/prop=Refresh.svg'),
+
+  /// Shuffle icon.
+  shuffle('assets/icons/prop=Shuffle.svg'),
+
+  /// Target icon.
+  target('assets/icons/prop=Target.svg'),
+
+  /// Duel icon.
+  duel('assets/icons/prop=Duel.svg'),
+
+  /// Multi icon.
+  multi('assets/icons/prop=Multi.svg');
 
   final String path;
   const GypseIcon(this.path);

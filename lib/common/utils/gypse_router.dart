@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
+import 'package:gypse/gameHubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
-import 'package:gypse/home/presentation/views/widgets/book/book_screen.dart';
+import 'package:gypse/gameHubs/presentation/views/book_screen.dart';
 import 'package:gypse/recap/presentation/views/recap_screen.dart';
 import 'package:gypse/settings/presentation/views/settings_screen.dart';
 import 'package:gypse/settings/presentation/views/widgets/about_gypse/about_gypse.dart';
@@ -55,6 +57,15 @@ GoRouter gypseRouter = GoRouter(
         return true;
       },
     ),
+    // NOTE : HUB SCREENS
+    GoRoute(
+      path: '${Screen.hubView.path}/:mode',
+      builder: (context, state) {
+        final GameMode mode = GameMode.values
+            .firstWhere((e) => e.name == state.pathParameters['mode']!);
+        return GameHubScreen(mode);
+      },
+    ),
     // NOTE : Settings SCREEN
     GoRoute(
       path: Screen.settingsView.path,
@@ -66,7 +77,7 @@ GoRouter gypseRouter = GoRouter(
         ),
         GoRoute(
           path: Screen.tutorialView.path,
-          builder: (context, state) => TutorialScreen(),
+          builder: (context, state) => const TutorialScreen(),
         ),
         GoRoute(
           path: Screen.profileSettings.path,

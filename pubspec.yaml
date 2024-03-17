@@ -115,10 +115,6 @@ flutter:
     - family: NotoSansDisplay
       fonts:
         - asset: assets/fonts/NotoSansDisplay-VariableFont_wdth,wght.ttf
-    - family: Montserrat
-      fonts:
-        - asset: assets/fonts/Montserrat-VariableFont_wght.ttf
-        - asset: assets/fonts/Montserrat-italic-VariableFont_wght.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

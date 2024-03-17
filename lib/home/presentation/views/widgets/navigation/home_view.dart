@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
-import 'package:gypse/common/style/buttons.dart';
-import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/path_enum.dart';
-import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/home/presentation/views/widgets/navigation/widgets/carousel_view.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+part of '../../home_screen.dart';
 
 class HomeView extends HookConsumerWidget {
   const HomeView({super.key});
@@ -20,16 +12,23 @@ class HomeView extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(child: CarouselView()),
-        Dimensions.s(context).paddingW(
+        Dimensions.xs(context).paddingW(
           GypseButton.orange(
             context,
             onPressed: () {
-              ref
-                  .read(logNavigationUseCaseProvider)
-                  .invoke(from: Screen.homeView.path, to: Screen.gameView.path);
-              context.go('${Screen.gameView.path}/ ');
+              context.go('${Screen.hubView.path}/${GameMode.solo.name}');
             },
-            label: 'Mode aléatoire',
+            label: 'Solo',
+          ),
+        ),
+        Dimensions.xxs(context).spaceH(),
+        Dimensions.xs(context).paddingW(
+          GypseButton.outlined(
+            context,
+            onPressed: () {
+              context.go('${Screen.hubView.path}/${GameMode.multi.name}');
+            },
+            label: 'Multijoueur',
           ),
         ),
         Dimensions.xs(context).spaceH(),

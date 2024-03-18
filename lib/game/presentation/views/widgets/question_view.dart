@@ -1,15 +1,4 @@
-// ignore_for_file: must_be_immutable
-
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gypse/common/style/fonts.dart';
-import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/state_enum.dart';
-import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
-import 'package:gypse/game/presentation/views/states/game_state.dart';
-import 'package:gypse/game/presentation/views/widgets/difficulty_icon.dart';
+part of '../game_screen.dart';
 
 class QuestionView extends StatelessWidget {
   const QuestionView({super.key});

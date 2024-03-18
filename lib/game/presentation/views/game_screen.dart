@@ -1,14 +1,18 @@
 import 'dart:io';
 
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/data_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/style/tiles.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
@@ -16,17 +20,20 @@ import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
+import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
+import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
 import 'package:gypse/game/presentation/views/no_question_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
-import 'package:gypse/game/presentation/views/widgets/answers_view.dart';
-import 'package:gypse/game/presentation/views/widgets/question_view.dart';
+import 'package:gypse/game/presentation/views/widgets/difficulty_icon.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+part 'widgets/answers_view.dart';
 part 'widgets/games_app_bar.dart';
+part 'widgets/question_view.dart';
 
 class GameScreen extends HookConsumerWidget {
   final UiGameMode params;

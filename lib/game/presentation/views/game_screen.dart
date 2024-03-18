@@ -22,7 +22,7 @@ import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
-import 'package:gypse/game/presentation/views/dialogs/game_end_dialog.dart';
+import 'package:gypse/game/presentation/views/dialogs/end_game_dialog.dart';
 import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
 import 'package:gypse/game/presentation/views/no_question_screen.dart';

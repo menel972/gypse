@@ -18,7 +18,7 @@ class MultiListView extends StatelessWidget {
             slivers: [
               SliverPersistentHeader(
                 floating: true,
-                delegate: _SliverAppBarDelegate(
+                delegate: SliverAppBarDelegate(
                   maxHeight: 60,
                   minHeight: 60,
                   child: GypseButton.orange(
@@ -30,7 +30,7 @@ class MultiListView extends StatelessWidget {
               ),
               SliverPersistentHeader(
                 pinned: true,
-                delegate: _SliverAppBarDelegate(
+                delegate: SliverAppBarDelegate(
                   maxHeight: Dimensions.xs(context).height,
                   minHeight: Dimensions.xxs(context).height,
                   child: Container(
@@ -38,38 +38,15 @@ class MultiListView extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  child: Container(
-                    color: Theme.of(context).colorScheme.primary,
-                    child: const Text(
-                      'À toi de jouer',
-                      style: GypseFont.m(bold: true),
-                    ),
-                  ),
-                ),
-              ),
-              SliverList.separated(
-                separatorBuilder: (context, index) =>
-                    Dimensions.xxxs(context).spaceH(),
-                itemBuilder: (context, index) {
-                  if (state.status != StateStatus.success) {
-                    return const MultiGameCardSkeleton();
-                  }
-
-                  final UiMultiGame game = state.yourTurnList![index];
-
-                  return MultiGameCard(
-                    mode: game.mode,
-                    player: game.players[1],
-                  );
-                },
-                itemCount: state.yourTurnList?.length ?? 2,
+              ...multiListViewItem(
+                context,
+                title: 'A toi de jouer',
+                list: state.yourTurnList,
+                status: state.status,
               ),
               SliverPersistentHeader(
                 pinned: true,
-                delegate: _SliverAppBarDelegate(
+                delegate: SliverAppBarDelegate(
                   maxHeight: Dimensions.xxs(context).height,
                   minHeight: Dimensions.xxs(context).height,
                   child: Container(
@@ -77,38 +54,15 @@ class MultiListView extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  child: Container(
-                    color: Theme.of(context).colorScheme.primary,
-                    child: const Text(
-                      'En attente de',
-                      style: GypseFont.m(bold: true),
-                    ),
-                  ),
-                ),
-              ),
-              SliverList.separated(
-                separatorBuilder: (context, index) =>
-                    Dimensions.xxxs(context).spaceH(),
-                itemBuilder: (context, index) {
-                  if (state.status != StateStatus.success) {
-                    return const MultiGameCardSkeleton();
-                  }
-
-                  final UiMultiGame game = state.waitingList![index];
-
-                  return MultiGameCard(
-                    mode: game.mode,
-                    player: game.players[1],
-                  );
-                },
-                itemCount: state.waitingList?.length ?? 2,
+              ...multiListViewItem(
+                context,
+                title: 'En attente',
+                list: state.waitingList,
+                status: state.status,
               ),
               SliverPersistentHeader(
                 pinned: true,
-                delegate: _SliverAppBarDelegate(
+                delegate: SliverAppBarDelegate(
                   maxHeight: Dimensions.xxs(context).height,
                   minHeight: Dimensions.xxs(context).height,
                   child: Container(
@@ -116,34 +70,11 @@ class MultiListView extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  child: Container(
-                    color: Theme.of(context).colorScheme.primary,
-                    child: const Text(
-                      'Terminées',
-                      style: GypseFont.m(bold: true),
-                    ),
-                  ),
-                ),
-              ),
-              SliverList.separated(
-                separatorBuilder: (context, index) =>
-                    Dimensions.xxxs(context).spaceH(),
-                itemBuilder: (context, index) {
-                  if (state.status != StateStatus.success) {
-                    return const MultiGameCardSkeleton();
-                  }
-
-                  final UiMultiGame game = state.finishedList![index];
-
-                  return MultiGameCard(
-                    mode: game.mode,
-                    player: game.players[1],
-                  );
-                },
-                itemCount: state.finishedList?.length ?? 2,
+              ...multiListViewItem(
+                context,
+                title: 'Parties terminées',
+                list: state.finishedList,
+                status: state.status,
               ),
             ],
           ),
@@ -151,32 +82,4 @@ class MultiListView extends StatelessWidget {
       },
     );
   }
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-  final double maxHeight;
-  final double minHeight;
-
-  const _SliverAppBarDelegate({
-    required this.child,
-    this.maxHeight = 50,
-    this.minHeight = 50,
-  });
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox.expand(child: child);
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
-
-  @override
-  double get maxExtent => maxHeight;
-
-  @override
-  double get minExtent => minHeight;
 }

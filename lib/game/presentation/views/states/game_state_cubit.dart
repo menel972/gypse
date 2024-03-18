@@ -38,7 +38,7 @@ class GameStateCubit extends Cubit<GameState> {
     'INIT'.log(tag: 'STATE');
 
     emit(state.copyWith(
-        mode: GameMode.confrontation, status: StateStatus.loading));
+        mode: params.mode, status: StateStatus.loading));
 
     _setTimeController();
     _setSettings();

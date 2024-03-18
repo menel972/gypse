@@ -364,10 +364,12 @@ class GameHubItem extends StatelessWidget {
 class MultiGameCard extends StatelessWidget {
   final GameMode mode;
   final String player;
+  final Function() onTap;
 
   const MultiGameCard({
     required this.mode,
     required this.player,
+    required this.onTap,
     super.key,
   });
 
@@ -384,27 +386,30 @@ class MultiGameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GypseContainer(
-      context,
-      pad: EdgeInsets.symmetric(
-        horizontal: Dimensions.xs(context).width,
-        vertical: Dimensions.xxxs(context).height,
-      ),
-      child: Row(
-        children: [
-          SvgPicture.asset(icon,
-              width: Dimensions.s(context).width,
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.primary,
-                BlendMode.srcIn,
-              )),
-          Dimensions.xs(context).spaceW(),
-          Expanded(
-              child: Text(
-            player.toUpperCase(),
-            style: const GypseFont.m(),
-          )),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: GypseContainer(
+        context,
+        pad: EdgeInsets.symmetric(
+          horizontal: Dimensions.xs(context).width,
+          vertical: Dimensions.xxxs(context).height,
+        ),
+        child: Row(
+          children: [
+            SvgPicture.asset(icon,
+                width: Dimensions.s(context).width,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.primary,
+                  BlendMode.srcIn,
+                )),
+            Dimensions.xs(context).spaceW(),
+            Expanded(
+                child: Text(
+              player.toUpperCase(),
+              style: const GypseFont.m(),
+            )),
+          ],
+        ),
       ),
     );
   }

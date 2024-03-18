@@ -38,7 +38,7 @@ class QuitDialog extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'QUITTER LA PARTIE',
+              state.isMultiMode ? 'ABANDONNER LA PARTIE' : 'QUITTER LA PARTIE',
               style: GypseFont.l(
                 bold: true,
                 color: Theme.of(context).colorScheme.error,
@@ -49,7 +49,9 @@ class QuitDialog extends HookConsumerWidget {
             ),
             Dimensions.xs(context).spaceH(),
             Text(
-              'Es-tu sûr.e de vouloir quitter la partie ?',
+              state.isMultiMode
+                  ? 'Es-tu sûr.e de vouloir abandonner la partie ?'
+                  : 'Es-tu sûr.e de vouloir quitter la partie ?',
               style: GypseFont.m(color: Theme.of(context).colorScheme.primary),
               maxLines: 3,
               textAlign: TextAlign.center,
@@ -60,7 +62,7 @@ class QuitDialog extends HookConsumerWidget {
               Expanded(
                   child: GypseButton.red(
                 context,
-                label: 'Quitter',
+                label: state.isMultiMode ? 'Abandonner' : 'Quitter',
                 onPressed: () async {
                   unawaited(updateUser(context, user));
 

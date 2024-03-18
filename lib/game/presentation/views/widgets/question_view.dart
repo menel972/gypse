@@ -61,7 +61,9 @@ class QuestionView extends StatelessWidget {
                     height: Dimensions.xs(context).height,
                     fillColor: Theme.of(context).colorScheme.primary,
                     ringColor: Theme.of(context).colorScheme.secondary,
-                    duration: state.settings.time.seconds,
+                    duration: state.mode == GameMode.time
+                        ? 60
+                        : state.settings.time.seconds,
                     textFormat: 's',
                     textStyle: const GypseFont.l(),
                     isReverse: true,

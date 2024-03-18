@@ -2,12 +2,15 @@
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
@@ -60,6 +63,16 @@ class GameStateCubit extends Cubit<GameState> {
     restart();
   }
 
+  Future<void> endGame() async {
+    'END GAME'.log(tag: 'STATE');
+    emit(state.copyWith(status: StateStatus.partialLoading));
+
+    _slideDown();
+    // send recap to the server
+    await Future.delayed(const Duration(milliseconds: 900));
+    ctx?.go(Screen.homeView.path);
+  }
+
   void saveGameState(int index) {
     'SAVE GAME STATE'.log(tag: 'STATE');
 
@@ -72,6 +85,11 @@ class GameStateCubit extends Cubit<GameState> {
 
   void onTimeOut() {
     'ON TIME OUT'.log(tag: 'STATE');
+
+    if (state.mode == GameMode.time) {
+      emit(state.copyWith(status: StateStatus.finish));
+      return;
+    }
 
     emit(state.copyWith(selectedAnswers: [0, 1, 2, 3]));
   }
@@ -229,6 +247,8 @@ class GameStateCubit extends Cubit<GameState> {
 
   void _updateRecap() {
     'UPDATE RECAP'.log(tag: 'STATE');
+
+    emit(state.copyWith(recap: [...state.recap, state]));
 
     _recapNotifier.addGame(state);
   }

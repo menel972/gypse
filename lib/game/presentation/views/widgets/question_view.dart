@@ -29,12 +29,12 @@ class QuestionView extends StatelessWidget {
                     DifficultyIcon(context, state.settings.level),
                   if (state.mode == GameMode.confrontation)
                     Text(
-                      '${state.recap.length + 1} / ${state.questions.length}',
+                      '${state.recap.length} / ${state.questions.length}',
                       style: const GypseFont.m(),
                     ),
                   if (state.mode == GameMode.time)
                     Text(
-                      '${state.recap.length + 1}',
+                      '${state.recap.length}',
                       style: const GypseFont.m(),
                     ),
                 ],

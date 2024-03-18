@@ -22,6 +22,7 @@ import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
+import 'package:gypse/game/presentation/views/dialogs/game_end_dialog.dart';
 import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
 import 'package:gypse/game/presentation/views/no_question_screen.dart';
@@ -54,6 +55,23 @@ class GameScreen extends HookConsumerWidget {
 
         if (state.status == StateStatus.finish) {
           'FINISH'.log(tag: 'STATE');
+
+          if (state.mode == GameMode.confrontation) {
+            context.read<GameStateCubit>().endGame();
+            return;
+          }
+
+          if (state.mode == GameMode.time) {
+            GypseDialog(
+              context,
+              height: Dimensions.xl(context).height,
+              onDismiss: () => context.read<GameStateCubit>().endGame(),
+              dismissible: false,
+              child: const EndGameDialog(),
+            );
+            return;
+          }
+
           GypseDialog(
             context,
             height: Dimensions.xl(context).height,

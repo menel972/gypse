@@ -112,28 +112,43 @@ class AnswersView extends StatelessWidget {
                     visible: state.selectedAnswers.isNotEmpty,
                     child: SafeArea(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Expanded(
-                            child: GypseButton.grey(
+                          if (state.mode != GameMode.confrontation)
+                            Expanded(
+                              child: GypseButton.grey(
+                                context,
+                                onPressed: () {
+                                  'Voir le verset'.log(tag: 'ANSWER VIEW');
+                                  VerseModal(context);
+                                },
+                                label: 'Voir le verset',
+                              ),
+                            ),
+                          if (state.mode != GameMode.confrontation)
+
+                          Dimensions.xs(context).spaceW(),
+                          if (state.mode == GameMode.confrontation &&
+                              state.recap.length == state.questions.length)
+                            Expanded(
+                              child: GypseButton.blue(context,
+                                  label: 'Terminer', onPressed: () {
+                                context
+                                    .read<GameStateCubit>()
+                                    .updateStatus(StateStatus.finish);
+                              }),
+                            )
+                          else
+                            GypseCircularButton(
                               context,
                               onPressed: () {
-                                'Voir le verset'.log(tag: 'ANSWER VIEW');
-                                VerseModal(context);
+                                context
+                                    .read<GameStateCubit>()
+                                    .updateStatus(StateStatus.reloading);
                               },
-                              label: 'Voir le verset',
+                              icon: GypseIcon.arrowRight.path,
+                              iconSize: Dimensions.iconL(context).width,
                             ),
-                          ),
-                          Dimensions.xs(context).spaceW(),
-                          GypseCircularButton(
-                            context,
-                            onPressed: () async {
-                              context
-                                  .read<GameStateCubit>()
-                                  .updateStatus(StateStatus.reloading);
-                            },
-                            icon: GypseIcon.arrowRight.path,
-                            iconSize: Dimensions.iconL(context).width,
-                          ),
                         ],
                       ),
                     ),

@@ -5,91 +5,150 @@ class MultiListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverPersistentHeader(
-          pinned: true,
-          delegate: _SliverAppBarDelegate(
-            maxHeight: 60,
-            minHeight: 60,
-            child: GypseButton.orange(
-              context,
-              label: 'Nouvelle partie',
-              onPressed: () {},
-            ),
-          ),
-        ),
-        SliverPersistentHeader(
-          pinned: true,
-          delegate: _SliverAppBarDelegate(
-            maxHeight: Dimensions.xs(context).height,
-            minHeight: Dimensions.xs(context).height,
-            child: Container(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-        ),
-        SliverPersistentHeader(
-          pinned: true,
-          delegate: _SliverAppBarDelegate(
-            child: Container(
-              color: Theme.of(context).colorScheme.primary,
-              child: const Text(
-                'À toi de jouer',
-                style: GypseFont.m(bold: true),
+    return BlocBuilder<MultiGameCubit, MultiGameState>(
+      builder: (context, state) {
+        if (state.status == StateStatus.initial) {
+          context.read<MultiGameCubit>().fetchGames();
+        }
+
+        return RefreshIndicator(
+          onRefresh: () => context.read<MultiGameCubit>().fetchGames(),
+          color: Theme.of(context).colorScheme.secondary,
+          child: CustomScrollView(
+            slivers: [
+              SliverPersistentHeader(
+                floating: true,
+                delegate: _SliverAppBarDelegate(
+                  maxHeight: 60,
+                  minHeight: 60,
+                  child: GypseButton.orange(
+                    context,
+                    label: 'Nouvelle partie',
+                    onPressed: () {},
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        SliverList.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('Item $index'),
-            );
-          },
-          itemCount: 3,
-        ),
-        SliverPersistentHeader(
-          pinned: true,
-          delegate: _SliverAppBarDelegate(
-            child: Container(
-              color: Theme.of(context).colorScheme.primary,
-              child: const Text(
-                'En attente de',
-                style: GypseFont.m(bold: true),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  maxHeight: Dimensions.xs(context).height,
+                  minHeight: Dimensions.xxs(context).height,
+                  child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        SliverList.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('Item $index'),
-            );
-          },
-          itemCount: 3,
-        ),
-        SliverPersistentHeader(
-          pinned: true,
-          delegate: _SliverAppBarDelegate(
-            child: Container(
-              color: Theme.of(context).colorScheme.primary,
-              child: const Text(
-                'Terminées',
-                style: GypseFont.m(bold: true),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                    child: const Text(
+                      'À toi de jouer',
+                      style: GypseFont.m(bold: true),
+                    ),
+                  ),
+                ),
               ),
-            ),
+              SliverList.separated(
+                separatorBuilder: (context, index) =>
+                    Dimensions.xxxs(context).spaceH(),
+                itemBuilder: (context, index) {
+                  if (state.status != StateStatus.success) {
+                    return const MultiGameCardSkeleton();
+                  }
+
+                  final UiMultiGame game = state.yourTurnList![index];
+
+                  return MultiGameCard(
+                    mode: game.mode,
+                    player: game.players[1],
+                  );
+                },
+                itemCount: state.yourTurnList?.length ?? 2,
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  maxHeight: Dimensions.xxs(context).height,
+                  minHeight: Dimensions.xxs(context).height,
+                  child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                    child: const Text(
+                      'En attente de',
+                      style: GypseFont.m(bold: true),
+                    ),
+                  ),
+                ),
+              ),
+              SliverList.separated(
+                separatorBuilder: (context, index) =>
+                    Dimensions.xxxs(context).spaceH(),
+                itemBuilder: (context, index) {
+                  if (state.status != StateStatus.success) {
+                    return const MultiGameCardSkeleton();
+                  }
+
+                  final UiMultiGame game = state.waitingList![index];
+
+                  return MultiGameCard(
+                    mode: game.mode,
+                    player: game.players[1],
+                  );
+                },
+                itemCount: state.waitingList?.length ?? 2,
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  maxHeight: Dimensions.xxs(context).height,
+                  minHeight: Dimensions.xxs(context).height,
+                  child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                    child: const Text(
+                      'Terminées',
+                      style: GypseFont.m(bold: true),
+                    ),
+                  ),
+                ),
+              ),
+              SliverList.separated(
+                separatorBuilder: (context, index) =>
+                    Dimensions.xxxs(context).spaceH(),
+                itemBuilder: (context, index) {
+                  if (state.status != StateStatus.success) {
+                    return const MultiGameCardSkeleton();
+                  }
+
+                  final UiMultiGame game = state.finishedList![index];
+
+                  return MultiGameCard(
+                    mode: game.mode,
+                    player: game.players[1],
+                  );
+                },
+                itemCount: state.finishedList?.length ?? 2,
+              ),
+            ],
           ),
-        ),
-        SliverList.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('Item $index'),
-            );
-          },
-          itemCount: 13,
-        ),
-      ],
+        );
+      },
     );
   }
 }

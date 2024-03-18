@@ -75,6 +75,12 @@ enum GypseIcon {
   /// Target icon.
   target('assets/icons/prop=Target.svg'),
 
+  /// Swords icon.
+  swords('assets/icons/prop=Swords.svg'),
+
+  /// Timer icon.
+  timer('assets/icons/prop=Timer.svg'),
+
   /// Duel icon.
   duel('assets/icons/prop=Duel.svg'),
 

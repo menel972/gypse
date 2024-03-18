@@ -10,6 +10,7 @@ import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/strings.dart';
+import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 
 part 'hubs/hub_app_bar.dart';
 part 'hubs/solo_hub.dart';

@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
@@ -9,12 +10,12 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/colors.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
-import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/gypse_router.dart';
+import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -37,7 +38,10 @@ class HomeCarouselCard extends GestureDetector {
               to: Screen.gameView.path,
               details: book.fr,
             );
-        context.go('${Screen.gameView.path}/${book.fr}');
+        context.go(
+          Screen.gameView.path,
+          extra: UiGameMode(mode: GameMode.book, book: book),
+        );
       };
 
   @override
@@ -84,8 +88,10 @@ class HomeCarouselCard extends GestureDetector {
                 child: GypseSmallButton(
                   context,
                   label: 'Jouer',
-                  onPressed: () =>
-                      context.go('${Screen.gameView.path}/${book.fr}'),
+                  onPressed: () => context.go(
+                    Screen.gameView.path,
+                    extra: UiGameMode(mode: GameMode.book, book: book),
+                  ),
                 ),
               ),
             ],
@@ -115,7 +121,10 @@ class BookFilterCard extends GestureDetector {
               to: Screen.gameView.path,
               details: book.fr,
             );
-        ctx?.go('${Screen.gameView.path}/${book.fr}', extra: !isEnabled);
+        context.go(
+          Screen.gameView.path,
+          extra: UiGameMode(mode: GameMode.book, book: book),
+        );
       };
 
   @override
@@ -334,18 +343,108 @@ class GameHubItem extends StatelessWidget {
             Positioned(
               bottom: -20,
               left: -50,
-              child: SvgPicture.asset(icon,
-                  height: Dimensions.screen(context).height * 0.15,
-                  colorFilter: ColorFilter.mode(
-                    isMultiMode
-                        ? Theme.of(context).colorScheme.primary.withOpacity(0.6)
-                        : Theme.of(context).colorScheme.secondary,
-                    BlendMode.srcIn,
-                  )),
+              child: SvgPicture.asset(
+                icon,
+                height: Dimensions.screen(context).height * 0.15,
+                colorFilter: ColorFilter.mode(
+                  isMultiMode
+                      ? Theme.of(context).colorScheme.primary.withOpacity(0.6)
+                      : Theme.of(context).colorScheme.secondary,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class MultiGameCard extends StatelessWidget {
+  final GameMode mode;
+  final String player;
+
+  const MultiGameCard({
+    required this.mode,
+    required this.player,
+    super.key,
+  });
+
+  String get icon {
+    switch (mode) {
+      case GameMode.confrontation:
+        return GypseIcon.swords.path;
+      case GameMode.time:
+        return GypseIcon.timer.path;
+      default:
+        return GypseIcon.multi.path;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GypseContainer(
+      context,
+      pad: EdgeInsets.symmetric(
+        horizontal: Dimensions.xs(context).width,
+        vertical: Dimensions.xxxs(context).height,
+      ),
+      child: Row(
+        children: [
+          SvgPicture.asset(icon,
+              width: Dimensions.s(context).width,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.primary,
+                BlendMode.srcIn,
+              )),
+          Dimensions.xs(context).spaceW(),
+          Expanded(
+              child: Text(
+            player.toUpperCase(),
+            style: const GypseFont.m(),
+          )),
+        ],
+      ),
+    );
+  }
+}
+
+class MultiGameCardSkeleton extends StatelessWidget {
+  const MultiGameCardSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GypseContainer(
+      context,
+      pad: EdgeInsets.symmetric(
+        horizontal: Dimensions.xs(context).width,
+        vertical: Dimensions.xxxs(context).height,
+      ),
+      child: Row(
+        children: [
+          SvgPicture.asset(GypseIcon.multi.path,
+              width: Dimensions.s(context).width,
+              colorFilter: const ColorFilter.mode(
+                Colors.transparent,
+                BlendMode.srcIn,
+              )),
+          Dimensions.xs(context).spaceW(),
+          Expanded(
+              child: Text(
+            'SKELETON'.toUpperCase(),
+            style: const GypseFont.m(color: Colors.transparent),
+          )),
+        ],
+      ),
+    ).animate(
+      onComplete: (controller) => controller.repeat(),
+      effects: [
+        ShimmerEffect(
+          duration: 3.seconds,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+      ],
     );
   }
 }

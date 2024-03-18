@@ -20,6 +20,7 @@ import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
+import 'package:gypse/gameHubs/presentation/views/states/multi_game_cubit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -104,6 +105,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 ref.read(questionsProvider.notifier),
                 ref.read(recapSessionStateNotifierProvider.notifier),
               ),
+            ),
+            BlocProvider<MultiGameCubit>(
+              create: (_) => MultiGameCubit(),
             ),
           ],
           child: MaterialApp.router(

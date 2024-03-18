@@ -1,12 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gypse/common/style/buttons.dart';
+import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
+import 'package:gypse/gameHubs/presentation/views/states/multi_game_cubit.dart';
 
 part 'multi/multi_app_bar.dart';
 part 'multi/multi_list_view.dart';
@@ -23,12 +28,12 @@ class MultiScreen extends StatelessWidget {
         child: MultiAppBar(),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage('$imagesPath/game_bkg.png'),
-            //   fit: BoxFit.cover,
-            // ),
-            ),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage('$imagesPath/game_bkg.png'),
+        //     fit: BoxFit.cover,
+        //   ),
+        //     ),
         child: SafeArea(
             child: Dimensions.xs(context).padding(const MultiListView())),
       ),

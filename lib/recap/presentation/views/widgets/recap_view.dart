@@ -18,7 +18,9 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:gypse/recap/presentation/views/widgets/recap_table_view.dart';
@@ -119,7 +121,10 @@ class RecapView extends HookConsumerWidget {
               GypseButton.grey(
                 context,
                 onPressed: () {
-                  context.go('${Screen.gameView.path}/ ');
+                  context.go(
+                    Screen.gameView.path,
+                    extra: const UiGameMode(mode: GameMode.solo),
+                  );
                   Future(
                       () => ref
                       .read(recapSessionStateNotifierProvider.notifier)

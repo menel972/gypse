@@ -24,7 +24,7 @@ class QuestionView extends StatelessWidget {
 
         return Padding(
           padding: EdgeInsets.only(
-            top: Dimensions.s(context).height,
+            top: Dimensions.xxxs(context).height,
             left: Dimensions.xs(context).width,
             right: Dimensions.xs(context).width,
           ),

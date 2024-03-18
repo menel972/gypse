@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
+import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/gameHubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
@@ -46,8 +47,8 @@ GoRouter gypseRouter = GoRouter(
     ),
     // NOTE : GAME SCREEN
     GoRoute(
-      path: '${Screen.gameView.path}/:book',
-      builder: (context, state) => GameScreen(state.pathParameters['book']!),
+      path: Screen.gameView.path,
+      builder: (context, state) => GameScreen(state.extra as UiGameMode),
       onExit: (context) async {
         Future.delayed(
             1.seconds, () => context.read<GameStateCubit>().dispose());

@@ -8,6 +8,7 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
+import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
@@ -29,14 +30,14 @@ class GameStateCubit extends Cubit<GameState> {
     'CHANGE STATUS - ${state.status}'.log(tag: 'STATE');
   }
 
-  void init(String filter) {
+  void init(UiGameMode params) {
     'INIT'.log(tag: 'STATE');
 
-    emit(state.copyWith(status: StateStatus.loading));
+    emit(state.copyWith(mode: params.mode, status: StateStatus.loading));
 
     _setTimeController();
     _setSettings();
-    _fetchQuestions(filter);
+    _fetchQuestions(params.book?.fr ?? ' ');
     _setAnswers();
 
     emit(state.copyWith(status: StateStatus.success));

@@ -4,7 +4,9 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
+import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/home/presentation/views/states/home_navigation_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -50,7 +52,10 @@ class NoDataDialog extends HookConsumerWidget {
               child: GypseButton.orange(
                 context,
                 label: 'Jouer',
-                onPressed: () => context.go('${Screen.gameView.path}/ '),
+                onPressed: () => context.go(
+                  Screen.gameView.path,
+                  extra: const UiGameMode(mode: GameMode.solo),
+                ),
               ),
             ),
           ],

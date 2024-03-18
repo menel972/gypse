@@ -8,26 +8,31 @@ import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/data_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/dialogs.dart';
+import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/strings.dart';
+import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
 import 'package:gypse/game/presentation/views/no_question_screen.dart';
-import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
+import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/game/presentation/views/widgets/answers_view.dart';
 import 'package:gypse/game/presentation/views/widgets/question_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+part 'widgets/games_app_bar.dart';
+
 class GameScreen extends HookConsumerWidget {
-  final String filter;
+  final UiGameMode params;
 
   const GameScreen(
-    this.filter, {
+    this.params, {
     super.key,
   });
 
@@ -62,7 +67,7 @@ class GameScreen extends HookConsumerWidget {
                     : context.go(Screen.recapSession.path);
               }
             },
-            child: NoQuestionScreen(filter),
+            child: NoQuestionScreen(params.book?.fr ?? ''),
           );
         }
 
@@ -85,10 +90,15 @@ class GameScreen extends HookConsumerWidget {
       },
       builder: (context, state) {
         if (state.status == StateStatus.initial) {
-          context.read<GameStateCubit>().init(filter);
+          context.read<GameStateCubit>().init(params);
         }
 
         return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: GamesAppBar(params.mode),
+          ),
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -96,47 +106,12 @@ class GameScreen extends HookConsumerWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child: SafeArea(
+            child: const SafeArea(
               bottom: false,
-              child: Stack(
+              child: Column(
                 children: [
-                  const Column(
-                    children: [
-                      Expanded(child: QuestionView()),
-                      AnswersView(),
-                    ],
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: Dimensions.xxs(context).width,
-                    child: IconButton(
-                      onPressed: () {
-                        context
-                            .read<GameStateCubit>()
-                            .updateStatus(StateStatus.pause);
-                        GypseDialog(
-                          context,
-                          height: Dimensions.xl(context).height,
-                          onDismiss: () => context
-                              .read<GameStateCubit>()
-                              .updateStatus(StateStatus.resume),
-                          child: QuitDialog(),
-                        );
-                      },
-                      icon: SvgPicture.asset(
-                        Platform.isIOS
-                            ? GypseIcon.arrowLeft.path
-                            : GypseIcon.arrowLeftAndroid.path,
-                        semanticsLabel: "Quitter la partie",
-                        width: Dimensions.iconM(context).width,
-                      ),
-                      iconSize: Dimensions.s(context).width * 0.6,
-                      highlightColor: Theme.of(context)
-                          .colorScheme
-                          .secondary
-                          .withOpacity(0.2),
-                    ),
-                  ),
+                  Expanded(child: QuestionView()),
+                  AnswersView(),
                 ],
               ),
             ),

@@ -20,7 +20,10 @@ class SoloHub extends StatelessWidget {
           title: 'Livre aléatoire',
           icon: GypseIcon.shuffle.path,
           mode: GameMode.solo,
-          onTap: () => context.go('${Screen.gameView.path}/ '),
+          onTap: () => context.go(
+            Screen.gameView.path,
+            extra: const UiGameMode(mode: GameMode.solo),
+          ),
         ),
         GameHubItem(
           title: 'Choix du livre',

@@ -25,7 +25,18 @@ class QuestionView extends StatelessWidget {
                 children: [
                   Text(state.currentQuestion!.book.fr,
                       style: const GypseFont.m()),
-                  DifficultyIcon(context, state.settings.level)
+                  if (!state.isMultiMode)
+                    DifficultyIcon(context, state.settings.level),
+                  if (state.mode == GameMode.confrontation)
+                    Text(
+                      '${state.recap.length + 1} / ${state.questions.length}',
+                      style: const GypseFont.m(),
+                    ),
+                  if (state.mode == GameMode.time)
+                    Text(
+                      '${state.recap.length + 1}',
+                      style: const GypseFont.m(),
+                    ),
                 ],
               ),
               Divider(

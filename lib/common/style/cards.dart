@@ -304,7 +304,7 @@ class GameHubItem extends StatelessWidget {
 
   bool get isMultiMode =>
       mode == GameMode.multi ||
-      mode == GameMode.random ||
+      mode == GameMode.confrontation ||
       mode == GameMode.time;
 
   final List<Color> soloColors = [

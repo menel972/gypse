@@ -11,6 +11,7 @@ import 'package:gypse/game/presentation/models/ui_question.dart';
 class GameState extends Equatable {
   final GameMode mode;
   final List<UiQuestion> questions;
+  final List<GameState> recap;
   final UiGypseSettings settings;
   final int currentIndex;
   final List<UiAnswer> answers;
@@ -24,6 +25,7 @@ class GameState extends Equatable {
   const GameState({
     required this.mode,
     required this.questions,
+    required this.recap,
     required this.settings,
     required this.currentIndex,
     required this.answers,
@@ -38,6 +40,7 @@ class GameState extends Equatable {
   const GameState.initial({
     this.mode = GameMode.solo,
     this.questions = const [],
+    this.recap = const [],
     this.settings = const UiGypseSettings(),
     this.currentIndex = 0,
     this.answers = const [],
@@ -53,6 +56,7 @@ class GameState extends Equatable {
   List<Object?> get props => [
         mode,
         questions,
+        recap,
         settings,
         currentQuestion,
         currentIndex,
@@ -84,9 +88,15 @@ class GameState extends Equatable {
     );
   }
 
+  bool get isMultiMode =>
+      mode == GameMode.multi ||
+      mode == GameMode.confrontation ||
+      mode == GameMode.time;
+
   GameState copyWith({
     GameMode? mode,
     List<UiQuestion>? questions,
+    List<GameState>? recap,
     UiGypseSettings? settings,
     int? currentIndex,
     List<UiAnswer>? answers,
@@ -100,6 +110,7 @@ class GameState extends Equatable {
     return GameState(
       mode: mode ?? this.mode,
       questions: questions ?? this.questions,
+      recap: recap ?? this.recap,
       settings: settings ?? this.settings,
       currentIndex: currentIndex ?? this.currentIndex,
       answers: answers ?? this.answers,

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
@@ -33,7 +34,8 @@ class GameStateCubit extends Cubit<GameState> {
   void init(UiGameMode params) {
     'INIT'.log(tag: 'STATE');
 
-    emit(state.copyWith(mode: params.mode, status: StateStatus.loading));
+    emit(state.copyWith(
+        mode: GameMode.confrontation, status: StateStatus.loading));
 
     _setTimeController();
     _setSettings();
@@ -100,6 +102,13 @@ class GameStateCubit extends Cubit<GameState> {
   void _setSettings() {
     'SET SETTINGS'.log(tag: 'STATE');
 
+    if (state.mode == GameMode.confrontation || state.mode == GameMode.time) {
+      emit(state.copyWith(
+          settings:
+              const UiGypseSettings(level: Level.hard, time: Time.medium)));
+      return;
+    }
+
     final UiGypseSettings settings =
         _userNotifier.state?.settings ?? const UiGypseSettings();
     emit(state.copyWith(settings: settings));
@@ -108,6 +117,21 @@ class GameStateCubit extends Cubit<GameState> {
   void _fetchQuestions(String filter) {
     'FETCH QUESTIONS'.log(tag: 'STATE');
     List<UiQuestion> questions;
+
+    // MODE AFFRONTEMENT
+    if (state.mode == GameMode.confrontation) {
+      final allQuestions = _questionNotifier.getGameQuestions(book: ' ');
+      questions = allQuestions.take(5).toList();
+      emit(state.copyWith(questions: questions, filter: ' '));
+      return;
+    }
+
+    // MODE TIME
+    if (state.mode == GameMode.time) {
+      questions = _questionNotifier.getGameQuestions(book: ' ');
+      emit(state.copyWith(questions: questions, filter: ' '));
+      return;
+    }
 
     // Enable questions
     questions = _questionNotifier

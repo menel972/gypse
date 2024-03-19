@@ -13,7 +13,7 @@ import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/books_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/strings.dart';
+import 'package:gypse/common/utils/gypse_scaffold.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game_hubs/presentation/states/book_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,21 +29,11 @@ class BookScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(logDisplayUseCaseProvider).invoke(screen: Screen.booksView.path);
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: BookAppBar(),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('$imagesPath/game_bkg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: BookView(),
-      ),
+    return GypseScaffold(
+      isGameView: true,
+      bottomArea: false,
+      appBar: const BookAppBar(),
+      body: BookView(),
     );
   }
 }

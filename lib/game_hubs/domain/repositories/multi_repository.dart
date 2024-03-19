@@ -1,4 +1,4 @@
-import 'package:gypse/gameHubs/domain/models/multi_game.dart';
+import 'package:gypse/game_hubs/domain/models/multi_game.dart';
 
 /// An abstract class representing a multi repository.
 ///

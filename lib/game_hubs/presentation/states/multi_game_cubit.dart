@@ -4,8 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
-import 'package:gypse/gameHubs/domain/usecases/fetch_games_by_pseudo_use_case.dart';
-import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
+import 'package:gypse/game_hubs/domain/usecases/fetch_games_by_pseudo_use_case.dart';
+import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 
 part 'multi_game_state.dart';
 

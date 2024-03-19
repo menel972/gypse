@@ -20,8 +20,8 @@ import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
-import 'package:gypse/gameHubs/domain/usecases/fetch_games_by_pseudo_use_case.dart';
-import 'package:gypse/gameHubs/presentation/states/multi_game_cubit.dart';
+import 'package:gypse/game_hubs/domain/usecases/fetch_games_by_pseudo_use_case.dart';
+import 'package:gypse/game_hubs/presentation/states/multi_game_cubit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

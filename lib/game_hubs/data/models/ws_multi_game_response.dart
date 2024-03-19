@@ -6,7 +6,7 @@ import 'package:gypse/auth/data/models/ws_user_response.dart';
 import 'package:gypse/auth/domain/models/player.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/gameHubs/domain/models/multi_game.dart';
+import 'package:gypse/game_hubs/domain/models/multi_game.dart';
 
 /// Represents a WebSocket multi-game response.
 /// ```

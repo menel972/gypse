@@ -1,5 +1,5 @@
-import 'package:gypse/gameHubs/data/repositories/multi_repository_impl.dart';
-import 'package:gypse/gameHubs/domain/repositories/multi_repository.dart';
+import 'package:gypse/game_hubs/data/repositories/multi_repository_impl.dart';
+import 'package:gypse/game_hubs/domain/repositories/multi_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// Use case for deleting a multi game.

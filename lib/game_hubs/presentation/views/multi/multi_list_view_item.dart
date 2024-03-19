@@ -7,7 +7,7 @@ import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
-import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
+import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 
 class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;

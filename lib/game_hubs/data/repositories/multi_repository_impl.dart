@@ -1,7 +1,7 @@
-import 'package:gypse/gameHubs/data/models/ws_multi_game_response.dart';
-import 'package:gypse/gameHubs/data/web_services/ws_multi_service.dart';
-import 'package:gypse/gameHubs/domain/models/multi_game.dart';
-import 'package:gypse/gameHubs/domain/repositories/multi_repository.dart';
+import 'package:gypse/game_hubs/data/models/ws_multi_game_response.dart';
+import 'package:gypse/game_hubs/data/web_services/ws_multi_service.dart';
+import 'package:gypse/game_hubs/domain/models/multi_game.dart';
+import 'package:gypse/game_hubs/domain/repositories/multi_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// An abstract class representing a multi repository.

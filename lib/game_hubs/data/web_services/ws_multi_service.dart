@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gypse/common/clients/firebase_client.dart';
 import 'package:gypse/common/utils/exception.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/gameHubs/data/models/ws_multi_game_response.dart';
+import 'package:gypse/game_hubs/data/models/ws_multi_game_response.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// A class that provides methods for interacting with the multi-game web service.

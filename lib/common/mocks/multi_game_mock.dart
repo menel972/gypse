@@ -1,7 +1,7 @@
 import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
-import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
+import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 
 List<UiMultiGame> getMultiGamesMock = [
   UiMultiGame(

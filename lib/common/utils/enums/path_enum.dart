@@ -1,17 +1,29 @@
 /// Enum representing different screens in the application.
 enum Screen {
+  // Auth
   initView('/'),
   authView('/auth'),
+
+  // Home
   homeView('/home'),
+
+  // Game
   gameView('/game'),
+
+  // Multi Hub
   hubView('/hub'),
-  multiView('multi'),
   booksView('books'),
-  tutorialView('tutorial'),
+  multiView('multi'),
+  gameCreationView('creation'),
+
+  // Settings
   settingsView('/settings'),
   gameSettings('game'),
   profileSettings('profile'),
+  tutorialView('tutorial'),
   aboutGypse('about'),
+  
+  // Misc
   noQuestionView('/no_question'),
   recapSession('/recap'),
   errorView('/error');

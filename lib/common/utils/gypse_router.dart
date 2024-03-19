@@ -6,6 +6,7 @@ import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
+import 'package:gypse/game_hubs/presentation/views/game_creation_screen.dart';
 import 'package:gypse/game_hubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
@@ -67,6 +68,12 @@ GoRouter gypseRouter = GoRouter(
         GoRoute(
           path: Screen.multiView.path,
           builder: (context, state) => const MultiScreen(),
+          routes: [
+            GoRoute(
+              path: Screen.gameCreationView.path,
+              builder: (context, state) => const GameCreationScreen(),
+            ),
+          ],
         ),
         GoRoute(
           path: Screen.booksView.path,

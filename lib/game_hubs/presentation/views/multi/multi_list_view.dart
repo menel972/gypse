@@ -25,7 +25,8 @@ class MultiListView extends StatelessWidget {
                   child: GypseButton.orange(
                     context,
                     label: 'Nouvelle partie',
-                    onPressed: () {},
+                    onPressed: () => context.go(
+                        '${Screen.hubView.path}/${GameMode.multi.name}/${Screen.multiView.path}/${Screen.gameCreationView.path}'),
                   ),
                 ),
               ),

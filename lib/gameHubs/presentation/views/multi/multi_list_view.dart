@@ -39,44 +39,30 @@ class MultiListView extends StatelessWidget {
                   ),
                 ),
               ),
-              ...multiListViewItem(
-                context,
-                title: 'A toi de jouer',
-                list: state.yourTurnList,
-                status: state.status,
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: SliverAppBarDelegate(
-                  maxHeight: Dimensions.xxs(context).height,
-                  minHeight: Dimensions.xxs(context).height,
-                  child: Container(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              if (state.yourTurnList.isNotEmpty)
+                ...multiListViewItem(
+                  context,
+                  title: 'A toi de jouer',
+                  list: state.yourTurnList,
+                  userPseudo: state.userPseudo,
+                  status: state.status,
                 ),
-              ),
-              ...multiListViewItem(
-                context,
-                title: 'En attente',
-                list: state.waitingList,
-                status: state.status,
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: SliverAppBarDelegate(
-                  maxHeight: Dimensions.xxs(context).height,
-                  minHeight: Dimensions.xxs(context).height,
-                  child: Container(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              if (state.waitingList.isNotEmpty)
+                ...multiListViewItem(
+                  context,
+                  title: 'En attente',
+                  list: state.waitingList,
+                  userPseudo: state.userPseudo,
+                  status: state.status,
                 ),
-              ),
-              ...multiListViewItem(
-                context,
-                title: 'Parties terminées',
-                list: state.finishedList,
-                status: state.status,
-              ),
+              if (state.finishedList.isNotEmpty)
+                ...multiListViewItem(
+                  context,
+                  title: 'Parties terminées',
+                  list: state.finishedList,
+                  status: state.status,
+                  userPseudo: state.userPseudo,
+                ),
             ],
           ),
         );

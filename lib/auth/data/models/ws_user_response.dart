@@ -293,10 +293,10 @@ class WsAnsweredQuestions extends Equatable {
         id: map?['qId'],
         level: map?['niveau'],
         isRightAnswer: map?['valid'],
-        time: map?['time'],
+        time: (map?['time']).toDouble(),
       );
     } catch (e) {
-      e.log();
+      e.log(tag: 'WsAnsweredQuestions.fromMap');
       return WsAnsweredQuestions();
     }
   }
@@ -306,7 +306,8 @@ class WsAnsweredQuestions extends Equatable {
   AnsweredQuestions toDomain() {
     return AnsweredQuestions(
       id: id ?? '',
-      level: Level.values.firstWhere((value) => value.id == level),
+      level: Level.values
+          .firstWhere((value) => value.id == level, orElse: () => Level.medium),
       isRightAnswer: isRightAnswer ?? false,
       time: time,
     );

@@ -10,7 +10,7 @@ import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/gameHubs/presentation/views/multi/multi_list_view_item.dart';
-import 'package:gypse/gameHubs/presentation/views/states/multi_game_cubit.dart';
+import 'package:gypse/gameHubs/presentation/states/multi_game_cubit.dart';
 
 part 'multi/multi_app_bar.dart';
 part 'multi/multi_list_view.dart';

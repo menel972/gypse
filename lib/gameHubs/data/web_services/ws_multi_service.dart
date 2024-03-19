@@ -20,10 +20,10 @@ class WsMultiService {
     try {
       return await _client.doc(multi.uId).set(multi.toMap()).then((_) => true);
     } on FirebaseException catch (err) {
-      err.message?.log();
+      err.message?.log(tag: 'WsMultiService - createMulti');
       return false;
     } on Exception catch (e) {
-      e.log();
+      e.log(tag: 'WsMultiService - createMulti');
       return false;
     }
   }
@@ -43,10 +43,10 @@ class WsMultiService {
           .map((doc) => WsMultiGameResponse.fromMap(doc.data()))
           .toList());
     } on FirebaseException catch (err) {
-      err.message?.log();
+      err.message?.log(tag: 'WsMultiService - fetchMultis');
       throw GypseException(code: err.code);
     } on Exception catch (e) {
-      e.log();
+      e.log(tag: 'WsMultiService - fetchMultis');
       throw GypseException();
     }
   }
@@ -66,10 +66,10 @@ class WsMultiService {
           .where((multi) => multi.player1 == pseudo || multi.player2 == pseudo)
           .toList();
     } on FirebaseException catch (err) {
-      err.message?.log();
+      err.message?.log(tag: 'WsMultiService - fetchMultiByPseudo');
       throw GypseException(code: err.code);
     } on Exception catch (e) {
-      e.log();
+      e.log(tag: 'WsMultiService - fetchMultiByPseudo');
       throw GypseException();
     }
   }
@@ -85,10 +85,10 @@ class WsMultiService {
     try {
       return await _client.doc(multi.uId).set(multi.toMap()).then((_) => true);
     } on FirebaseException catch (err) {
-      err.message?.log();
+      err.message?.log(tag: 'WsMultiService - updateMulti');
       return false;
     } on Exception catch (e) {
-      e.log();
+      e.log(tag: 'WsMultiService - updateMulti');
       return false;
     }
   }
@@ -104,10 +104,10 @@ class WsMultiService {
     try {
       return await _client.doc(id).delete().then((_) => true);
     } on FirebaseException catch (err) {
-      err.message?.log();
+      err.message?.log(tag: 'WsMultiService - deleteMulti');
       return false;
     } on Exception catch (e) {
-      e.log();
+      e.log(tag: 'WsMultiService - deleteMulti');
       return false;
     }
   }

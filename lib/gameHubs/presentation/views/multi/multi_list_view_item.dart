@@ -41,7 +41,8 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 List<Widget> multiListViewItem(
   BuildContext context, {
   required String title,
-  required List<UiMultiGame>? list,
+  required List<UiMultiGame> list,
+  required String userPseudo,
   required StateStatus status,
 }) {
   return [
@@ -64,13 +65,17 @@ List<Widget> multiListViewItem(
           return const MultiGameCardSkeleton();
         }
 
-        final UiMultiGame game = list![index];
+        if (list.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        final UiMultiGame game = list[index];
 
         return MultiGameCard(
           mode: game.mode,
-          player: game.players[1],
+          player: game.players.firstWhere((e) => e.pseudo != userPseudo),
           onTap: () {
-            if (game.hasToPlay == 'player1') {
+            if (game.hasToPlay == userPseudo) {
               context.go(Screen.gameView.path,
                   extra: UiGameMode(mode: game.mode));
             } else {
@@ -79,7 +84,17 @@ List<Widget> multiListViewItem(
           },
         );
       },
-      itemCount: list?.length ?? 2,
+      itemCount: list.isEmpty ? 1 : list.length,
+    ),
+    SliverPersistentHeader(
+      pinned: true,
+      delegate: SliverAppBarDelegate(
+        maxHeight: Dimensions.xxs(context).height,
+        minHeight: Dimensions.xxs(context).height,
+        child: Container(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ),
     ),
   ];
 }

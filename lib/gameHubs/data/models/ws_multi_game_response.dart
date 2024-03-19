@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gypse/auth/data/models/ws_user_response.dart';
 import 'package:gypse/auth/domain/models/player.dart';
@@ -29,8 +30,8 @@ class WsMultiGameResponse extends Equatable {
   String? mode;
   List<WsAnsweredQuestions>? resultP1;
   List<WsAnsweredQuestions>? resultP2;
-  String? createdAt;
-  String? updatedAt;
+  Timestamp? createdAt;
+  Timestamp? updatedAt;
 
   /// Constructs a [WsMultiGameResponse] instance.
   WsMultiGameResponse({
@@ -70,11 +71,13 @@ class WsMultiGameResponse extends Equatable {
       playerScore2: map?['playerScore2'],
       mode: map?['mode'],
       resultP1: map?['resultP1'] != null
-          ? map!['resultP1'].map((e) => WsAnsweredQuestions.fromMap(e)).toList()
-          : [],
+          ? List<WsAnsweredQuestions>.from(
+              map!['resultP1'].map((e) => WsAnsweredQuestions.fromMap(e)))
+          : null,
       resultP2: map?['resultP2'] != null
-          ? map!['resultP2'].map((e) => WsAnsweredQuestions.fromMap(e)).toList()
-          : [],
+          ? List<WsAnsweredQuestions>.from(
+              map!['resultP2'].map((e) => WsAnsweredQuestions.fromMap(e)))
+          : null,
       createdAt: map?['createdAt'],
       updatedAt: map?['updatedAt'],
     );
@@ -111,8 +114,8 @@ class WsMultiGameResponse extends Equatable {
       resultP2: domain.resultP2.$2
           .map((e) => WsAnsweredQuestions.fromDomain(e))
           .toList(),
-      createdAt: domain.createdAt.toIso8601String(),
-      updatedAt: domain.updatedAt.toIso8601String(),
+      createdAt: Timestamp.fromDate(domain.createdAt),
+      updatedAt: Timestamp.fromDate(domain.updatedAt),
     );
   }
 
@@ -140,10 +143,8 @@ class WsMultiGameResponse extends Equatable {
         player2 ?? '',
         resultP2?.map((e) => e.toDomain()).toList() ?? [],
       ),
-      createdAt:
-          createdAt.isNullOrEmpty ? DateTime.now() : DateTime.parse(createdAt!),
-      updatedAt:
-          updatedAt.isNullOrEmpty ? DateTime.now() : DateTime.parse(updatedAt!),
+      createdAt: createdAt.isNull ? DateTime.now() : createdAt!.toDate(),
+      updatedAt: updatedAt.isNull ? DateTime.now() : updatedAt!.toDate(),
     );
   }
 }

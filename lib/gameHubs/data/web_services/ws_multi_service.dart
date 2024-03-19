@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gypse/common/clients/firebase_client.dart';
 import 'package:gypse/common/utils/exception.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/gameHubs/data/models/ws_multi_game_response.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// A class that provides methods for interacting with the multi-game web service.
 class WsMultiService {
@@ -14,7 +16,7 @@ class WsMultiService {
   /// Creates a new multi-game.
   ///
   /// Returns `true` if the multi-game was created successfully, `false` otherwise.
-  Future<bool?> createMulti(WsMultiGameResponse multi) async {
+  Future<bool> createMulti(WsMultiGameResponse multi) async {
     try {
       return await _client.doc(multi.uId).set(multi.toMap()).then((_) => true);
     } on FirebaseException catch (err) {
@@ -79,7 +81,7 @@ class WsMultiService {
   /// Updates a multi-game.
   ///
   /// Returns `true` if the multi-game was updated successfully, `false` otherwise.
-  Future<bool?> updateMulti(WsMultiGameResponse multi) async {
+  Future<bool> updateMulti(WsMultiGameResponse multi) async {
     try {
       return await _client.doc(multi.uId).set(multi.toMap()).then((_) => true);
     } on FirebaseException catch (err) {
@@ -98,7 +100,7 @@ class WsMultiService {
   /// Deletes a multi-game by ID.
   ///
   /// Returns `true` if the multi-game was deleted successfully, `false` otherwise.
-  Future<bool?> deleteMulti(String id) async {
+  Future<bool> deleteMulti(String id) async {
     try {
       return await _client.doc(id).delete().then((_) => true);
     } on FirebaseException catch (err) {
@@ -112,3 +114,8 @@ class WsMultiService {
 
   // #endregion
 }
+
+AutoDisposeProvider<WsMultiService> get wsMultiServiceProvider =>
+    Provider.autoDispose<WsMultiService>(
+        (AutoDisposeProviderRef<WsMultiService> ref) =>
+            WsMultiService(ref.read(multiDbProvider)));

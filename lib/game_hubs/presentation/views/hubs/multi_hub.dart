@@ -6,24 +6,23 @@ class MultiHub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: Dimensions.xxs(context).width,
-      crossAxisSpacing: Dimensions.xxs(context).width,
-      physics: const ClampingScrollPhysics(),
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimensions.xxs(context).width,
-        vertical: Dimensions.xs(context).height,
+    return Dimensions.iconXXS(context).padding(
+      GridView.count(
+        physics: const ClampingScrollPhysics(),
+        crossAxisCount: 2,
+        childAspectRatio: 1,
+        mainAxisSpacing: Dimensions.xxs(context).width,
+        crossAxisSpacing: Dimensions.xxs(context).width,
+        children: [
+          GameHubItem(
+            title: 'Duel',
+            icon: GypseIcon.duel.path,
+            mode: GameMode.multi,
+            onTap: () => context.go(
+                '${Screen.hubView.path}/${GameMode.multi.name}/${Screen.multiView.path}'),
+          ),
+        ],
       ),
-      children: [
-        GameHubItem(
-          title: 'Duel',
-          icon: GypseIcon.duel.path,
-          mode: GameMode.multi,
-          onTap: () => context.go(
-              '${Screen.hubView.path}/${GameMode.multi.name}/${Screen.multiView.path}'),
-        ),
-      ],
     );
   }
 }

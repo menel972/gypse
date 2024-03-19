@@ -9,6 +9,7 @@ import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
+import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/gypse_scaffold.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 

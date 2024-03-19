@@ -6,34 +6,32 @@ class SoloHub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: Dimensions.xxs(context).width,
-      crossAxisSpacing: Dimensions.xxs(context).width,
-      physics: const ClampingScrollPhysics(),
-      childAspectRatio: 1,
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimensions.xxs(context).width,
-        vertical: Dimensions.xs(context).height,
-      ),
-      children: [
-        GameHubItem(
-          title: 'Livre aléatoire',
-          icon: GypseIcon.shuffle.path,
-          mode: GameMode.solo,
-          onTap: () => context.go(
-            Screen.gameView.path,
-            extra: const UiGameMode(mode: GameMode.solo),
+    return Dimensions.iconXXS(context).padding(
+      GridView.count(
+        physics: const ClampingScrollPhysics(),
+        crossAxisCount: 2,
+        childAspectRatio: 1.0,
+        mainAxisSpacing: Dimensions.xxs(context).width,
+        crossAxisSpacing: Dimensions.xxs(context).width,
+        children: [
+          GameHubItem(
+            title: 'Livre aléatoire',
+            icon: GypseIcon.shuffle.path,
+            mode: GameMode.solo,
+            onTap: () => context.go(
+              Screen.gameView.path,
+              extra: const UiGameMode(mode: GameMode.solo),
+            ),
           ),
-        ),
-        GameHubItem(
-          title: 'Choix du livre',
-          icon: GypseIcon.target.path,
-          mode: GameMode.solo,
-          onTap: () => context.go(
-              '${Screen.hubView.path}/${GameMode.solo.name}/${Screen.booksView.path}'),
-        ),
-      ],
+          GameHubItem(
+            title: 'Choix du livre',
+            icon: GypseIcon.target.path,
+            mode: GameMode.solo,
+            onTap: () => context.go(
+                '${Screen.hubView.path}/${GameMode.solo.name}/${Screen.booksView.path}'),
+          ),
+        ],
+      ),
     );
   }
 }

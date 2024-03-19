@@ -333,11 +333,12 @@ class GameHubItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Stack(
+          alignment: Alignment.topCenter,
           children: [
             Dimensions.xs(context).padding(
               Text(
                 title,
-                style: const GypseFont.l(bold: true),
+                style: const GypseFont.m(bold: true),
                 textAlign: TextAlign.center,
               ),
             ),

@@ -1,5 +1,6 @@
 part of '../multi_screen.dart';
 
+/// The app bar widget for the multi-player game hub.
 class MultiAppBar extends StatelessWidget {
   const MultiAppBar({super.key});
 

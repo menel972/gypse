@@ -1,5 +1,6 @@
 part of '../game_hub_screen.dart';
 
+/// A widget representing the solo game hub.
 class SoloHub extends StatelessWidget {
   const SoloHub({super.key});
 

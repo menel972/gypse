@@ -2,16 +2,20 @@
 
 part of '../book_screen.dart';
 
+/// A widget that displays a view for books.
 class BookView extends HookConsumerWidget {
   late List<Books> books;
   late Iterable<String> userQuestions;
 
+  /// Constructs a [BookView] widget.
   BookView({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     books = ref.watch(bookStateProvider);
     userQuestions = ref.read(userProvider.notifier).answeredQuestionsId;
 
+    /// Retrieves the questions IDs for a given book filter.
     getQuestionsIdByBook(Books filter) => ref
         .read(questionsProvider.notifier)
         .getEnabledQuestions(userQuestions, book: filter.fr);

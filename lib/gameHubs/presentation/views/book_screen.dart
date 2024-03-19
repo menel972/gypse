@@ -21,8 +21,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 part 'books/book_app_bar.dart';
 part 'books/book_view.dart';
 
+/// A screen that displays a book view.
 class BookScreen extends HookConsumerWidget {
   const BookScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(logDisplayUseCaseProvider).invoke(screen: Screen.booksView.path);

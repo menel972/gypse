@@ -1,15 +1,22 @@
 import 'package:equatable/equatable.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 
+/// Represents a UI player.
+/// ```
+/// final String pseudo;
+/// final int score;
+///```
 class UiPlayer extends Equatable {
   final String pseudo;
   final int score;
 
+  /// Constructs a [UiPlayer] instance.
   const UiPlayer({
     required this.pseudo,
     required this.score,
   });
 
+  /// Constructs an initial [UiPlayer] instance.
   const UiPlayer.initial({
     this.pseudo = '',
     this.score = 0,
@@ -18,6 +25,7 @@ class UiPlayer extends Equatable {
   @override
   List<Object> get props => [pseudo, score];
 
+  /// Gets the rank of the player based on their score.
   Rank get rank {
     switch (score) {
       case < 3:
@@ -35,6 +43,7 @@ class UiPlayer extends Equatable {
     }
   }
 
+  /// Creates a copy of the [UiPlayer] instance with updated values.
   UiPlayer copyWith({
     String? pseudo,
     int? score,

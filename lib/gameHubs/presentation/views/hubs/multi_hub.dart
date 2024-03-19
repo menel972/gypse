@@ -1,5 +1,6 @@
 part of '../game_hub_screen.dart';
 
+/// A widget representing the multi hub.
 class MultiHub extends StatelessWidget {
   const MultiHub({super.key});
 

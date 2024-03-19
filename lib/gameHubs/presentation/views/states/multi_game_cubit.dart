@@ -6,9 +6,11 @@ import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
 
 part 'multi_game_state.dart';
 
+/// A [Cubit] that manages the state of a multi-game view.
 class MultiGameCubit extends Cubit<MultiGameState> {
   MultiGameCubit() : super(const MultiGameState.initial());
 
+  /// Fetches the games and updates the state accordingly.
   Future<void> fetchGames() async {
     emit(state.copyWith(status: StateStatus.loading));
     await Future.delayed(const Duration(seconds: 2));

@@ -4,6 +4,17 @@ import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
 
+/// Represents a multi-player game.
+///
+/// ```
+/// final String uId;
+/// final List<Player> players;
+/// final GameMode mode;
+/// final (String, List<AnsweredQuestions>) resultP1;
+/// final (String, List<AnsweredQuestions>) resultP2;
+/// final DateTime createdAt;
+/// final DateTime updatedAt;
+/// ```
 class MultiGame extends Equatable {
   final String uId;
   final List<Player> players;
@@ -13,6 +24,7 @@ class MultiGame extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  /// Constructs a [MultiGame] instance.
   const MultiGame({
     required this.uId,
     required this.players,
@@ -34,6 +46,7 @@ class MultiGame extends Equatable {
         updatedAt,
       ];
 
+  /// Constructs a [MultiGame] instance from a presentation model.
   factory MultiGame.fromPresentation(UiMultiGame ui) {
     return MultiGame(
       uId: ui.uId,
@@ -56,6 +69,7 @@ class MultiGame extends Equatable {
     );
   }
 
+  /// Converts the [MultiGame] instance to a presentation model.
   UiMultiGame toPresentation() {
     return UiMultiGame(
       uId: uId,

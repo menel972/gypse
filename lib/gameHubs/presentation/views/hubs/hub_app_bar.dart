@@ -1,8 +1,12 @@
 part of '../game_hub_screen.dart';
 
+/// The app bar widget for the game hub.
 class HubAppBar extends StatelessWidget {
   final GameMode mode;
 
+  /// Constructs a [HubAppBar] widget.
+  ///
+  /// The [mode] parameter specifies the game mode.
   const HubAppBar(this.mode, {super.key});
 
   @override

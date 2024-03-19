@@ -1,5 +1,6 @@
 part of '../book_screen.dart';
 
+/// The app bar widget for the book view.
 class BookAppBar extends StatelessWidget {
   const BookAppBar({super.key});
 

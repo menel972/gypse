@@ -1,5 +1,6 @@
 part of '../multi_screen.dart';
 
+/// A widget that displays the list of UiMultiGame.
 class MultiListView extends StatelessWidget {
   const MultiListView({super.key});
 

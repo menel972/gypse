@@ -7,6 +7,19 @@ import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/gameHubs/domain/models/multi_game.dart';
 
+/// Represents a WebSocket multi-game response.
+/// ```
+/// final String? uId;
+/// String? player1;
+/// int? playerScore1;
+/// String? player2;
+/// int? playerScore2;
+/// String? mode;
+/// List<WsAnsweredQuestions>? resultP1;
+/// List<WsAnsweredQuestions>? resultP2;
+/// String? createdAt;
+/// String? updatedAt;
+/// ```
 class WsMultiGameResponse extends Equatable {
   final String? uId;
   String? player1;
@@ -19,6 +32,7 @@ class WsMultiGameResponse extends Equatable {
   String? createdAt;
   String? updatedAt;
 
+  /// Constructs a [WsMultiGameResponse] instance.
   WsMultiGameResponse({
     this.uId,
     this.player1,
@@ -46,6 +60,7 @@ class WsMultiGameResponse extends Equatable {
         updatedAt,
       ];
 
+  /// Constructs a [WsMultiGameResponse] instance from a map.
   factory WsMultiGameResponse.fromMap(Map<String, dynamic>? map) {
     return WsMultiGameResponse(
       uId: map?['uId'],
@@ -65,6 +80,7 @@ class WsMultiGameResponse extends Equatable {
     );
   }
 
+  /// Converts the [WsMultiGameResponse] instance to a map.
   Map<String, dynamic> toMap() {
     return {
       'uId': uId,
@@ -80,6 +96,7 @@ class WsMultiGameResponse extends Equatable {
     };
   }
 
+  /// Constructs a [WsMultiGameResponse] instance from a domain object.
   factory WsMultiGameResponse.fromDomain(MultiGame domain) {
     return WsMultiGameResponse(
       uId: domain.uId,
@@ -99,6 +116,7 @@ class WsMultiGameResponse extends Equatable {
     );
   }
 
+  /// Converts the [WsMultiGameResponse] instance to a domain object.
   MultiGame toDomain() {
     return MultiGame(
       uId: uId ?? '',

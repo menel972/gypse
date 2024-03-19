@@ -15,6 +15,7 @@ import 'package:gypse/gameHubs/presentation/views/states/multi_game_cubit.dart';
 part 'multi/multi_app_bar.dart';
 part 'multi/multi_list_view.dart';
 
+/// A screen that displays the list of UiMultiGame.
 class MultiScreen extends StatelessWidget {
   const MultiScreen({super.key});
 
@@ -32,9 +33,10 @@ class MultiScreen extends StatelessWidget {
         //     image: AssetImage('$imagesPath/game_bkg.png'),
         //     fit: BoxFit.cover,
         //   ),
-        //     ),
+        // ),
         child: SafeArea(
-            child: Dimensions.xs(context).padding(const MultiListView())),
+          child: Dimensions.xs(context).padding(const MultiListView()),
+        ),
       ),
     );
   }

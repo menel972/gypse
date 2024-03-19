@@ -16,9 +16,11 @@ part 'hubs/hub_app_bar.dart';
 part 'hubs/solo_hub.dart';
 part 'hubs/multi_hub.dart';
 
+/// The screen that displays the game hub.
 class GameHubScreen extends StatelessWidget {
   final GameMode mode;
 
+  /// Constructs a [GameHubScreen] with the specified [mode].
   const GameHubScreen(this.mode, {super.key});
 
   @override

@@ -37,6 +37,7 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => minHeight;
 }
 
+/// Builds a list of widgets for a multi-list view item.
 List<Widget> multiListViewItem(
   BuildContext context, {
   required String title,

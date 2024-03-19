@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
+import 'package:gypse/auth/domain/models/player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/utils/enums/locales_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
@@ -26,8 +27,8 @@ import 'package:gypse/common/utils/enums/state_enum.dart';
 ///It contains all the data for an user.
 class User extends Equatable {
   final String uid;
-  final String userName;
   final bool isAdmin;
+  final Player player;
   Locales language;
   LoginState status;
   List<AnsweredQuestions> questions;
@@ -40,8 +41,8 @@ class User extends Equatable {
   ///It contains all the data for an user.
   User({
     required this.uid,
-    required this.userName,
     required this.isAdmin,
+    required this.player,
     required this.language,
     required this.status,
     required this.questions,
@@ -52,8 +53,8 @@ class User extends Equatable {
   List<Object?> get props {
     return [
       uid,
-      userName,
       isAdmin,
+      player,
       language,
       status,
       questions,
@@ -66,8 +67,8 @@ class User extends Equatable {
   factory User.fromPresentation(UiUser uiUser) {
     return User(
       uid: uiUser.uId,
-      userName: uiUser.userName,
       isAdmin: uiUser.isAdmin,
+      player: Player.fromPresentation(uiUser.player),
       language: uiUser.language,
       status: uiUser.status,
       questions: uiUser.questions
@@ -82,8 +83,8 @@ class User extends Equatable {
   UiUser toPresentation() {
     return UiUser(
       uid,
-      userName: userName,
       isAdmin: isAdmin,
+      player: player.toPresentation(),
       language: language,
       status: status,
       questions: List<UiAnsweredQuestions>.from(

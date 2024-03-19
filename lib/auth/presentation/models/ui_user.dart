@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
+import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/common/utils/enums/locales_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
@@ -24,8 +25,8 @@ import 'package:gypse/common/utils/extensions.dart';
 ///It contains all the data for an user.
 class UiUser extends Equatable {
   final String uId;
-  final String userName;
   final bool isAdmin;
+  final UiPlayer player;
   Locales language;
   LoginState status;
   List<UiAnsweredQuestions> questions;
@@ -38,8 +39,8 @@ class UiUser extends Equatable {
   ///It contains all the data for an user.
   UiUser(
     this.uId, {
-    this.userName = '',
     this.isAdmin = false,
+    this.player = const UiPlayer.initial(),
     this.language = Locales.fr,
     this.status = LoginState.loading,
     this.questions = const [],
@@ -48,8 +49,8 @@ class UiUser extends Equatable {
 
   factory UiUser.anonymous(String uId) => UiUser(
         uId,
-        userName: '',
         isAdmin: false,
+        player: const UiPlayer.initial(),
         language: Locales.fr,
         status: LoginState.loading,
         questions: const [],
@@ -59,7 +60,6 @@ class UiUser extends Equatable {
   @override
   List<Object?> get props => [
         uId,
-        userName,
         isAdmin,
         language,
         status,
@@ -68,22 +68,22 @@ class UiUser extends Equatable {
       ];
 
   UiUser copyWith({
-    String? userName,
+    UiPlayer? player,
     LoginState? status,
     List<UiAnsweredQuestions>? questions,
     UiGypseSettings? settings,
   }) =>
       UiUser(
         uId,
-        userName: userName ?? this.userName,
         isAdmin: isAdmin,
+        player: player ?? this.player,
         language: language,
         status: status ?? this.status,
         questions: questions ?? this.questions,
         settings: settings ?? this.settings,
       );
 
-  bool get isAnonymous => userName.isEmpty;
+  bool get isAnonymous => player.pseudo.isEmpty;
 
   (bool, int?) get levelMedUnlocked {
     int? delta;

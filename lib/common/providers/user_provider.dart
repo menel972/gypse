@@ -8,7 +8,7 @@ class UserProvider extends StateNotifier<UiUser?> {
 
   void setCurrentUser(UiUser user) {
     state = user;
-    state?.userName.log(tag: 'Stored User');
+    state?.player.pseudo.log(tag: 'Stored User');
     state?.uId.log(tag: 'Stored User');
   }
 

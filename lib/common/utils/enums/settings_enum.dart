@@ -50,3 +50,19 @@ enum GameMode {
   /// Time-based game mode.
   time,
 }
+
+/// Represents the rank of a player.
+enum Rank {
+  e('Rang E'),
+
+  d('Rang D'),
+
+  c('Rang C'),
+
+  b('Rang B'),
+
+  a('Rang A');
+
+  final String label;
+  const Rank(this.label);
+}

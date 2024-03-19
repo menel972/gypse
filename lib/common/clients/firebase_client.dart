@@ -26,6 +26,12 @@ class FirebaseClients {
   final CollectionReference<Map<String, dynamic>> usersDb =
       FirebaseFirestore.instance.collection(usersPath);
 
+  ///## Multi Games database
+  ///
+  ///An instance of the collection in the Firebase Firestore database <b>where multi games are stored</b>.
+  final CollectionReference<Map<String, dynamic>> multiDb =
+      FirebaseFirestore.instance.collection(multiPath);
+
   ///## Authentication client
   ///
   ///An instance of the entry point of the <b>Firebase Authentication SDK</b>.
@@ -61,6 +67,13 @@ AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
         Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
           (AutoDisposeProviderRef<CollectionReference> ref) =>
               FirebaseClients().usersDb,
+        );
+
+AutoDisposeProvider<CollectionReference<Map<String, dynamic>>>
+    get multiDbProvider =>
+        Provider.autoDispose<CollectionReference<Map<String, dynamic>>>(
+          (AutoDisposeProviderRef<CollectionReference> ref) =>
+              FirebaseClients().multiDb,
         );
 
 AutoDisposeProvider<FirebaseAnalytics> get firebaseAnalyticsProvider =>

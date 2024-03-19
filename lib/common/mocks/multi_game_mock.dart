@@ -1,3 +1,4 @@
+import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
@@ -5,7 +6,10 @@ import 'package:gypse/gameHubs/presentation/models/ui_multi_game.dart';
 List<UiMultiGame> getMultiGamesMock = [
   UiMultiGame(
     uId: '1',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 8),
+    ],
     mode: GameMode.time,
     resultP1: ('player1', <UiAnsweredQuestions>[]),
     resultP2: (
@@ -36,7 +40,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '2',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.confrontation,
     resultP1: ('player1', <UiAnsweredQuestions>[]),
     resultP2: (
@@ -67,7 +74,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '3',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.time,
     resultP1: ('player1', <UiAnsweredQuestions>[]),
     resultP2: (
@@ -98,7 +108,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '4',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',
@@ -129,7 +142,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '5',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.time,
     resultP1: (
       'player1',
@@ -160,7 +176,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '6',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',
@@ -213,7 +232,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '7',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.time,
     resultP1: (
       'player1',
@@ -266,7 +288,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '8',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',
@@ -319,7 +344,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '9',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.time,
     resultP1: (
       'player1',
@@ -372,7 +400,10 @@ List<UiMultiGame> getMultiGamesMock = [
   ),
   UiMultiGame(
     uId: '10',
-    players: const ['player1', 'player2'],
+    players: const [
+      UiPlayer(pseudo: 'player1', score: 1),
+      UiPlayer(pseudo: 'player2', score: 1),
+    ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',

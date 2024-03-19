@@ -2,6 +2,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:gypse/auth/domain/models/player.dart';
 import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums/locales_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
@@ -35,6 +36,7 @@ import 'package:gypse/common/utils/extensions.dart';
 class WsUserResponse extends Equatable {
   final String? uid;
   String? userName;
+  int? score;
   String? locale;
   bool? isConnected;
   bool? isAdmin;
@@ -49,6 +51,7 @@ class WsUserResponse extends Equatable {
   WsUserResponse({
     this.uid = '',
     this.userName = '',
+    this.score = 0,
     this.locale = '',
     this.isConnected = false,
     this.isAdmin = false,
@@ -60,6 +63,7 @@ class WsUserResponse extends Equatable {
   List<Object?> get props => [
         uid,
         userName,
+        score,
         locale,
         isConnected,
         isAdmin,
@@ -73,6 +77,7 @@ class WsUserResponse extends Equatable {
     return <String, dynamic>{
       'id': uid,
       'userName': userName,
+      'score': score,
       'locale': locale,
       'isConnected': isConnected,
       'isAdmin': isAdmin,
@@ -91,6 +96,7 @@ class WsUserResponse extends Equatable {
     return WsUserResponse(
       uid: map?['id'],
       userName: map?['userName'],
+      score: map?['score'],
       locale: map?['locale'],
       isConnected: map?['isConnected'],
       isAdmin: map?['isAdmin'],
@@ -108,7 +114,10 @@ class WsUserResponse extends Equatable {
   User toDomain() {
     return User(
       uid: uid ?? '',
-      userName: userName ?? '',
+      player: Player(
+        pseudo: userName ?? '',
+        score: score ?? 0,
+      ),
       isAdmin: isAdmin ?? false,
       language: Locales.values.firstWhere((code) => code.name == locale),
       status: LoginState.uninitialized,
@@ -124,7 +133,8 @@ class WsUserResponse extends Equatable {
   factory WsUserResponse.fromDomain(User domain) {
     return WsUserResponse(
       uid: domain.uid,
-      userName: domain.userName,
+      userName: domain.player.pseudo,
+      score: domain.player.score,
       locale: domain.language.name,
       isConnected: domain.status == LoginState.authenticated,
       isAdmin: domain.isAdmin,

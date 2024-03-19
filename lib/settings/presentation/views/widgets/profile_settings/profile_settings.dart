@@ -50,11 +50,11 @@ class ProfileSettings extends HookConsumerWidget {
         child: Column(
           children: [
             Semantics(
-              label: 'Nom d\'utilisateur : ${user.userName}',
+              label: 'Nom d\'utilisateur : ${user.player.pseudo}',
               child: TextFormField(
                 enabled: false,
                 style: const GypseFont.s(),
-                initialValue: user.userName,
+                initialValue: user.player.pseudo,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   labelText: 'Nom d\'utilisateur',
@@ -144,7 +144,7 @@ class ProfileSettings extends HookConsumerWidget {
                             .invoke(cta: 'logout');
                         bool result = await signOutUseCase();
                         if (result) {
-                          'À bientôt ${user.userName}'.success(context);
+                          'À bientôt ${user.player.pseudo}'.success(context);
                           context.go(Screen.authView.path);
                         } else {
                           'Une erreur est survenue'.failure(context);

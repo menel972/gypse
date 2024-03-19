@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 
 class UiMultiGame extends Equatable {
   final String uId;
-  final List<String> players;
+  final List<UiPlayer> players;
   final GameMode mode;
   final (String, List<UiAnsweredQuestions>) resultP1;
   final (String, List<UiAnsweredQuestions>) resultP2;
@@ -61,7 +62,7 @@ class UiMultiGame extends Equatable {
 
   UiMultiGame copyWith({
     String? uId,
-    List<String>? players,
+    List<UiPlayer>? players,
     GameMode? mode,
     (String, List<UiAnsweredQuestions>)? resultP1,
     (String, List<UiAnsweredQuestions>)? resultP2,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/common/analytics/domain/usecase/firebase_analytics_use_cases.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/colors.dart';
@@ -363,7 +364,7 @@ class GameHubItem extends StatelessWidget {
 
 class MultiGameCard extends StatelessWidget {
   final GameMode mode;
-  final String player;
+  final UiPlayer player;
   final Function() onTap;
 
   const MultiGameCard({
@@ -405,9 +406,16 @@ class MultiGameCard extends StatelessWidget {
             Dimensions.xs(context).spaceW(),
             Expanded(
                 child: Text(
-              player.toUpperCase(),
+              player.pseudo.toUpperCase(),
               style: const GypseFont.m(),
             )),
+            Text(
+              player.rank.label,
+              style: GypseFont.xs(
+                bold: true,
+                color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.4),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
+import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 
 class CredentialsState extends Equatable {
@@ -59,7 +60,10 @@ class CredentialsState extends Equatable {
   UiUser toUser(String uid) {
     return UiUser(
       uid,
-      userName: '$userName#${uid.substring(0, 4)}',
+      player: UiPlayer(
+        pseudo: '$userName#${uid.substring(0, 4)}',
+        score: 0,
+      ),
       settings: const UiGypseSettings(),
     );
   }

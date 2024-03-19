@@ -4,6 +4,7 @@ String imagesPath = 'assets/images';
 /// FIREBASE DB
 String questionsPath = 'questions';
 String usersPath = 'user';
+String multiPath = 'multi';
 String cloudStorageUrl = 'gs://quiz-bible-44f41.appspot.com';
 
 /// APP CONFIG

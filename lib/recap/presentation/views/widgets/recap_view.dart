@@ -106,7 +106,7 @@ class RecapView extends HookConsumerWidget {
                   onPressed: () {
                     ref
                         .read(homeNavigationStateProvider.notifier)
-                        .updatePage(2);
+                        .updatePage(1);
                     context.go(Screen.homeView.path);
                     Future(() =>
                         ref

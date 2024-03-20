@@ -43,7 +43,7 @@ class GameCreationMode extends StatelessWidget {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: state.selection != 0
-                                ? Colors.black26
+                                ? Colors.black38
                                 : Colors.transparent,
                             border: Border.all(
                               color: state.selection != 0
@@ -73,7 +73,7 @@ class GameCreationMode extends StatelessWidget {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: state.selection != 1
-                                ? Colors.black26
+                                ? Colors.black38
                                 : Colors.transparent,
                             border: Border.all(
                               color: state.selection != 1

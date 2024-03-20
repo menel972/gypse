@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
@@ -16,6 +15,7 @@ import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/common/utils/gypse_scaffold.dart';
 import 'package:gypse/game_hubs/domain/usecases/create_game_use_case.dart';
 import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
+import 'package:gypse/game_hubs/presentation/views/game_creation/invitation_text_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'game_creation/game_creation_app_bar.dart';
@@ -27,8 +27,10 @@ class GameCreationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bottom = MediaQuery.of(context).viewInsets.bottom;
+
     return GypseScaffold(
-      isGameView: true,
+      noBackground: true,
       appBar: const GameCreationAppBar(),
       body: Dimensions.iconXXS(context).padding(
         BlocProvider<GameCreationCubit>(
@@ -40,13 +42,17 @@ class GameCreationScreen extends HookConsumerWidget {
             onPopInvoked: (_) {
               context.read<GameCreationCubit>().dispose();
             },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const GameCreationMode(),
-                Dimensions.xs(context).spaceH(),
-                const GameInvitation(),
-              ],
+            child: SingleChildScrollView(
+              reverse: true,
+              padding: EdgeInsets.only(bottom: bottom),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const GameCreationMode(),
+                  Dimensions.xs(context).spaceH(),
+                  const GameInvitation(),
+                ],
+              ),
             ),
           ),
         ),

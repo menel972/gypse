@@ -22,6 +22,7 @@ class GypseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: appBar != null
           ? PreferredSize(
               preferredSize: const Size.fromHeight(kToolbarHeight),

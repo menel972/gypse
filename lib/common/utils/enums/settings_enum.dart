@@ -33,22 +33,25 @@ enum Time {
 /// Represents the different game modes available.
 enum GameMode {
   /// Solo game mode.
-  solo,
+  solo('Mode solo'),
 
   /// Multiplayer game mode.
-  multi,
+  multi('Mode multi'),
 
   /// Book game mode.
-  book,
+  book('Mode solo'),
 
   /// Random game mode.
-  random,
+  random('Mode solo'),
 
   /// Confrontation game mode.
-  confrontation,
+  confrontation('Affrontement'),
 
   /// Time-based game mode.
-  time,
+  time('Contre la montre');
+
+  final String label;
+  const GameMode(this.label);
 }
 
 /// Represents the rank of a player.

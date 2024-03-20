@@ -5,27 +5,26 @@ class GameCreationMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Text(
-          'Mode de jeu',
-          style: GypseFont.m(),
-        ),
-        Divider(
-          height: Dimensions.xs(context).width,
-        ),
-        SizedBox(
-          height: Dimensions.screen(context).width * 0.45,
-          child: BlocBuilder<GameCreationCubit, GameCreationState>(
-            builder: (context, state) {
-              return GridView.count(
+    return BlocBuilder<GameCreationCubit, GameCreationState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Mode de jeu : ${state.mode?.label ?? ''}',
+              style: const GypseFont.m(),
+            ),
+            Divider(height: Dimensions.xs(context).width),
+            SizedBox(
+              height: Dimensions.screen(context).width * 0.45,
+              child: GridView.count(
                 crossAxisCount: 2,
                 childAspectRatio: 1,
                 mainAxisSpacing: Dimensions.xxs(context).width,
                 crossAxisSpacing: Dimensions.xxs(context).width,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  // TODO : Add a Overlay widget
                   Stack(
                     fit: StackFit.expand,
                     children: [
@@ -87,11 +86,11 @@ class GameCreationMode extends StatelessWidget {
                     ],
                   ),
                 ],
-              );
-            },
-          ),
-        )
-      ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

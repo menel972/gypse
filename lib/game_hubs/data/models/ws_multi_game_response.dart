@@ -84,9 +84,9 @@ class WsMultiGameResponse extends Equatable {
   }
 
   /// Converts the [WsMultiGameResponse] instance to a map.
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap({String? uId}) {
     return {
-      'uId': uId,
+      'uId': uId ?? this.uId,
       'player1': player1,
       'playerScore1': playerScore1,
       'player2': player2,

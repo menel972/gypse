@@ -1,11 +1,9 @@
-import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gypse/common/style/autocomplete_options.dart';
 import 'package:gypse/common/style/fonts.dart';
-import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
-import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
 
 class InvitationTextField extends StatelessWidget {
@@ -17,50 +15,12 @@ class InvitationTextField extends StatelessWidget {
     return BlocBuilder<GameCreationCubit, GameCreationState>(
       builder: (context, state) {
         return Autocomplete(
-          displayStringForOption: (option) => option,
           onSelected: (value) {
+            context.read<GameCreationCubit>().onTextChange(value);
             FocusScope.of(context).unfocus();
           },
           optionsViewBuilder: (context, onSelected, options) {
-            return Align(
-              alignment: Alignment.topLeft,
-              child: Material(
-                color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: SizedBox(
-                  height: Dimensions.screen(context).height * 0.14,
-                  width: Dimensions.screen(context).width * 0.92,
-                  child: Blur(
-                    blur: 3,
-                    blurColor: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(10),
-                    overlay: ListView.separated(
-                      padding: Dimensions.xxs(context).pad(),
-                      itemCount: options.length,
-                      separatorBuilder: (_, __) =>
-                          Dimensions.xxs(context).spaceH(),
-                      itemBuilder: (BuildContext context, int index) {
-                        final option = options.elementAt(index);
-                        return GestureDetector(
-                          onTap: () {
-                            onSelected(option);
-                          },
-                          child: Text(
-                            option,
-                            style: GypseFont.s(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    child: Container(),
-                  ),
-                ),
-              ),
-            );
+            return AutocompleteOptions(onSelected, options);
           },
           fieldViewBuilder:
               (context, textEditingController, focusNode, onFieldSubmitted) {
@@ -69,14 +29,18 @@ class InvitationTextField extends StatelessWidget {
               focusNode: focusNode,
               decoration: InputDecoration(
                 labelText: 'Nom d\'utilisateur',
+                helperText: state.inputError,
+                helperStyle: const GypseFont.xs(),
                 suffixIcon: SvgPicture.asset(
                   GypseIcon.user.path,
                   fit: BoxFit.scaleDown,
                 ),
               ),
-              onChanged: (value) {},
+              onChanged: (value) {
+                context.read<GameCreationCubit>().onTextChange(value);
+              },
               textInputAction: TextInputAction.done,
-              keyboardType: TextInputType.name,
+              keyboardType: TextInputType.text,
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
             );
           },
@@ -84,6 +48,7 @@ class InvitationTextField extends StatelessWidget {
             if (value.text == '') {
               return const Iterable<String>.empty();
             }
+            // TODO : Fetch options from user
             return _kOptions.where((String option) {
               return option.toLowerCase().startsWith(value.text.toLowerCase());
             });

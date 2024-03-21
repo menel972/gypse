@@ -24,66 +24,29 @@ class GameCreationMode extends StatelessWidget {
                 crossAxisSpacing: Dimensions.xxs(context).width,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  // TODO : Add a Overlay widget
-                  Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      GameHubItem(
-                        title: 'Affrontement',
-                        icon: GypseIcon.duel.path,
-                        mode: GameMode.multi,
-                        onTap: () {},
-                      ),
-                      GestureDetector(
-                        onTap: () =>
-                            context.read<GameCreationCubit>().selectGameMode(0),
-                        child: Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: state.selection != 0
-                                ? Colors.black38
-                                : Colors.transparent,
-                            border: Border.all(
-                              color: state.selection != 0
-                                  ? Colors.transparent
-                                  : Theme.of(context).colorScheme.onPrimary,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ],
+                  GypseOverlay(
+                    onTap: () =>
+                        context.read<GameCreationCubit>().selectGameMode(0),
+                    visibility: state.selection != 0,
+                    hasBorder: true,
+                    child: GameHubItem(
+                      title: 'Affrontement',
+                      icon: GypseIcon.swords.path,
+                      mode: GameMode.multi,
+                      onTap: () {},
+                    ),
                   ),
-                  Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      GameHubItem(
-                        title: 'Contre la montre',
-                        icon: GypseIcon.duel.path,
-                        mode: GameMode.multi,
-                        onTap: () {},
-                      ),
-                      GestureDetector(
-                        onTap: () =>
-                            context.read<GameCreationCubit>().selectGameMode(1),
-                        child: Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: state.selection != 1
-                                ? Colors.black38
-                                : Colors.transparent,
-                            border: Border.all(
-                              color: state.selection != 1
-                                  ? Colors.transparent
-                                  : Theme.of(context).colorScheme.onPrimary,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ],
+                  GypseOverlay(
+                    onTap: () =>
+                        context.read<GameCreationCubit>().selectGameMode(1),
+                    visibility: state.selection != 1,
+                    hasBorder: true,
+                    child: GameHubItem(
+                      title: 'Contre la montre',
+                      icon: GypseIcon.timer.path,
+                      mode: GameMode.multi,
+                      onTap: () {},
+                    ),
                   ),
                 ],
               ),

@@ -18,7 +18,13 @@ class WsMultiService {
   /// Returns `true` if the multi-game was created successfully, `false` otherwise.
   Future<bool> createMulti(WsMultiGameResponse multi) async {
     try {
-      return await _client.doc(multi.uId).set(multi.toMap()).then((_) => true);
+      DocumentReference<Map<String, dynamic>> doc = _client.doc();
+
+      return await _client
+          .doc(doc.id)
+          .set(multi.toMap(uId: doc.id))
+          .then((_) => true);
+
     } on FirebaseException catch (err) {
       err.message?.log(tag: 'WsMultiService - createMulti');
       return false;

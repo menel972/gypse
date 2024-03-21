@@ -6,6 +6,7 @@ import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
+import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
 import 'package:gypse/game_hubs/presentation/views/game_creation_screen.dart';
 import 'package:gypse/game_hubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
@@ -72,6 +73,10 @@ GoRouter gypseRouter = GoRouter(
             GoRoute(
               path: Screen.gameCreationView.path,
               builder: (context, state) => const GameCreationScreen(),
+              onExit: (context) {
+                context.read<GameCreationCubit>().dispose();
+                return true;
+              },
             ),
           ],
         ),

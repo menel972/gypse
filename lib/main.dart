@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gypse/auth/domain/usecase/check_user_name_validity_use_case.dart';
+import 'package:gypse/auth/domain/usecase/get_user_by_pseudo.dart';
 import 'package:gypse/common/notifications/local_notification_service.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
@@ -20,7 +22,9 @@ import 'package:gypse/common/utils/gypse_router.dart';
 import 'package:gypse/common/utils/network_error_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
+import 'package:gypse/game_hubs/domain/usecases/create_game_use_case.dart';
 import 'package:gypse/game_hubs/domain/usecases/fetch_games_by_pseudo_use_case.dart';
+import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
 import 'package:gypse/game_hubs/presentation/states/multi_game_cubit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -111,6 +115,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               create: (_) => MultiGameCubit(
                 ref.read(userProvider.notifier),
                 ref.read(fetchGamesByPseudoUseCaseProvider),
+              ),
+            ),
+            BlocProvider<GameCreationCubit>(
+              create: (_) => GameCreationCubit(
+                ref.read(userProvider.notifier),
+                ref.read(createGameUseCaseProvider),
+                ref.read(checkUserNameValidityUseCaseProvider),
+                ref.read(getUserByPseudoUseCaseProvider),
               ),
             ),
           ],

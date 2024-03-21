@@ -18,6 +18,9 @@ abstract class UserRepository {
   ///<i>Errors are handled, logged and thrown with a [GypseException].</i>
   Future<void> onNewUser(User user);
 
+  /// Fetches all  users.
+  Future<List<User>> fetchAllUsers();
+
   ///<i><small>`Domain Layer`</small></i>
   ///## Fetch user
   ///

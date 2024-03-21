@@ -12,7 +12,7 @@ import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/gypse_scaffold.dart';
+import 'package:gypse/common/style/gypse_scaffold.dart';
 import 'package:gypse/game_hubs/presentation/states/multi_game_cubit.dart';
 import 'package:gypse/game_hubs/presentation/views/multi/multi_list_view_item.dart';
 

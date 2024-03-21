@@ -50,6 +50,24 @@ class WsUserService {
    * READ
    */
 
+  /// Fetches all users.
+  ///
+  /// Returns a list of [WsUserResponse] objects representing the fetched users.
+  ///
+  /// Throws a [GypseException] if an error occurs during the fetch process.
+  Future<List<WsUserResponse>?> fetchUsers() async {
+    try {
+      return await _client.get().then((snap) =>
+          snap.docs.map((doc) => WsUserResponse.fromMap(doc.data())).toList());
+    } on FirebaseException catch (err) {
+      err.message?.log(tag: 'WsUserService - fetchUsers');
+      throw GypseException(code: err.code);
+    } on Exception catch (e) {
+      e.log(tag: 'WsUserService - fetchUsers');
+      throw GypseException();
+    }
+  }
+
   ///<i><small>`Data Layer`</small></i>
   ///## Fetching user method
   ///

@@ -39,38 +39,35 @@ class _GameInvitationState extends State<GameInvitation>
                     const Text('Trouve un adversaire', style: GypseFont.m()),
                     Divider(height: Dimensions.xs(context).width),
                     const InvitationTextField(),
-                    Dimensions.xxs(context).spaceH(),
-                    Row(
-                      children: [
-                        // TODO : Add a Divider text widget
-                        Expanded(
-                          child: Divider(
-                            thickness: 1,
-                            endIndent: 20,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withOpacity(0.5),
+                    Visibility(
+                      visible: state.pseudoP2.isNotEmpty,
+                      child: TextButton(
+                        onPressed: () {
+                          state.inputError.isEmpty &&
+                                  state.status != StateStatus.loading
+                              ? context.read<GameCreationCubit>().createGame()
+                              : null;
+                        },
+                        child: Text(
+                          'Inviter',
+                          style: GypseFont.m(
+                            bold: state.inputError.isEmpty &&
+                                state.status != StateStatus.loading,
+                            color: state.inputError.isEmpty &&
+                                    state.status != StateStatus.loading
+                                ? Theme.of(context).colorScheme.secondary
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onPrimary
+                                    .withOpacity(0.5),
                           ),
                         ),
-                        const Text(
-                          'ou',
-                          style: GypseFont.s(),
-                          textAlign: TextAlign.center,
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 1,
-                            indent: 20,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withOpacity(0.5),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                    Dimensions.xxs(context).spaceH(),
+                    DividerText(
+                      text: 'ou',
+                      height: Dimensions.xs(context).height,
+                    ),
                     GypseButton.grey(
                       context,
                       label: 'Invite un ami',

@@ -293,7 +293,7 @@ class WsAnsweredQuestions extends Equatable {
         id: map?['qId'],
         level: map?['niveau'],
         isRightAnswer: map?['valid'],
-        time: (map?['time']).toDouble(),
+        time: (map?['time']),
       );
     } catch (e) {
       e.log(tag: 'WsAnsweredQuestions.fromMap');

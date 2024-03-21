@@ -26,6 +26,13 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
+  Future<List<User>> fetchAllUsers() async {
+    List<WsUserResponse>? wsUsers = await _userService.fetchUsers();
+
+    return wsUsers?.map((wsUser) => wsUser.toDomain()).toList() ?? [];
+  }
+
+  @override
   Future<User> getCurrentUser(String id) async {
     try {
       final WsUserResponse? wsUser = await _userService

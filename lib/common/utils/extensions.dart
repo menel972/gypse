@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/style/gypse_snack_bar.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -104,26 +104,21 @@ extension Snack on Object {
   ///
   /// Returns a [SnackBar] with a custom appearance.<br>
   /// Use it to **inform the user of a successful event**.
-  void success(BuildContext context) =>
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(toString(), style: const GypseFont.xs()),
-        backgroundColor: const Color.fromRGBO(207, 109, 18, 1),
-        duration: const Duration(seconds: 5),
-      ));
+  void success(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      GypseSnackBar.success(context, message: this),
+    );
+  }
 
   ///## Extension on [String]
   ///
   /// Returns a [SnackBar] with a custom appearance.<br>
   /// Use it to **inform the user of a failure**.
-  void failure(BuildContext context) =>
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          toString(),
-          style: const GypseFont.xs(),
-        ),
-        backgroundColor: const Color.fromRGBO(176, 0, 32, 1),
-        duration: const Duration(seconds: 5),
-      ));
+  void failure(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      GypseSnackBar.error(context, message: this),
+    );
+  }
 }
 
 ///## Extension on [String]

@@ -48,8 +48,7 @@ class RecapSessionState extends Equatable {
 class RecapSessionStateNotifier extends StateNotifier<RecapSessionState> {
   RecapSessionStateNotifier() : super(const RecapSessionState());
 
-  void addGame(GameState game) =>
-      state = state.copyWith(games: [...state.games, game]);
+  void addGames(List<GameState> games) => state = state.copyWith(games: games);
 
   void openDetails() => state = state.copyWith(details: true);
 

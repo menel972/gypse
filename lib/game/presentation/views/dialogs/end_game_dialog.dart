@@ -4,7 +4,7 @@ import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
+import 'package:gypse/game/presentation/views/states/game_cubit.dart';
 
 class EndGameDialog extends StatelessWidget {
   const EndGameDialog({super.key});

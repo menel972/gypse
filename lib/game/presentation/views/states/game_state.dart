@@ -7,9 +7,11 @@ import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
+import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 
 class GameState extends Equatable {
   final GameMode mode;
+  final UiMultiGame? multiGameData;
   final List<UiQuestion> questions;
   final List<GameState> recap;
   final UiGypseSettings settings;
@@ -24,6 +26,7 @@ class GameState extends Equatable {
 
   const GameState({
     required this.mode,
+    required this.multiGameData,
     required this.questions,
     required this.recap,
     required this.settings,
@@ -39,6 +42,7 @@ class GameState extends Equatable {
 
   const GameState.initial({
     this.mode = GameMode.solo,
+    this.multiGameData,
     this.questions = const [],
     this.recap = const [],
     this.settings = const UiGypseSettings(),
@@ -55,6 +59,7 @@ class GameState extends Equatable {
   @override
   List<Object?> get props => [
         mode,
+        multiGameData,
         questions,
         recap,
         settings,
@@ -95,6 +100,7 @@ class GameState extends Equatable {
 
   GameState copyWith({
     GameMode? mode,
+    UiMultiGame? multiGameData,
     List<UiQuestion>? questions,
     List<GameState>? recap,
     UiGypseSettings? settings,
@@ -109,6 +115,7 @@ class GameState extends Equatable {
   }) {
     return GameState(
       mode: mode ?? this.mode,
+      multiGameData: multiGameData ?? this.multiGameData,
       questions: questions ?? this.questions,
       recap: recap ?? this.recap,
       settings: settings ?? this.settings,

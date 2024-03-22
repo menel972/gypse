@@ -16,16 +16,20 @@ import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
+import 'package:gypse/game_hubs/domain/usecases/update_game_use_case.dart';
+import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 
 class GameCubit extends Cubit<GameState> {
   final UserProvider _userNotifier;
   final QuestionsProvider _questionNotifier;
   final RecapSessionStateNotifier _recapNotifier;
+  final UpdateGameUseCase _updateGameUseCase;
 
   GameCubit(
     this._userNotifier,
     this._questionNotifier,
     this._recapNotifier,
+    this._updateGameUseCase,
   ) : super(const GameState.initial());
 
 // #region PUBLIC
@@ -37,8 +41,13 @@ class GameCubit extends Cubit<GameState> {
   void init(UiGameMode params) {
     'INIT'.log(tag: 'STATE');
 
-    emit(state.copyWith(
-        mode: params.mode, status: StateStatus.loading));
+    emit(
+      state.copyWith(
+        mode: params.mode,
+        multiGameData: params.multiGameData,
+        status: StateStatus.loading,
+      ),
+    );
 
     _setTimeController();
     _setSettings();
@@ -69,6 +78,24 @@ class GameCubit extends Cubit<GameState> {
 
     _slideDown();
     // send recap to the server
+
+    UiMultiGame updatedGame = state.multiGameData!.copyWith(
+      resultP1: state.multiGameData!.resultP1.$2.isEmpty
+          ? (
+              _userNotifier.state!.player.pseudo,
+              state.recap.map((e) => e.toUiAnsweredQuestions()).toList()
+            )
+          : null,
+      resultP2: state.multiGameData!.resultP1.$2.isNotEmpty
+          ? (
+              _userNotifier.state!.player.pseudo,
+              state.recap.map((e) => e.toUiAnsweredQuestions()).toList()
+            )
+          : null,
+      updatedAt: DateTime.now(),
+    );
+
+    await _updateGameUseCase.invoke(updatedGame);
     await Future.delayed(const Duration(milliseconds: 900));
     ctx?.go(Screen.homeView.path);
   }
@@ -80,7 +107,7 @@ class GameCubit extends Cubit<GameState> {
     _onPropositionSelected(index);
     _saveElapsedTime();
     _updateUserState();
-    _updateRecap();
+    _updateStateRecap();
   }
 
   void onTimeOut() {
@@ -98,6 +125,12 @@ class GameCubit extends Cubit<GameState> {
     'DISPOSE'.log(tag: 'STATE');
 
     emit(const GameState.initial());
+  }
+
+  void updateRecap() {
+    'UPDATE RECAP'.log(tag: 'STATE');
+
+    _recapNotifier.addGames(state.recap);
   }
 // #endregion
 
@@ -135,6 +168,22 @@ class GameCubit extends Cubit<GameState> {
   void _fetchQuestions(String filter) {
     'FETCH QUESTIONS'.log(tag: 'STATE');
     List<UiQuestion> questions;
+
+    // FETCH QUESTIONS FROM MULTI
+    if (state.isMultiMode && state.multiGameData != null) {
+      if (state.multiGameData!.resultP1.$2.isNotEmpty) {
+        final allQuestions = _questionNotifier.getGameQuestions(book: ' ');
+        List<String> gameQuestions =
+            state.multiGameData!.resultP1.$2.map((e) => e.qId).toList();
+
+        questions =
+            allQuestions.where((e) => gameQuestions.contains(e.uId)).toList();
+
+        questions.length.log(tag: 'INIT QUESTIONS LENGTH');
+        emit(state.copyWith(questions: questions, filter: ' '));
+        return;
+      }
+    }
 
     // MODE AFFRONTEMENT
     if (state.mode == GameMode.confrontation) {
@@ -245,12 +294,10 @@ class GameCubit extends Cubit<GameState> {
     _userNotifier.updateAnsweredQuestions(state.toUiAnsweredQuestions());
   }
 
-  void _updateRecap() {
-    'UPDATE RECAP'.log(tag: 'STATE');
+  void _updateStateRecap() {
+    'UPDATE STATE RECAP'.log(tag: 'STATE');
 
     emit(state.copyWith(recap: [...state.recap, state]));
-
-    _recapNotifier.addGame(state);
   }
 // #endregion
 }

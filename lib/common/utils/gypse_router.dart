@@ -10,7 +10,7 @@ import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
 import 'package:gypse/game_hubs/presentation/views/game_creation_screen.dart';
 import 'package:gypse/game_hubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
-import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
+import 'package:gypse/game/presentation/views/states/game_cubit.dart';
 import 'package:gypse/game_hubs/presentation/views/multi_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';

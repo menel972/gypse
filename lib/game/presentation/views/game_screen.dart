@@ -12,6 +12,7 @@ import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/dialogs.dart';
 import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/style/gypse_scaffold.dart';
 import 'package:gypse/common/style/tiles.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
@@ -19,7 +20,6 @@ import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
-import 'package:gypse/common/utils/strings.dart';
 import 'package:gypse/game/presentation/models/ui_answer.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game/presentation/views/dialogs/end_game_dialog.dart';
@@ -27,7 +27,7 @@ import 'package:gypse/game/presentation/views/dialogs/quit_dialog.dart';
 import 'package:gypse/game/presentation/views/modals/verse_modal.dart';
 import 'package:gypse/game/presentation/views/no_question_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
-import 'package:gypse/game/presentation/views/states/game_state_cubit.dart';
+import 'package:gypse/game/presentation/views/states/game_cubit.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 import 'package:gypse/game/presentation/views/widgets/difficulty_icon.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -120,28 +120,15 @@ class GameScreen extends HookConsumerWidget {
           context.read<GameCubit>().init(params);
         }
 
-        return Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(kToolbarHeight),
-            child: GamesAppBar(params.mode),
-          ),
-          body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('$imagesPath/game_bkg.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: const SafeArea(
-              bottom: false,
-              child: Column(
-                children: [
-                  Expanded(child: QuestionView()),
-                  AnswersView(),
-                ],
-              ),
-            ),
+        return GypseScaffold(
+          isGameView: true,
+          bottomArea: false,
+          appBar: GamesAppBar(params.mode),
+          body: const Column(
+            children: [
+              Expanded(child: QuestionView()),
+              AnswersView(),
+            ],
           ),
         );
       },

@@ -49,6 +49,16 @@ class User extends Equatable {
     required this.settings,
   });
 
+  User.mock({
+    this.uid = 'ambuIUO',
+    this.isAdmin = false,
+    this.player = const Player.mock(),
+    this.language = Locales.fr,
+    this.status = LoginState.authenticated,
+    this.questions = const [AnsweredQuestions.mock()],
+    required this.settings,
+  });
+
   @override
   List<Object?> get props {
     return [
@@ -121,6 +131,11 @@ class GypseSettings extends Equatable {
     required this.time,
   });
 
+  GypseSettings.mock({
+    this.level = Level.hard,
+    this.time = Time.medium,
+  });
+
   @override
   List<Object> get props => [level, time];
 
@@ -167,6 +182,13 @@ class AnsweredQuestions extends Equatable {
     required this.level,
     required this.isRightAnswer,
     this.time,
+  });
+
+  const AnsweredQuestions.mock({
+    this.id = 'ambuIUO',
+    this.level = Level.hard,
+    this.isRightAnswer = true,
+    this.time = 20,
   });
 
   @override

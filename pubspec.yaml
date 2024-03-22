@@ -66,6 +66,7 @@ dependencies:
   url_launcher: ^6.2.3
 
 dev_dependencies:
+  bloc_test: ^9.1.6
   flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter

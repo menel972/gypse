@@ -35,6 +35,17 @@ class MultiGame extends Equatable {
     required this.updatedAt,
   });
 
+  /// Constructs a mock of [MultiGame] instance.
+  const MultiGame.mock({
+    this.uId = 'ALVLIzer574',
+    this.players = const [Player.mock(), Player.mock()],
+    this.mode = GameMode.confrontation,
+    this.resultP1 = ('ALVLIzer574', const [AnsweredQuestions.mock()]),
+    this.resultP2 = ('ALVLIzer674', const [AnsweredQuestions.mock()]),
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
   @override
   List<Object?> get props => [
         uId,

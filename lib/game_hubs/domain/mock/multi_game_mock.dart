@@ -1,34 +1,34 @@
-import 'package:gypse/auth/presentation/models/ui_player.dart';
-import 'package:gypse/auth/presentation/models/ui_user.dart';
+import 'package:gypse/auth/domain/models/player.dart';
+import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
-import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
+import 'package:gypse/game_hubs/domain/models/multi_game.dart';
 
-List<UiMultiGame> getMultiGamesMock = [
-  UiMultiGame(
+List<MultiGame> getMultiGamesMock = [
+  MultiGame(
     uId: '1',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 8),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 8),
     ],
     mode: GameMode.time,
-    resultP1: ('player1', <UiAnsweredQuestions>[]),
+    resultP1: ('player1', <AnsweredQuestions>[]),
     resultP2: (
       'player2#abcd',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: false,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 20,
@@ -38,31 +38,31 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '2',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.confrontation,
-    resultP1: ('player1', <UiAnsweredQuestions>[]),
+    resultP1: ('player1', <AnsweredQuestions>[]),
     resultP2: (
       'player2#efgh',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: false,
           time: 20,
@@ -72,31 +72,31 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '3',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.time,
-    resultP1: ('player1', <UiAnsweredQuestions>[]),
+    resultP1: ('player1', <AnsweredQuestions>[]),
     resultP2: (
       'player2#ijkl',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: false,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 20,
@@ -106,30 +106,30 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '4',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',
-      <UiAnsweredQuestions>[
-        const UiAnsweredQuestions(
-          qId: '',
+      <AnsweredQuestions>[
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 12,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 18,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 22,
@@ -140,30 +140,30 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '5',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.time,
     resultP1: (
       'player1',
-      <UiAnsweredQuestions>[
-        const UiAnsweredQuestions(
-          qId: '',
+      <AnsweredQuestions>[
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 8,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 12,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: false,
           time: 18,
@@ -174,30 +174,30 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '6',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',
-      <UiAnsweredQuestions>[
-        const UiAnsweredQuestions(
-          qId: '',
+      <AnsweredQuestions>[
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 12,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 18,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 22,
@@ -207,20 +207,20 @@ List<UiMultiGame> getMultiGamesMock = [
     resultP2: (
       'player2#uvwx',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: false,
           time: 20,
@@ -230,30 +230,30 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '7',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.time,
     resultP1: (
       'player1',
-      <UiAnsweredQuestions>[
-        const UiAnsweredQuestions(
-          qId: '',
+      <AnsweredQuestions>[
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 8,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 12,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: false,
           time: 18,
@@ -263,20 +263,20 @@ List<UiMultiGame> getMultiGamesMock = [
     resultP2: (
       'player2#yzab',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: false,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 20,
@@ -286,30 +286,30 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '8',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',
-      <UiAnsweredQuestions>[
-        const UiAnsweredQuestions(
-          qId: '',
+      <AnsweredQuestions>[
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 12,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 18,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 22,
@@ -319,20 +319,20 @@ List<UiMultiGame> getMultiGamesMock = [
     resultP2: (
       'player2#cdef',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: false,
           time: 20,
@@ -342,30 +342,30 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '9',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.time,
     resultP1: (
       'player1',
-      <UiAnsweredQuestions>[
-        const UiAnsweredQuestions(
-          qId: '',
+      <AnsweredQuestions>[
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 8,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 12,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: false,
           time: 18,
@@ -375,20 +375,20 @@ List<UiMultiGame> getMultiGamesMock = [
     resultP2: (
       'player2#ghij',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: false,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 20,
@@ -398,30 +398,30 @@ List<UiMultiGame> getMultiGamesMock = [
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
   ),
-  UiMultiGame(
+  MultiGame(
     uId: '10',
     players: const [
-      UiPlayer(pseudo: 'player1', score: 1),
-      UiPlayer(pseudo: 'player2', score: 1),
+      Player(pseudo: 'player1', score: 1),
+      Player(pseudo: 'player2', score: 1),
     ],
     mode: GameMode.confrontation,
     resultP1: (
       'player1',
-      <UiAnsweredQuestions>[
-        const UiAnsweredQuestions(
-          qId: '',
+      <AnsweredQuestions>[
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 12,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: true,
           time: 18,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 22,
@@ -431,20 +431,20 @@ List<UiMultiGame> getMultiGamesMock = [
     resultP2: (
       'player2#ijkl',
       [
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.easy,
           isRightAnswer: true,
           time: 10,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.medium,
           isRightAnswer: false,
           time: 15,
         ),
-        const UiAnsweredQuestions(
-          qId: '',
+        const AnsweredQuestions(
+          id: '',
           level: Level.hard,
           isRightAnswer: true,
           time: 20,

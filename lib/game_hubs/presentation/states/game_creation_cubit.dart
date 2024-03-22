@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/auth/domain/usecase/check_user_name_validity_use_case.dart';
 import 'package:gypse/auth/domain/usecase/get_user_by_pseudo.dart';
 import 'package:gypse/auth/presentation/models/ui_player.dart';
-import 'package:gypse/common/providers/user_provider.dart';
+import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
@@ -15,13 +15,13 @@ import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 part 'game_creation_state.dart';
 
 class GameCreationCubit extends Cubit<GameCreationState> {
-  final UserProvider _userProvider;
+  final UiUser _user;
   final CreateGameUseCase _createGameUseCase;
   final CheckUserNameValidityUseCase _checkUserNameUseCase;
   final GetUserByPseudoUseCase _getUserByPseudoUseCase;
 
   GameCreationCubit(
-    this._userProvider,
+    this._user,
     this._createGameUseCase,
     this._checkUserNameUseCase,
     this._getUserByPseudoUseCase,
@@ -61,7 +61,7 @@ class GameCreationCubit extends Cubit<GameCreationState> {
       ));
       return;
     }
-    UiPlayer userPlayer = _userProvider.state!.player;
+    UiPlayer userPlayer = _user.player;
 
     // NOTE : CREATE GAME
     'CREATE GAME'.log(tag: 'GameCreationCubit');
@@ -105,7 +105,7 @@ class GameCreationCubit extends Cubit<GameCreationState> {
       return;
     }
 
-    bool isCurrentUser = value == _userProvider.state!.player.pseudo;
+    bool isCurrentUser = value == _user.player.pseudo;
 
     if (isCurrentUser) {
       emit(state.copyWith(inputError: 'Vous ne pouvez pas vous inviter'));

@@ -19,3 +19,5 @@ abstract class MultiRepository {
   /// Deletes a multi-game by ID.
   Future<bool> deleteGame(String id);
 }
+
+

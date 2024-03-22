@@ -16,6 +16,12 @@ class Player extends Equatable {
     required this.score,
   });
 
+  /// Constructs a mock of[Player] instance.
+  const Player.mock({
+    this.pseudo = 'pseudo#1234',
+    this.score = 8,
+  });
+
   @override
   List<Object> get props => [pseudo, score];
 
@@ -32,6 +38,17 @@ class Player extends Equatable {
     return UiPlayer(
       pseudo: pseudo,
       score: score,
+    );
+  }
+
+  /// Creates a copy of the [Player] instance with updated properties.
+  Player copyWith({
+    String? pseudo,
+    int? score,
+  }) {
+    return Player(
+      pseudo: pseudo ?? this.pseudo,
+      score: score ?? this.score,
     );
   }
 }

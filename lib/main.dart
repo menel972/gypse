@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             ),
             BlocProvider<GameCreationCubit>(
               create: (_) => GameCreationCubit(
-                ref.read(userProvider.notifier),
+                ref.watch(userProvider)!,
                 ref.read(createGameUseCaseProvider),
                 ref.read(checkUserNameValidityUseCaseProvider),
                 ref.read(getUserByPseudoUseCaseProvider),

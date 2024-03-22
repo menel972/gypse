@@ -32,7 +32,7 @@ class QuitDialog extends HookConsumerWidget {
     Future<void> updateUser(BuildContext context, UiUser user) =>
         ref.read(onUserChangedUseCaseProvider).invoke(context, user);
 
-    return BlocBuilder<GameStateCubit, GameState>(
+    return BlocBuilder<GameCubit, GameState>(
       builder: (context, state) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -17,12 +17,12 @@ import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game/presentation/views/states/game_state.dart';
 import 'package:gypse/game/presentation/views/states/recap_session_state.dart';
 
-class GameStateCubit extends Cubit<GameState> {
+class GameCubit extends Cubit<GameState> {
   final UserProvider _userNotifier;
   final QuestionsProvider _questionNotifier;
   final RecapSessionStateNotifier _recapNotifier;
 
-  GameStateCubit(
+  GameCubit(
     this._userNotifier,
     this._questionNotifier,
     this._recapNotifier,

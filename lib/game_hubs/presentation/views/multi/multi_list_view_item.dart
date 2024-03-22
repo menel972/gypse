@@ -77,7 +77,7 @@ List<Widget> multiListViewItem(
           onTap: () {
             if (game.hasToPlay == userPseudo) {
               context.go(Screen.gameView.path,
-                  extra: UiGameMode(mode: game.mode));
+                  extra: UiGameMode(mode: game.mode, multiGameData: game));
             } else {
               // Finish screen
             }

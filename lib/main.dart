@@ -104,8 +104,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         });
         return MultiBlocProvider(
           providers: [
-            BlocProvider<GameStateCubit>(
-              create: (_) => GameStateCubit(
+            BlocProvider<GameCubit>(
+              create: (_) => GameCubit(
                 ref.read(userProvider.notifier),
                 ref.read(questionsProvider.notifier),
                 ref.read(recapSessionStateNotifierProvider.notifier),

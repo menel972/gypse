@@ -30,34 +30,38 @@ import 'package:gypse/tutorial/presentation/views/tutorial_screen.dart';
 ///Each of them is identified by the enum class [Screen].
 GoRouter gypseRouter = GoRouter(
   routes: [
-    // NOTE : INIT SCREEN
+    // #region INIT SCREEN
     GoRoute(
       path: Screen.initView.path,
       builder: (context, state) {
         return InitScreen();
       },
     ),
-    // NOTE : AUTH SCREEN
+    // #endregion
+    // #region AUTH SCREEN
     GoRoute(
       path: Screen.authView.path,
       builder: (context, state) => AuthScreen(),
     ),
-    // NOTE : HOME SCREEN
+    // #endregion
+    // #region HOME SCREEN
     GoRoute(
       path: Screen.homeView.path,
       builder: (context, state) => HomeScreen(),
     ),
-    // NOTE : GAME SCREEN
+    // #endregion
+    // #region GAME SCREEN
     GoRoute(
       path: Screen.gameView.path,
       builder: (context, state) => GameScreen(state.extra as UiGameMode),
       onExit: (context) async {
         Future.delayed(
-            1.seconds, () => context.read<GameStateCubit>().dispose());
+            1.seconds, () => context.read<GameCubit>().dispose());
         return true;
       },
     ),
-    // NOTE : HUB SCREENS
+    // #endregion
+    // #region HUB SCREENS
     GoRoute(
       path: '${Screen.hubView.path}/:mode',
       builder: (context, state) {
@@ -86,7 +90,8 @@ GoRouter gypseRouter = GoRouter(
         ),
       ],
     ),
-    // NOTE : Settings SCREEN
+    // #endregion
+    // #region SETTINGS SCREEN
     GoRoute(
       path: Screen.settingsView.path,
       builder: (context, state) => const SettingsScreen(),
@@ -109,11 +114,13 @@ GoRouter gypseRouter = GoRouter(
         ),
       ],
     ),
-    // NOTE : RECAP SESSION SCREEN
+    // #endregion
+    // #region RECAP SESSION SCREEN
     GoRoute(
       path: Screen.recapSession.path,
       builder: (context, state) => const RecapScreen(),
     ),
+    // #endregion
   ],
 );
 

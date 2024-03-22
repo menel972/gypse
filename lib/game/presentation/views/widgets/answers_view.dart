@@ -5,7 +5,7 @@ class AnswersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GameStateCubit, GameState>(
+    return BlocBuilder<GameCubit, GameState>(
       builder: (context, state) {
         return AnimatedContainer(
           duration: const Duration(milliseconds: 900),
@@ -79,7 +79,7 @@ class AnswersView extends StatelessWidget {
                             enabled: state.selectedAnswers.isEmpty,
                             onTap: () {
                               context
-                                  .read<GameStateCubit>()
+                                  .read<GameCubit>()
                                   .saveGameState(index);
                             },
                           ),
@@ -134,7 +134,7 @@ class AnswersView extends StatelessWidget {
                               child: GypseButton.blue(context,
                                   label: 'Terminer', onPressed: () {
                                 context
-                                    .read<GameStateCubit>()
+                                    .read<GameCubit>()
                                     .updateStatus(StateStatus.finish);
                               }),
                             )
@@ -143,7 +143,7 @@ class AnswersView extends StatelessWidget {
                               context,
                               onPressed: () {
                                 context
-                                    .read<GameStateCubit>()
+                                    .read<GameCubit>()
                                     .updateStatus(StateStatus.reloading);
                               },
                               icon: GypseIcon.arrowRight.path,

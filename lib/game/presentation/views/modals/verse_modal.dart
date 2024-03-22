@@ -36,7 +36,7 @@ class VerseModal extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(logActionUseCaseProvider).invoke(cta: 'read verse');
 
-    return BlocBuilder<GameStateCubit, GameState>(builder: (context, state) {
+    return BlocBuilder<GameCubit, GameState>(builder: (context, state) {
       return Dimensions.xs(context).padding(Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

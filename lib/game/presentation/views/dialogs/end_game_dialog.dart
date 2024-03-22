@@ -37,7 +37,7 @@ class EndGameDialog extends StatelessWidget {
           context,
           label: 'Terminer',
           onPressed: () {
-            context.read<GameStateCubit>().endGame();
+            context.read<GameCubit>().endGame();
             Navigator.of(context).pop();
           },
         ),

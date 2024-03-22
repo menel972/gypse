@@ -5,7 +5,7 @@ class QuestionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GameStateCubit, GameState>(
+    return BlocBuilder<GameCubit, GameState>(
       builder: (context, state) {
         if (state.currentQuestion == null) {
           return const SizedBox();
@@ -69,7 +69,7 @@ class QuestionView extends StatelessWidget {
                     isReverse: true,
                     onComplete: () {
                       context
-                          .read<GameStateCubit>()
+                          .read<GameCubit>()
                           .updateStatus(StateStatus.timeOut);
                     },
                   ),

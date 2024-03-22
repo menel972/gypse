@@ -46,18 +46,19 @@ class GameScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BlocConsumer<GameStateCubit, GameState>(
+    return BlocConsumer<GameCubit, GameState>(
+      // #region LISTENER
       listener: (context, state) {
         if (state.status == StateStatus.reloading) {
           'RELOADING'.log(tag: 'STATE');
-          context.read<GameStateCubit>().setNextQuestion();
+          context.read<GameCubit>().setNextQuestion();
         }
 
         if (state.status == StateStatus.finish) {
           'FINISH'.log(tag: 'STATE');
 
           if (state.mode == GameMode.confrontation) {
-            context.read<GameStateCubit>().endGame();
+            context.read<GameCubit>().endGame();
             return;
           }
 
@@ -65,7 +66,7 @@ class GameScreen extends HookConsumerWidget {
             GypseDialog(
               context,
               height: Dimensions.xl(context).height,
-              onDismiss: () => context.read<GameStateCubit>().endGame(),
+              onDismiss: () => context.read<GameCubit>().endGame(),
               dismissible: false,
               child: const EndGameDialog(),
             );
@@ -98,24 +99,25 @@ class GameScreen extends HookConsumerWidget {
 
         if (state.status == StateStatus.pause) {
           'PAUSE'.log(tag: 'STATE');
-          context.read<GameStateCubit>().pause();
+          context.read<GameCubit>().pause();
         }
 
         if (state.status == StateStatus.resume) {
           'RESUME'.log(tag: 'STATE');
           if (state.selectedAnswers.isEmpty) {
-            context.read<GameStateCubit>().resume();
+            context.read<GameCubit>().resume();
           }
         }
 
         if (state.status == StateStatus.timeOut) {
           'TIME OUT'.log(tag: 'STATE');
-          context.read<GameStateCubit>().onTimeOut();
+          context.read<GameCubit>().onTimeOut();
         }
       },
+      // #endregion
       builder: (context, state) {
         if (state.status == StateStatus.initial) {
-          context.read<GameStateCubit>().init(params);
+          context.read<GameCubit>().init(params);
         }
 
         return Scaffold(

@@ -25,12 +25,12 @@ class GamesAppBar extends StatelessWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          context.read<GameStateCubit>().updateStatus(StateStatus.pause);
+          context.read<GameCubit>().updateStatus(StateStatus.pause);
           GypseDialog(
             context,
             height: Dimensions.xl(context).height,
             onDismiss: () =>
-                context.read<GameStateCubit>().updateStatus(StateStatus.resume),
+                context.read<GameCubit>().updateStatus(StateStatus.resume),
             child: QuitDialog(),
           );
         },

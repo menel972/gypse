@@ -1,4 +1,4 @@
-part of '../multi_screen.dart';
+part of '../multi_list_screen.dart';
 
 /// The app bar widget for the multi-player game hub.
 class MultiAppBar extends StatelessWidget {

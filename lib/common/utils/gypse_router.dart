@@ -11,7 +11,8 @@ import 'package:gypse/game_hubs/presentation/views/game_creation_screen.dart';
 import 'package:gypse/game_hubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_cubit.dart';
-import 'package:gypse/game_hubs/presentation/views/multi_screen.dart';
+import 'package:gypse/game_hubs/presentation/views/multi_list_screen.dart';
+import 'package:gypse/game_hubs/presentation/views/recap_multi_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
 import 'package:gypse/game_hubs/presentation/views/book_screen.dart';
@@ -55,8 +56,7 @@ GoRouter gypseRouter = GoRouter(
       path: Screen.gameView.path,
       builder: (context, state) => GameScreen(state.extra as UiGameMode),
       onExit: (context) async {
-        Future.delayed(
-            1.seconds, () => context.read<GameCubit>().dispose());
+        Future.delayed(1.seconds, () => context.read<GameCubit>().dispose());
         return true;
       },
     ),
@@ -71,6 +71,10 @@ GoRouter gypseRouter = GoRouter(
       },
       routes: [
         GoRoute(
+          path: Screen.booksView.path,
+          builder: (context, state) => const BookScreen(),
+        ),
+        GoRoute(
           path: Screen.multiView.path,
           builder: (context, state) => const MultiScreen(),
           routes: [
@@ -82,11 +86,12 @@ GoRouter gypseRouter = GoRouter(
                 return true;
               },
             ),
+            GoRoute(
+              path: Screen.recapMultiView.path,
+              builder: (context, state) =>
+                  RecapMultiScreen(state.extra as UiGameMode),
+            ),
           ],
-        ),
-        GoRoute(
-          path: Screen.booksView.path,
-          builder: (context, state) => const BookScreen(),
         ),
       ],
     ),

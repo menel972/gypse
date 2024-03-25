@@ -27,6 +27,7 @@ import 'package:gypse/game_hubs/domain/usecases/fetch_games_by_pseudo_use_case.d
 import 'package:gypse/game_hubs/domain/usecases/update_game_use_case.dart';
 import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
 import 'package:gypse/game_hubs/presentation/states/multi_game_cubit.dart';
+import 'package:gypse/game_hubs/presentation/states/recap_multi_cubit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -125,6 +126,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 ref.read(createGameUseCaseProvider),
                 ref.read(checkUserNameValidityUseCaseProvider),
                 ref.read(getUserByPseudoUseCaseProvider),
+              ),
+            ),
+            BlocProvider<RecapMultiCubit>(
+              create: (_) => RecapMultiCubit(
+                ref.watch(userProvider)!.player,
+                ref.read(questionsProvider.notifier),
               ),
             ),
           ],

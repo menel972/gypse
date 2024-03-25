@@ -79,7 +79,10 @@ List<Widget> multiListViewItem(
               context.go(Screen.gameView.path,
                   extra: UiGameMode(mode: game.mode, multiGameData: game));
             } else {
-              // Finish screen
+              context.go(
+                '${Screen.hubView.path}/${game.mode.name}/${Screen.multiView.path}/${Screen.recapMultiView.path}',
+                extra: UiGameMode(mode: game.mode, multiGameData: game),
+              );
             }
           },
         );

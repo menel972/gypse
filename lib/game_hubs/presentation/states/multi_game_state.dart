@@ -40,7 +40,9 @@ class MultiGameState extends Equatable {
   /// The list is sorted in ascending order based on the [updatedAt] property of the games.
   List<UiMultiGame> get waitingList {
     if (games.isEmpty) return [];
-    return games.where((e) => e.hasToPlay != userPseudo).toList()
+    return games
+        .where((e) => e.hasToPlay != null && e.hasToPlay != userPseudo)
+        .toList()
       ..sort((a, b) => a.updatedAt.compareTo(b.updatedAt))
       ..reversed.toList();
   }

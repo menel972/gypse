@@ -78,6 +78,14 @@ class UiMultiGame extends Equatable {
     return goodP1 > goodP2 ? resultP1.$1 : resultP2.$1;
   }
 
+  List<UiAnsweredQuestions> userResults(String pseudo) {
+    return resultP1.$1 == pseudo ? resultP1.$2 : resultP2.$2;
+  }
+
+  List<UiAnsweredQuestions> opponentResults(String pseudo) {
+    return resultP1.$1 == pseudo ? resultP2.$2 : resultP1.$2;
+  }
+
   /// Creates a copy of this [UiMultiGame] instance with the specified fields replaced with new values.
   UiMultiGame copyWith({
     String? uId,

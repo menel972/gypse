@@ -73,7 +73,6 @@ class QuestionView extends StatelessWidget {
                           .updateStatus(StateStatus.timeOut);
                     },
                   ),
-                  // ref.watch(timerStateNotifierProvider(context)),
                 ],
               ),
             ],

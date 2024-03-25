@@ -15,6 +15,7 @@ enum Screen {
   booksView('books'),
   multiView('multi'),
   gameCreationView('creation'),
+  recapMultiView('recap'),
 
   // Settings
   settingsView('/settings'),

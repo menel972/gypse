@@ -77,8 +77,8 @@ class GameCubit extends Cubit<GameState> {
     emit(state.copyWith(status: StateStatus.partialLoading));
 
     _slideDown();
-    // send recap to the server
 
+    // send recap to the server
     UiMultiGame updatedGame = state.multiGameData!.copyWith(
       resultP1: state.multiGameData!.resultP1.$2.isEmpty
           ? (
@@ -169,36 +169,72 @@ class GameCubit extends Cubit<GameState> {
     'FETCH QUESTIONS'.log(tag: 'STATE');
     List<UiQuestion> questions;
 
-    // FETCH QUESTIONS FROM MULTI
-    if (state.isMultiMode && state.multiGameData != null) {
-      if (state.multiGameData!.resultP1.$2.isNotEmpty) {
-        final allQuestions = _questionNotifier.getGameQuestions(book: ' ');
-        List<String> gameQuestions =
-            state.multiGameData!.resultP1.$2.map((e) => e.qId).toList();
-
-        questions =
-            allQuestions.where((e) => gameQuestions.contains(e.uId)).toList();
-
-        questions.length.log(tag: 'INIT QUESTIONS LENGTH');
-        emit(state.copyWith(questions: questions, filter: ' '));
-        return;
-      }
-    }
-
     // MODE AFFRONTEMENT
     if (state.mode == GameMode.confrontation) {
-      final allQuestions = _questionNotifier.getGameQuestions(book: ' ');
-      questions = allQuestions.take(5).toList();
-      emit(state.copyWith(questions: questions, filter: ' '));
-      return;
+      questions = _fetchConfrontationQuestions();
     }
 
     // MODE TIME
-    if (state.mode == GameMode.time) {
-      questions = _questionNotifier.getGameQuestions(book: ' ');
-      emit(state.copyWith(questions: questions, filter: ' '));
-      return;
+    else if (state.mode == GameMode.time) {
+      questions = _fetchTimeQuestions();
     }
+
+    // MODE SOLO
+    else {
+      questions = _fetchSoloQuestions(filter);
+    }
+
+    emit(state.copyWith(questions: questions, filter: filter));
+  }
+
+  List<UiQuestion> _fetchConfrontationQuestions() {
+    'FETCH CONFRONTATION QUESTIONS'.log(tag: 'STATE');
+
+    List<UiQuestion> questions;
+    final allQuestions = _questionNotifier.getGameQuestions(book: ' ');
+
+    if (state.multiGameData!.resultP1.$2.isNotEmpty) {
+      List<String> gameQuestionsId =
+          state.multiGameData!.resultP1.$2.map((e) => e.qId).toList();
+
+      questions =
+          allQuestions.where((e) => gameQuestionsId.contains(e.uId)).toList();
+    } else {
+      questions = allQuestions.take(5).toList();
+    }
+
+    questions.length.log(tag: 'INIT QUESTIONS LENGTH');
+    return questions;
+  }
+
+  List<UiQuestion> _fetchTimeQuestions() {
+    'FETCH TIME QUESTIONS'.log(tag: 'STATE');
+
+    List<UiQuestion> questions;
+    final allQuestions = _questionNotifier.getGameQuestions(book: ' ');
+
+    if (state.multiGameData!.resultP1.$2.isNotEmpty) {
+      List<String> gameQuestionsId =
+          state.multiGameData!.resultP1.$2.map((e) => e.qId).toList();
+      List<UiQuestion> gameQuestions =
+          allQuestions.where((e) => gameQuestionsId.contains(e.uId)).toList();
+
+      questions = [
+        ...gameQuestions,
+        ...allQuestions.where((e) => !gameQuestionsId.contains(e.uId))
+      ];
+    } else {
+      questions = allQuestions;
+    }
+
+    questions.length.log(tag: 'INIT QUESTIONS LENGTH');
+    return questions;
+  }
+
+  List<UiQuestion> _fetchSoloQuestions(String filter) {
+    'FETCH SOLO QUESTIONS'.log(tag: 'STATE');
+
+    List<UiQuestion> questions;
 
     // Enable questions
     questions = _questionNotifier
@@ -210,8 +246,10 @@ class GameCubit extends Cubit<GameState> {
       questions = _questionNotifier.getGameQuestions(book: filter);
     }
 
-    emit(state.copyWith(questions: questions, filter: filter));
+    questions.length.log(tag: 'INIT QUESTIONS LENGTH');
+    return questions;
   }
+
 // #endregion
 
 // #region Game Logic

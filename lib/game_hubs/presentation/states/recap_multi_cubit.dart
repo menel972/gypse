@@ -23,20 +23,14 @@ class RecapMultiCubit extends Cubit<UiMultiGame> {
     emit(game);
   }
 
-  void dispose() {
-    'DISPOSE'.log(tag: 'STATE');
-    emit(
-      UiMultiGame.empty(createdAt: DateTime.now(), updatedAt: DateTime.now()),
-    );
-  }
-
   UiPlayer get opponent {
     return state.players
         .firstWhere((player) => player.pseudo != userPlayer.pseudo);
   }
 
   String get title {
-    if (state.winner == null) return 'En cours';
+    if (state.hasToPlay != null) return 'en cours';
+    if (state.winner == state.hasToPlay) return 'égalité';
 
     return state.winner == userPlayer.pseudo ? 'Victoire' : 'Défaite';
   }
@@ -52,11 +46,11 @@ class RecapMultiCubit extends Cubit<UiMultiGame> {
         .where((e) => e.isRightAnswer)
         .length;
 
-    if (state.winner != null) return '$userScore - $opponentScore';
+    if (state.hasToPlay != null) return '$userScore - ';
 
     if (state.userResults(userPlayer.pseudo).isEmpty) return ' - ';
 
-    return '$userScore - ';
+    return '$userScore - $opponentScore';
   }
 
   UiQuestion questions(String id) {

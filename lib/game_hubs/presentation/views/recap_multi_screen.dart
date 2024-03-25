@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gypse/common/style/buttons.dart';
@@ -17,9 +16,9 @@ import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 import 'package:gypse/game_hubs/presentation/states/recap_multi_cubit.dart';
 
 part 'recap/recap_multi_app_bar.dart';
+part 'recap/recap_multi_questions.dart';
 part 'recap/recap_multi_scores.dart';
 part 'recap/recap_multi_status.dart';
-part 'recap/recap_multi_questions.dart';
 
 class RecapMultiScreen extends StatelessWidget {
   final UiGameMode params;
@@ -30,7 +29,7 @@ class RecapMultiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RecapMultiCubit, UiMultiGame>(
       builder: (context, state) {
-        if (state.players.isEmpty) {
+        if (state.uId != params.multiGameData?.uId) {
           context.read<RecapMultiCubit>().init(params.multiGameData!);
         }
 

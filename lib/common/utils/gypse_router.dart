@@ -6,16 +6,17 @@ import 'package:gypse/auth/presentation/views/auth_screen.dart';
 import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
-import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
-import 'package:gypse/game_hubs/presentation/views/game_creation_screen.dart';
-import 'package:gypse/game_hubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game/presentation/views/game_screen.dart';
 import 'package:gypse/game/presentation/views/states/game_cubit.dart';
+import 'package:gypse/game_hubs/presentation/states/game_creation_cubit.dart';
+import 'package:gypse/game_hubs/presentation/states/multi_game_cubit.dart';
+import 'package:gypse/game_hubs/presentation/views/book_screen.dart';
+import 'package:gypse/game_hubs/presentation/views/game_creation_screen.dart';
+import 'package:gypse/game_hubs/presentation/views/game_hub_screen.dart';
 import 'package:gypse/game_hubs/presentation/views/multi_list_screen.dart';
 import 'package:gypse/game_hubs/presentation/views/recap_multi_screen.dart';
 import 'package:gypse/home/presentation/views/home_screen.dart';
 import 'package:gypse/home/presentation/views/init_screen.dart';
-import 'package:gypse/game_hubs/presentation/views/book_screen.dart';
 import 'package:gypse/recap/presentation/views/recap_screen.dart';
 import 'package:gypse/settings/presentation/views/settings_screen.dart';
 import 'package:gypse/settings/presentation/views/widgets/about_gypse/about_gypse.dart';
@@ -90,6 +91,10 @@ GoRouter gypseRouter = GoRouter(
               path: Screen.recapMultiView.path,
               builder: (context, state) =>
                   RecapMultiScreen(state.extra as UiGameMode),
+              onExit: (context) {
+                context.read<MultiGameCubit>().fetchGames();
+                return true;
+              },
             ),
           ],
         ),

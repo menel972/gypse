@@ -97,7 +97,10 @@ class GameCubit extends Cubit<GameState> {
 
     await _updateGameUseCase.invoke(updatedGame);
     await Future.delayed(const Duration(milliseconds: 900));
-    ctx?.go(Screen.homeView.path);
+    ctx?.go(
+      '${Screen.hubView.path}/${state.mode.name}/${Screen.multiView.path}/${Screen.recapMultiView.path}',
+      extra: UiGameMode(mode: state.mode, multiGameData: updatedGame),
+    );
   }
 
   void saveGameState(int index) {

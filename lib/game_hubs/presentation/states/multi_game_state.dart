@@ -32,8 +32,7 @@ class MultiGameState extends Equatable {
   List<UiMultiGame> get yourTurnList {
     if (games.isEmpty) return [];
     return games.where((e) => e.hasToPlay == userPseudo).toList()
-      ..sort((a, b) => a.updatedAt.compareTo(b.updatedAt))
-      ..reversed.toList();
+      ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
   }
 
   /// Returns a list of [UiMultiGame] objects where it's not the player's turn to play.
@@ -43,8 +42,7 @@ class MultiGameState extends Equatable {
     return games
         .where((e) => e.hasToPlay != null && e.hasToPlay != userPseudo)
         .toList()
-      ..sort((a, b) => a.updatedAt.compareTo(b.updatedAt))
-      ..reversed.toList();
+      ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
   }
 
   /// Returns a list of [UiMultiGame] objects that are finished.
@@ -52,8 +50,7 @@ class MultiGameState extends Equatable {
   List<UiMultiGame> get finishedList {
     if (games.isEmpty) return [];
     return games.where((e) => e.hasToPlay == null).toList()
-      ..sort((a, b) => a.updatedAt.compareTo(b.updatedAt))
-      ..reversed.toList();
+      ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
   }
 
   /// Creates a copy of this [MultiGameState] with the given parameters overridden.

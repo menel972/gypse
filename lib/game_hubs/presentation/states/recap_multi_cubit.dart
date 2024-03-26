@@ -1,17 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
-import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_question.dart';
 import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 
 class RecapMultiCubit extends Cubit<UiMultiGame> {
   final UiPlayer userPlayer;
-  final QuestionsProvider _questionsProvider;
+  // final QuestionsProvider _questionsProvider;
+  final List<UiQuestion> Function({required String book}) _getQuestionsUseCase;
 
-  RecapMultiCubit(this.userPlayer, this._questionsProvider)
-      : super(
+  RecapMultiCubit(
+    this.userPlayer,
+    this._getQuestionsUseCase,
+  ) : super(
           UiMultiGame.empty(
             createdAt: DateTime.now(),
             updatedAt: DateTime.now(),
@@ -46,17 +48,17 @@ class RecapMultiCubit extends Cubit<UiMultiGame> {
         .where((e) => e.isRightAnswer)
         .length;
 
-    if (state.hasToPlay != null) return '$userScore - ';
-
     if (state.userResults(userPlayer.pseudo).isEmpty) return ' - ';
+
+    if (state.hasToPlay == opponent.pseudo &&
+        state.userResults(userPlayer.pseudo).isNotEmpty) return '$userScore - ';
+
 
     return '$userScore - $opponentScore';
   }
 
   UiQuestion questions(String id) {
-    return _questionsProvider
-        .getGameQuestions(book: ' ')
-        .firstWhere((e) => e.uId == id);
+    return _getQuestionsUseCase(book: ' ').firstWhere((e) => e.uId == id);
   }
 
   bool hasSucceed(String id, UiPlayer player) {

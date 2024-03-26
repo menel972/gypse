@@ -29,6 +29,15 @@ class GameCreationCubit extends Cubit<GameCreationState> {
 
   // #region PUBLIC METHODS
 
+  void init(String param) {
+    'INIT'.log(tag: 'STATE');
+
+    emit(state.copyWith(
+      pseudoP2: param,
+      status: StateStatus.partialLoading,
+    ));
+  }
+
   void selectGameMode(int mode) {
     'SELECT GAME MODE'.log(tag: 'GameCreationCubit');
     emit(state.copyWith(selection: mode));
@@ -93,6 +102,7 @@ class GameCreationCubit extends Cubit<GameCreationState> {
 
   // #endregion
 
+  // #region PRIVATE METHODS
   void _pseudoFormatValidator() {
     'VALIDATOR'.log(tag: 'GameCreationCubit');
 
@@ -121,4 +131,5 @@ class GameCreationCubit extends Cubit<GameCreationState> {
 
     return await _checkUserNameUseCase.invoke(value);
   }
+  // #endregion
 }

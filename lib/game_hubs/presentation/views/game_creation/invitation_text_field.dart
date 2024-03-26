@@ -25,7 +25,7 @@ class InvitationTextField extends StatelessWidget {
           fieldViewBuilder:
               (context, textEditingController, focusNode, onFieldSubmitted) {
             return TextFormField(
-              controller: textEditingController,
+              controller: textEditingController..text = state.pseudoP2,
               focusNode: focusNode,
               decoration: InputDecoration(
                 labelText: 'Nom d\'utilisateur',

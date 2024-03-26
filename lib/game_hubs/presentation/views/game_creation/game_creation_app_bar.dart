@@ -9,7 +9,10 @@ class GameCreationAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: () {
+          context.go(
+              '${Screen.hubView.path}/${GameMode.multi.name}/${Screen.multiView.path}');
+        },
         icon: SvgPicture.asset(
           Platform.isIOS
               ? GypseIcon.arrowLeft.path

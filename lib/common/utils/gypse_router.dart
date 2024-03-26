@@ -81,9 +81,11 @@ GoRouter gypseRouter = GoRouter(
           routes: [
             GoRoute(
               path: Screen.gameCreationView.path,
-              builder: (context, state) => const GameCreationScreen(),
-              onExit: (context) {
-                context.read<GameCreationCubit>().dispose();
+              builder: (context, state) =>
+                  GameCreationScreen(state.extra as String?),
+              onExit: (context) async {
+                Future.delayed(
+                    500.ms, () => context.read<GameCreationCubit>().dispose());
                 return true;
               },
             ),

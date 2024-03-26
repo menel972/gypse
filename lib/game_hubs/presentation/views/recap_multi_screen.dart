@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/style/gypse_scaffold.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
+import 'package:gypse/common/utils/enums/path_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
@@ -67,7 +69,14 @@ class RecapMultiScreen extends StatelessWidget {
                       child: GypseButton.outlined(
                         context,
                         label: 'Nouvelle partie',
-                        onPressed: () {},
+                        onPressed: () {
+                          context.go(
+                              '${Screen.hubView.path}/${state.mode}/${Screen.multiView.path}/${Screen.gameCreationView.path}',
+                              extra: context
+                                  .read<RecapMultiCubit>()
+                                  .opponent
+                                  .pseudo);
+                        },
                       ),
                     ),
                   ],

@@ -131,7 +131,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             BlocProvider<RecapMultiCubit>(
               create: (_) => RecapMultiCubit(
                 ref.watch(userProvider)!.player,
-                ref.read(questionsProvider.notifier),
+                ref.read(questionsProvider.notifier).getGameQuestions,
               ),
             ),
           ],

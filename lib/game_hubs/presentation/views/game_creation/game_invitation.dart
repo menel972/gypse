@@ -18,6 +18,12 @@ class _GameInvitationState extends State<GameInvitation>
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<GameCreationCubit, GameCreationState>(
       listener: (context, state) {

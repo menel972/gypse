@@ -85,7 +85,10 @@ enum GypseIcon {
   duel('assets/icons/prop=Duel.svg'),
 
   /// Multi icon.
-  multi('assets/icons/prop=Multi.svg');
+  multi('assets/icons/prop=Multi.svg'),
+
+  /// Quote icon.
+  quote('assets/icons/prop=Quote.svg');
 
   final String path;
   const GypseIcon(this.path);

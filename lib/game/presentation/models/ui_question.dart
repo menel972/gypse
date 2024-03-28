@@ -32,6 +32,9 @@ class UiQuestion extends Equatable {
     this.answers = const [],
   });
 
+  UiAnswer get rightAnswer =>
+      answers.firstWhere((element) => element.isRightAnswer);
+
   @override
   List<Object> get props => [uId, text, book, answers];
 }

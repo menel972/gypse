@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/common/style/buttons.dart';
 import 'package:gypse/common/style/cards.dart';
 import 'package:gypse/common/style/fonts.dart';
+import 'package:gypse/common/style/gypse_modal.dart';
 import 'package:gypse/common/style/gypse_scaffold.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';
@@ -16,6 +17,7 @@ import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game/presentation/models/ui_game_mode.dart';
 import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
 import 'package:gypse/game_hubs/presentation/states/recap_multi_cubit.dart';
+import 'package:gypse/game_hubs/presentation/views/recap/recap_multi_verse_modal.dart';
 
 part 'recap/recap_multi_app_bar.dart';
 part 'recap/recap_multi_questions.dart';

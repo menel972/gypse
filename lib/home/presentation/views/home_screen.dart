@@ -9,7 +9,7 @@ import 'package:gypse/common/providers/data_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
 import 'package:gypse/common/style/anonymous_dialogs.dart';
 import 'package:gypse/common/style/buttons.dart';
-import 'package:gypse/common/style/dialogs.dart';
+import 'package:gypse/common/style/gypse_dialog.dart';
 import 'package:gypse/common/style/fonts.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/enums/assets_enum.dart';

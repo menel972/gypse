@@ -14,7 +14,7 @@ import 'package:gypse/common/notifications/local_notification_service.dart';
 import 'package:gypse/common/providers/connectivity_provider.dart';
 import 'package:gypse/common/providers/questions_provider.dart';
 import 'package:gypse/common/providers/user_provider.dart';
-import 'package:gypse/common/style/dialogs.dart';
+import 'package:gypse/common/style/gypse_dialog.dart';
 import 'package:gypse/common/style/theme.dart';
 import 'package:gypse/common/utils/dimensions.dart';
 import 'package:gypse/common/utils/extensions.dart';

@@ -32,6 +32,9 @@ class RecapMultiQuestions extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 titleAlignment: ListTileTitleAlignment.titleHeight,
                 dense: true,
+                onTap: () {
+                  GypseModal(context, child: RecapMultiVerseModal(i));
+                },
                 leading: hasSucceedP1
                     ? SvgPicture.asset(
                         GypseIcon.check.path,

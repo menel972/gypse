@@ -78,9 +78,7 @@ class AnswersView extends StatelessWidget {
                             index: index + 1,
                             enabled: state.selectedAnswers.isEmpty,
                             onTap: () {
-                              context
-                                  .read<GameCubit>()
-                                  .saveGameState(index);
+                              context.read<GameCubit>().saveGameState(index);
                             },
                           ),
                         );
@@ -120,14 +118,16 @@ class AnswersView extends StatelessWidget {
                                 context,
                                 onPressed: () {
                                   'Voir le verset'.log(tag: 'ANSWER VIEW');
-                                  VerseModal(context);
+                                  GypseModal(
+                                    context,
+                                    child: const VerseModal(),
+                                  );
                                 },
                                 label: 'Voir le verset',
                               ),
                             ),
                           if (state.mode != GameMode.confrontation)
-
-                          Dimensions.xs(context).spaceW(),
+                            Dimensions.xs(context).spaceW(),
                           if (state.mode == GameMode.confrontation &&
                               state.recap.length == state.questions.length)
                             Expanded(

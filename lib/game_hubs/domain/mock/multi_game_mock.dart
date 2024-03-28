@@ -1,4 +1,3 @@
-import 'package:gypse/auth/domain/models/player.dart';
 import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/game_hubs/domain/models/multi_game.dart';

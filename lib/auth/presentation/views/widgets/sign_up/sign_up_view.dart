@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:gypse/auth/domain/usecase/auth_use_cases.dart';
 import 'package:gypse/auth/domain/usecase/user_use_case.dart';
 import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
-import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up/no_auth_dialog.dart';
 import 'package:gypse/auth/presentation/views/widgets/sign_up/states/sign_up_state.dart';

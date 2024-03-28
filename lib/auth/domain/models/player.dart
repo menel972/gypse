@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:gypse/auth/presentation/models/ui_player.dart';
+part of 'user.dart';
 
 /// Represents a player in the game.
 /// ```

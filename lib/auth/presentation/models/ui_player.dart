@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:gypse/common/utils/enums/settings_enum.dart';
+part of 'ui_user.dart';
 
 /// Represents a UI player.
 /// ```

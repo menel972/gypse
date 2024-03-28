@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gypse/auth/data/models/ws_user_response.dart';
-import 'package:gypse/auth/domain/models/player.dart';
+import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 import 'package:gypse/game_hubs/domain/models/multi_game.dart';

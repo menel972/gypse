@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:gypse/auth/presentation/models/ui_auth_request.dart';
-import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/auth/presentation/models/ui_user.dart';
 
 class CredentialsState extends Equatable {

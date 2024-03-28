@@ -1,13 +1,15 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
-import 'package:gypse/auth/presentation/models/ui_player.dart';
 import 'package:gypse/common/utils/enums/locales_enum.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
 import 'package:gypse/common/utils/extensions.dart';
 
-/** UI USER */
+part 'ui_gypse_settings.dart';
+part 'ui_answered_questions.dart';
+part 'ui_game_history.dart';
+part 'ui_player.dart';
 
 ///<i><small>`Presentation Layer`</small></i>
 ///## User's data <i><small>(received from the domain layer)</small></i>
@@ -27,6 +29,8 @@ class UiUser extends Equatable {
   final String uId;
   final bool isAdmin;
   final UiPlayer player;
+  final List<UiGameHistory> multiGamesHistory;
+  final int fish;
   Locales language;
   LoginState status;
   List<UiAnsweredQuestions> questions;
@@ -41,6 +45,8 @@ class UiUser extends Equatable {
     this.uId, {
     this.isAdmin = false,
     this.player = const UiPlayer.initial(),
+    this.multiGamesHistory = const [],
+    this.fish = 5,
     this.language = Locales.fr,
     this.status = LoginState.loading,
     this.questions = const [],
@@ -61,6 +67,9 @@ class UiUser extends Equatable {
   List<Object?> get props => [
         uId,
         isAdmin,
+        player,
+        multiGamesHistory,
+        fish,
         language,
         status,
         questions,
@@ -114,69 +123,4 @@ class UiUser extends Equatable {
 
     return (delta.isNull || hardList.isNotEmpty, delta);
   }
-}
-
-/** UI GYPSE SETTINGS */
-
-///<i><small>`Presentation Layer`</small></i>
-///## User settings <i><small>(received from the domain layer)</small></i>
-///
-///```
-///Level level;
-///Time time;
-///```
-///
-///It contains user's settings.
-class UiGypseSettings extends Equatable {
-  final Level level;
-  final Time time;
-
-  ///<i><small>`Presentation Layer`</small></i>
-  ///### User settings <i><small>(received from the domain layer)</small></i>
-  ///#### `UiGypseSettings` constructor
-  ///<br>
-  ///It contains user's settings.
-  const UiGypseSettings({this.level = Level.easy, this.time = Time.medium});
-
-  @override
-  List<Object?> get props => [level, time];
-
-  UiGypseSettings copyWith({Level? level, Time? time}) => UiGypseSettings(
-        level: level ?? this.level,
-        time: time ?? this.time,
-      );
-}
-
-/** UI ANSWERED QUESTIONS */
-
-///<i><small>`Presentation Layer`</small></i>
-///## Already answered question <i><small>(received from the domain layer)</small></i>
-///
-///```
-///final String qId;
-///final Level level;
-///final bool isRightAnswer;
-///```
-///
-///It contains information on questions that have already been answered.
-class UiAnsweredQuestions extends Equatable {
-  final String qId;
-  final Level level;
-  final bool isRightAnswer;
-  final double? time;
-
-  ///<i><small>`Presentation Layer`</small></i>
-  ///### Already answered question <i><small>(received from the domain layer)</small></i>
-  ///#### `UiAnsweredQuestions` constructor
-  ///<br>
-  ///It contains information on questions that have already been answered.
-  const UiAnsweredQuestions({
-    required this.qId,
-    required this.level,
-    required this.isRightAnswer,
-    this.time,
-  });
-
-  @override
-  List<Object?> get props => [qId, level, isRightAnswer, time];
 }

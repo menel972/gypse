@@ -1,4 +1,3 @@
-import 'package:gypse/auth/domain/models/player.dart';
 import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums/locales_enum.dart';
 import 'package:gypse/common/utils/enums/state_enum.dart';
@@ -12,6 +11,8 @@ List<User> getUsersMock = [
     status: LoginState.authenticated,
     questions: const [AnsweredQuestions.mock()],
     settings: GypseSettings.mock(),
+    multiGamesHistory: const [],
+    fish: 5,
   ),
   User(
     uid: 'abc123',
@@ -21,6 +22,8 @@ List<User> getUsersMock = [
     status: LoginState.authenticated,
     questions: const [AnsweredQuestions.mock()],
     settings: GypseSettings.mock(),
+    multiGamesHistory: const [],
+    fish: 5,
   ),
   User(
     uid: 'def456',
@@ -30,6 +33,8 @@ List<User> getUsersMock = [
     status: LoginState.authenticated,
     questions: const [AnsweredQuestions.mock()],
     settings: GypseSettings.mock(),
+    multiGamesHistory: const [],
+    fish: 5,
   ),
   User(
     uid: 'ghi789',
@@ -39,6 +44,8 @@ List<User> getUsersMock = [
     status: LoginState.authenticated,
     questions: const [AnsweredQuestions.mock()],
     settings: GypseSettings.mock(),
+    multiGamesHistory: const [],
+    fish: 5,
   ),
   User(
     uid: 'jkl012',
@@ -48,6 +55,8 @@ List<User> getUsersMock = [
     status: LoginState.authenticated,
     questions: const [AnsweredQuestions.mock()],
     settings: GypseSettings.mock(),
+    multiGamesHistory: const [],
+    fish: 5,
   ),
   User(
     uid: 'mno345',
@@ -57,5 +66,7 @@ List<User> getUsersMock = [
     status: LoginState.authenticated,
     questions: const [AnsweredQuestions.mock()],
     settings: GypseSettings.mock(),
+    multiGamesHistory: const [],
+    fish: 5,
   ),
 ];

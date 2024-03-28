@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:gypse/auth/domain/models/player.dart';
 import 'package:gypse/auth/domain/models/user.dart';
 import 'package:gypse/common/utils/enums/settings_enum.dart';
 import 'package:gypse/game_hubs/presentation/models/ui_multi_game.dart';
